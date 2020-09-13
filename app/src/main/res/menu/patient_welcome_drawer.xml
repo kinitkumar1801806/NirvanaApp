@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/patient_profile"
+            android:icon="@drawable/profile_photo"
+            android:title="PROFILE"
+            />
+        <item
+            android:id="@+id/doctor_consultation"
+            android:icon="@drawable/profile_photo"
+            android:title="DOCTOR CONSULTATION"
+            />
+        <item
+            android:id="@+id/book_appointment"
+            android:icon="@drawable/alarm_button"
+            android:title="BOOK APPOINTMENT"/>
+        <item
+            android:id="@+id/blogs"
+            android:icon="@drawable/chat_secondary"
+            android:title="BLOGS"/>
+        <item android:id="@+id/niri"
+            android:icon="@drawable/power_button"
+            android:title="Niri"/>
+        <item
+            android:id="@+id/yoga_tutorial"
+            android:icon="@drawable/cube"
+            android:title="YOGA TUTORIAL"/>
+        <item
+            android:id="@+id/meditation_tutorial"
+            android:icon="@drawable/question_mark"
+            android:title="MEDITATION TUTORIAL"/>
+        <item
+            android:id="@+id/goal_planning"
+            android:icon="@drawable/goal"
+            android:title="GOAL PLANNING" />
+        <item
+            android:id="@+id/product"
+            android:icon="@drawable/star"
+            android:title="PRODUCT"/>
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/power_button"
+            android:title="Logout"/>
+
+    </group>
+
+</menu>

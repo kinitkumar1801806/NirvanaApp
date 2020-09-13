@@ -1,0 +1,103 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "2.0.4.1"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':kommunicate')
+    api 'com.google.firebase:firebase-messaging:20.1.0'
+    api 'com.google.android.gms:play-services-maps:17.0.0'
+    api 'com.google.android.gms:play-services-location:17.0.0'
+    api 'de.hdodenhof:circleimageview:2.2.0'
+    api 'com.google.android.material:material:1.0.0'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    api 'com.github.bumptech.glide:glide:4.9.0'
+    api 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //Note: use this in case customization is not required
+}
+/*ext {
+    // Where you will see your artifact in Bintray's web interface
+    // The "bintrayName" should match the name of the Bintray repro.
+    bintrayRepo = 'Kommunicate-Android-Chat-SDK'
+    bintrayName = 'kommunicate-android-chat-sdk-ui'
+    bintrayOrg = 'kommunicate'
+
+    // Maven metadata
+    publishedGroupId = 'io.kommunicate.sdk'
+    libraryName = 'kommunicateui'
+    // Save yourself a head ache, and set this equal to the name of the Android Studio library
+    // module. The artifact name needs to match the name of the library.
+    artifact = 'kommunicateui'
+
+    libraryDescription = 'Kommunicate android chat SDK for cutomer support'
+    libraryVersion = '2.0.4.1'
+    developerId = 'kommunicate'
+    developerName = 'Kommunicate'
+    developerEmail = 'devashish.mamgain@gmail.com'
+}
+
+apply from: 'https://raw.githubusercontent.com/attwellBrian/JCenter/master/installv1.gradle'
+apply plugin: 'com.jfrog.bintray'
+version = libraryVersion
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    failOnError false // add this line
+    source = android.sourceSets.main.java.srcDirs
+    //source = android.sourceSets.main.allJava
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        userOrg = bintrayOrg
+        desc = libraryDescription
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+            // Optional. The passphrase for GPG signing'
+            // gpg {
+            //    sign = true //Determines whether to GPG sign the files. The default is false
+            //    passphrase = properties.getProperty("bintray.gpg.password")
+            //}
+        }
+    }
+}*/
+
+

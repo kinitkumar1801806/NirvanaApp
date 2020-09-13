@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/signup_doctor">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/signup_bg"
+        tools:context=".DoctorSignupActivity"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter the Details"
+            android:textSize="30sp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:layout_marginTop="25dp"
+            >
+            <EditText
+                android:id="@+id/patient_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:hint="Enter your  name"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:layout_marginTop="15dp"
+            >
+            <EditText
+                android:id="@+id/patient_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="2"
+                android:padding="8dp"
+                android:hint="Enter your age"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:layout_marginTop="15dp"
+            >
+            <EditText
+                android:id="@+id/patient_problem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:maxLines="5"
+                android:inputType="text"
+                android:padding="8dp"
+                android:hint="Tell us about your problem"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/patient_gender"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="18sp" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:textSize="18sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="40dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:id="@+id/male_patient"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp"
+                android:id="@+id/female_patient"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/signup_btn_doctor"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="100dp"
+            android:text="Submit"
+            android:padding="8dp"
+            android:onClick="Fix_the_Meeting"
+            android:textColor="?android:attr/textColorPrimary"
+            android:background="@drawable/button_rounded"
+            android:textSize="20sp" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBar_patient"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:visibility="invisible" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</ScrollView>

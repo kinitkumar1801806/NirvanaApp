@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/photo"
+    tools:context=".MainActivity">
+
+
+    <ImageButton
+        android:id="@+id/detail_play"
+        android:layout_width="66dp"
+        android:layout_height="60dp"
+        android:onClick="play_music"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_media_pause" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:scaleType="fitXY"
+        android:layout_width="52dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="40dp"
+        android:layout_toLeftOf="@id/detail_play"
+        android:background="#00FFFFFF"
+        android:onClick="play_previous"
+        app:srcCompat="@drawable/ic_media_previous" />
+
+    <ImageButton
+        android:id="@+id/forwardButton"
+        android:layout_width="52dp"
+        android:layout_height="62dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="250dp"
+        android:onClick="play_next"
+        android:layout_toRightOf="@id/detail_play"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_media_next" />
+
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginRight="30dp"
+        android:max="100"
+        android:progress="0"/>
+
+    <TextView
+        android:id="@+id/detail_music"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="30dp"
+        android:text="To Build A Home"
+        android:textColor="#FAF7F4F4"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/detail_artist"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginRight="30dp"
+        android:text="calm music of indian nature"
+        android:textColor="#FAF7F4F4"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="360dp">>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="307dp"
+            android:layout_height="310dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/tape" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="77dp"
+            android:layout_height="41dp"
+            android:text="Themes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+</RelativeLayout>

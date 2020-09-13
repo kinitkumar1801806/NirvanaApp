@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#339966</color>
+    <color name="colorPrimaryDark">#339966</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="primary_text">#ffffff</color>
+    <color name="primary_light">#FFCDD2</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#ffffff</color>
+    <color name="divider">#b6b6b6</color>
+    <color name="white">#ffffff</color>
+    <color name="bg_gradient_start">#31244e</color>
+    <color name="bg_gradient_end">#6b394c</color>
+    <color name="green">#339966</color>
+    <color name="greenish_white">#2E8B57</color>
+</resources>

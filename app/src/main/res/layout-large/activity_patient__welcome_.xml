@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/patient_drawer"
+    android:layout_height="match_parent"
+    tools:context=".Patient_Welcome_Activity">
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:backgroundTint="@color/green"
+        app:itemIconTint="@color/white"
+        app:itemHorizontalPadding="30dp"
+        app:itemIconSize="@dimen/doctor_icons_large"
+        app:itemTextColor="@color/white"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/patient_welcome_drawer" />
+</androidx.drawerlayout.widget.DrawerLayout>

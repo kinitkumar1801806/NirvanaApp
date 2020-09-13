@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "223193575388",
+    "firebase_url": "https://nirvana-fd31f.firebaseio.com",
+    "project_id": "nirvana-fd31f",
+    "storage_bucket": "nirvana-fd31f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223193575388:android:189f10c2654116ef836919",
+        "android_client_info": {
+          "package_name": "com.example.nirvana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223193575388-53v243hcd6bvtp7pbt4gb2qspk93295l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nirvana",
+            "certificate_hash": "2f9e716474992f2ddd50e1029a21dafddba96038"
+          }
+        },
+        {
+          "client_id": "223193575388-u7gg88vn3adqb435pv733675mouoml86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDNSGYgcsPyADpcj4Jp4Ej8n2t8NoC8Hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223193575388-u7gg88vn3adqb435pv733675mouoml86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

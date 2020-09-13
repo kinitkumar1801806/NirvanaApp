@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ECounselFragment">
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="126dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/green_logo" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N i r v a n a"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/green"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="30dp"
+        android:onClick="fix_meeting"
+        android:layout_marginRight="30dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="fix_meeting"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/person_secondary"
+            />
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Fix a Meeting "
+            android:onClick="fix_meeting"
+            android:padding="20dp"
+            tools:ignore="OnClick" />
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:onClick="meeting_already_fixed"
+        android:layout_marginRight="30dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="meeting_already_fixed"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/person_secondary"
+            />
+        <TextView
+            android:id="@+id/already_fix_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Fixed Meetings "
+            android:padding="20dp"
+            android:onClick="meeting_already_fixed"
+            tools:ignore="OnClick" />
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+
+</LinearLayout>

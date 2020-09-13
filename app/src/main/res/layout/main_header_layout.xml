@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp"
+    android:background="@color/greenish_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="15dp"
+            android:padding="10dp"
+            android:layout_marginTop="55dp"
+            android:src="@drawable/green_logo"
+            app:civ_circle_background_color="@color/white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIRVANA"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nirvana.ieee.01@gmail.com"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

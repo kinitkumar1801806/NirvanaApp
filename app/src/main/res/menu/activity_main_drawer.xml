@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_home"
+
+            />
+        <item
+            android:id="@+id/nav_signup"
+            android:icon="@drawable/baseline_how_to_reg_black_18dp"
+            android:title="@string/menu_signup" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/baseline_vpn_key_black_18dp"
+            android:title="@string/menu_login" />
+        <item
+            android:id="@+id/nav_what_we_do"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_what_we_do" />
+        <item
+            android:id="@+id/nav_what_we_offer"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_what_we_offer" />
+        <item
+            android:id="@+id/nav_support"
+            android:icon="@drawable/baseline_build_black_18dp"
+            android:title="@string/menu_support" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/baseline_group_black_18dp"
+            android:title="@string/menu_about" />
+
+    </group>
+</menu>

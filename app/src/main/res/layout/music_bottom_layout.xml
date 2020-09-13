@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/music_bottom">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="show_detail_musicplayer"
+        android:verticalScrollbarPosition="defaultPosition"
+        android:backgroundTint="@color/primary_text"
+        android:layout_gravity="bottom">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/image1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demo audio"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="70dp"
+            android:maxLines="1"
+            android:id="@+id/music_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demo Artist"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
+            android:id="@+id/music_artist"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_media_play"
+            android:layout_gravity="right"
+            android:onClick="change_icon"
+            android:id="@+id/music_action_btn"
+            android:layout_marginTop="5dp"/>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

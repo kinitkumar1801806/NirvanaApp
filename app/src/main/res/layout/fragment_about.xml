@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutFragment"
+    android:id="@+id/about_fragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="70dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/green_logo"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:text="About Us"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/about_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About Fragment"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"/>
+</LinearLayout>
+</ScrollView>

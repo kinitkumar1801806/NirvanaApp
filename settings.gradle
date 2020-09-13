@@ -1,0 +1,4 @@
+include ':kommunicateui'
+include ':kommunicate'
+rootProject.name='Nirvana'
+include ':app'

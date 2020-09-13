@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/profile_photo"
+            android:title="PROFILE"
+            />
+       <item android:id="@+id/my_doctors"
+           android:icon="@drawable/profile_photo"
+           android:title="MY DOCTORS"/>
+        <item android:id="@+id/niri"
+            android:icon="@drawable/power_button"
+            android:title="Niri"/>
+        <item
+            android:id="@+id/appointment"
+            android:icon="@drawable/alarm_button"
+            android:title="APPOINTMENTS"/>
+        <item
+            android:id="@+id/patient_managementSystem"
+            android:icon="@drawable/schedule"
+            android:title="APPLY FOR PATIENT MANAGEMENT SYSTEM" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/power_button"
+            android:title="Logout"/>
+    </group>
+</menu>

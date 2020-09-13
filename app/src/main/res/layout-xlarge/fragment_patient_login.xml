@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatientLoginFragment"
+    android:orientation="vertical"
+    android:id="@+id/login_patient_fragment">
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/green_logo" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N i r v a n a"
+        android:textSize="40sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/green"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="65sp"
+        android:layout_marginTop="100dp"
+        android:textColorHint="@color/white"
+        android:layout_gravity="center_horizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerCountries"
+            android:layout_width="153dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="-15dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:theme="@style/MyTextInputLayout">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="-62dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/ic_smartphone_black_24dp" />
+
+            <EditText
+                android:id="@+id/phone1_patient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:paddingLeft="68dp"
+                android:maxLength="10"
+                android:layout_marginRight="10dp"
+                android:hint="Phone no."
+                android:textSize="35sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/signin_patient"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="65dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Login"
+        android:onClick="login_patient"
+        android:textColor="@color/white"
+        android:background="@drawable/button_rounded"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not Registered?"
+            android:textColor="@android:color/black"
+            android:textSize="35sp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:onClick="signup_patient"
+            android:id="@+id/register"
+            android:textColor="@color/green"
+            android:textSize="30sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="20dp"/>
+</LinearLayout>

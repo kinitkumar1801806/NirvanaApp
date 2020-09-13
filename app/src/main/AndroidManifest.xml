@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.nirvana">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/niri"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <service android:name=".SinchService" />
+        <service
+            android:name=".Service.Background"
+            android:enabled="true"
+            android:exported="true"/>
+        <activity android:name=".VoiceCallScreenActivity" />
+        <activity android:name=".IncominCallScreenActivity" />
+        <activity android:name=".IncomingVideoCallActivity" />
+        <activity android:name=".VideoCallScreenActivity" />
+        <activity
+            android:name=".MyDoctorActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OfficeWelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ClinicWelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HospitalWelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SchoolWelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".rganisationLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BlogActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OfficeLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SchoolLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ClinicLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HospitalLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".OfficePhoneVerification" />
+        <activity android:name=".SchoolPhoneVerification" />
+        <activity android:name=".ClinicPhoneVerification" />
+        <activity android:name=".HospitalPhoneVerification" />
+        <activity
+            android:name=".OrganisationActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.MainActivity" />
+        </activity>
+        <activity android:name=".Meeting_Alresdy_fixed_step2" />
+        <activity
+            android:name=".Meeting_Already_Fixed_step1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Niri" />
+        <activity
+            android:name=".PendingMeetingsStep2"
+            android:parentActivityName=".PendingMeetingsStep1">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.PendingMeetingsStep1" />
+        </activity>
+        <activity
+            android:name=".PendingMeetingsStep1"
+            android:parentActivityName=".Doctor_Welcome_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Doctor_Welcome_Activity" />
+        </activity>
+        <activity
+            android:name=".Not_Fixed_Meeting_step2"
+            android:parentActivityName=".Not_Fixed_Meetings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Not_Fixed_Meetings" />
+        </activity>
+        <activity
+            android:name=".Not_Fixed_Meetings"
+            android:parentActivityName=".Doctor_Welcome_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Doctor_Welcome_Activity" />
+        </activity>
+        <activity
+            android:name=".PatientQueue"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Fix_Meeting_step3"
+            android:parentActivityName=".Doctors_GridView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Doctors_GridView" />
+        </activity>
+        <activity
+            android:name=".Fix_Meeting_step2"
+            android:parentActivityName=".Doctors_GridView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Doctors_GridView" />
+        </activity>
+        <activity
+            android:name=".Doctors_GridView"
+            android:parentActivityName=".Doctor_Welcome_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Doctor_Welcome_Activity" />
+        </activity>
+        <activity
+            android:name=".Patient_Welcome_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Doctor_Welcome_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PatientPhoneVerification" />
+        <activity
+            android:name=".DoctorPhoneVerification"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PatientLoginActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DoctorLoginActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PatientSignupActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DoctorSignupActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.MainActivity" />
+        </activity>
+        <activity
+            android:name=".detail_music_player"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".MediaPLayerService" />
+
+        <activity
+            android:name=".NirvanaAudioPlayer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

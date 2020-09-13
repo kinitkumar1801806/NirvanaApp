@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Niri">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="usdfuusfbgosfdi"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="270dp"
+        android:visibility="invisible"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/niri"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:id="@+id/refresh"
+        android:onClick="Refresh"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+       />
+</LinearLayout>

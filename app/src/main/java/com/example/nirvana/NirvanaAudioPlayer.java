@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,14 +49,17 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     boolean serviceBound = false;
     ImageView collapsingImageView;
     ImageView music_action_image;
+    TextView marquee_music, detail_music_artist;
+    ImageView detail_play;
+    SeekBar seekBar;
     TextView music_name, artist_name;
     int imageIndex = 0;
     boolean check = true;
-    int id = 0,count=0;
+    int id = 0,count=0,track=0,tt=0;
     int music_index = 0;
+    ArrayList<String> dataList,titleList,albumList,artistList;
     private DatabaseReference databaseReference;
     public ArrayList<Audio> audioList;
-    public ArrayList<String> dataList,titleList,albumList,artistList;
     private int STORAGE_PERMISSION_CODE = 1;
     public static final String Broadcast_PLAY_NEW_AUDIO = "com.example.nirvana.NirvanaAudioPlayer.PlayNewAudio";
 
@@ -64,34 +70,22 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         setContentView(R.layout.activity_nirvana_audio_player);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        collapsingImageView = (ImageView) findViewById(R.id.collapsingImageView);
+        HomeMusicPlayer homeMusicPlayer=new HomeMusicPlayer();
+        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.music_frame,homeMusicPlayer,"homeplayer");
+        fragmentTransaction.commit();
+        dataList=new ArrayList<>();
+        titleList=new ArrayList<>();
+        artistList=new ArrayList<>();
+        albumList=new ArrayList<>();
         if (ContextCompat.checkSelfPermission(NirvanaAudioPlayer.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)+ContextCompat.checkSelfPermission(NirvanaAudioPlayer.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
         } else {
             requestStoragePermission();
         }
-        dataList=new ArrayList<>();
-        titleList=new ArrayList<>();
-        albumList=new ArrayList<>();
-        artistList=new ArrayList<>();
-        loadCollapsingImage(imageIndex);
         loadAudio();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                playAudio("https://upload.wikimedia.org/wikipedia/commons/6/6c/Grieg_Lyric_Pieces_Kobold.ogg");
-                //play the first audio in the ArrayList
-//                playAudio(2);
-                if (imageIndex == 4) {
-                    imageIndex = 0;
-                    loadCollapsingImage(imageIndex);
-                } else {
-                    loadCollapsingImage(++imageIndex);
-                }
-            }
-        });
+
     }
 
     private void requestStoragePermission() {
@@ -154,9 +148,8 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
 
                     }
                 }));
-
-                music_name.setText(audioList.get(0).getTitle());
-                artist_name.setText(audioList.get(0).getArtist());
+                music_name.setText(audioList.get(music_index).getTitle());
+                artist_name.setText(audioList.get(music_index).getArtist());
             }
         } catch (NullPointerException e) {
 
@@ -211,6 +204,8 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putBoolean("ServiceState", serviceBound);
+        savedInstanceState.putInt("music_index",music_index);
+        savedInstanceState.putInt("tt",tt);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -218,19 +213,10 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         serviceBound = savedInstanceState.getBoolean("ServiceState");
+        music_index=savedInstanceState.getInt("music_index");
+        tt=savedInstanceState.getInt("tt");
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (serviceBound) {
-            unbindService(serviceConnection);
-            //service is active
-            player.stopSelf();
-        }
-
-    }
 
     public void loadAudio() {
         audioList=new ArrayList<>();
@@ -292,13 +278,16 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_pause).getConstantState()) {
             music_action_image.setImageResource(R.drawable.ic_media_play);
             player.pauseMedia();
+            tt=0;
             id = 1;
         } else {
             music_action_image.setImageResource(R.drawable.ic_media_pause);
+            tt=1;
             if (id == 0) {
                 playAudio(0);
             } else if (id == 1) {
                 player.resumeMedia();
+                id=0;
             }
         }
     }
@@ -306,62 +295,107 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public void show_detail_musicplayer(View view) {
         retrieve();
         if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_pause).getConstantState()) {
-            Intent intent = new Intent(this, detail_music_player.class);
-            intent.putExtra("index", music_index);
-            intent.putStringArrayListExtra("dataList",dataList);
-            intent.putStringArrayListExtra("titleList",titleList);
-            intent.putStringArrayListExtra("albumList",albumList);
-            intent.putStringArrayListExtra("artistList",artistList);
-            startActivityForResult(intent, 1);
+            Bundle bundle=new Bundle();
+            bundle.putString("playing","yes");
+            bundle.putInt("index",music_index);
+            bundle.putStringArrayList("dataList",dataList);
+            bundle.putStringArrayList("titleList",titleList);
+            bundle.putStringArrayList("albumList",albumList);
+            bundle.putStringArrayList("artistList",artistList);
+            DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
+            detailMusicFragment.setArguments(bundle);
+            track=1;
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.music_frame,detailMusicFragment,"detailplayer");
+            fragmentTransaction.commit();
         } else if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_play).getConstantState()) {
-            Intent intent = new Intent(this, detail_music_player.class);
-            intent.putExtra("index1", music_index);
-            intent.putStringArrayListExtra("dataList",dataList);
-            intent.putStringArrayListExtra("titleList",titleList);
-            intent.putStringArrayListExtra("albumList",albumList);
-            intent.putStringArrayListExtra("artistList",artistList);
-            startActivityForResult(intent, 1);
+            Bundle bundle=new Bundle();
+            bundle.putString("playing","no");
+            bundle.putInt("index",music_index);
+            bundle.putStringArrayList("dataList",dataList);
+            bundle.putStringArrayList("titleList",titleList);
+            bundle.putStringArrayList("albumList",albumList);
+            bundle.putStringArrayList("artistList",artistList);
+            DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
+            detailMusicFragment.setArguments(bundle);
+            track=1;
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.music_frame,detailMusicFragment,"detailplayer");
+            fragmentTransaction.commit();
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                int ind = data.getIntExtra("index", -1);
-                if (ind != -1) {
-                    music_index = ind;
-                    id=1;
-                    music_name.setText(audioList.get(music_index).getTitle());
-                    artist_name.setText(audioList.get(music_index).getArtist());
-                    music_action_image.setImageResource(R.drawable.ic_media_pause);
-                    player.resumeMedia();
-                } else {
-                    ind = data.getIntExtra("index1", 0);
-                    music_index = ind;
-                    id=1;
-                    music_name.setText(audioList.get(music_index).getTitle());
-                    artist_name.setText(audioList.get(music_index).getArtist());
-                    music_action_image.setImageResource(R.drawable.ic_media_play);
-                    player.stopMedia();
-                }
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+    public void play_previous(View view) {
+        marquee_music = findViewById(R.id.detail_music);
+        marquee_music.setSelected(true);
+        detail_music_artist = findViewById(R.id.detail_artist);
+        if (music_index != 0) {
+            player.skipToPrevious();
+            music_index--;
+            marquee_music.setText(audioList.get(music_index).getTitle());
+            detail_music_artist.setText(audioList.get(music_index).getArtist());
+            playAudio(music_index);
 
-            }
+        } else {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         }
     }
- public void retrieve()
- {
-     int l=audioList.size();
-     for(int i=0;i<l;i++)
-     {
-         dataList.add(audioList.get(i).getData());
-         titleList.add(audioList.get(i).getTitle());
-         albumList.add(audioList.get(i).getAlbum());
-         artistList.add(audioList.get(i).getArtist());
-     }
- }
+    public void play_next(View view) {
+        marquee_music = findViewById(R.id.detail_music);
+        marquee_music.setSelected(true);
+        detail_music_artist = findViewById(R.id.detail_artist);
+        seekBar=findViewById(R.id.seekbar);
+        if (audioList.size() != music_index+1) {
+            player.skipToNext();
+            music_index++;
+            marquee_music.setText(audioList.get(music_index).getTitle());
+            detail_music_artist.setText(audioList.get(music_index).getArtist());
+            playAudio(music_index);
+            seekBar.setProgress(0);
+        } else {
+            player.skipToNext();
+            music_index=0;
+            marquee_music.setText(audioList.get(music_index).getTitle());
+            detail_music_artist.setText(audioList.get(music_index).getArtist());
+            playAudio(music_index);
+            seekBar.setProgress(0);
+        }
+    }
+    public void play_music(View view) {
+        detail_play=findViewById(R.id.detail_play);
+        if (detail_play.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.filled_play).getConstantState()) {
+            detail_play.setImageResource(R.drawable.filled_pause);
+            if(id==1)
+                player.resumeMedia();
+            else
+                playAudio(music_index);
+
+        } else {
+            detail_play.setImageResource(R.drawable.filled_play);
+            player.pauseMedia();
+        }
+    }
+    public void retrieve()
+    {
+        int l=audioList.size();
+        for (int i=0;i<l;i++)
+        {
+            dataList.add(audioList.get(i).getData());
+            artistList.add(audioList.get(i).getArtist());
+            albumList.add(audioList.get(i).getAlbum());
+            titleList.add(audioList.get(i).getTitle());
+
+        }
+    }
+
+    public void change_image(View view) {
+        collapsingImageView = (ImageView) findViewById(R.id.collapsingImageView);
+        if (imageIndex == 4) {
+            imageIndex = 0;
+            loadCollapsingImage(imageIndex);
+        } else {
+            loadCollapsingImage(++imageIndex);
+        }
+    }
+
 }

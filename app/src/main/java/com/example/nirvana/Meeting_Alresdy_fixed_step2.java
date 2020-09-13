@@ -308,6 +308,14 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
                             .environmentHost(ENVIRONMENT)
                             .build();
                     uc.registerUser(this, this);
+                    UserController uc1 = Sinch.getUserControllerBuilder()
+                            .context(getApplicationContext())
+                            .applicationKey(APP_KEY)
+                            .userId(doctor_phone)
+                            .environmentHost(ENVIRONMENT)
+                            .build();
+                    uc1.registerUser(this, this);
+
                 }else{
                     startClientAndMakeCall();
                     makeCall();
@@ -343,6 +351,13 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
                             .environmentHost(ENVIRONMENT)
                             .build();
                     uc.registerUser(this, this);
+                    UserController uc1 = Sinch.getUserControllerBuilder()
+                            .context(getApplicationContext())
+                            .applicationKey(APP_KEY)
+                            .userId(doctor_phone)
+                            .environmentHost(ENVIRONMENT)
+                            .build();
+                    uc1.registerUser(this, this);
                 }
                  else {
                     startClientAndMakeCall();

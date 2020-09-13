@@ -75,10 +75,8 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         }
         else if(id==R.id.doctor_product)
         {
-           Intent intent=new Intent(this, Background.class);
-           intent.putExtra("phone",phone);
-           System.out.println(phone);
-           this.startService(intent);
+         Intent intent=new Intent(this,NirvanaAudioPlayer.class);
+         startActivity(intent);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

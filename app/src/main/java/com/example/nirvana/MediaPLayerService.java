@@ -321,7 +321,6 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
             mediaPlayer.start();
         }
     }
-
     public void stopMedia() {
         if (mediaPlayer == null) return;
         if (mediaPlayer.isPlaying()) {

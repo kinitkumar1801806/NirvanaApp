@@ -191,15 +191,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
-        <activity
-            android:name=".detail_music_player"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".MediaPLayerService" />
 
         <activity
             android:name=".NirvanaAudioPlayer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.nirvana.Doctor_Welcome_Activity" /></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

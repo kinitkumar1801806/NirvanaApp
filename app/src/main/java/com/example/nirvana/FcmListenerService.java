@@ -106,7 +106,7 @@ public class FcmListenerService extends FirebaseMessagingService {
                 new Intent(getApplicationContext(), MainActivity.class), 0);
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                        .setSmallIcon(R.drawable.icon)
+                        .setSmallIcon(R.mipmap.niri)
                         .setContentTitle("Missed call from ")
                         .setContentText(userId)
                         .setContentIntent(contentIntent)

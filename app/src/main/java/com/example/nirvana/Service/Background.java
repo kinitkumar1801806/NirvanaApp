@@ -7,8 +7,11 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.sinch.android.rtc.SinchClient;
+
 public class Background extends Service {
     String phone;
+    private SinchClient mSinchClient;
     public Background() {
     }
     @Override

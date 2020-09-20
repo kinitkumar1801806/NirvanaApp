@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -23,6 +24,9 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import com.sinch.android.rtc.AudioController;
 import com.sinch.android.rtc.ClientRegistration;
@@ -60,11 +64,11 @@ public class SinchService extends Service {
 
     public static final String CALL_ID = "CALL_ID";
     static final String TAG = SinchService.class.getSimpleName();
-
+    public Integer i=0;
     private PersistedSettings mSettings;
     private SinchServiceInterface mSinchServiceInterface = new SinchServiceInterface();
     private SinchClient mSinchClient;
-
+    public String phone;
     private StartFailedListener mListener;
 
     @Override
@@ -79,11 +83,35 @@ public class SinchService extends Service {
             start();
         }
     }
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId){
+        phone=intent.getStringExtra("phone");
+        i=intent.getIntExtra("i",0);
+        if(i==0||i%10==0)
+        {
+            stop();
+            createClient(phone);
+            i++;
+        }
+        onTaskRemoved(intent);
+        return START_STICKY;
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
+        restartServiceIntent.setPackage(getPackageName());
+        restartServiceIntent.putExtra("phone",phone);
+        restartServiceIntent.putExtra("i",i);
+        startService(restartServiceIntent);
+        super.onTaskRemoved(rootIntent);
+    }
 
     private void createClient(String username) {
-        mSinchClient =Sinch.getSinchClientBuilder().context(getApplicationContext()).userId(username)
+        mSinchClient =Sinch.getSinchClientBuilder().context(getApplicationContext())
                 .applicationKey("6a9ce4e2-e655-4a59-a2b0-b76c84132546")
                 .applicationSecret("2dEpHTchh0SLCsnYyv2gPw==")
+                .userId(username)
                 .environmentHost("clientapi.sinch.com").build();
 
 
@@ -292,11 +320,9 @@ public class SinchService extends Service {
 
     private class SinchCallClientListener implements CallClientListener {
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onIncomingCall(CallClient callClient, Call call) {
-            Toast.makeText(SinchService.this,"Incoming Call : "+call.getCallId(),Toast.LENGTH_SHORT).show();
-            Toast.makeText(SinchService.this, call.getDetails().isVideoOffered()+"", Toast.LENGTH_SHORT).show();
-
             Intent intent;
             if (call.getDetails().isVideoOffered()) {
                 intent = new Intent(getApplicationContext(), IncomingVideoCallActivity.class);
@@ -311,8 +337,14 @@ public class SinchService extends Service {
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !inForeground) {
-                ((NotificationManager) Objects.requireNonNull(getSystemService(Context.NOTIFICATION_SERVICE))).notify(MESSAGE_ID, createIncomingCallNotification(call.getRemoteUserId(), intent));
+            if (!inForeground) {
+                NotificationChannel notificationChannel = new NotificationChannel( FcmListenerService.CHANNEL_ID, "Music_Player", NotificationManager.IMPORTANCE_HIGH);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationChannel.enableLights(true);
+                notificationChannel.enableVibration(true);
+                notificationChannel.setVibrationPattern(new long[]{0});
+                notificationManager.createNotificationChannel(notificationChannel);
+                notificationManager.notify(MESSAGE_ID, createIncomingCallNotification(call.getRemoteUserId(), intent));
             } else {
                 SinchService.this.startActivity(intent);
             }
@@ -353,7 +385,6 @@ public class SinchService extends Service {
             return pendingIntent;
         }
 
-        @TargetApi(20)
         private Notification createIncomingCallNotification(String userId, Intent fullScreenIntent) {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 112, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -361,8 +392,8 @@ public class SinchService extends Service {
                     new NotificationCompat.Builder(getApplicationContext(), FcmListenerService.CHANNEL_ID)
                             .setContentTitle("Incoming call")
                             .setContentText(userId)
-                            .setLargeIcon(getBitmap(getApplicationContext(), R.drawable.call_pressed))
-                            .setSmallIcon(R.drawable.call_pressed)
+                            .setLargeIcon(getBitmap(getApplicationContext(), R.mipmap.niri))
+                            .setSmallIcon(R.mipmap.niri)
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(pendingIntent)
                             .setFullScreenIntent(pendingIntent, true)

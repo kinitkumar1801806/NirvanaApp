@@ -29,6 +29,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.nirvana.Service.CallerName;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +59,6 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
     private TextView nameView, ageView, genderView, problemView, dateView, timeView;
     private String phone, p_phone, date, date_period, time, name, patient_phone, time_period, link;
     ProgressDialog progressDialog;
-    ImageView volume, mic;
     TextView patientName;
     static final String TAG = PendingMeetingsStep2.class.getSimpleName();
     private static String callType = "";
@@ -309,13 +312,6 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
                             .environmentHost(ENVIRONMENT)
                             .build();
                     uc.registerUser(this, this);
-                    UserController uc1 = Sinch.getUserControllerBuilder()
-                            .context(getApplicationContext())
-                            .applicationKey(APP_KEY)
-                            .userId(patient_phone)
-                            .environmentHost(ENVIRONMENT)
-                            .build();
-                    uc1.registerUser(this, this);
                 }
                 else
                 {
@@ -389,41 +385,6 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
         }
     }
 
-    public void speaker(View view) {
-        volume = findViewById(R.id.volume);
-        AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setMode(AudioManager.MODE_IN_CALL);
-        if (volume.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.baseline_volume_up_white_18dp).getConstantState()) {
-            volume.setImageResource(R.drawable.baseline_mic_off_white_18dp);
-            audioManager.setSpeakerphoneOn(true);
-        } else {
-            volume.setImageResource(R.drawable.baseline_volume_up_white_18dp);
-            audioManager.setSpeakerphoneOn(true);
-        }
-    }
-
-    public void hang_up(View view) {
-        mediaPlayer.stop();
-        call.hangup();
-        Toast.makeText(PendingMeetingsStep2.this, "Call hangup....", Toast.LENGTH_SHORT).show();
-        Pending_Meeting_Step2_Fragment pending_meeting_step2_fragment = new Pending_Meeting_Step2_Fragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout2, pending_meeting_step2_fragment);
-        fragmentTransaction.commit();
-    }
-
-    public void mic(View view) {
-        mic = findViewById(R.id.mute);
-        AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setMode(AudioManager.MODE_IN_CALL);
-        if (mic.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.baseline_mic_white_18dp).getConstantState()) {
-            mic.setImageResource(R.drawable.baseline_mic_off_white_18dp);
-            audioManager.setMicrophoneMute(true);
-        } else {
-            mic.setImageResource(R.drawable.baseline_mic_white_18dp);
-            audioManager.setMicrophoneMute(false);
-        }
-    }
 
     public static boolean isNetworkAvailable(Context context) {
 
@@ -463,7 +424,6 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
     }
 
     private void makeCall() {
-        Call call;
         String callId;
         if (callType.equals("voice")) {
             call=getSinchServiceInterface().callUser(patient_phone);
@@ -474,6 +434,7 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
             intent.putExtra("name", name);
             intent.putExtra("link", link);
             intent.putExtra(CALL_ID, callId);
+            SetCallerName();
             startActivity(intent);
         } else {
             call=getSinchServiceInterface().callUserVideo(patient_phone);
@@ -484,9 +445,23 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
             intent.putExtra("name", name);
             intent.putExtra("link", link);
             intent.putExtra(CALL_ID, callId);
+            SetCallerName();
             startActivity(intent);
         }
     }
+public void SetCallerName()
+{
+    CallerName callerName=new CallerName(
+            name,
+            link
+    );
+    Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("CallerName").child(call.getCallId())
+            .setValue(callerName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
 
+                }
+            });
+}
 }
 

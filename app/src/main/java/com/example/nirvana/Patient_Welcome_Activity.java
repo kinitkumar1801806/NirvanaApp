@@ -39,6 +39,9 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         {
             Intent intent=getIntent();
             phone=intent.getStringExtra("phone");
+            Intent intent1=new Intent(this,SinchService.class);
+            intent1.putExtra("phone",phone);
+            startService(intent1);
         }
         HomeFragment homeFragment=new HomeFragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();

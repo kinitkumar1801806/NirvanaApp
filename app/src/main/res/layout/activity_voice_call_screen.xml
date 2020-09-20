@@ -71,8 +71,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/micbutton"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:padding="10dp"
@@ -99,8 +99,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/speakerbtn"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:padding="10dp"

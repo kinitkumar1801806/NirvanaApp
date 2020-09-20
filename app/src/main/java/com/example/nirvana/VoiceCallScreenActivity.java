@@ -34,9 +34,6 @@ public class VoiceCallScreenActivity extends BaseActivity {
     private AudioPLayer mAudioPlayer;
     private Timer mTimer;
     private UpdateCallDurationTask mDurationTask;
-
-    DatabaseReference userRef;
-    ValueEventListener listener1;
     String receiverUserId="",receiverUserImage="",receiverUserName="",senderUserId="";
     private String mCallId;
 
@@ -189,10 +186,11 @@ public class VoiceCallScreenActivity extends BaseActivity {
         @Override
         public void onCallEstablished(Call call) {
             mAudioPlayer.stopProgressTone();
+            mCallerName.setText(receiverUserName);
             mCallDuration.setVisibility(View.VISIBLE);
             mCallState.setVisibility(View.GONE);
-            micbutton.setVisibility(View.GONE);
-            speakerbutton.setVisibility(View.GONE);
+            micbutton.setVisibility(View.VISIBLE);
+            speakerbutton.setVisibility(View.VISIBLE);
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
             AudioController audioController = getSinchServiceInterface().getAudioController();
             audioController.disableSpeaker();

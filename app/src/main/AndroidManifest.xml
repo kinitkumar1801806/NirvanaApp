@@ -28,6 +28,11 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name="androidx.media.session.MediaButtonReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".MessageActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 

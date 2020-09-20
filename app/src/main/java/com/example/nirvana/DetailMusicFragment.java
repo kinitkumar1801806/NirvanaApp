@@ -1,10 +1,9 @@
 package com.example.nirvana;
-
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,15 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,12 +29,14 @@ import java.util.ArrayList;
 public class DetailMusicFragment extends Fragment{
     View view1;
     SeekBar seekBar;
-    TextView marquee_music, detail_music_artist;
+    TextView marquee_music, detail_music_artist,Duration,currentDuration;
     ImageView detail_play;
-    String action;
+    String action,phone;
+    boolean ch;
     ArrayList<String> dataList,titleList,albumList,artistList;
     ArrayList<Audio> audioList;
     int music_index;
+    MediaPLayerService player;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,7 +89,8 @@ public class DetailMusicFragment extends Fragment{
            titleList=bundle.getStringArrayList("titleList");
            albumList=bundle.getStringArrayList("albumList");
            artistList=bundle.getStringArrayList("artistList");
-           loadAudioPlayer();
+           phone=bundle.getString("phone");
+            loadAudioPlayer();
         }
 
 
@@ -94,10 +104,13 @@ public class DetailMusicFragment extends Fragment{
         marquee_music = view1.findViewById(R.id.detail_music);
         marquee_music.setSelected(true);
         seekBar = view1.findViewById(R.id.seekbar);
+        currentDuration=view1.findViewById(R.id.current_position);
         detail_play = view1.findViewById(R.id.detail_play);
+        Duration=view1.findViewById(R.id.duration);
         detail_music_artist = view1.findViewById(R.id.detail_artist);
         marquee_music.setText(audioList.get(music_index).getTitle());
         detail_music_artist.setText(audioList.get(music_index).getArtist());
+
         if(action.equals("yes"))
         {
             detail_play.setImageResource(R.drawable.filled_pause);
@@ -105,6 +118,8 @@ public class DetailMusicFragment extends Fragment{
         else{
             detail_play.setImageResource(R.drawable.filled_play);
         }
+
+        change();
         return view1;
     }
     private void loadAudioPlayer() {
@@ -114,5 +129,87 @@ public class DetailMusicFragment extends Fragment{
             audioList.add(new Audio(dataList.get(i),titleList.get(i),albumList.get(i),artistList.get(i)));
         }
     }
+public void change()
+{
+    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if(player!= null && fromUser){
+                player.Seekto(progress);
+            }
+        }
+    });
+
+    Handler mHandler = new Handler();
+    getActivity().runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            if(player != null){
+                seekBar.setMax((int) player.duration()/1000);
+                long duration=player.duration();
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+                duration-=minutes*60*1000;
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+                String sec;
+                if(seconds<10)
+                    sec="0"+String.valueOf(seconds);
+                else
+                    sec=String.valueOf(seconds);
+                String dur="0"+minutes+":"+sec;
+                Duration.setText(dur);
+                int mCurrentPosition = (int) (player.currentPosition()/ 1000);
+                seekBar.setProgress(mCurrentPosition);
+                long curr_duration=player.currentPosition();
+                long curr_minutes = TimeUnit.MILLISECONDS.toMinutes(curr_duration);
+                curr_duration-=curr_minutes*60*1000;
+                long curr_seconds = TimeUnit.MILLISECONDS.toSeconds(curr_duration);
+                String curr_sec;
+                if(curr_seconds<10)
+                    curr_sec="0"+String.valueOf(curr_seconds);
+                else
+                    curr_sec=String.valueOf(curr_seconds);
+                String curr_dur="0"+curr_minutes+":"+curr_sec;
+                currentDuration.setText(curr_dur);
+                marquee_music.setText(audioList.get(music_index).getTitle());
+                detail_music_artist.setText(audioList.get(music_index).getArtist());
+                LoadIndex();
+            }
+            mHandler.postDelayed(this, 1000);
+        }
+    });
+}
+ public void change1(MediaPLayerService player1)
+ {
+     player=player1;
+ }
+    public void LoadIndex()
+    {
+        DatabaseReference databaseReference1= FirebaseDatabase.getInstance().getReference("Music_Index").child(phone);
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                    music_index=Integer.parseInt((String) hashMap.get("music_index"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

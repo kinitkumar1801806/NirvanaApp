@@ -24,7 +24,6 @@ public class Meeting_Adapter extends BaseAdapter {
     ArrayList<String> NameList,Username_List;
     ArrayList<String> ImageArray;
     ArrayList<String> Date_List,Time_List;
-    String submission_period,date;
     public Meeting_Adapter (Context context, ArrayList<String> ImageArray,ArrayList<String>NameList,ArrayList<String>Username_List,ArrayList<String> Date_List,ArrayList<String>Time_List) {
         mContext = context;
         this.ImageArray=ImageArray;

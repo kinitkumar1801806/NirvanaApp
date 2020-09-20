@@ -39,6 +39,9 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         {
             Intent intent=getIntent();
             phone=intent.getStringExtra("phone");
+            Intent intent1=new Intent(this,SinchService.class);
+            intent1.putExtra("phone",phone);
+            startService(intent1);
         }
         Doctor_Home_Fragment doctor_home_fragment=new Doctor_Home_Fragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
@@ -76,6 +79,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         else if(id==R.id.doctor_product)
         {
          Intent intent=new Intent(this,NirvanaAudioPlayer.class);
+         intent.putExtra("phone",phone);
          startActivity(intent);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

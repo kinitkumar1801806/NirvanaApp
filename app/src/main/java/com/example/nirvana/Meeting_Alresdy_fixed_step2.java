@@ -42,6 +42,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nirvana.Service.CallerName;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -112,21 +115,6 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
         fragmentTransaction.commit();
         AsyncTaskRunner runner=new AsyncTaskRunner();
         runner.execute();
-    }
-    public void mic(View view) {
-        mic = findViewById(R.id.mute);
-        AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setMode(AudioManager.MODE_IN_CALL);
-        if(mic.getDrawable().getConstantState()==getResources().getDrawable(R.drawable.baseline_mic_white_18dp).getConstantState())
-        {
-            mic.setImageResource(R.drawable.baseline_mic_off_white_18dp);
-            audioManager.setMicrophoneMute(true);
-        }
-        else
-        {
-            mic.setImageResource(R.drawable.baseline_mic_white_18dp);
-            audioManager.setMicrophoneMute(false);
-        }
     }
 
     @Override
@@ -308,13 +296,6 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
                             .environmentHost(ENVIRONMENT)
                             .build();
                     uc.registerUser(this, this);
-                    UserController uc1 = Sinch.getUserControllerBuilder()
-                            .context(getApplicationContext())
-                            .applicationKey(APP_KEY)
-                            .userId(doctor_phone)
-                            .environmentHost(ENVIRONMENT)
-                            .build();
-                    uc1.registerUser(this, this);
 
                 }else{
                     startClientAndMakeCall();
@@ -427,21 +408,7 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
             }
         }
     }
-    public void speaker(View view) {
-        volume = findViewById(R.id.volume);
-        AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setMode(AudioManager.MODE_IN_CALL);
-        if(volume.getDrawable().getConstantState()==getResources().getDrawable(R.drawable.baseline_volume_up_white_18dp).getConstantState())
-        {
-            volume.setImageResource(R.drawable.baseline_mic_off_white_18dp);
-            audioManager.setSpeakerphoneOn(true);
-        }
-        else
-        {
-            volume.setImageResource(R.drawable.baseline_volume_up_white_18dp);
-            audioManager.setSpeakerphoneOn(true);
-        }
-    }
+
     public void hang_up(View view) {
         mediaPlayer.stop();
         call.hangup();
@@ -453,7 +420,6 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
     }
 
     private void makeCall() {
-        Call call;
         String callId;
         if (callType.equals("voice")) {
             call=getSinchServiceInterface().callUser(doctor_phone);
@@ -464,6 +430,7 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
             intent.putExtra("name", name);
             intent.putExtra("link", link);
             intent.putExtra(CALL_ID, callId);
+            SetCallerName();
             startActivity(intent);
         } else {
             call=getSinchServiceInterface().callUserVideo(doctor_phone);
@@ -474,6 +441,7 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
             intent.putExtra("name", name);
             intent.putExtra("link", link);
             intent.putExtra(CALL_ID, callId);
+            SetCallerName();
             startActivity(intent);
         }
     }
@@ -513,5 +481,18 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
         Log.i("update_status", "Network is available : FALSE");
         return false;
     }
+    public void SetCallerName()
+    {
+        CallerName callerName=new CallerName(
+                name,
+                link
+        );
+        Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("CallerName").child(call.getCallId())
+                .setValue(callerName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
 
+                    }
+                });
+    }
 }

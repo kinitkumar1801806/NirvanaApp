@@ -11,13 +11,23 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
 import com.ebanx.swipebtn.SwipeButton;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallEndCause;
 import com.sinch.android.rtc.calling.CallListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class IncominCallScreenActivity extends BaseActivity {
@@ -58,6 +68,7 @@ public class IncominCallScreenActivity extends BaseActivity {
         hangup_bounce=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
         hangupbtn.startAnimation(hangup_bounce);
         hangup_bounce.setRepeatCount(Animation.INFINITE);
+        getCallerName();
         answerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +82,33 @@ public class IncominCallScreenActivity extends BaseActivity {
             }
         });
     }
+public void getCallerName()
+{
+    DatabaseReference databaseReference= (DatabaseReference) FirebaseDatabase.getInstance().getReference("CallerName").child(mCallId);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    HashMap<String,Object> hashMap=(HashMap)snapshot.getValue();
+                    String name=(String)hashMap.get("caller_name");
+                    String link=(String)hashMap.get("link");
+                    if(link.equals("None"))
+                    {
+                        Glide.with(IncominCallScreenActivity.this).load(R.drawable.person_secondary).into(profile_image);
+                    }
+                    else
+                    {
+                        Glide.with(IncominCallScreenActivity.this).load(link).into(profile_image);
+                    }
+                    textViewRemoteUser.setText(name);
+                    Task<Void> databaseReference2= FirebaseDatabase.getInstance().getReference("CallerName").child(mCallId).removeValue();
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+}
     @Override
     protected void onResume() {
         super.onResume();

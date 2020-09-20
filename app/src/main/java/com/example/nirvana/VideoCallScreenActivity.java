@@ -68,10 +68,7 @@ public class VideoCallScreenActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video_call_screen);
         getSupportActionBar().hide();
-
-
         mAudioPlayer = new AudioPLayer(this);
-
         endCallButton=findViewById(R.id.hangupButton);
         micbutton=findViewById(R.id.micbutton);
         videobutton=findViewById(R.id.videobutton);

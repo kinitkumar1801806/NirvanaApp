@@ -10,8 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,17 +17,18 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,18 +37,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import android.Manifest;
-
-import static android.provider.LiveFolders.INTENT;
 import static com.example.nirvana.R.drawable.ic_media_pause;
 
 public class NirvanaAudioPlayer extends AppCompatActivity {
     MediaPLayerService player;
+    RelativeLayout relativeLayout;
     boolean serviceBound = false;
     ImageView collapsingImageView;
     ImageView music_action_image;
-    TextView marquee_music, detail_music_artist;
+    TextView marquee_music, detail_music_artist,currentDuration;
     ImageView detail_play;
     SeekBar seekBar;
     TextView music_name, artist_name;
@@ -57,12 +54,13 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     boolean check = true;
     int id = 0,count=0,track=0,tt=0;
     int music_index = 0;
+    public ProgressBar progressBar;
     ArrayList<String> dataList,titleList,albumList,artistList;
     private DatabaseReference databaseReference;
     public ArrayList<Audio> audioList;
     private int STORAGE_PERMISSION_CODE = 1;
     public static final String Broadcast_PLAY_NEW_AUDIO = "com.example.nirvana.NirvanaAudioPlayer.PlayNewAudio";
-
+    public String phone;
     // Change to your package name
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +68,10 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         setContentView(R.layout.activity_nirvana_audio_player);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Bundle bundle=new Bundle();
+        bundle.putInt("track",track);
         HomeMusicPlayer homeMusicPlayer=new HomeMusicPlayer();
+        homeMusicPlayer.setArguments(bundle);
         FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.music_frame,homeMusicPlayer,"homeplayer");
         fragmentTransaction.commit();
@@ -78,15 +79,17 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         titleList=new ArrayList<>();
         artistList=new ArrayList<>();
         albumList=new ArrayList<>();
+        phone=getIntent().getStringExtra("phone");
+        System.out.println(Integer.valueOf(Build.VERSION.SDK_INT));
         if (ContextCompat.checkSelfPermission(NirvanaAudioPlayer.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)+ContextCompat.checkSelfPermission(NirvanaAudioPlayer.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
         } else {
             requestStoragePermission();
         }
+        LoadIndex();
         loadAudio();
-
-    }
+  }
 
     private void requestStoragePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -130,10 +133,14 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public void initRecyclerView() {
         try {
             if (audioList.size() > 0) {
+                ProgressBar progressBar;
                 music_name = findViewById(R.id.music_name);
                 artist_name = findViewById(R.id.music_artist);
                 music_action_image = findViewById(R.id.music_action_btn);
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+                recyclerView.setVisibility(View.VISIBLE);
+                progressBar=findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.GONE);
                 RecyclerView_Adapter adapter = new RecyclerView_Adapter(audioList, getApplication());
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -145,11 +152,14 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                         music_name.setText(audioList.get(index).getTitle());
                         artist_name.setText(audioList.get(index).getArtist());
                         music_action_image.setImageResource(ic_media_pause);
-
+                        id=1;
                     }
                 }));
-                music_name.setText(audioList.get(music_index).getTitle());
-                artist_name.setText(audioList.get(music_index).getArtist());
+                if(music_index<audioList.size())
+                {
+                    music_name.setText(audioList.get(music_index).getTitle());
+                    artist_name.setText(audioList.get(music_index).getArtist());
+                }
             }
         } catch (NullPointerException e) {
 
@@ -204,8 +214,6 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putBoolean("ServiceState", serviceBound);
-        savedInstanceState.putInt("music_index",music_index);
-        savedInstanceState.putInt("tt",tt);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -213,8 +221,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         serviceBound = savedInstanceState.getBoolean("ServiceState");
-        music_index=savedInstanceState.getInt("music_index");
-        tt=savedInstanceState.getInt("tt");
+
     }
 
 
@@ -239,6 +246,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                         count++;
                         initRecyclerView();
                     }
+
                 }
             }
 
@@ -248,6 +256,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             }
 
         });
+
     }
 
 
@@ -260,8 +269,11 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             storage.storeAudioIndex(audioIndex);
 
             Intent playerIntent = new Intent(this, MediaPLayerService.class);
+            playerIntent.putExtra("music_index",music_index);
+            playerIntent.putExtra("phone",phone);
             startService(playerIntent);
             bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+
         } else {
             //Store the new audioIndex to SharedPreferences
             StorageUtil storage = new StorageUtil(getApplicationContext());
@@ -270,8 +282,12 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             //Service is active
             //Send a broadcast to the service -> PLAY_NEW_AUDIO
             Intent broadcastIntent = new Intent(Broadcast_PLAY_NEW_AUDIO);
+            broadcastIntent.putExtra("music_index",music_index);
+            broadcastIntent.putExtra("phone",phone);
             sendBroadcast(broadcastIntent);
+
         }
+
     }
 
     public void change_icon(View view) {
@@ -284,46 +300,56 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             music_action_image.setImageResource(R.drawable.ic_media_pause);
             tt=1;
             if (id == 0) {
-                playAudio(0);
+                playAudio(music_index);
+                id=1;
             } else if (id == 1) {
                 player.resumeMedia();
-                id=0;
             }
         }
     }
 
     public void show_detail_musicplayer(View view) {
-        retrieve();
-        if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_pause).getConstantState()) {
-            Bundle bundle=new Bundle();
-            bundle.putString("playing","yes");
-            bundle.putInt("index",music_index);
-            bundle.putStringArrayList("dataList",dataList);
-            bundle.putStringArrayList("titleList",titleList);
-            bundle.putStringArrayList("albumList",albumList);
-            bundle.putStringArrayList("artistList",artistList);
-            DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
-            detailMusicFragment.setArguments(bundle);
-            track=1;
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.music_frame,detailMusicFragment,"detailplayer");
-            fragmentTransaction.commit();
-        } else if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_play).getConstantState()) {
-            Bundle bundle=new Bundle();
-            bundle.putString("playing","no");
-            bundle.putInt("index",music_index);
-            bundle.putStringArrayList("dataList",dataList);
-            bundle.putStringArrayList("titleList",titleList);
-            bundle.putStringArrayList("albumList",albumList);
-            bundle.putStringArrayList("artistList",artistList);
-            DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
-            detailMusicFragment.setArguments(bundle);
-            track=1;
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.music_frame,detailMusicFragment,"detailplayer");
-            fragmentTransaction.commit();
+        if(player.check()&&player!=null)
+        {
+            retrieve();
+            if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_pause).getConstantState()) {
+                Bundle bundle=new Bundle();
+                bundle.putString("playing","yes");
+                bundle.putInt("index",music_index);
+                bundle.putStringArrayList("dataList",dataList);
+                bundle.putStringArrayList("titleList",titleList);
+                bundle.putStringArrayList("albumList",albumList);
+                bundle.putStringArrayList("artistList",artistList);
+                bundle.putString("phone",phone);
+                DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
+                detailMusicFragment.setArguments(bundle);
+                track=1;
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.music_frame,detailMusicFragment,"detailplayer");
+                fragmentTransaction.commit();
+                detailMusicFragment.change1(player);
+            } else if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_play).getConstantState()) {
+                Bundle bundle=new Bundle();
+                bundle.putString("playing","no");
+                bundle.putInt("index",music_index);
+                bundle.putStringArrayList("dataList",dataList);
+                bundle.putStringArrayList("titleList",titleList);
+                bundle.putStringArrayList("albumList",albumList);
+                bundle.putStringArrayList("artistList",artistList);
+                bundle.putString("phone",phone);
+                DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
+                detailMusicFragment.setArguments(bundle);
+                track=1;
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.music_frame,detailMusicFragment,"detailplayer");
+                fragmentTransaction.commit();
+                detailMusicFragment.change1(player);
+
+            }
+
         }
     }
+
 
     public void play_previous(View view) {
         marquee_music = findViewById(R.id.detail_music);
@@ -332,6 +358,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         if (music_index != 0) {
             player.skipToPrevious();
             music_index--;
+
             marquee_music.setText(audioList.get(music_index).getTitle());
             detail_music_artist.setText(audioList.get(music_index).getArtist());
             playAudio(music_index);
@@ -368,11 +395,28 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             if(id==1)
                 player.resumeMedia();
             else
+            {
                 playAudio(music_index);
-
+                id=1;
+            }
         } else {
             detail_play.setImageResource(R.drawable.filled_play);
             player.pauseMedia();
+        }
+    }
+    public void change_theme(View view) {
+        relativeLayout=findViewById(R.id.relativeLayout);
+        if(relativeLayout.getBackground().getConstantState()==getResources().getDrawable(R.drawable.photo).getConstantState())
+        {
+            relativeLayout.setBackgroundResource(R.drawable.ocean);
+        }
+        else if(relativeLayout.getBackground().getConstantState()==getResources().getDrawable(R.drawable.ocean).getConstantState())
+        {
+            relativeLayout.setBackgroundResource(R.drawable.sunrise);
+        }
+        else if(relativeLayout.getBackground().getConstantState()==getResources().getDrawable(R.drawable.sunrise).getConstantState())
+        {
+            relativeLayout.setBackgroundResource(R.drawable.photo);
         }
     }
     public void retrieve()
@@ -397,5 +441,30 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             loadCollapsingImage(++imageIndex);
         }
     }
+    public void LoadIndex()
+    {
+        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("Music_Index").child(phone);
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                    music_index=Integer.parseInt((String) hashMap.get("music_index"));
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
+        player.stopSelf();
+    }
 }

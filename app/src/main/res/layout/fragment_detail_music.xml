@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/photo"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/relativeLayout">
 
 
     <ImageButton
@@ -47,12 +48,34 @@
     <SeekBar
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="190dp"
         android:layout_marginRight="30dp"
         android:max="100"
-        android:progress="0"/>
+        android:progress="0" />
+
+    <TextView
+            android:id="@+id/current_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/seekbar"
+            android:layout_alignStart="@+id/seekbar"/>
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="03:00"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:layout_alignBottom="@+id/seekbar"
+            android:layout_alignEnd="@+id/seekbar"
+             />
+
 
     <TextView
         android:id="@+id/detail_music"
@@ -96,9 +119,10 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="77dp"
+            android:layout_width="wrap_content"
             android:layout_height="41dp"
-            android:text="Themes"
+            android:text="Change Theme"
+            android:onClick="change_theme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

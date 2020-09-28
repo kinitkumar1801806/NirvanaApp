@@ -10,11 +10,11 @@
         android:required="false" />
 
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -28,146 +28,163 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name="androidx.media.session.MediaButtonReceiver" >
+        <activity android:name=".GoalPlanning.StressTestReport"></activity>
+        <activity android:name=".GoalPlanning.StressTest" />
+        <activity android:name=".GoalPlanning.SessionWithStudent" />
+        <activity android:name=".GoalPlanning.SessionWithFaculty" />
+        <activity android:name=".GoalPlanning.ManagerialReport" />
+        <activity android:name=".GoalPlanning.EmployerReport" />
+        <activity android:name=".GoalPlanning.BookSession" />
+        <activity android:name=".GoalPlanning.GoalPlanning" />
+
+        <receiver android:name="androidx.media.session.MediaButtonReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
-        <activity android:name=".MessageActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
-        <service android:name=".SinchService" />
+        <activity
+            android:name=".Call.MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".Call.SinchService" />
         <service
             android:name=".Service.Background"
             android:enabled="true"
-            android:exported="true"/>
-        <activity android:name=".VoiceCallScreenActivity" />
-        <activity android:name=".IncominCallScreenActivity" />
-        <activity android:name=".IncomingVideoCallActivity" />
-        <activity android:name=".VideoCallScreenActivity" />
+            android:exported="true" />
+        <service android:name=".Call.FcmListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".Call.VoiceCallScreenActivity" />
+        <activity android:name=".Call.IncominCallScreenActivity" />
+        <activity android:name=".Call.IncomingVideoCallActivity" />
+        <activity android:name=".Call.VideoCallScreenActivity" />
         <activity
-            android:name=".MyDoctorActivity"
+            android:name=".Doctors.MyDoctorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".OfficeWelcomeActivity"
+            android:name=".Offices.OfficeWelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ClinicWelcomeActivity"
+            android:name=".Clinics.ClinicWelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HospitalWelcomeActivity"
+            android:name=".Hospitals.HospitalWelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SchoolWelcomeActivity"
+            android:name=".Schools.SchoolWelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".rganisationLoginActivity"
+            android:name=".Organisations.rganisationLoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".BlogActivity"
+            android:name=".Blogs.BlogActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".OfficeLoginActivity"
+            android:name=".Offices.OfficeLoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SchoolLoginActivity"
+            android:name=".Schools.SchoolLoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ClinicLoginActivity"
+            android:name=".Clinics.ClinicLoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HospitalLoginActivity"
+            android:name=".Hospitals.HospitalLoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".OfficePhoneVerification" />
-        <activity android:name=".SchoolPhoneVerification" />
-        <activity android:name=".ClinicPhoneVerification" />
-        <activity android:name=".HospitalPhoneVerification" />
+        <activity android:name=".Offices.OfficePhoneVerification" />
+        <activity android:name=".Schools.SchoolPhoneVerification" />
+        <activity android:name=".Clinics.ClinicPhoneVerification" />
+        <activity android:name=".Hospitals.HospitalPhoneVerification" />
         <activity
-            android:name=".OrganisationActivity"
+            android:name=".Organisations.OrganisationActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
-        <activity android:name=".Meeting_Alresdy_fixed_step2" />
+        <activity android:name=".Patients.Meeting_Alresdy_fixed_step2" />
         <activity
-            android:name=".Meeting_Already_Fixed_step1"
+            android:name=".Patients.Meeting_Already_Fixed_step1"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Niri" />
         <activity
-            android:name=".PendingMeetingsStep2"
-            android:parentActivityName=".PendingMeetingsStep1">
+            android:name=".Doctors.PendingMeetingsStep2"
+            android:parentActivityName=".Doctors.PendingMeetingsStep1">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.PendingMeetingsStep1" />
+                android:value="com.example.nirvana.Doctors.PendingMeetingsStep1" />
         </activity>
         <activity
-            android:name=".PendingMeetingsStep1"
-            android:parentActivityName=".Doctor_Welcome_Activity"
+            android:name=".Doctors.PendingMeetingsStep1"
+            android:parentActivityName=".Doctors.Doctor_Welcome_Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctor_Welcome_Activity" />
+                android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
         </activity>
         <activity
-            android:name=".Not_Fixed_Meeting_step2"
-            android:parentActivityName=".Not_Fixed_Meetings">
+            android:name=".Doctors.Not_Fixed_Meeting_step2"
+            android:parentActivityName=".Doctors.Not_Fixed_Meetings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Not_Fixed_Meetings" />
+                android:value="com.example.nirvana.Doctors.Not_Fixed_Meetings" />
         </activity>
         <activity
-            android:name=".Not_Fixed_Meetings"
-            android:parentActivityName=".Doctor_Welcome_Activity"
+            android:name=".Doctors.Not_Fixed_Meetings"
+            android:parentActivityName=".Doctors.Doctor_Welcome_Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctor_Welcome_Activity" />
+                android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
         </activity>
         <activity
-            android:name=".PatientQueue"
+            android:name=".Patients.PatientQueue"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Fix_Meeting_step3"
-            android:parentActivityName=".Doctors_GridView">
+            android:name=".Patients.Fix_Meeting_step3"
+            android:parentActivityName=".Doctors.Doctors_GridView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctors_GridView" />
+                android:value="com.example.nirvana.Doctors.Doctors_GridView" />
         </activity>
         <activity
-            android:name=".Fix_Meeting_step2"
-            android:parentActivityName=".Doctors_GridView">
+            android:name=".Patients.Fix_Meeting_step2"
+            android:parentActivityName=".Doctors.Doctors_GridView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctors_GridView" />
+                android:value="com.example.nirvana.Doctors.Doctors_GridView" />
         </activity>
         <activity
-            android:name=".Doctors_GridView"
-            android:parentActivityName=".Doctor_Welcome_Activity"
+            android:name=".Doctors.Doctors_GridView"
+            android:parentActivityName=".Doctors.Doctor_Welcome_Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctor_Welcome_Activity" />
+                android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
         </activity>
         <activity
-            android:name=".Patient_Welcome_Activity"
+            android:name=".Patients.Patient_Welcome_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Doctor_Welcome_Activity"
+            android:name=".Doctors.Doctor_Welcome_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PatientPhoneVerification" />
+        <activity android:name=".Patients.PatientPhoneVerification" />
         <activity
-            android:name=".DoctorPhoneVerification"
+            android:name=".Doctors.DoctorPhoneVerification"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
         <activity
-            android:name=".PatientLoginActivity"
+            android:name=".Patients.PatientLoginActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -175,7 +192,7 @@
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
         <activity
-            android:name=".DoctorLoginActivity"
+            android:name=".Doctors.DoctorLoginActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -183,28 +200,29 @@
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
         <activity
-            android:name=".PatientSignupActivity"
+            android:name=".Patients.PatientSignupActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
         <activity
-            android:name=".DoctorSignupActivity"
+            android:name=".Doctors.DoctorSignupActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.MainActivity" />
         </activity>
 
-        <service android:name=".MediaPLayerService" />
+        <service android:name=".MusicPlayer.MediaPLayerService" />
 
         <activity
-            android:name=".NirvanaAudioPlayer"
-            android:theme="@style/AppTheme.NoActionBar" >
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.nirvana.Doctor_Welcome_Activity" /></activity>
+            android:name=".MusicPlayer.NirvanaAudioPlayer"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
+        </activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

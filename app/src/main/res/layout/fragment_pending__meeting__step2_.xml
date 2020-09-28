@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/signup_bg"
-    tools:context=".Pending_Meeting_Step2_Fragment">
+    tools:context=".Doctors.Pending_Meeting_Step2_Fragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

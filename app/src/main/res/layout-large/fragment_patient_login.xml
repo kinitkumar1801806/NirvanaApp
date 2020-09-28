@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PatientLoginFragment"
+    tools:context=".Patients.PatientLoginFragment"
     android:orientation="vertical"
     android:id="@+id/login_patient_fragment">
     <ImageView

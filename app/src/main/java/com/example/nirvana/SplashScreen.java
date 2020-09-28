@@ -6,6 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.example.nirvana.Clinics.ClinicWelcomeActivity;
+import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
+import com.example.nirvana.Hospitals.HospitalWelcomeActivity;
+import com.example.nirvana.Offices.OfficeWelcomeActivity;
+import com.example.nirvana.Patients.Patient_Welcome_Activity;
+import com.example.nirvana.Schools.SchoolWelcomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +51,6 @@ public class SplashScreen extends AppCompatActivity {
             if(auth.getCurrentUser()!=null)
             {
                 Id=auth.getCurrentUser().getUid();
-                System.out.println(Id);
                 FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
                 DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors");
                 databaseReference.addValueEventListener(new ValueEventListener() {
@@ -61,7 +66,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String uid=(String)userData.get("Id");
                                 if(uid.equals(Id))
                                 {
-                                    Intent intent=new Intent(SplashScreen.this,Doctor_Welcome_Activity.class);
+                                    Intent intent=new Intent(SplashScreen.this, Doctor_Welcome_Activity.class);
                                     String phone=(String)userData.get("phone");
                                     check="yes";
                                     intent.putExtra("phone",phone);
@@ -92,7 +97,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String phone=(String)userData.get("phone");
                                 if(uid.equals(Id))
                                 {
-                                    Intent intent=new Intent(SplashScreen.this,Patient_Welcome_Activity.class);
+                                    Intent intent=new Intent(SplashScreen.this, Patient_Welcome_Activity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
                                     startActivity(intent);
@@ -122,7 +127,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String phone=(String)userData.get("contact");
                                 if(uid.equals(Id))
                                 {
-                                    Intent intent=new Intent(SplashScreen.this,SchoolWelcomeActivity.class);
+                                    Intent intent=new Intent(SplashScreen.this, SchoolWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
                                     startActivity(intent);
@@ -152,7 +157,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String phone=(String)userData.get("contact");
                                 if(uid.equals(Id))
                                 {
-                                    Intent intent=new Intent(SplashScreen.this,ClinicWelcomeActivity.class);
+                                    Intent intent=new Intent(SplashScreen.this, ClinicWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
                                     startActivity(intent);
@@ -182,7 +187,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String phone=(String)userData.get("contact");
                                 if(uid.equals(Id))
                                 {
-                                    Intent intent=new Intent(SplashScreen.this,HospitalWelcomeActivity.class);
+                                    Intent intent=new Intent(SplashScreen.this, HospitalWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
                                     startActivity(intent);
@@ -212,7 +217,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String phone=(String)userData.get("contact");
                                 if(uid.equals(Id))
                                 {
-                                    Intent intent=new Intent(SplashScreen.this,OfficeWelcomeActivity.class);
+                                    Intent intent=new Intent(SplashScreen.this, OfficeWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
                                     startActivity(intent);

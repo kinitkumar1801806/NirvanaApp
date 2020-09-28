@@ -8,13 +8,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.nirvana.Doctors.DoctorLoginActivity;
+import com.example.nirvana.Doctors.DoctorSignupActivity;
+import com.example.nirvana.Organisations.OrganisationActivity;
+import com.example.nirvana.Organisations.rganisationLoginActivity;
+import com.example.nirvana.Patients.PatientLoginActivity;
+import com.example.nirvana.Patients.PatientSignupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,8 +28,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mDrawerLayout;
@@ -203,33 +203,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void doctor_register(View view) {
-        Intent intent =new Intent(this,DoctorSignupActivity.class);
+        Intent intent =new Intent(this, DoctorSignupActivity.class);
         startActivity(intent);
     }
 
     public void patient_register(View view) {
-        Intent intent =new Intent(this,PatientSignupActivity.class);
+        Intent intent =new Intent(this, PatientSignupActivity.class);
         startActivity(intent);
     }
 
     public void doctor_signin(View view) {
-        Intent intent =new Intent(this,DoctorLoginActivity.class);
+        Intent intent =new Intent(this, DoctorLoginActivity.class);
         startActivity(intent);
     }
 
     public void patient_signin(View view) {
-        Intent intent =new Intent(this,PatientLoginActivity.class);
+        Intent intent =new Intent(this, PatientLoginActivity.class);
         startActivity(intent);
     }
 
     public void organisation_register(View view) {
-        Intent intent=new Intent(this,OrganisationActivity.class);
+        Intent intent=new Intent(this, OrganisationActivity.class);
         startActivity(intent);
     }
 
     public void organisation_signin(View view) {
 
-        Intent intent=new Intent(this,rganisationLoginActivity.class);
+        Intent intent=new Intent(this, rganisationLoginActivity.class);
         startActivity(intent);
     }
 }

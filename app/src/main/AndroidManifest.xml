@@ -28,7 +28,9 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GoalPlanning.StressTestReport"></activity>
+        <activity android:name=".Payments.MainPaymentActivity"></activity>
+        <activity android:name=".Blogs.Blog_Detail_Activity" />
+        <activity android:name=".GoalPlanning.StressTestReport" />
         <activity android:name=".GoalPlanning.StressTest" />
         <activity android:name=".GoalPlanning.SessionWithStudent" />
         <activity android:name=".GoalPlanning.SessionWithFaculty" />
@@ -63,7 +65,7 @@
         <activity android:name=".Call.IncomingVideoCallActivity" />
         <activity android:name=".Call.VideoCallScreenActivity" />
         <activity
-            android:name=".Doctors.MyDoctorActivity"
+            android:name=".Schools.MyDoctorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Offices.OfficeWelcomeActivity"
@@ -234,6 +236,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <meta-data android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_L3XPW2PWIoKazI"/>
     </application>
-
 </manifest>

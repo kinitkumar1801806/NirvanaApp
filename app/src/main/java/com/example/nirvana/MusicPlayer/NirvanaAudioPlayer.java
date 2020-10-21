@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -209,6 +210,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             MediaPLayerService.LocalBinder binder = (MediaPLayerService.LocalBinder) service;
             player = binder.getService();
             serviceBound = true;
+
         }
 
         @Override
@@ -471,7 +473,5 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(serviceConnection);
-        player.stopSelf();
     }
 }

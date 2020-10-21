@@ -61,7 +61,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
 
     public void fix_the_meeting(View view) {
         Intent intent =new Intent(this, Fix_Meeting_step3.class);
-       intent.putStringArrayListExtra("arr",arr);
+        intent.putStringArrayListExtra("arr",arr);
         startActivity(intent);
     }
 

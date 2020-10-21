@@ -177,7 +177,6 @@ public void change()
                 currentDuration.setText(curr_dur);
                 marquee_music.setText(audioList.get(music_index).getTitle());
                 detail_music_artist.setText(audioList.get(music_index).getArtist());
-
             }
             mHandler.postDelayed(this, 1000);
         }
@@ -189,6 +188,7 @@ public void change()
  }
     public void SetIndex(int index)
     {
-       music_index=index;
+        music_index=index;
+
     }
 }

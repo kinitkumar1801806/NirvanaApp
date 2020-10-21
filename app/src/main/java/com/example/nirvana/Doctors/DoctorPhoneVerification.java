@@ -10,6 +10,20 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import com.example.nirvana.R;
 import com.example.nirvana.Model.doctor_details;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,12 +40,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class DoctorPhoneVerification extends AppCompatActivity {
     private PhoneAuthCredential credential;
     private FirebaseAuth mAuth;
     private Task<Void> databaseReference;
+    final String username ="nirvana.ieee.01@gmail.com";
+    final String password ="nirvana_IEEE";
     private StorageReference mStorageRef;
     private EditText code;
     private ProgressBar progressBar;
@@ -160,6 +177,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                             .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
+                                                    sendEmail();
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
                                                     Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
@@ -184,6 +202,50 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                             }
                         });
     }
+public void sendEmail()
+{
+    Properties props = new Properties();
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.port", "587");
+    Session session = Session.getInstance(props,
+            new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+    try {
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("nirvana.ieee.01@gmail.com"));
+        message.setRecipients(Message.RecipientType.TO,
+                InternetAddress.parse(Email));
+        message.setSubject("Thank you for registering in Nirvana");
+        message.setText("Dear "+Fname+" "+Lname+", "
+                + "\n\n Welcome to Nirvana.....Your doctor id is "+Id+".Please do not delete this email as every time you sign in into your account " +
+                "you will need this id.");
 
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+
+        //Multipart multipart = new MimeMultipart();
+
+        //messageBodyPart = new MimeBodyPart();
+        //String file = "path of file to be attached";
+        //String fileName = "attachmentName";
+        //DataSource source = new FileDataSource(file);
+        //messageBodyPart.setDataHandler(new DataHandler(source));
+       // messageBodyPart.setFileName(fileName);
+        //multipart.addBodyPart(messageBodyPart);
+
+        //message.setContent(multipart);
+
+        Transport.send(message);
+
+        System.out.println("Done");
+
+    } catch (MessagingException e) {
+        throw new RuntimeException(e);
+    }
+}
 
 }

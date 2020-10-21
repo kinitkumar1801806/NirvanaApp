@@ -14,7 +14,6 @@ import android.view.MenuItem;
 
 import com.example.nirvana.Doctors.Doctor_Home_Fragment;
 import com.example.nirvana.MainActivity;
-import com.example.nirvana.Doctors.MyDoctorActivity;
 import com.example.nirvana.Niri;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;

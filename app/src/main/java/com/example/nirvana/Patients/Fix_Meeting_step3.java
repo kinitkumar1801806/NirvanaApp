@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nirvana.Doctors.Doctor_Meeting;
+import com.example.nirvana.Payments.MainPaymentActivity;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,8 +32,8 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class Fix_Meeting_step3 extends AppCompatActivity {
-ArrayList<String>arr;
-private String doctor_name,doctor_phone,Uid,patient_phone,username_doctor;
+ArrayList<String>arr,Patient_Detail,Doctor_Detail;
+private String doctor_name,doctor_phone,Uid,patient_phone,username_doctor,bio;
 FirebaseAuth mauth;
 Task<Void> databaseReference;
 Task<Void> databaseReference1;
@@ -46,8 +47,11 @@ ProgressBar progressBar;
         doctor_name=arr.get(0);
         doctor_phone=arr.get(1);
         username_doctor=arr.get(2);
+        bio=arr.get(3);
         mauth=FirebaseAuth.getInstance();
         Uid=mauth.getCurrentUser().getUid();
+        Patient_Detail=new ArrayList<>();
+        Doctor_Detail=new ArrayList<>();
         DatabaseReference Reference=FirebaseDatabase.getInstance().getReference().child("Patient");
         Reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -122,54 +126,29 @@ ProgressBar progressBar;
             SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
             Date todayDate = new Date();
             String thisDate = currentDate.format(todayDate);
-            Patient_Meeting patient_meeting=new Patient_Meeting(
-                    name1,
-                    age1,
-                    problem1,
-                    patient_gender1,
-                    doctor_name,
-                    doctor_phone,
-                    time,
-                    date,
-                    thisDate,
-                    username_doctor,
-                    "None",
-                    currentTime
-            );
-            final Doctor_Meeting doctor_meeting=new Doctor_Meeting(
-                    name1,
-                    age1,
-                    problem1,
-                    patient_gender1,
-                    patient_phone,
-                    time1,
-                    currentTime,
-                    date1,
-                    thisDate,
-                    doctor_phone,
-                    username_doctor,
-                    arr.get(3)
-            );
+            Patient_Detail.add(name1);
+            Patient_Detail.add(age1);
+            Patient_Detail.add(problem1);
+            Patient_Detail.add(patient_gender1);
+            Patient_Detail.add(doctor_name);
+            Patient_Detail.add(doctor_phone);
+            Patient_Detail.add(time);
+            Patient_Detail.add(date);
+            Patient_Detail.add(thisDate);
+            Patient_Detail.add(username_doctor);
+            Patient_Detail.add("None");
+            Patient_Detail.add(currentTime);
+            Doctor_Detail.add(patient_phone);
+            Doctor_Detail.add(time1);
+            Doctor_Detail.add(date1);
+            Doctor_Detail.add(arr.get(4));
+            Doctor_Detail.add(bio);
+            progressBar.setVisibility(view.GONE);
+            Intent intent=new Intent(this, MainPaymentActivity.class);
+            intent.putStringArrayListExtra("Patient_Detail",Patient_Detail);
+            intent.putStringArrayListExtra("Doctor_Detail",Doctor_Detail);
+            startActivity(intent);
 
-               databaseReference= FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(patient_phone).child(doctor_phone)
-                       .setValue(patient_meeting).addOnCompleteListener(new OnCompleteListener<Void>() {
-                           @Override
-                           public void onComplete(@NonNull Task<Void> task) {
-
-                           }
-                       });
-
-          databaseReference1=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child("Not_Fixed_Meetings").child(doctor_phone).child(patient_phone)
-                    .setValue(doctor_meeting).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent=new Intent(Fix_Meeting_step3.this, Fix_Meeting_step2.class);
-                            intent.putStringArrayListExtra("arr",arr);
-                            startActivity(intent);
-
-                        }
-                    });
         }
     }
 }

@@ -26,8 +26,8 @@
            android:textAppearance="@style/TextAppearance.AppCompat.Large"
            android:textColor="?android:attr/textColorPrimary" />
 
-       <GridView
-           android:id="@+id/gridview"
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/recycler_view"
            android:layout_width="match_parent"
            android:layout_height="match_parent"/>
    </RelativeLayout>

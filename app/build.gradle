@@ -27,6 +27,10 @@ android {
     }
 
 }
+repositories
+        {
+            mavenCentral()
+        }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -53,5 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.code.gson:gson:2.7'
+    implementation 'javax.mail:javax.mail-api:1.5.3'
+    implementation 'com.razorpay:checkout:1.5.16'
     implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
 }

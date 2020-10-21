@@ -1,4 +1,4 @@
-package com.example.nirvana.Doctors;
+package com.example.nirvana.Schools;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,15 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.nirvana.Adapter.ImageAdapter_Doctor;
-import com.example.nirvana.Patients.Fix_Meeting_step2;
 import com.example.nirvana.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,29 +22,30 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Doctors_GridView extends AppCompatActivity {
+public class MyDoctorActivity extends AppCompatActivity {
     ArrayList<String> ImageArray;
     ArrayList<String> NameList;
+    TextView textview;
     ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList;
     RecyclerView recyclerView;
     ImageAdapter_Doctor imageAdapter_doctor;
+    public String Who;
     ProgressDialog progressDialog;
-    TextView textview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctors__grid_view);
+        setContentView(R.layout.activity_my_doctor);
         Toolbar toolbar=findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        Intent intent=getIntent();
+        textview=findViewById(R.id.text_view);
+        Who=intent.getStringExtra("who");
         NameList=new ArrayList<>();
         Username_List=new ArrayList<>();
         Phone_List=new ArrayList<>();
         arr=new ArrayList<>();
-        BioList=new ArrayList<>();
-        Expand_List=new ArrayList<>();
         ImageArray=new ArrayList<>();
-        textview=findViewById(R.id.text_view);
-        progressDialog =new ProgressDialog(Doctors_GridView.this);
+        progressDialog =new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -69,25 +65,25 @@ public void retrieveData()
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if(dataSnapshot.exists())
             {
-                HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
-                for(String key:hashMap.keySet()) {
-                    Object data = hashMap.get(key);
-                    HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                    String fname=(String)userData.get("fname");
-                    String lname=(String)userData.get("lname");
-                    String Name=fname+" "+lname;
-                    String username=(String)userData.get("username");
-                    String phone=(String)userData.get("phone");
-                    String link=(String)userData.get("link");
-                    String affiliation=(String)userData.get("affiliation");
-                    NameList.add(Name);
-                    Username_List.add(username);
-                    Phone_List.add(phone);
-                    ImageArray.add(link);
-                    BioList.add(affiliation);
-                    Expand_List.add("0");
-                    initRecyclerView();
-                }
+            HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
+            for(String key:hashMap.keySet()) {
+                Object data = hashMap.get(key);
+                HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                String fname=(String)userData.get("fname");
+                String lname=(String)userData.get("lname");
+                String Name=fname+" "+lname;
+                String username=(String)userData.get("username");
+                String phone=(String)userData.get("phone");
+                String link=(String)userData.get("link");
+                String affiliation=(String)userData.get("affiliation");
+                NameList.add(Name);
+                Username_List.add(username);
+                Phone_List.add(phone);
+                ImageArray.add(link);
+                BioList.add(affiliation);
+                Expand_List.add("0");
+                initRecyclerView();
+            }
             }
             else
             {
@@ -103,7 +99,7 @@ public void retrieveData()
 }
 public void initRecyclerView()
 {
-    imageAdapter_doctor= new ImageAdapter_Doctor(Doctors_GridView.this, ImageArray, NameList,Username_List,Expand_List,BioList);
+    imageAdapter_doctor= new ImageAdapter_Doctor(MyDoctorActivity.this, ImageArray, NameList,Username_List,Expand_List,BioList);
     recyclerView.setAdapter(imageAdapter_doctor);
     imageAdapter_doctor.setOnItemClickListener(new ImageAdapter_Doctor.OnItemClickListener() {
         @Override
@@ -114,12 +110,8 @@ public void initRecyclerView()
             arr.add(0,name);
             arr.add(1,phone);
             arr.add(2,username);
-            arr.add(3,BioList.get(position));
-            arr.add(4,ImageArray.get(position));
-            Intent i = new Intent(getApplicationContext(), Fix_Meeting_step2.class);
-            // Pass image index
-            i.putStringArrayListExtra("arr",arr);
-            startActivity(i);
+            arr.add(3,ImageArray.get(position));
+            arr.add(4,Who);
         }
 
         @Override

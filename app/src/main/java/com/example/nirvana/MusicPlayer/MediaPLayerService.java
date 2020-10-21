@@ -216,9 +216,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     @Override
     public void onCompletion(MediaPlayer mp) {
         //Invoked when playback of a media source has completed.
-        removeNotification();
-        mp.stop();
-        mp.release();
+
     }
 
     @Override
@@ -250,10 +248,10 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
         playMedia();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onSeekComplete(MediaPlayer mp) {
         //Invoked indicating the completion of a seek operation.
-
 
     }
 
@@ -750,7 +748,6 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
                     music_index=Integer.parseInt((String) hashMap.get("music_index"));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

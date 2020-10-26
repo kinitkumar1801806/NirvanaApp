@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".Blogs.BlogActivity">
+    tools:context=".Schools.MyDoctorActivity"
+    android:orientation="vertical">
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize" />
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_marginTop="55dp"
-       android:orientation="vertical">
-       <TextView
-           android:id="@+id/text_view"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="300dp"
-           android:gravity="center_horizontal"
-           android:text=""
-           android:textAppearance="@style/TextAppearance.AppCompat.Large"
-           android:textColor="?android:attr/textColorPrimary" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="?android:attr/textColorPrimary" />
 
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/recycler_view"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"/>
-   </RelativeLayout>
-
-
-    <include
-        layout="@layout/mydoctor_bottom_drawer"/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+</LinearLayout>

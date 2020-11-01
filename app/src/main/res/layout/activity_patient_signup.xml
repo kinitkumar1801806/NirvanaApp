@@ -13,6 +13,7 @@
         tools:context=".Patients.PatientSignupActivity"
         android:orientation="vertical"
         >
+
         <ImageView
             android:layout_width="200dp"
             android:layout_height="126dp"
@@ -26,41 +27,77 @@
             android:textSize="35sp"
             android:layout_marginTop="-15dp"
             android:layout_gravity="center_horizontal"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:theme="@style/MyTextInputLayout"
-            >
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="-35dp"
-                android:layout_marginLeft="13dp"
-                android:src="@drawable/person_secondary" />
-            <EditText
-                android:id="@+id/fname_patient"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="5dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingLeft="48dp"
-                android:hint="First  Name"
-                android:textSize="18sp"
-                /></com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:theme="@style/MyTextInputLayout"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="-35dp"
+                    android:layout_marginLeft="13dp"
+                    android:src="@drawable/person_secondary" />
+
+                <EditText
+                    android:id="@+id/age_patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:ems="10"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:paddingLeft="48dp"
+                    android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:theme="@style/MyTextInputLayout"
+                >
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="-35dp"
+                    android:layout_marginLeft="13dp"
+                    android:src="@drawable/person_secondary" />
+                <EditText
+                    android:id="@+id/fname_patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="48dp"
+                    android:hint="First  Name"
+                    android:textSize="18sp"
+                    /></com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,50 +170,50 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-                <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerCountries"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="11dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:theme="@style/MyTextInputLayout">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-38dp"
+                    android:paddingBottom="10dp"
+                    android:src="@drawable/ic_smartphone_black_24dp" />
+
+                <EditText
+                    android:id="@+id/mob_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/spinnerCountries"
-                        android:layout_width="113dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="11dp" />
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:theme="@style/MyTextInputLayout">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="-38dp"
-                        android:paddingBottom="10dp"
-                        android:src="@drawable/ic_smartphone_black_24dp" />
-
-                    <EditText
-                        android:id="@+id/mob_patient"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:ems="10"
-                        android:inputType="phone"
-                        android:paddingLeft="38dp"
-                        android:maxLength="10"
-                        android:layout_marginRight="10dp"
-                        android:hint="Phone no."
-                        android:textSize="18sp" />
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:inputType="phone"
+                    android:paddingLeft="38dp"
+                    android:maxLength="10"
+                    android:layout_marginRight="10dp"
+                    android:hint="Phone no."
+                    android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -192,12 +229,12 @@
                 android:theme="@style/MyTextInputLayout"
                 >
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-35dp"
-                    android:layout_marginLeft="13dp"
-                    android:src="@drawable/person_secondary" />
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/location" />
                 <EditText
                     android:id="@+id/address_patient"
                     android:layout_width="match_parent"
@@ -208,50 +245,50 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:paddingLeft="48dp"
-                    android:hint="Address"
+                    android:hint="City, State"
                     android:textSize="18sp"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:theme="@style/MyTextInputLayout"
-            app:passwordToggleEnabled="true"
-            >
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="-34dp"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/baseline_vpn_key_black_18dp" />
-
-            <EditText
-                android:id="@+id/password1_patient"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="5dp"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingLeft="48dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="18sp"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:theme="@style/MyTextInputLayout"
+                app:passwordToggleEnabled="true"
+                >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="-34dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/baseline_vpn_key_black_18dp" />
+
+                <EditText
+                    android:id="@+id/password1_patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="5dp"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="48dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -305,7 +342,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:textSize="18sp"
-                 />
+                />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

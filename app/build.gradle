@@ -50,14 +50,14 @@ dependencies {
     implementation project(path: ':kommunicateui')
     implementation project(path: ':kommunicate')
     testImplementation 'junit:junit:4.12'
-    implementation 'com.ebanx:swipe-button:0.4.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.code.gson:gson:2.7'
-    implementation 'javax.mail:javax.mail-api:1.5.3'
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
     implementation 'com.razorpay:checkout:1.5.16'
     implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
 }

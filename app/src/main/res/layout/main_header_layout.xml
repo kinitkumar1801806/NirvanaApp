@@ -36,13 +36,6 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="nirvana.ieee.01@gmail.com"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                />
         </LinearLayout>
 
     </LinearLayout>

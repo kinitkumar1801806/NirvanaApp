@@ -125,7 +125,6 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                     Id=mAuth.getCurrentUser().getUid();
                                     //verification successful we will start the profile activity
                                     details_patient details_patient=new details_patient(
-                                            Uname,
                                             Email,
                                             Phone,
                                             Address,

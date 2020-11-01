@@ -28,7 +28,8 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Payments.MainPaymentActivity"></activity>
+        <activity android:name=".LoginByPasswordActivity"></activity>
+        <activity android:name=".Payments.MainPaymentActivity" />
         <activity android:name=".Blogs.Blog_Detail_Activity" />
         <activity android:name=".GoalPlanning.StressTestReport" />
         <activity android:name=".GoalPlanning.StressTest" />
@@ -236,7 +237,10 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <meta-data android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_L3XPW2PWIoKazI"/>
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_L3XPW2PWIoKazI" />
     </application>
+
 </manifest>

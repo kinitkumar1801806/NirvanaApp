@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HospitalPhoneVerification extends AppCompatActivity {
     private ArrayList<String> arr;
-    private  String Name,Address,Email,Contact,Specific_need,mVerificationId,Id,code1;
+    private  String Name,Address,Email,Contact,Specific_need,mVerificationId,Id,code1,password;
     private EditText code;
     private ProgressBar progressBar;
     private PhoneAuthCredential credential;
@@ -49,6 +49,7 @@ public class HospitalPhoneVerification extends AppCompatActivity {
         Email=arr.get(2);
         Specific_need=arr.get(3);
         Contact=arr.get(4);
+        password=arr.get(5);
         sendVerificationCode(Contact);
     }
     private void sendVerificationCode(String mobile) {
@@ -129,7 +130,8 @@ public class HospitalPhoneVerification extends AppCompatActivity {
                                             Contact,
                                             Specific_need,
                                             "None",
-                                            Id
+                                            Id,
+                                            password
                                     );
                                     databaseReference= FirebaseDatabase.getInstance().getReference("Hospitals").child(Contact)
                                             .setValue(hospital_details).addOnCompleteListener(new OnCompleteListener<Void>() {

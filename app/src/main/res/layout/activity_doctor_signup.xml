@@ -29,42 +29,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusable="true"
-                android:theme="@style/MyTextInputLayout"
-                >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-35dp"
-                    android:layout_marginLeft="13dp"
-                    android:src="@drawable/person_secondary" />
-
-                <EditText
-                    android:id="@+id/username_doctor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:ems="10"
-                    android:layout_gravity="center_vertical"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="48dp"
-                    android:hint="Username"
-                    android:textSize="18sp"
-                    /></com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

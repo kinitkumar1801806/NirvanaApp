@@ -28,7 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PatientSignupActivity extends AppCompatActivity {
-    String Uname,Email,Pass,Phone,Address,Gender,Fname,Lname,Password;
+    String Email,Pass,Phone,Address,Gender,Fname,Lname,Password;
     private Spinner spinner;
     private ArrayList<String> arr;
     @Override
@@ -49,11 +49,10 @@ public class PatientSignupActivity extends AppCompatActivity {
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
     public void register_patient(View view) {
-        EditText username,password,email,confirm_password,phone,address,fname,lname;
+        EditText password,email,confirm_password,phone,address,fname,lname;
         RadioGroup gender;
         RadioButton patient_gender,male,female;
         final ProgressBar progressBar;
-        username=findViewById(R.id.username_patient);
         fname=findViewById(R.id.fname_patient);
         lname=findViewById(R.id.lname_patient);
         email=findViewById(R.id.email_patient);
@@ -69,13 +68,7 @@ public class PatientSignupActivity extends AppCompatActivity {
         patient_gender=findViewById(selectedId);
         String pw=password.getText().toString().trim();
         String cpw=confirm_password.getText().toString().trim();
-        if(TextUtils.isEmpty(username.getText()))
-        {
-            username.setError("Please enter the username");
-            progressBar.setVisibility(View.GONE);
-        }
-
-        else if(TextUtils.isEmpty(fname.getText()))
+        if(TextUtils.isEmpty(fname.getText()))
         {
             fname.setError("Please enter the first name");
             progressBar.setVisibility(View.GONE);
@@ -138,13 +131,11 @@ public class PatientSignupActivity extends AppCompatActivity {
             String email1 = email.getText().toString().trim();
             String phone1 = phone.getText().toString().trim();
             String address1 = address.getText().toString().trim();
-            String username1 = username.getText().toString().trim();
             String gender1 = patient_gender.getText().toString().trim();
             String fname1 = fname.getText().toString().trim();
             String lname1 = lname.getText().toString().trim();
             String pass1=password.getText().toString();
             String phonenumber = "+" + code + phone1;
-            Uname=username1;
             Email=email1;
             Phone=phonenumber;
             Address=address1;
@@ -153,7 +144,7 @@ public class PatientSignupActivity extends AppCompatActivity {
             Lname=lname1;
             Pass=pass1;
             arr=new ArrayList<String>();
-            arr.add(0,Uname);
+            arr.add(0,"");
             arr.add(1,Email);
             arr.add(2,Phone);
             arr.add(3,Address);

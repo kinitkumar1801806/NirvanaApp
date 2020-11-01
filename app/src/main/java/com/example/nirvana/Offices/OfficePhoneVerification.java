@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class OfficePhoneVerification extends AppCompatActivity {
 
     private ArrayList<String> arr;
-    private  String Name,Address,Email,Contact,Specific_need,Purpose,mVerificationId,Id,code1;
+    private  String Name,Address,Email,Contact,Specific_need,Purpose,mVerificationId,Id,code1,password;
     private EditText code;
     private ProgressBar progressBar;
     private PhoneAuthCredential credential;
@@ -49,6 +49,7 @@ public class OfficePhoneVerification extends AppCompatActivity {
         Specific_need=arr.get(3);
         Contact=arr.get(4);
         Purpose=arr.get(5);
+        password=arr.get(6);
         sendVerificationCode(Contact);
     }
     private void sendVerificationCode(String mobile) {
@@ -127,7 +128,8 @@ public class OfficePhoneVerification extends AppCompatActivity {
                                             Specific_need,
                                             Purpose,
                                             "None",
-                                            Id
+                                            Id,
+                                            password
                                     );
                                     databaseReference= FirebaseDatabase.getInstance().getReference("Offices").child(Contact)
                                             .setValue(school_details).addOnCompleteListener(new OnCompleteListener<Void>() {

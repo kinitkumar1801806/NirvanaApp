@@ -25,7 +25,7 @@
         android:layout_marginBottom="100dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center_horizontal"
-        android:text="N i r v a n a"
+        android:text="Nirvana"
         android:textSize="30sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/white" />

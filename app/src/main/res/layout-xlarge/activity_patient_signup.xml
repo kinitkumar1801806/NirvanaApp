@@ -50,18 +50,17 @@
                     android:src="@drawable/person_secondary" />
 
                 <EditText
-                    android:id="@+id/username_patient"
+                    android:id="@+id/age_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:ems="10"
-                    android:layout_gravity="center_vertical"
-                    android:inputType="textPersonName"
+                    android:hint="Age"
+                    android:inputType="number"
                     android:paddingLeft="65dp"
-                    android:hint="Username"
-                    android:textSize="30sp"
-                    /></com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="30sp" /></com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -234,19 +233,19 @@
                     android:layout_marginTop="-58dp"
                     android:layout_marginLeft="13dp"
                     android:src="@drawable/person_secondary" />
+
                 <EditText
                     android:id="@+id/address_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:ems="10"
+                    android:hint="City, State"
                     android:inputType="textPersonName"
                     android:paddingLeft="65dp"
-                    android:hint="Address"
-                    android:textSize="30sp"
-                    />
+                    android:textSize="30sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <LinearLayout

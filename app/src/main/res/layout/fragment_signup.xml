@@ -25,19 +25,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Signup"
+        android:text="Sign-up"
         android:textSize="35sp"
         android:layout_marginTop="40dp"
         android:textColorHint="@color/white"
         android:layout_gravity="center_horizontal"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="signup as"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        android:textColorHint="@color/white"
-        android:layout_gravity="center_horizontal"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Patient"
+                android:text="Client"
                 android:textSize="15sp"
                 android:layout_gravity="center_horizontal"/>
 
@@ -76,7 +69,7 @@
                 android:padding="10dp"
                 android:onClick="doctor_register"
                 app:civ_circle_background_color="@color/green"
-                android:src="@drawable/briefcase"/>
+                android:src="@drawable/doctor_signup"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

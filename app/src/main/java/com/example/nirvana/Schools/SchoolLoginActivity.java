@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nirvana.LoginByPasswordActivity;
 import com.example.nirvana.Model.CountryCode;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -156,5 +157,12 @@ public class SchoolLoginActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_school_login,schoolSignupFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void LoginByPassword(View view) {
+        Intent intent=new Intent(this, LoginByPasswordActivity.class);
+        intent.putExtra("phone",phone1);
+        intent.putExtra("who","school");
+        startActivity(intent);
     }
 }

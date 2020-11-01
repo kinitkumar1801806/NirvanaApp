@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 public class DoctorSignupActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 234;
     private static final int PICK_File_REQUEST = 134;
-    String Uname,Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice;
+    String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice;
     private Spinner spinner;
     private Uri Imagepath,Filepath;
     private StorageReference mStorageRef;
@@ -75,11 +75,10 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
     public void register_doctor(View view) {
-        EditText username,password,email,confirm_password,phone,address,fname,lname,affiliation,year_of_practice,place_of_practice,linkedIn;
+        EditText password,email,confirm_password,phone,address,fname,lname,affiliation,year_of_practice,place_of_practice,linkedIn;
         RadioGroup gender;
         RadioButton doctor_gender;
         final ProgressBar progressBar;
-        username=findViewById(R.id.username_doctor);
         fname=findViewById(R.id.fname_doctor);
         lname=findViewById(R.id.lname_doctor);
         email=findViewById(R.id.email_doctor);
@@ -99,12 +98,7 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
         doctor_gender=findViewById(selectedId);
         String pw=password.getText().toString().trim();
         String cpw=confirm_password.getText().toString().trim();
-        if(TextUtils.isEmpty(username.getText()))
-        {
-            username.setError("Please enter the username");
-            progressBar.setVisibility(View.GONE);
-        }
-        else if(TextUtils.isEmpty(fname.getText()))
+        if(TextUtils.isEmpty(fname.getText()))
         {
             fname.setError("Please enter the first name");
             progressBar.setVisibility(View.GONE);
@@ -201,13 +195,11 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
             String email1=email.getText().toString().trim();
             String phone1=phone.getText().toString().trim();
             String address1=address.getText().toString().trim();
-            String username1=username.getText().toString().trim();
             String gender1=doctor_gender.getText().toString().trim();
             String fname1=fname.getText().toString().trim();
             String lname1=lname.getText().toString().trim();
             String pass1=password.getText().toString();
             String phonenumber = "+" + code +phone1;
-            Uname=username1;
             Email=email1;
             Phone=phonenumber;
             Address=address1;
@@ -220,7 +212,7 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
             Place_Of_Practice=place_of_practice.getText().toString();
             LinkedIn=linkedIn.getText().toString();
             arr=new ArrayList<String>();
-            arr.add(0,Uname);
+            arr.add(0,"");
             arr.add(1,Email);
             arr.add(2,Phone);
             arr.add(3,Address);

@@ -60,6 +60,29 @@
         android:textColor="@color/white"
         android:background="@drawable/button_rounded"
         android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have not recieved the otp?"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:onClick="LoginByPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login By Password"
+            android:textColor="@color/green"
+            android:textSize="16dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

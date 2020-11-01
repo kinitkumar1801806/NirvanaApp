@@ -52,7 +52,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
     private StorageReference mStorageRef;
     private EditText code;
     private ProgressBar progressBar;
-    private String Uname,Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice,Id,totalpatient,satisfiedpatient,rating,ratingby,link;
+    private String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice,Id,totalpatient,satisfiedpatient,rating,ratingby,link;
     private String mVerificationId,code1;
     private ArrayList<String> arr;
     @Override
@@ -64,7 +64,6 @@ public class DoctorPhoneVerification extends AppCompatActivity {
         progressBar=findViewById(R.id.progress_verify);
         Intent intent=getIntent();
         arr=intent.getStringArrayListExtra("arr");
-        Uname=arr.get(0);
         Email=arr.get(1);
         Phone=arr.get(2);
         Address=arr.get(3);
@@ -153,7 +152,6 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                     Id=mAuth.getCurrentUser().getUid();
                                     //verification successful we will start the profile activity
                                     doctor_details doctor_details=new doctor_details(
-                                            Uname,
                                             Email,
                                             Phone,
                                             Address,
@@ -177,9 +175,9 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                             .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                    sendEmail();
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
+                                                    sendEmail();
                                                     Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
                                                     intent.putExtra("phone",Phone);
                                                     startActivity(intent);
@@ -204,12 +202,13 @@ public class DoctorPhoneVerification extends AppCompatActivity {
     }
 public void sendEmail()
 {
-    Properties props = new Properties();
-    props.put("mail.smtp.auth", "true");
-    props.put("mail.smtp.starttls.enable", "true");
-    props.put("mail.smtp.host", "smtp.gmail.com");
-    props.put("mail.smtp.port", "587");
-    Session session = Session.getInstance(props,
+    Properties properties = new Properties();
+    properties.setProperty("mail.smtp.auth", "true");
+    properties.setProperty("mail.smtp.starttls.enable", "true");
+    properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+    properties.setProperty("mail.smtp.port", "465");
+
+    Session session = Session.getInstance(properties,
             new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(username, password);
@@ -224,21 +223,6 @@ public void sendEmail()
         message.setText("Dear "+Fname+" "+Lname+", "
                 + "\n\n Welcome to Nirvana.....Your doctor id is "+Id+".Please do not delete this email as every time you sign in into your account " +
                 "you will need this id.");
-
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-
-        //Multipart multipart = new MimeMultipart();
-
-        //messageBodyPart = new MimeBodyPart();
-        //String file = "path of file to be attached";
-        //String fileName = "attachmentName";
-        //DataSource source = new FileDataSource(file);
-        //messageBodyPart.setDataHandler(new DataHandler(source));
-       // messageBodyPart.setFileName(fileName);
-        //multipart.addBodyPart(messageBodyPart);
-
-        //message.setContent(multipart);
-
         Transport.send(message);
 
         System.out.println("Done");

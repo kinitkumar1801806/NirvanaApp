@@ -1,9 +1,8 @@
 package com.example.nirvana.Model;
 
 public class details_patient {
-    public String username,email,phone,address,gender,fname,lname,pass,Id,link;
-    public details_patient(String username, String email, String phone, String address, String gender, String fname,String lname,String pass,String Id,String link) {
-        this.username = username;
+    public String email,phone,address,gender,fname,lname,pass,Id,link;
+    public details_patient(String email, String phone, String address, String gender, String fname,String lname,String pass,String Id,String link) {
         this.email = email;
         this.phone = phone;
         this.address = address;

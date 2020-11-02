@@ -28,7 +28,9 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginByPasswordActivity"></activity>
+        <activity android:name=".Payments.PaymentFailureActivity"></activity>
+        <activity android:name=".Payments.PaymentSuccessActivity" />
+        <activity android:name=".LoginByPasswordActivity" />
         <activity android:name=".Payments.MainPaymentActivity" />
         <activity android:name=".Blogs.Blog_Detail_Activity" />
         <activity android:name=".GoalPlanning.StressTestReport" />

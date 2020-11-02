@@ -69,7 +69,7 @@
                 android:padding="10dp"
                 android:onClick="doctor_register"
                 app:civ_circle_background_color="@color/green"
-                android:src="@drawable/doctor_signup"/>
+                android:src="@drawable/office_signup"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

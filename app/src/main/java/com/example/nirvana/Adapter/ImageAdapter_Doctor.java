@@ -69,7 +69,7 @@ public class ImageAdapter_Doctor extends RecyclerView.Adapter<ImageAdapter_Docto
         }
         else
         {
-            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,250);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,260);
             holder.linearLayout1.setLayoutParams(layoutParams);
             holder.Expand_btn.setImageResource(R.drawable.ic_baseline_expand_more_24);
 

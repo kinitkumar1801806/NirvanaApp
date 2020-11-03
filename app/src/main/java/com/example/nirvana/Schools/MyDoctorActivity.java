@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class MyDoctorActivity extends AppCompatActivity {
     ArrayList<String> ImageArray;
     ArrayList<String> NameList;
-    ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList;
+    ArrayList<String> Email_List,Phone_List,arr,Expand_List,BioList;
     RecyclerView recyclerView;
     ImageAdapter_Doctor imageAdapter_doctor;
     ProgressDialog progressDialog;
@@ -42,7 +42,7 @@ public class MyDoctorActivity extends AppCompatActivity {
         Toolbar toolbar=findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         NameList=new ArrayList<>();
-        Username_List=new ArrayList<>();
+        Email_List=new ArrayList<>();
         Phone_List=new ArrayList<>();
         arr=new ArrayList<>();
         BioList=new ArrayList<>();
@@ -76,12 +76,12 @@ public class MyDoctorActivity extends AppCompatActivity {
                         String fname=(String)userData.get("fname");
                         String lname=(String)userData.get("lname");
                         String Name=fname+" "+lname;
-                        String username=(String)userData.get("username");
+                        String email=(String)userData.get("email");
                         String phone=(String)userData.get("phone");
                         String link=(String)userData.get("link");
                         String affiliation=(String)userData.get("affiliation");
                         NameList.add(Name);
-                        Username_List.add(username);
+                        Email_List.add(email);
                         Phone_List.add(phone);
                         ImageArray.add(link);
                         BioList.add(affiliation);
@@ -103,17 +103,17 @@ public class MyDoctorActivity extends AppCompatActivity {
     }
     public void initRecyclerView()
     {
-        imageAdapter_doctor= new ImageAdapter_Doctor(MyDoctorActivity.this, ImageArray, NameList,Username_List,Expand_List,BioList);
+        imageAdapter_doctor= new ImageAdapter_Doctor(MyDoctorActivity.this, ImageArray, NameList,Email_List,Expand_List,BioList);
         recyclerView.setAdapter(imageAdapter_doctor);
         imageAdapter_doctor.setOnItemClickListener(new ImageAdapter_Doctor.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 String phone=Phone_List.get(position);
                 String name=NameList.get(position);
-                String username=Username_List.get(position);
+                String email=Email_List.get(position);
                 arr.add(0,name);
                 arr.add(1,phone);
-                arr.add(2,username);
+                arr.add(2,email);
                 arr.add(3,BioList.get(position));
                 arr.add(4,ImageArray.get(position));
                 Intent i = new Intent(getApplicationContext(), Fix_Meeting_step2.class);

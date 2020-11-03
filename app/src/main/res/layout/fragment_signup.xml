@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,49 +7,44 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".SignupFragment"
-    android:orientation="vertical"
     android:id="@+id/signup_fragment">
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="200dp"
         android:layout_height="126dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
         android:src="@drawable/green_logo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N i r v a n a"
-        android:textSize="20sp"
-        android:layout_gravity="center_horizontal"
+        android:text="Nirvana"
+        android:id="@+id/nirvana"
+        android:textSize="28sp"
+        android:layout_marginTop="120dp"
+       android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/logo"
         android:textColor="@color/green"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Signup"
-        android:textSize="35sp"
+        android:text="Sign-up"
+        android:layout_alignTop="@+id/nirvana"
+        android:layout_centerHorizontal="true"
+        android:textSize="22sp"
         android:layout_marginTop="40dp"
         android:textColorHint="@color/white"
         android:layout_gravity="center_horizontal"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="signup as"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        android:textColorHint="@color/white"
-        android:layout_gravity="center_horizontal"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="130dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="130dp"
+    android:layout_marginLeft="20dp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
+                android:id="@+id/patient"
                 android:layout_height="100dp"
                 android:padding="10dp"
                 android:onClick="patient_register"
@@ -58,51 +53,55 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Patient"
-                android:textSize="15sp"
+                android:text="Client"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@+id/patient"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="100dp"
+                android:textSize="18sp"
                 android:layout_gravity="center_horizontal"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="15dp"
-            android:orientation="vertical">
+</RelativeLayout>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="120dp"
                 android:layout_height="100dp"
+                android:id="@+id/doctor"
                 android:layout_gravity="center_horizontal"
                 android:padding="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
                 android:onClick="doctor_register"
+                android:layout_marginBottom="160dp"
                 app:civ_circle_background_color="@color/green"
-                android:src="@drawable/briefcase"/>
+                android:src="@drawable/doctor_signup"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Doctor"
-                android:textSize="15sp"
+                android:layout_alignTop="@+id/doctor"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:textSize="18sp"
                 android:layout_gravity="center_horizontal"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:padding="10dp"
+                android:id="@+id/organisation"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:onClick="organisation_register"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="160dp"
                 app:civ_circle_background_color="@color/green"
                 android:src="@drawable/briefcase"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Organisation"
-                android:textSize="15sp"
+                android:layout_alignTop="@+id/organisation"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="100dp"
+                android:textSize="18sp"
                 android:layout_gravity="center_horizontal"/>
-        </LinearLayout>
-
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

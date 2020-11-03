@@ -28,7 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PatientSignupActivity extends AppCompatActivity {
-    String Email,Pass,Phone,Address,Gender,Fname,Lname,Password;
+    String Age,Email,Pass,Phone,Address,Gender,Fname,Lname,Password;
     private Spinner spinner;
     private ArrayList<String> arr;
     @Override
@@ -49,10 +49,11 @@ public class PatientSignupActivity extends AppCompatActivity {
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
     public void register_patient(View view) {
-        EditText password,email,confirm_password,phone,address,fname,lname;
+        EditText age,password,email,confirm_password,phone,address,fname,lname;
         RadioGroup gender;
         RadioButton patient_gender,male,female;
         final ProgressBar progressBar;
+        age=findViewById(R.id.age_patient);
         fname=findViewById(R.id.fname_patient);
         lname=findViewById(R.id.lname_patient);
         email=findViewById(R.id.email_patient);
@@ -68,7 +69,13 @@ public class PatientSignupActivity extends AppCompatActivity {
         patient_gender=findViewById(selectedId);
         String pw=password.getText().toString().trim();
         String cpw=confirm_password.getText().toString().trim();
-        if(TextUtils.isEmpty(fname.getText()))
+        if(TextUtils.isEmpty(age.getText()))
+        {
+            age.setError("Please enter the age");
+            progressBar.setVisibility(View.GONE);
+        }
+
+        else if(TextUtils.isEmpty(fname.getText()))
         {
             fname.setError("Please enter the first name");
             progressBar.setVisibility(View.GONE);
@@ -95,7 +102,7 @@ public class PatientSignupActivity extends AppCompatActivity {
         }
         else if(TextUtils.isEmpty(address.getText()))
         {
-            address.setError("Please enter the address");
+            address.setError("Please enter the city and state");
             progressBar.setVisibility(View.GONE);
         }
         else if(TextUtils.isEmpty(password.getText()))
@@ -127,15 +134,17 @@ public class PatientSignupActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
         else
-            {
+        {
             String email1 = email.getText().toString().trim();
             String phone1 = phone.getText().toString().trim();
             String address1 = address.getText().toString().trim();
+            String age1 = age.getText().toString().trim();
             String gender1 = patient_gender.getText().toString().trim();
             String fname1 = fname.getText().toString().trim();
             String lname1 = lname.getText().toString().trim();
             String pass1=password.getText().toString();
             String phonenumber = "+" + code + phone1;
+            Age=age1;
             Email=email1;
             Phone=phonenumber;
             Address=address1;
@@ -144,7 +153,7 @@ public class PatientSignupActivity extends AppCompatActivity {
             Lname=lname1;
             Pass=pass1;
             arr=new ArrayList<String>();
-            arr.add(0,"");
+            arr.add(0,Age);
             arr.add(1,Email);
             arr.add(2,Phone);
             arr.add(3,Address);
@@ -153,29 +162,29 @@ public class PatientSignupActivity extends AppCompatActivity {
             arr.add(6,Lname);
             arr.add(7,Password);
 
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patients").child(phonenumber);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
-                        {
-                            Toast.makeText(PatientSignupActivity.this,"This number is already register with an account",Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
-                        else
-                        {
-                            Intent intent=new Intent(PatientSignupActivity.this, PatientPhoneVerification.class);
-                            intent.putStringArrayListExtra("arr",arr);
-                            startActivity(intent);
-                        }
+            FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patients").child(phonenumber);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        Toast.makeText(PatientSignupActivity.this,"This number is already register with an account",Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    else
+                    {
+                        Intent intent=new Intent(PatientSignupActivity.this, PatientPhoneVerification.class);
+                        intent.putStringArrayListExtra("arr",arr);
+                        startActivity(intent);
                     }
-                });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
 
         }

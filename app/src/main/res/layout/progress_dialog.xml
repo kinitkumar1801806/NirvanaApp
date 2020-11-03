@@ -11,11 +11,12 @@
         android:padding="25dp"
         android:gravity="center"
         android:background="@drawable/bg_round">
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            />
+            android:indeterminateTint="@color/colorPrimaryDark"/>
     <TextView
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"

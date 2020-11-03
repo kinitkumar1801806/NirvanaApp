@@ -27,15 +27,15 @@
             android:title="Niri"/>
         <item
             android:id="@+id/yoga_tutorial"
-            android:icon="@drawable/cube"
+            android:icon="@drawable/tutorial_icon"
             android:title="YOGA TUTORIAL"/>
         <item
             android:id="@+id/meditation_tutorial"
-            android:icon="@drawable/question_mark"
+            android:icon="@drawable/tutorial_icon"
             android:title="MEDITATION TUTORIAL"/>
         <item
             android:id="@+id/goal_planning"
-            android:icon="@drawable/goal"
+            android:icon="@drawable/todo_icon"
             android:title="GOAL PLANNING" />
         <item
             android:id="@+id/product"

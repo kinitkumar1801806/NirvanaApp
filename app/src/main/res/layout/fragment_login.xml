@@ -13,35 +13,27 @@
         android:layout_width="200dp"
         android:layout_height="126dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/green_logo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N i r v a n a"
-        android:textSize="20sp"
+        android:text="Nirvana"
+        android:textSize="28sp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/green"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="35sp"
-        android:layout_marginTop="40dp"
-        android:textColorHint="@color/white"
-        android:layout_gravity="center_horizontal"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="login as"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
+        android:textSize="22sp"
+        android:layout_marginTop="80dp"
         android:textColorHint="@color/white"
         android:layout_gravity="center_horizontal"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Patient"
+                android:text="Client"
                 android:textSize="15sp"
                 android:layout_gravity="center_horizontal"/>
 
@@ -76,7 +68,7 @@
                 android:padding="10dp"
                 android:onClick="doctor_signin"
                 app:civ_circle_background_color="@color/green"
-                android:src="@drawable/briefcase"/>
+                android:src="@drawable/doctor_signup"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

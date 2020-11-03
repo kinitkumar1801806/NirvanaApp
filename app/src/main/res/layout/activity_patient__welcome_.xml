@@ -21,6 +21,5 @@
         app:itemIconPadding="-10dp"
         android:layout_gravity="start"
         app:itemTextColor="@color/white"
-        app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/patient_welcome_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

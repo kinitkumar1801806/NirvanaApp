@@ -51,7 +51,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/verify_clinic"
+        android:id="@+id/doctor_verify"
         android:layout_width="300dp"
         android:layout_height="80dp"
         android:layout_marginTop="75dp"

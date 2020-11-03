@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.nirvana.Model.Hospital_details;
 import com.example.nirvana.Patients.Patient_Welcome_Activity;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -96,7 +97,7 @@ public class HospitalPhoneVerification extends AppCompatActivity {
     private void verifyVerificationCode(String code) {
         //creating the credential
         try {
-            verify=findViewById(R.id.verify_clinic);
+            verify=findViewById(R.id.hospital_verify);
             verify.setEnabled(false);
             credential = PhoneAuthProvider.getCredential(mVerificationId, code);
             progressBar.setVisibility(View.VISIBLE);
@@ -139,7 +140,7 @@ public class HospitalPhoneVerification extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(HospitalPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
-                                                    Intent intent=new Intent(HospitalPhoneVerification.this, Patient_Welcome_Activity.class);
+                                                    Intent intent=new Intent(HospitalPhoneVerification.this, HospitalWelcomeActivity.class);
                                                     intent.putExtra("phone",Contact);
                                                     startActivity(intent);
                                                 }

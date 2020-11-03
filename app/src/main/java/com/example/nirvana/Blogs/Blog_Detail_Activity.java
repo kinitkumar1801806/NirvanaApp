@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.Task;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 public class Blog_Detail_Activity extends AppCompatActivity {
 public TextView BlogNo,BlogTitle,BlogBody,Comment,Like,Date,Time;
 public ImageView Like_btn;
-public String blog,title,date,time,like,comment,body,phone;
+public String blog,title,date,time,like,comment,body,phone,if_like="0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,7 @@ public String blog,title,date,time,like,comment,body,phone;
         {
             update();
             Like_btn.setImageResource(R.drawable.like_heart_white);
+            if_like="1";
         }
     }
     public void update()
@@ -100,9 +102,16 @@ public String blog,title,date,time,like,comment,body,phone;
     @Override
     public void onBackPressed() {
         final Intent data = new Intent();
-        data.putExtra("like",like);
-        data.putExtra("blog",blog);
-        setResult(Activity.RESULT_OK, data);
+        if(if_like.equals("1"))
+        {
+            Toast.makeText(this,"dfdgdghgh",Toast.LENGTH_SHORT).show();
+            data.putExtra("like",like);
+            data.putExtra("blog",blog);
+            setResult(Activity.RESULT_OK, data);
+        }
+        else{
+            setResult(Activity.RESULT_CANCELED, data);
+        }
         super.onBackPressed();
     }
 }

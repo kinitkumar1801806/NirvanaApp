@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.nirvana.Hospitals.Hospital_details;
+import com.example.nirvana.Model.Hospital_details;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

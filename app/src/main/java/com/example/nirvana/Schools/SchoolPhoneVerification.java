@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.nirvana.Model.School_details;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +35,7 @@ public class SchoolPhoneVerification extends AppCompatActivity {
     private ProgressBar progressBar;
     private PhoneAuthCredential credential;
     private FirebaseAuth mAuth;
+    Button verify;
     private Task<Void> databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +98,15 @@ public class SchoolPhoneVerification extends AppCompatActivity {
     private void verifyVerificationCode(String code) {
         //creating the credential
         try {
+            verify=findViewById(R.id.school_verify);
+            verify.setEnabled(false);
             credential = PhoneAuthProvider.getCredential(mVerificationId, code);
             progressBar.setVisibility(View.VISIBLE);
             signInWithPhoneAuthCredential(credential);
         }
         catch(Exception e)
         {
+            verify.setEnabled(true);
             progressBar.setVisibility(View.GONE);
             Toast.makeText(SchoolPhoneVerification.this,"Please make sure that sim of entered number is available in your phone",Toast.LENGTH_SHORT).show();
         }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class PatientPhoneVerification extends AppCompatActivity {
     String Uname,Email,Phone,Address,Gender,Fname,Lname,Password,Id,code1;
     String mVerificationId;
     ArrayList<String> arr;
+    Button verify;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,12 +106,15 @@ public class PatientPhoneVerification extends AppCompatActivity {
     private void verifyVerificationCode(String code) {
         //creating the credential
         try {
+            verify=findViewById(R.id.patient_verify);
+            verify.setEnabled(false);
             credential = PhoneAuthProvider.getCredential(mVerificationId, code);
             progressBar.setVisibility(View.VISIBLE);
             signInWithPhoneAuthCredential(credential);
         }
         catch(Exception e)
         {
+            verify.setEnabled(true);
             Toast.makeText(PatientPhoneVerification.this,"Please make sure that sim of entered number is available in your phone",Toast.LENGTH_SHORT).show();
         }
     }

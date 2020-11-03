@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.nirvana.Blogs.BlogActivity;
 import com.example.nirvana.Doctors.Doctors_GridView;
@@ -24,10 +25,18 @@ import com.example.nirvana.R;
 import com.example.nirvana.Call.SinchService;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class Patient_Welcome_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
+    public TextView patient_name,patient_address;
     FirebaseAuth auth;
     private String phone;
     @Override
@@ -42,6 +51,9 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         mDrawerToggle.syncState();
         NavigationView navigationView=findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
+        patient_name=hView.findViewById(R.id.header_name);
+        patient_address=hView.findViewById(R.id.header_address);
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null)
         {
@@ -51,12 +63,32 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             intent1.putExtra("phone",phone);
             startService(intent1);
         }
+        RetrievePatientDetails();
         HomeFragment homeFragment=new HomeFragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
         fragmentTransaction.commit();
     }
+    private void RetrievePatientDetails() {
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient").child(phone);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
+                String fname=hashMap.get("fname").toString();
+                String lname=hashMap.get("lname").toString();
+                String address=hashMap.get("address").toString();
+                patient_name.setText("Mr."+fname+" "+lname);
+                patient_address.setText(address);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
@@ -70,6 +102,7 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         else if(id==R.id.blogs)
         {
            Intent intent=new Intent(this, BlogActivity.class);
+           intent.putExtra("phone",phone);
            startActivity(intent);
         }
         else if(id==R.id.niri)

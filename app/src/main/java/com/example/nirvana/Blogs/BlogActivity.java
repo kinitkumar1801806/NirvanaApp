@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nirvana.Adapter.BlogAdapter;
 import com.example.nirvana.R;
@@ -175,6 +176,7 @@ public class BlogActivity extends AppCompatActivity {
                 Time_List.clear();
                 head_List.clear();
                 blogAdapter.notifyItemChanged(pos);
+                Toast.makeText(this,"dfdgdghghzdicv8d",Toast.LENGTH_SHORT).show();
             } else {
 
             }

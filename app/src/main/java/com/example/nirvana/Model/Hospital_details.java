@@ -1,4 +1,4 @@
-package com.example.nirvana.Hospitals;
+package com.example.nirvana.Model;
 
 public class Hospital_details {
     public String hospital_name,address,email,contact,specific_need,link,Id,password;

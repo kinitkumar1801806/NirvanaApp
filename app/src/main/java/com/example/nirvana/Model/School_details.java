@@ -1,4 +1,4 @@
-package com.example.nirvana.Schools;
+package com.example.nirvana.Model;
 
 public class School_details {
     public String school_name,address,email,contact,specific_need,purpose,link,Id,password;

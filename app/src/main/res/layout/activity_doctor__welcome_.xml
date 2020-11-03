@@ -19,7 +19,6 @@
         app:itemTextColor="@color/white"
         app:itemIconPadding="-10dp"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header_main"
         app:itemIconTint="@color/white"
         app:itemIconSize="@dimen/doctor_icons"
         app:menu="@menu/doctor_welcome_drawer" />

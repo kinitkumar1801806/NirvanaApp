@@ -23,6 +23,7 @@ import com.example.nirvana.Niri;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;
 import com.example.nirvana.Call.SinchService;
+import com.example.nirvana.YogaTutorials.YogaVideosActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -121,7 +122,8 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         }
         else if(id==R.id.yoga_tutorial)
         {
-
+            Intent intent=new Intent(this,YogaVideosActivity.class);
+            startActivity(intent);
         }
         else if(id==R.id.meditation_tutorial)
         {

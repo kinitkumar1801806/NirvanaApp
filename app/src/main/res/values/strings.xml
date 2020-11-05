@@ -11,12 +11,14 @@
     <string name="menu_signup">SIGNUP</string>
     <string name="menu_login">LOGIN</string>
     <string name="menu_about">ABOUT US</string>
-    <string name="menu_support">SUPPORT</string>
+    <string name="menu_support" translatable="false">SUPPORT</string>
     <string name="menu_what_we_do">WHAT WE DO</string>
     <string name="menu_what_we_offer">WHAT WE OFFER</string>
     <string name="music_player">Music Player</string>
     <!-- TODO: Remove or change this placeholder text -->
-
+    <string name="player_error">Error initializing YouTube player: %s</string>
+    <string name="seek_to" translatable="false">Jump To</string>
+    <string name="seek_to_hint">Seconds</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="speech_prompt">Say something&#8230;</string>

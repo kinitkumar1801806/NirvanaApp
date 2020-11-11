@@ -50,7 +50,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/signup_doctor"
+        android:id="@+id/doctor_verify"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="25dp"

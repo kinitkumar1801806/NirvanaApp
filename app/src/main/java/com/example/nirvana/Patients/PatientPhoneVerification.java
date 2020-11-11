@@ -147,6 +147,7 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(PatientPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
                                                     Intent intent=new Intent(PatientPhoneVerification.this, Patient_Welcome_Activity.class);
+                                                    intent.putExtra("phone",Phone);
                                                     startActivity(intent);
 
                                                 }

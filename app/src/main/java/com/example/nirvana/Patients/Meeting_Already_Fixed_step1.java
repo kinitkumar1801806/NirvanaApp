@@ -3,6 +3,7 @@ package com.example.nirvana.Patients;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
@@ -57,6 +58,10 @@ public class Meeting_Already_Fixed_step1 extends AppCompatActivity {
         progressDialog.show();
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        recyclerView=findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         retrieveData();
     }
 

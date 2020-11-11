@@ -94,7 +94,7 @@ public class ImageAdapter_Doctor extends RecyclerView.Adapter<ImageAdapter_Docto
             linearLayout=itemView.findViewById(R.id.show_head_layout);
             linearLayout1=itemView.findViewById(R.id.linearLayout1);
             bio=itemView.findViewById(R.id.show_bio);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            linearLayout1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener!=null)

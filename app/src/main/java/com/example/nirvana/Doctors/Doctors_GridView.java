@@ -76,7 +76,7 @@ public void retrieveData()
                     String fname=(String)userData.get("fname");
                     String lname=(String)userData.get("lname");
                     String Name=fname+" "+lname;
-                    String username=(String)userData.get("username");
+                    String username=(String)userData.get("email");//username removed,now we will be using email in placxe of username
                     String phone=(String)userData.get("phone");
                     String link=(String)userData.get("link");
                     String affiliation=(String)userData.get("affiliation");

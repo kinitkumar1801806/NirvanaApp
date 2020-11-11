@@ -57,14 +57,14 @@ public class Not_Fixed_Meeting_Adapter extends RecyclerView.Adapter<Not_Fixed_Me
         holder.time.setText(TimeList.get(position));
         if(Expand_List.get(position).equals("1"))
         {
-            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,250);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,400);
             holder.linearLayout1.setLayoutParams(layoutParams);
             holder.Expand_btn.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
 
         }
         else
         {
-            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,135);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,275);
             holder.linearLayout1.setLayoutParams(layoutParams);
             holder.Expand_btn.setImageResource(R.drawable.ic_baseline_expand_more_24);
 
@@ -82,13 +82,13 @@ public class Not_Fixed_Meeting_Adapter extends RecyclerView.Adapter<Not_Fixed_Me
         public LinearLayout linearLayout,linearLayout1;
         public ViewHolder(@NonNull View itemView,OnItemClickListener listener) {
             super(itemView);
-            name=itemView.findViewById(R.id.doctor_name);
-            username=itemView.findViewById(R.id.doctor_username);
-            User_image=itemView.findViewById(R.id.doctor_image);
+            name=itemView.findViewById(R.id.patient_name);
+            username=itemView.findViewById(R.id.patient_username);
+            User_image=itemView.findViewById(R.id.patient_image);
             Expand_btn=itemView.findViewById(R.id.show_more);
             linearLayout=itemView.findViewById(R.id.show_head_layout);
             linearLayout1=itemView.findViewById(R.id.linearLayout1);
-            problem=itemView.findViewById(R.id.show_bio);
+            problem=itemView.findViewById(R.id.show_problem);
             date=itemView.findViewById(R.id.submission_date);
             time=itemView.findViewById(R.id.submission_time);
             itemView.setOnClickListener(new View.OnClickListener() {

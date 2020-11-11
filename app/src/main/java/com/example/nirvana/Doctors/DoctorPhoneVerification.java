@@ -182,7 +182,6 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
-                                                    sendEmail();
                                                     Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
                                                     intent.putExtra("phone",Phone);
                                                     startActivity(intent);

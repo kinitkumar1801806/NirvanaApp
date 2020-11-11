@@ -147,7 +147,7 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child("Fixed_Meetings")
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child("Not_Fixed_Meetings")
                     .child(phone).child(patient_phone);
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override

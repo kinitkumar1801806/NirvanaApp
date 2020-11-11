@@ -63,7 +63,7 @@ public class PendingMeetingsStep1 extends AppCompatActivity {
 public void retrieveData()
 {
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference=firebaseDatabase.getReference("Doctor_Meetings").child("Fixed_Meetings").child(phone
+    DatabaseReference databaseReference=firebaseDatabase.getReference("Doctor_Meetings").child("Not_Fixed_Meetings").child(phone
     );
     databaseReference.addValueEventListener(new ValueEventListener() {
         @Override
@@ -80,19 +80,22 @@ public void retrieveData()
                     String problem=(String)userData.get("p_problem");
                     String submission_date = (String) userData.get("submission_date");
                     String time1=(String)userData.get("submission_time");
-                    username=(String)userData.get("d_username");
-                    link=(String) userData.get("link");
-                    NameList.add(i,Name);
-                    Username_List.add(i,username);
-                    Phone_List.add(i,Phone);
-                    Patient_Phone.add(i,phone1);
-                    date1.add(i,submission_date);
-                    Problem_List.add(problem);
-                    Expand_List.add("0");
-                    time.add(i,time1);
-                    Image_Array.add(i,link);
-                    i++;
-                    initRecyclerView();
+                    if(!date.equals("Not fixed"))
+                    {
+                        username=(String)userData.get("d_username");
+                        link=(String) userData.get("link");
+                        NameList.add(i,Name);
+                        Username_List.add(i,username);
+                        Phone_List.add(i,Phone);
+                        Patient_Phone.add(i,phone1);
+                        date1.add(i,submission_date);
+                        Problem_List.add(problem);
+                        Expand_List.add("0");
+                        time.add(i,time1);
+                        Image_Array.add(i,link);
+                        i++;
+                        initRecyclerView();
+                    }
                 }
             }
             if(NameList.size()==0)

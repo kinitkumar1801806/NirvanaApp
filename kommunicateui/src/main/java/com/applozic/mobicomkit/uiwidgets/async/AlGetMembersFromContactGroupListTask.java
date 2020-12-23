@@ -23,10 +23,10 @@ import java.util.Set;
 public class AlGetMembersFromContactGroupListTask extends AsyncTask<Void, Void, AlGetMembersFromContactGroupListTask.AlGetMembersModel> {
 
     WeakReference<Context> context;
-    private String groupType;
-    private List<String> groupIds;
-    private List<String> groupNames;
-    private GetMembersFromGroupIdListListener listener;
+    private final String groupType;
+    private final List<String> groupIds;
+    private final List<String> groupNames;
+    private final GetMembersFromGroupIdListListener listener;
 
     public AlGetMembersFromContactGroupListTask(Context context, GetMembersFromGroupIdListListener listener, List<String> groupIds, List<String> groupNames, String groupType) {
         this.context = new WeakReference<Context>(context);

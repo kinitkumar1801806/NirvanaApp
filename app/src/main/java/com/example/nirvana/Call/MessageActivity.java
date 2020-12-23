@@ -328,7 +328,7 @@ public class MessageActivity extends AppCompatActivity {
         Task<Void> databaseReference= FirebaseDatabase.getInstance().getReference("Status").child(sender).child("status")
                 .setValue("Offline");
     }
-    private TextWatcher filterTextWatcher = new TextWatcher() {
+    private final TextWatcher filterTextWatcher = new TextWatcher() {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(text_send.getText().toString().equals(""))

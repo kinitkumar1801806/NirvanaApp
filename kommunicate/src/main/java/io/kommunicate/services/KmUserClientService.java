@@ -34,6 +34,7 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -49,7 +50,7 @@ import static com.applozic.mobicomkit.api.HttpRequestUtils.DEVICE_KEY_HEADER;
  */
 
 public class KmUserClientService extends UserClientService {
-    private static String TAG = "KmUserClientService";
+    private static final String TAG = "KmUserClientService";
 
     public static final String AUTHORIZATION = "Authorization";
     public static final String CONTENT_TYPE = "Content-Type";
@@ -524,7 +525,7 @@ public class KmUserClientService extends UserClientService {
         BufferedReader bufferedReader = null;
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
             InputStream inputStream = connection.getInputStream();
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream, UTF_8));
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         } else {
             Utils.printLog(context, TAG, "Response code for getResponse is  :" + connection.getResponseCode());
         }

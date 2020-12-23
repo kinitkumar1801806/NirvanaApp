@@ -25,8 +25,8 @@ public class TitleNavigationAdapter extends BaseAdapter {
     private ImageView imgIcon;
     private TextView txtTitle;
     private TextView txtName;
-    private ArrayList<SpinnerNavItem> spinnerNavItem;
-    private Context context;
+    private final ArrayList<SpinnerNavItem> spinnerNavItem;
+    private final Context context;
 
     public TitleNavigationAdapter(Context context,
                                   ArrayList<SpinnerNavItem> spinnerNavItem) {

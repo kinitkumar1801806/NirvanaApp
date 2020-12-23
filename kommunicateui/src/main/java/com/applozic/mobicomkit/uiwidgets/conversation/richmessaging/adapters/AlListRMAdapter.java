@@ -26,8 +26,8 @@ import java.util.Map;
 
 public class AlListRMAdapter extends ALRichMessageAdapter {
 
-    private List<ALRichMessageModel.AlElementModel> elementList;
-    private Map<String, Object> replyMetadata;
+    private final List<ALRichMessageModel.AlElementModel> elementList;
+    private final Map<String, Object> replyMetadata;
 
     AlListRMAdapter(Context context, Message message, List<ALRichMessageModel.AlElementModel> elementList, Map<String, Object> replyMetadata, ALRichMessageListener messageListener, KmThemeHelper themeHelper) {
         super(context, messageListener, message, themeHelper);
@@ -81,10 +81,10 @@ public class AlListRMAdapter extends ALRichMessageAdapter {
 
     private class AlListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView headerTv;
-        private TextView detailsTv;
-        private RelativeLayout rootLayout;
-        private ImageView listImage;
+        private final TextView headerTv;
+        private final TextView detailsTv;
+        private final RelativeLayout rootLayout;
+        private final ImageView listImage;
 
         public AlListItemViewHolder(View itemView) {
             super(itemView);

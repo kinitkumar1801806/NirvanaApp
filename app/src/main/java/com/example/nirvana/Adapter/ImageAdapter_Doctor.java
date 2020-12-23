@@ -25,7 +25,11 @@ import java.util.List;
 public class ImageAdapter_Doctor extends RecyclerView.Adapter<ImageAdapter_Doctor.ViewHolder> {
     Context mContext;
     private  OnItemClickListener mListener;
-    private ArrayList<String> ImageArray, NameList,Username_List,Expand_List,BioList;
+    private final ArrayList<String> ImageArray;
+    private final ArrayList<String> NameList;
+    private final ArrayList<String> Username_List;
+    private final ArrayList<String> Expand_List;
+    private final ArrayList<String> BioList;
     public interface OnItemClickListener
     {
         void onItemClick(int position);

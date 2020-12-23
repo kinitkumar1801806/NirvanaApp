@@ -23,7 +23,7 @@ import io.kommunicate.R;
 
 public class KmClientService extends MobiComKitClientService {
 
-    private HttpRequestUtils httpRequestUtils;
+    private final HttpRequestUtils httpRequestUtils;
     public static final String CONVERSATION_SHARE_ENDPOINT = "/conversations/";
     public static final String HELCENTER_APPID_ENDPOINT = "/?appId=";
     public static final String KM_AUTO_SUGGESTION_URL = "/autosuggest/message/";
@@ -108,7 +108,7 @@ public class KmClientService extends MobiComKitClientService {
      * @param feedbackComment the comment array of the inputs given by the user
      * @return the feedback response json string
      */
-    public String postConversationFeedback(int conversationId, int rating, String feedbackComment[]) throws Exception {
+    public String postConversationFeedback(int conversationId, int rating, String[] feedbackComment) throws Exception {
         JSONObject jsonObject = new JSONObject();
         JSONArray feedbackJsonArray = new JSONArray();
 

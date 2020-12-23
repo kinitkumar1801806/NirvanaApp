@@ -12,9 +12,9 @@ import java.lang.ref.WeakReference;
 import io.kommunicate.callbacks.KmGetConversationInfoCallback;
 
 public class KmConversationInfoTask extends AsyncTask<Object, Object, Channel> {
-    private WeakReference<Context> context;
-    private ChannelService channelService;
-    private KmGetConversationInfoCallback conversationInfoCallback;
+    private final WeakReference<Context> context;
+    private final ChannelService channelService;
+    private final KmGetConversationInfoCallback conversationInfoCallback;
     private Exception exception;
     private String clientConversationId;
     private Integer conversationId;

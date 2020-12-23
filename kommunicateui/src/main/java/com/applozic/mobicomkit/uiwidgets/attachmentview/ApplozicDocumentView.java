@@ -64,9 +64,9 @@ public class ApplozicDocumentView {
     TextView audio_duration_textView;
     String audio_duration;
     private AttachmentTask mDownloadThread;
-    private boolean mCacheFlag = false;
-    private KmStoragePermissionListener kmStoragePermissionListener;
-    private Handler mHandler = new Handler();
+    private final boolean mCacheFlag = false;
+    private final KmStoragePermissionListener kmStoragePermissionListener;
+    private final Handler mHandler = new Handler();
 
 
     public ApplozicDocumentView(Context context, KmStoragePermissionListener kmStoragePermissionListener) {

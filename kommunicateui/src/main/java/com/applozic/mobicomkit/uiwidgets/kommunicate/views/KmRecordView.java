@@ -41,7 +41,7 @@ public class KmRecordView extends FrameLayout {
     private float initialX, basketInitialY, difX = 0;
     private float cancelBounds = DEFAULT_CANCEL_BOUNDS;
     private long startTime, elapsedTime = 0;
-    private Context context;
+    private final Context context;
     private KmOnRecordListener recordListener;
     private boolean isSwiped, isLessThanSecondAllowed = false;
     private boolean isSoundEnabled = true;

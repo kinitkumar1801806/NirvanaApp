@@ -23,12 +23,12 @@ import io.kommunicate.utils.KmAppSettingPreferences;
 
 public class KmUserLoginTask extends UserLoginTask {
     private Exception e;
-    private KMUser user;
-    private AlLoginHandler handler;
-    private WeakReference<Context> context;
+    private final KMUser user;
+    private final AlLoginHandler handler;
+    private final WeakReference<Context> context;
     private RegistrationResponse response;
-    private KmUserClientService userClientService;
-    private boolean isAgent;
+    private final KmUserClientService userClientService;
+    private final boolean isAgent;
     private ResultReceiver prechatReceiver;
 
 

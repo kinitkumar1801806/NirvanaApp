@@ -64,7 +64,7 @@ public class SinchService extends Service {
     static final String TAG = SinchService.class.getSimpleName();
     public Integer i=0;
     private PersistedSettings mSettings;
-    private SinchServiceInterface mSinchServiceInterface = new SinchServiceInterface();
+    private final SinchServiceInterface mSinchServiceInterface = new SinchServiceInterface();
     private SinchClient mSinchClient;
     public String phone;
     private StartFailedListener mListener;
@@ -406,7 +406,7 @@ public class SinchService extends Service {
 
     private class PersistedSettings {
 
-        private SharedPreferences mStore;
+        private final SharedPreferences mStore;
 
         private static final String PREF_KEY = "Sinch";
 

@@ -29,9 +29,9 @@ import io.kommunicate.users.KmUserResponse;
 
 public class KmUserService {
 
-    private Context context;
-    private KmUserClientService userClientService;
-    private BaseContactService contactService;
+    private final Context context;
+    private final KmUserClientService userClientService;
+    private final BaseContactService contactService;
 
     public KmUserService(Context context) {
         this.context = context;

@@ -10,9 +10,9 @@ import java.lang.ref.WeakReference;
 
 public class KmUpdateConversationTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> context;
-    private GroupInfoUpdate groupInfoUpdate;
-    private KmConversationUpdateListener listener;
+    private final WeakReference<Context> context;
+    private final GroupInfoUpdate groupInfoUpdate;
+    private final KmConversationUpdateListener listener;
     private static final String SUCCESS = "success";
 
     public KmUpdateConversationTask(Context context, GroupInfoUpdate groupInfoUpdate, KmConversationUpdateListener listener) {

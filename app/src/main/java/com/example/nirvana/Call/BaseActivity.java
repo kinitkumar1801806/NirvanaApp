@@ -57,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
         return mSinchServiceInterface;
     }
 
-    private Messenger messenger = new Messenger(new Handler() {
+    private final Messenger messenger = new Messenger(new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {

@@ -143,7 +143,7 @@ ProgressBar progressBar;
             Doctor_Detail.add(date1);
             Doctor_Detail.add(arr.get(4));
             Doctor_Detail.add(bio);
-            progressBar.setVisibility(view.GONE);
+            progressBar.setVisibility(View.GONE);
             Intent intent=new Intent(this, MainPaymentActivity.class);
             intent.putStringArrayListExtra("Patient_Detail",Patient_Detail);
             intent.putStringArrayListExtra("Doctor_Detail",Doctor_Detail);

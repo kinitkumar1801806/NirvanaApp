@@ -13,11 +13,11 @@ import io.kommunicate.callbacks.KMStartChatHandler;
 import io.kommunicate.callbacks.KmStartConversationHandler;
 
 public class KmConversationCreateTask extends AsyncTask<Void, Void, ChannelFeedApiResponse> {
-    private WeakReference<Context> context;
-    private ChannelService channelService;
-    private ChannelInfo channelInfo;
-    private KmStartConversationHandler startConversationHandler;
-    private KMStartChatHandler startChatHandler;
+    private final WeakReference<Context> context;
+    private final ChannelService channelService;
+    private final ChannelInfo channelInfo;
+    private final KmStartConversationHandler startConversationHandler;
+    private final KMStartChatHandler startChatHandler;
 
 
     public KmConversationCreateTask(Context context, ChannelInfo channelInfo, KmStartConversationHandler startConversationHandler) {

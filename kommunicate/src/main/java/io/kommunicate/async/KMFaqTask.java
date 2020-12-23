@@ -22,16 +22,16 @@ import io.kommunicate.services.KmUserService;
 
 public class KMFaqTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> context;
+    private final WeakReference<Context> context;
     private boolean isArticleRequest = false;
     private boolean isSelectedArticleRequest = false;
     private boolean isAnswerRequest = false;
     private boolean isDashBoardFaqRequest = false;
-    private String accessKey;
-    private String data;
-    private KmUserService kmUserService;
+    private final String accessKey;
+    private final String data;
+    private final KmUserService kmUserService;
     private Exception exception;
-    private KmFaqTaskListener listener;
+    private final KmFaqTaskListener listener;
 
     public KMFaqTask(Context context, String accessKey, String data, KmFaqTaskListener listener) {
         this.context = new WeakReference<Context>(context);

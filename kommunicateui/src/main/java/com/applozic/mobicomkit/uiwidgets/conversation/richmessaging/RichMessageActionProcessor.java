@@ -39,7 +39,7 @@ import io.kommunicate.models.KmAutoSuggestionModel;
 
 public class RichMessageActionProcessor implements ALRichMessageListener {
 
-    private ALRichMessageListener richMessageListener;
+    private final ALRichMessageListener richMessageListener;
     public static final String NOTIFY_ITEM_CHANGE = "notifyItemChange";
     private static final String TAG = "AlRichMessageAction";
 
@@ -362,7 +362,7 @@ public class RichMessageActionProcessor implements ALRichMessageListener {
         metadata.put("isRoomGuestJSON", "true");
         metadata.put("roomGuestJson", GsonUtils.getJsonFromObject(guestList, List.class));
 
-        StringBuilder message = new StringBuilder("");
+        StringBuilder message = new StringBuilder();
         int count = 0;
 
         for (ALGuestCountModel guestModel : guestList) {

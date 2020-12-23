@@ -83,7 +83,7 @@ public class ApplozicSetting {
     private static final String RESTRICTED_WORDS_REGEX = "RESTRICTED_WORDS_REGEX";
     public static ApplozicSetting applozicSetting;
     public SharedPreferences sharedPreferences;
-    private Context context;
+    private final Context context;
 
     private static final String SHOW_IMAGE_ON_TOOLBAR = "SHOW_IMAGE_ON_TOOLBAR";
 
@@ -760,7 +760,7 @@ public class ApplozicSetting {
         VIDEO_CALL(Integer.valueOf("1906")),
         AUDIO_CALL(Integer.valueOf("1907"));
 
-        private Integer value;
+        private final Integer value;
 
         RequestCode(Integer c) {
             value = c;

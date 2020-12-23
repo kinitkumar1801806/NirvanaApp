@@ -12,10 +12,10 @@ import java.util.List;
 
 public class KmRadioGroup {
 
-    private KmFlowLayout flowLayout;
-    private List<KmFormPayloadModel.Options> options;
-    private Context context;
-    private KmRadioButtonClickListener radioButtonClickListener;
+    private final KmFlowLayout flowLayout;
+    private final List<KmFormPayloadModel.Options> options;
+    private final Context context;
+    private final KmRadioButtonClickListener radioButtonClickListener;
 
     public KmRadioGroup(Context context, KmRadioButtonClickListener radioButtonClickListener, KmFlowLayout flowLayout, List<KmFormPayloadModel.Options> options) {
         this.flowLayout = flowLayout;

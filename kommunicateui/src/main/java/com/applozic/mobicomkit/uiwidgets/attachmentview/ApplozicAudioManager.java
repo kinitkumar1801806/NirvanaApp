@@ -25,8 +25,8 @@ public class ApplozicAudioManager implements AudioManager.OnAudioFocusChangeList
     private static ApplozicAudioManager myObj;
     private static final int MAX_SIZE = 5;
     private ApplozicDocumentView currentView;
-    private Map<String, MediaPlayer> pool = new HashMap<>();
-    private Context context;
+    private final Map<String, MediaPlayer> pool = new HashMap<>();
+    private final Context context;
     private AudioManager audioManager;
     private int minute, second;
 
@@ -264,11 +264,7 @@ public class ApplozicAudioManager implements AudioManager.OnAudioFocusChangeList
         boolean gotFocus;
         int audioFocus = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN);
-        if (audioFocus == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            gotFocus = true;
-        } else {
-            gotFocus = false;
-        }
+        gotFocus = audioFocus == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
         return gotFocus;
     }
 }

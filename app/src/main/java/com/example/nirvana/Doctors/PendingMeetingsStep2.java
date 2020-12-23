@@ -47,6 +47,8 @@ import com.sinch.android.rtc.SinchError;
 import com.sinch.android.rtc.UserController;
 import com.sinch.android.rtc.UserRegistrationCallback;
 import com.sinch.android.rtc.calling.Call;
+
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,7 +67,7 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
     private static String callType = "";
     private long mSigningSequence = 1;
     public static final String CALL_ID = "CALL_ID";
-    private int MULTIPLE_PERMISSION = 1;
+    private final int MULTIPLE_PERMISSION = 1;
     Call call;
     MediaPlayer mediaPlayer;
     String[] permission = {android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.MODIFY_AUDIO_SETTINGS, android.Manifest.permission.READ_PHONE_STATE,
@@ -125,7 +127,7 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
         MessageDigest messageDigest;
         try {
             messageDigest = MessageDigest.getInstance("SHA-1");
-            byte[] hash = messageDigest.digest(toSign.getBytes("UTF-8"));
+            byte[] hash = messageDigest.digest(toSign.getBytes(StandardCharsets.UTF_8));
             signature = Base64.encodeToString(hash, Base64.DEFAULT).trim();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e.getCause());

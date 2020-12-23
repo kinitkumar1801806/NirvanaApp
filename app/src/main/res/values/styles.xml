@@ -21,5 +21,9 @@
     <style name="MyTextInputLayout" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/black</item>
     </style>
+    <style name="MyTheme">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
 </resources>

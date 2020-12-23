@@ -12,7 +12,7 @@ public class KmFeedback {
 
     private int groupId;
     private int id;
-    private String comments[];
+    private String[] comments;
     private int rating;
     private Object type;
     private String createdAt;
@@ -31,7 +31,7 @@ public class KmFeedback {
         return comments;
     }
 
-    public void setComments(String comments[]) {
+    public void setComments(String[] comments) {
         this.comments = comments;
     }
 

@@ -118,32 +118,32 @@ public class DetailedConversationAdapter extends RecyclerView.Adapter implements
     public ImageLoader contactImageLoader, loadImage;
     public String searchString;
     private AlCustomizationSettings alCustomizationSettings;
-    private Context context;
+    private final Context context;
     private Contact contact;
-    private Channel channel;
-    private boolean individual;
-    private Drawable sentIcon;
-    private Drawable deliveredIcon;
-    private Drawable pendingIcon;
-    private Drawable readIcon;
-    private ImageLoader imageThumbnailLoader;
-    private EmojiconHandler emojiconHandler;
-    private FileClientService fileClientService;
-    private MessageDatabaseService messageDatabaseService;
-    private BaseContactService contactService;
-    private Class<?> messageIntentClass;
+    private final Channel channel;
+    private final boolean individual;
+    private final Drawable sentIcon;
+    private final Drawable deliveredIcon;
+    private final Drawable pendingIcon;
+    private final Drawable readIcon;
+    private final ImageLoader imageThumbnailLoader;
+    private final EmojiconHandler emojiconHandler;
+    private final FileClientService fileClientService;
+    private final MessageDatabaseService messageDatabaseService;
+    private final BaseContactService contactService;
+    private final Class<?> messageIntentClass;
     private List<Message> messageList;
     private List<Message> originalList;
-    private MobiComConversationService conversationService;
-    private ImageCache imageCache;
-    private TextAppearanceSpan highlightTextSpan;
+    private final MobiComConversationService conversationService;
+    private final ImageCache imageCache;
+    private final TextAppearanceSpan highlightTextSpan;
     private View view;
     private ContextMenuClickListener contextMenuClickListener;
     private ALRichMessageListener listener;
     private KmStoragePermissionListener storagePermissionListener;
-    private String geoApiKey;
-    private float[] sentMessageCornerRadii = {0, 0, 0, 0, 0, 0, 0, 0};
-    private float[] receivedMessageCornerRadii = {0, 0, 0, 0, 0, 0, 0, 0};
+    private final String geoApiKey;
+    private final float[] sentMessageCornerRadii = {0, 0, 0, 0, 0, 0, 0, 0};
+    private final float[] receivedMessageCornerRadii = {0, 0, 0, 0, 0, 0, 0, 0};
     private KmFontManager fontManager;
     private KmThemeHelper themeHelper;
 
@@ -571,7 +571,7 @@ public class DetailedConversationAdapter extends RecyclerView.Adapter implements
                         String userId = contactDisplayName.getDisplayName();
                         char firstLetter = contactDisplayName.getDisplayName().charAt(0);
                         if (userId.length() > 0) {
-                            myHolder.nameTextView.setText(String.valueOf(userId));
+                            myHolder.nameTextView.setText(userId);
                         }
 
                         Character colorKey = AlphaNumberColorUtil.alphabetBackgroundColorMap.containsKey(firstLetter) ? firstLetter : null;
@@ -1054,7 +1054,7 @@ public class DetailedConversationAdapter extends RecyclerView.Adapter implements
                         // Sets the span to start at the starting point of the match and end at "length"
                         // characters beyond the starting point
                         highlightedName.setSpan(highlightTextSpan, startIndex,
-                                startIndex + searchString.toString().length(), 0);
+                                startIndex + searchString.length(), 0);
 
                         myHolder.messageTextView.setText(highlightedName);
                     }
@@ -1417,7 +1417,7 @@ public class DetailedConversationAdapter extends RecyclerView.Adapter implements
     private int indexOfSearchQuery(String message) {
         if (!TextUtils.isEmpty(searchString)) {
             return message.toLowerCase(Locale.getDefault()).indexOf(
-                    searchString.toString().toLowerCase(Locale.getDefault()));
+                    searchString.toLowerCase(Locale.getDefault()));
         }
         return -1;
     }

@@ -52,7 +52,7 @@ public class ContactSelectionActivity extends AppCompatActivity implements Searc
     private String imageUrl;
     private ActionBar mActionBar;
     private SearchListFragment searchListFragment;
-    private boolean isSearchResultView = false;
+    private final boolean isSearchResultView = false;
     private String mSearchTerm;
     private AppContactService contactService;
     private ConnectivityReceiver connectivityReceiver;
@@ -178,11 +178,8 @@ public class ContactSelectionActivity extends AppCompatActivity implements Searc
         this.mSearchTerm = query;
         if (getSearchListFragment() != null) {
             getSearchListFragment().onQueryTextChange(query);
-            isSearching = true;
 
-            if (query.isEmpty()) {
-                isSearching = false;
-            }
+            isSearching = !query.isEmpty();
         }
         return true;
     }

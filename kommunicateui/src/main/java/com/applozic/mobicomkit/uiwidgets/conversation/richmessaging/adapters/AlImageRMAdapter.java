@@ -31,7 +31,7 @@ import java.util.List;
 public class AlImageRMAdapter extends ALRichMessageAdapter {
 
     private List<ALRichMessageModel.ALPayloadModel> payloadList;
-    private AlCustomizationSettings alCustomizationSettings;
+    private final AlCustomizationSettings alCustomizationSettings;
 
     AlImageRMAdapter(Context context, ALRichMessageModel model, ALRichMessageListener listener, Message message, AlCustomizationSettings alCustomizationSettings) {
         super(context, model, listener, message, KmThemeHelper.getInstance(context, alCustomizationSettings));

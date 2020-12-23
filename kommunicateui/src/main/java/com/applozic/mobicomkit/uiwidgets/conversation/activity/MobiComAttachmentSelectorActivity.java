@@ -52,21 +52,21 @@ public class MobiComAttachmentSelectorActivity extends AppCompatActivity {
     public static String DISPLAY_NAME = "DISPLAY_NAME";
     public static String GROUP_ID = "GROUP_ID";
     public static String GROUP_NAME = "GROUP_NAME";
-    private static int REQUEST_CODE_ATTACH_PHOTO = 10;
+    private static final int REQUEST_CODE_ATTACH_PHOTO = 10;
     AlCustomizationSettings alCustomizationSettings;
     FileClientService fileClientService;
     Uri imageUri;
     String userId, displayName, groupName;
     Integer groupId;
     MobiComUserPreference userPreferences;
-    private String TAG = "MultiAttActivity";
+    private final String TAG = "MultiAttActivity";
     private Button sendAttachment;
     private Button cancelAttachment;
     private EditText messageEditText;
     private ConnectivityReceiver connectivityReceiver;
     private GridView galleryImagesGridView;
     List<String> restrictedWords;
-    private ArrayList<Uri> attachmentFileList = new ArrayList<>();
+    private final ArrayList<Uri> attachmentFileList = new ArrayList<>();
     private MobiComAttachmentGridViewAdapter imagesAdapter;
 
     KmAttachmentsController kmAttachmentsController;

@@ -20,7 +20,8 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
     Context mContext;
     String videoId;
     private  OnItemClickListener mListener;
-    private ArrayList<String> VideosList,TitleList;
+    private final ArrayList<String> VideosList;
+    private final ArrayList<String> TitleList;
     public interface OnItemClickListener
     {
         void onItemClick(int position);
@@ -71,8 +72,8 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView video_title;
-        private ImageView video_image;
+        private final TextView video_title;
+        private final ImageView video_image;
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             video_image = itemView.findViewById(R.id.video_image);

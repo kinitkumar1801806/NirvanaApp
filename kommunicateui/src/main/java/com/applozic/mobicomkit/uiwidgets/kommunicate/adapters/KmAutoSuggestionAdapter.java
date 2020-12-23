@@ -18,8 +18,8 @@ import io.kommunicate.models.KmAutoSuggestionModel;
 
 public class KmAutoSuggestionAdapter extends RecyclerView.Adapter {
 
-    private Context context;
-    private ALRichMessageListener listener;
+    private final Context context;
+    private final ALRichMessageListener listener;
     public static final String KM_AUTO_SUGGESTION_ACTION = "KM_AUTO_SUGGESTION_ACTION";
     public static final String KM_AUTO_SUGGESTION_TYPED_TEXT = "TYPED_TEXT";
     private Cursor mCursor;
@@ -107,8 +107,8 @@ public class KmAutoSuggestionAdapter extends RecyclerView.Adapter {
 
     private class KmQuickReplyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView kmQuickReplyTitle;
-        private TextView kmQuickReplyMessage;
+        private final TextView kmQuickReplyTitle;
+        private final TextView kmQuickReplyMessage;
 
         public KmQuickReplyViewHolder(View itemView) {
             super(itemView);

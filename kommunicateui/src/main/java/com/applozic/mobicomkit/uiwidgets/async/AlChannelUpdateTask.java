@@ -10,9 +10,9 @@ import java.lang.ref.WeakReference;
 
 public class AlChannelUpdateTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> context;
-    private GroupInfoUpdate groupInfoUpdate;
-    private AlChannelUpdateListener listener;
+    private final WeakReference<Context> context;
+    private final GroupInfoUpdate groupInfoUpdate;
+    private final AlChannelUpdateListener listener;
     private static final String SUCCESS = "success";
 
     public AlChannelUpdateTask(Context context, GroupInfoUpdate groupInfoUpdate, AlChannelUpdateListener listener) {

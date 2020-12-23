@@ -39,7 +39,7 @@ public class KmRichMessageModel<T> extends JsonMarker {
     public enum TemplateId {
         BUTTON(Short.valueOf("3")), SUGGESTED_REPLY(Short.valueOf("6")), LIST(Short.valueOf("7")), FAQ(Short.valueOf("8")),
         IMAGE(Short.valueOf("9")), CARD(Short.valueOf("10")), MIXED_BUTTONS(Short.valueOf("11")), FORM(Short.valueOf("12"));
-        private Short value;
+        private final Short value;
 
         TemplateId(Short s) {
             value = s;

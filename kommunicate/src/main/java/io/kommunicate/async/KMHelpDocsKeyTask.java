@@ -18,10 +18,10 @@ import io.kommunicate.services.KmUserService;
  */
 
 public class KMHelpDocsKeyTask extends AsyncTask<Void, Void, String> {
-    private WeakReference<Context> context;
-    private String type;
+    private final WeakReference<Context> context;
+    private final String type;
     private Exception exception;
-    private KmFaqTaskListener listener;
+    private final KmFaqTaskListener listener;
 
     public KMHelpDocsKeyTask(Context context, String type, KmFaqTaskListener listener) {
         this.context = new WeakReference<Context>(context);

@@ -11,10 +11,10 @@ import io.kommunicate.utils.KmAppSettingPreferences;
 
 public class KmAppSettingTask extends AsyncTask<Void, Void, KmAppSettingModel> {
 
-    private WeakReference<Context> context;
-    private String appId;
+    private final WeakReference<Context> context;
+    private final String appId;
     private String error;
-    private KmCallback callback;
+    private final KmCallback callback;
 
     public KmAppSettingTask(Context context, String appId, KmCallback callback) {
         this.context = new WeakReference<>(context);

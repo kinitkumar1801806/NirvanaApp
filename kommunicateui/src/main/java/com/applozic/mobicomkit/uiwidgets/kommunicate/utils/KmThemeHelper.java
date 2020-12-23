@@ -14,9 +14,9 @@ import io.kommunicate.utils.KmAppSettingPreferences;
 public class KmThemeHelper implements KmCallback {
 
     private static KmThemeHelper kmThemeHelper;
-    private Context context;
-    private KmAppSettingPreferences appSettingPreferences;
-    private AlCustomizationSettings alCustomizationSettings;
+    private final Context context;
+    private final KmAppSettingPreferences appSettingPreferences;
+    private final AlCustomizationSettings alCustomizationSettings;
     private int primaryColor = -1;
     private int secondaryColor = -1;
     private int sentMessageBackgroundColor = -1;

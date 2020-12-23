@@ -29,13 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class PatientLoginActivity extends AppCompatActivity {
     private Spinner spinner;
     String phone1;
     ProgressBar progressBar1;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    String code;
+    String code,flag="0",Id;
     String phonenumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +77,23 @@ public class PatientLoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient").child(phonenumber);
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
+                {
+                    HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
+                    for(String key:hashMap.keySet()) {
+                        Object data = hashMap.get(key);
+                        HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                        String phone = (String) userData.get("phone");
+                        if (phone.equals(phonenumber)) {
+                           flag="1";
+                        }
+                    }
+                }
+                if(flag.equals("1"))
                 {
                     Bundle bundle=new Bundle();
                     bundle.putString("phone",phonenumber);
@@ -133,6 +147,7 @@ public class PatientLoginActivity extends AppCompatActivity {
                                     progressBar1.setVisibility(View.GONE);
                                     Intent intent=new Intent(PatientLoginActivity.this, Patient_Welcome_Activity.class);
                                     intent.putExtra("phone",phone1);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
 
 

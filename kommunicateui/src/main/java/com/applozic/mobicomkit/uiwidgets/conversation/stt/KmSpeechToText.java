@@ -22,9 +22,9 @@ import java.util.Locale;
 
 public class KmSpeechToText implements RecognitionListener {
     private static final String TAG = "KmSpeechToText";
-    private KmRecordButton recordButton;
-    private Activity context;
-    private KmTextListener listener;
+    private final KmRecordButton recordButton;
+    private final Activity context;
+    private final KmTextListener listener;
     private SpeechRecognizer speechRecognizer;
     private boolean isStopped;
 

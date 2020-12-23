@@ -65,7 +65,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     ArrayList<String> dataList,titleList,albumList,artistList;
     private DatabaseReference databaseReference;
     public ArrayList<Audio> audioList;
-    private int STORAGE_PERMISSION_CODE = 1;
+    private final int STORAGE_PERMISSION_CODE = 1;
     public static final String Broadcast_PLAY_NEW_AUDIO = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.PlayNewAudio";
     public String phone;
     // Change to your package name

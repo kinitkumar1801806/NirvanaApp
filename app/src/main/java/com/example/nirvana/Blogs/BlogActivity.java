@@ -34,7 +34,7 @@ public class BlogActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
     private static final int id = 123;
-    public String phone;
+    public String Id;
     public Integer pos;
     BlogAdapter blogAdapter;
     @Override
@@ -55,7 +55,7 @@ public class BlogActivity extends AppCompatActivity {
         Expand_List=new ArrayList<>();
         Like_List=new ArrayList<>();
         Intent intent=getIntent();
-        phone=intent.getStringExtra("phone");
+        Id=intent.getStringExtra("Id");
         blog_No=new ArrayList<>();
         Comment_List =new ArrayList<>();
         head_List=new ArrayList<>();
@@ -91,7 +91,7 @@ public class BlogActivity extends AppCompatActivity {
                      body_list.add(body);
                      blog_No.add(blog_no);
                      Expand_List.add("0");
-                     Time_List.add(time);
+                     Time_List.add(time); 
                      Date_List.add(date);
                      Like_List.add(like);
                      TitleList.add(title);
@@ -103,6 +103,7 @@ public class BlogActivity extends AppCompatActivity {
              {
                  TextView textView=findViewById(R.id.text_view);
                  textView.setText("We don't have any blog at this time");
+                 progressDialog.dismiss();
              }
          }
          @Override
@@ -135,7 +136,7 @@ public class BlogActivity extends AppCompatActivity {
              intent.putExtra("title",title);
              intent.putExtra("body",body);
              intent.putExtra("blog",blog);
-             intent.putExtra("phone",phone);
+             intent.putExtra("phone",Id);
              startActivityForResult(intent,id);
          }
 
@@ -181,5 +182,11 @@ public class BlogActivity extends AppCompatActivity {
 
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        overridePendingTransition(R.anim.no_animation, R.anim.slide_in_bottom);
     }
 }

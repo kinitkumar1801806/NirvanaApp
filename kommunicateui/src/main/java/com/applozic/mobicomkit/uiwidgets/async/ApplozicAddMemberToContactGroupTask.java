@@ -18,7 +18,7 @@ public class ApplozicAddMemberToContactGroupTask extends AsyncTask<Object, Objec
     ChannelService channelService;
     GroupMemberListener groupMemberListener;
     private Exception exception;
-    private String groupType;
+    private final String groupType;
 
 
     public ApplozicAddMemberToContactGroupTask(Context context, String contactGroupId, String groupType, List<String> groupMemberList, GroupMemberListener groupMemberListener) {

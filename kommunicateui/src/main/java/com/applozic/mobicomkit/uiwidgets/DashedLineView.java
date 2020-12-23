@@ -15,9 +15,9 @@ public class DashedLineView extends View {
     private Paint paint;
     private Path path;
     private PathEffect effects;
-    private String dashColor = "#BEBBBB";
-    private float dashWidth = DimensionsUtils.convertDpToPixel(4);
-    private float dashSpacing = DimensionsUtils.convertDpToPixel(2);
+    private final String dashColor = "#BEBBBB";
+    private final float dashWidth = DimensionsUtils.convertDpToPixel(4);
+    private final float dashSpacing = DimensionsUtils.convertDpToPixel(2);
 
     public DashedLineView(Context context) {
         super(context);

@@ -155,7 +155,7 @@ public class MessageInfoFragment extends Fragment {
         }
 
         messageInfoAsyncTask = new MessageInfoAsyncTask(message.getKeyString(), getActivity());
-        messageInfoAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);;
+        messageInfoAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         return view;
     }
 

@@ -16,7 +16,13 @@ import java.util.ArrayList;
 public class Not_Fixed_Meeting_Adapter extends RecyclerView.Adapter<Not_Fixed_Meeting_Adapter.ViewHolder> {
     Context mContext;
     private OnItemClickListener mListener;
-    private ArrayList<String> ImageArray, NameList,Username_List,Expand_List,ProblemList,DateList,TimeList;
+    private final ArrayList<String> ImageArray;
+    private final ArrayList<String> NameList;
+    private final ArrayList<String> Username_List;
+    private final ArrayList<String> Expand_List;
+    private final ArrayList<String> ProblemList;
+    private final ArrayList<String> DateList;
+    private final ArrayList<String> TimeList;
     public interface OnItemClickListener
     {
         void onItemClick(int position);

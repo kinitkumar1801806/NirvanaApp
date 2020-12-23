@@ -29,9 +29,9 @@ import java.util.regex.Pattern;
 
 public class KmPrechatInputAdapter extends RecyclerView.Adapter<KmPrechatInputAdapter.KmPrechatInputViewHolder> {
 
-    private List<KmPrechatInputModel> inputModelList;
-    private Map<String, String> dataMap;
-    private Map<String, String> inputTextMap;
+    private final List<KmPrechatInputModel> inputModelList;
+    private final Map<String, String> dataMap;
+    private final Map<String, String> inputTextMap;
 
     public KmPrechatInputAdapter(List<KmPrechatInputModel> inputModelList) {
         this.inputModelList = inputModelList;
@@ -59,8 +59,8 @@ public class KmPrechatInputAdapter extends RecyclerView.Adapter<KmPrechatInputAd
     }
 
     public class KmPrechatInputViewHolder extends RecyclerView.ViewHolder {
-        private TextInputEditText inputEditText;
-        private TextInputLayout textInputLayout;
+        private final TextInputEditText inputEditText;
+        private final TextInputLayout textInputLayout;
 
         public KmPrechatInputViewHolder(@NonNull View itemView) {
             super(itemView);

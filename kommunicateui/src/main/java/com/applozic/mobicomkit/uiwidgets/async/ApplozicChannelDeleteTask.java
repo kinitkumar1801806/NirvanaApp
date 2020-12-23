@@ -18,7 +18,7 @@ public class ApplozicChannelDeleteTask extends AsyncTask<Void, Void, Boolean> {
     private final Context context;
     private String response;
     private Exception mException;
-    private Channel channel;
+    private final Channel channel;
 
     public ApplozicChannelDeleteTask(Context context, TaskListener listener, Channel channel) {
         this.context = context;

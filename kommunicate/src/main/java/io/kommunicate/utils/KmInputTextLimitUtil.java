@@ -3,8 +3,8 @@ package io.kommunicate.utils;
 import io.kommunicate.callbacks.KmCharLimitCallback;
 
 public class KmInputTextLimitUtil {
-    private int characterLimit;
-    private int notifyAtCharacterCount;
+    private final int characterLimit;
+    private final int notifyAtCharacterCount;
 
     public KmInputTextLimitUtil(int characterLimit, int charactersRemainingTillLimit) {
         this.characterLimit = characterLimit;

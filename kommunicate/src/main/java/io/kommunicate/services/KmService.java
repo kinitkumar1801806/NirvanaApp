@@ -35,9 +35,9 @@ import io.kommunicate.utils.KmConstants;
 
 public class KmService {
 
-    private Context context;
-    private KmClientService clientService;
-    private KmAutoSuggestionDatabase autoSuggestionDatabase;
+    private final Context context;
+    private final KmClientService clientService;
+    private final KmAutoSuggestionDatabase autoSuggestionDatabase;
     public static final String TAG = "KmService";
     public static final String KM_SKIP_BOT = "skipBot";
     public static final String KM_NO_ALERT = "NO_ALERT";
@@ -51,10 +51,6 @@ public class KmService {
 
     public String getAwayMessage(String appKey, Integer groupId) throws Exception {
         String response = clientService.getAwayMessage(appKey, groupId);
-
-        if (response == null) {
-            return null;
-        }
 
         return response;
     }

@@ -37,7 +37,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     String phone1;
     ProgressBar progressBar;
-    String code,Id1;
+    String code,Id1,flag="0",ID;
     String phonenumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,16 +86,27 @@ public class DoctorLoginActivity extends AppCompatActivity {
         }
         Id1=Id.getText().toString();
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors").child(phonenumber);
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String Id;
                 if(dataSnapshot.exists())
                 {
-                    progressBar.setVisibility(View.VISIBLE);
                     HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
-                    String id=(String)hashMap.get("Id");
-                    if(Id1.equals(id))
+                    for(String key:hashMap.keySet()) {
+                        Object data = hashMap.get(key);
+                        HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                        String phone = (String) userData.get("phone");
+                        Id=(String)userData.get("Id");
+                        if (phone.equals(phonenumber)) {
+                            flag="1";
+                        }
+                        ID=Id;
+                }
+                if(flag.equals("1"))
+                    progressBar.setVisibility(View.VISIBLE);
+                    if(Id1.equals(ID))
                     {
                         Bundle bundle=new Bundle();
                         bundle.putString("phone",phonenumber);
@@ -156,6 +167,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
                                     progressBar1.setVisibility(View.GONE);
                                     Intent intent=new Intent(DoctorLoginActivity.this, Doctor_Welcome_Activity.class);
                                     intent.putExtra("phone",phone1);
+                                    intent.putExtra("Id",Id1);
                                     startActivity(intent);
 
 

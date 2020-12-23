@@ -40,7 +40,7 @@ public class GoalPlanning extends AppCompatActivity {
                     intent.putExtra(CalendarContract.Events.DESCRIPTION, info.getText().toString());
                     intent.putExtra(CalendarContract.Events.EVENT_LOCATION, time.getText().toString());
                     intent.putExtra(CalendarContract.Events.ALL_DAY,"true");
-                    intent.putExtra(Intent.EXTRA_EMAIL,"shreyashikumari2019@gmail.com, priyanshkharesln@gmail.com");
+                    intent.putExtra(Intent.EXTRA_EMAIL,"nirvana.ieee.01@gmail.com");
                     if(intent.resolveActivity(getPackageManager()) != null){
                         startActivity(intent);
                     }else{
@@ -54,5 +54,11 @@ public class GoalPlanning extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        overridePendingTransition(R.anim.no_animation, R.anim.slide_in_bottom);
     }
 }

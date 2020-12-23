@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import javax.mail.internet.MimeMultipart;
 import com.example.nirvana.R;
 import com.example.nirvana.Model.doctor_details;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
@@ -39,6 +42,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Properties;
@@ -48,9 +52,10 @@ public class DoctorPhoneVerification extends AppCompatActivity {
     private PhoneAuthCredential credential;
     private FirebaseAuth mAuth;
     private Task<Void> databaseReference;
+    private Uri Imagepath,Filepath;
     final String username ="nirvana.ieee.01@gmail.com";
     final String password ="nirvana_IEEE";
-    private StorageReference mStorageRef;
+    private StorageReference mStorageRef,Ref;
     private EditText code;
     private ProgressBar progressBar;
     private String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice,Id,totalpatient,satisfiedpatient,rating,ratingby,link;
@@ -77,11 +82,13 @@ public class DoctorPhoneVerification extends AppCompatActivity {
         LinkedIn=arr.get(9);
         Year_Of_Practice=arr.get(10);
         Place_Of_Practice=arr.get(11);
-        link=arr.get(12);
         totalpatient="0";
         satisfiedpatient="0";
         rating="0";
         ratingby="0";
+        Filepath=Uri.parse(intent.getStringExtra("Filepath"));
+        Imagepath=Uri.parse(intent.getStringExtra("Imagepath"));
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         sendVerificationCode(Phone);
     }
     private void sendVerificationCode(String mobile) {
@@ -93,7 +100,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 mCallbacks);                       // OnVerificationStateChangedCallbacks
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -168,15 +175,42 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                             Year_Of_Practice,
                                             Place_Of_Practice,
                                             LinkedIn,
-                                            Id,
                                             totalpatient,
                                             satisfiedpatient,
                                             rating,
                                             ratingby,
-                                            link
+                                            link,
+                                            Id
                                     );
+                                    StorageReference Ref1 =mStorageRef.child("Doctors").child(Id).child("Certificate");
+                                    Ref1.putFile(Filepath);
+                                    Ref =mStorageRef.child("Profile Images").child(Id);
+                                    Ref.putFile(Imagepath)
+                                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    // Get a URL to the uploaded content
+                                                    Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            link=uri.toString();
 
-                                    databaseReference= FirebaseDatabase.getInstance().getReference("Doctors").child(Phone)
+
+                                                        }
+                                                    }) ;
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception exception) {
+                                                    // Handle unsuccessful uploads
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(DoctorPhoneVerification.this,"We are getting some issue.We will come back very soon",Toast.LENGTH_SHORT).show();
+                                                    // ...
+                                                }
+                                            });
+                                    databaseReference= FirebaseDatabase.getInstance().getReference("Doctors").child(Id)
                                             .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -184,6 +218,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                                     Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
                                                     Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
                                                     intent.putExtra("phone",Phone);
+                                                    intent.putExtra("Id",Id);
                                                     startActivity(intent);
 
 

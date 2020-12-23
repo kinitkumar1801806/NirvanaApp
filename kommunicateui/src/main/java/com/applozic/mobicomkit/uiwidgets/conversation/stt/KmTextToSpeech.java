@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class KmTextToSpeech implements TextToSpeech.OnInitListener {
 
-    private Context context;
+    private final Context context;
     private TextToSpeech textToSpeech;
     private static final String TAG = "KmTextToSpeech";
 

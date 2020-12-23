@@ -23,10 +23,10 @@ import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 public class KmAnimationHelper {
-    private Context context;
-    private AnimatedVectorDrawableCompat animatedVectorDrawable;
-    private ImageView basketImg;
-    private TextView smallBlinkingDot;
+    private final Context context;
+    private final AnimatedVectorDrawableCompat animatedVectorDrawable;
+    private final ImageView basketImg;
+    private final TextView smallBlinkingDot;
     private AlphaAnimation alphaAnimation;
     private OnBasketAnimationEndListener onBasketAnimationEndListener;
     private boolean isBasketAnimating, isStartRecorded = false;

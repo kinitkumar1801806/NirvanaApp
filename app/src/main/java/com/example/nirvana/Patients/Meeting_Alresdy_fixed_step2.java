@@ -52,6 +52,7 @@ import com.sinch.android.rtc.UserController;
 import com.sinch.android.rtc.UserRegistrationCallback;
 import com.sinch.android.rtc.calling.Call;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,7 +74,7 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
     public static final String CALL_ID = "CALL_ID";
     Bundle bundle;
     private static String callType = "";
-    private int MULTIPLE_PERMISSION = 1;
+    private final int MULTIPLE_PERMISSION = 1;
     SinchClient sinchClient;
     Call call;
     private long mSigningSequence = 1;
@@ -132,7 +133,7 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
         MessageDigest messageDigest;
         try {
             messageDigest = MessageDigest.getInstance("SHA-1");
-            byte[] hash = messageDigest.digest(toSign.getBytes("UTF-8"));
+            byte[] hash = messageDigest.digest(toSign.getBytes(StandardCharsets.UTF_8));
             signature = Base64.encodeToString(hash, Base64.DEFAULT).trim();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e.getCause());

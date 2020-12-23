@@ -61,7 +61,7 @@ public class HospitalPhoneVerification extends AppCompatActivity {
                 TaskExecutors.MAIN_THREAD,          //Work done on main Thread
                 mCallbacks);                       // OnVerificationStateChangedCallbacks
     }
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {

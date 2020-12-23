@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.Doctors.DoctorLoginActivity;
 import com.example.nirvana.Doctors.DoctorSignupActivity;
 import com.example.nirvana.Organisations.OrganisationActivity;
@@ -29,10 +30,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
-    private int MULTIPLE_PERMISSION = 1;
+    private final int MULTIPLE_PERMISSION = 1;
     FirebaseAuth auth;
     private String Id;
     String[] permission={Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS,Manifest.permission.READ_PHONE_STATE,
@@ -128,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id=item.getItemId();
         if(id==R.id.nav_login)
         {
+
             LoginFragment loginFragment=new LoginFragment();
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout,loginFragment,"Login");

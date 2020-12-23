@@ -683,12 +683,12 @@ public class MobiComQuickConversationFragment extends Fragment implements Search
 
     public class DownloadConversation extends AsyncTask<Void, Integer, Long> {
 
-        private int firstVisibleItem;
-        private boolean initial;
+        private final int firstVisibleItem;
+        private final boolean initial;
         private List<Message> nextMessageList = new ArrayList<Message>();
         private boolean loadMoreMessages;
-        private String searchString;
-        private WeakReference<Context> context;
+        private final String searchString;
+        private final WeakReference<Context> context;
         private WeakReference<SwipeRefreshLayout> swipeRefreshLayoutWeakReference;
         private WeakReference<TextView> textViewWeakReference;
 
@@ -811,9 +811,7 @@ public class MobiComQuickConversationFragment extends Fragment implements Search
                 }
             }
             if (loadMoreMessages) {
-                if (messageList.contains(null)) {
-                    messageList.remove(null);
-                }
+                messageList.remove(null);
             }
 
             if (recyclerAdapter != null) {

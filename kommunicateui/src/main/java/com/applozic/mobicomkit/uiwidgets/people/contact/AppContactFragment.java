@@ -99,7 +99,7 @@ public class AppContactFragment extends ListFragment implements SearchListFragme
     private Button shareButton;
     private String[] userIdArray;
     private MobiComUserPreference userPreference;
-    private int visibleThreshold = 0;
+    private final int visibleThreshold = 0;
     private int previousTotalItemCount = 0;
     private boolean loading = true;
     private ContactDatabase contactDatabase;
@@ -262,12 +262,7 @@ public class AppContactFragment extends ListFragment implements SearchListFragme
                 if ((alCustomizationSettings.isRegisteredUserContactListCall() || ApplozicSetting.getInstance(getActivity()).isRegisteredUsersContactCall()) && Utils.isInternetAvailable(getActivity().getApplicationContext()) && TextUtils.isEmpty(userPreference.getContactsGroupId())) {
                     if (totalItemsCount < previousTotalItemCount) {
                         previousTotalItemCount = totalItemsCount;
-                        if (totalItemsCount == 0) {
-                            loading = true;
-                        } else {
-                            loading = false;
-
-                        }
+                        loading = totalItemsCount == 0;
                     }
 
                     if (loading && (totalItemsCount > previousTotalItemCount)) {
@@ -505,9 +500,9 @@ public class AppContactFragment extends ListFragment implements SearchListFragme
      */
     private class ContactsAdapter extends CursorAdapter implements SectionIndexer {
         Context context;
-        private LayoutInflater mInflater; // Stores the layout inflater
-        private AlphabetIndexer mAlphabetIndexer; // Stores the AlphabetIndexer instance
-        private TextAppearanceSpan highlightTextSpan; // Stores the highlight text appearance style
+        private final LayoutInflater mInflater; // Stores the layout inflater
+        private final AlphabetIndexer mAlphabetIndexer; // Stores the AlphabetIndexer instance
+        private final TextAppearanceSpan highlightTextSpan; // Stores the highlight text appearance style
 
         /**
          * Instantiates a new Contacts Adapter.

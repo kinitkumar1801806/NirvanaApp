@@ -69,7 +69,7 @@ public class KmCustomDialog {
     }
 
     public static class KmDialogBuilder extends JsonMarker {
-        private Activity activity;
+        private final Activity activity;
         private String title;
         private String message;
         private String positiveButtonLabel;

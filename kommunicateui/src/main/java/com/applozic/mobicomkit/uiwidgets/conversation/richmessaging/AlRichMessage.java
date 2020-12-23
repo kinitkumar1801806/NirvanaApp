@@ -55,7 +55,7 @@ public abstract class AlRichMessage {
     protected Context context;
     protected Message message;
     protected ALRichMessageListener listener;
-    private LinearLayout containerView;
+    private final LinearLayout containerView;
     protected LinearLayout listItemLayout;
     protected LinearLayout faqReplyLayout;
     protected LinearLayout faqLayout;

@@ -11,7 +11,7 @@ public class KmBotPreference {
     private static final String EMPTY_STRING = "";
     private static final int MAX_SHARED_PREF_SIZE = 50;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
     private static KmBotPreference kmBotPreference;
 
     private KmBotPreference(Context context) {

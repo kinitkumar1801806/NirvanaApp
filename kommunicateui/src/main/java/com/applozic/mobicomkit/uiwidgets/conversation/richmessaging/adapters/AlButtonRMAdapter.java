@@ -25,7 +25,7 @@ import io.kommunicate.utils.KmUtils;
 
 public class AlButtonRMAdapter extends ALRichMessageAdapter {
 
-    private List<ALRichMessageModel.ALPayloadModel> payloadList;
+    private final List<ALRichMessageModel.ALPayloadModel> payloadList;
 
     AlButtonRMAdapter(Context context, ALRichMessageModel model, ALRichMessageListener listener, Message message, KmThemeHelper themeHelper) {
         super(context, model, listener, message, themeHelper);

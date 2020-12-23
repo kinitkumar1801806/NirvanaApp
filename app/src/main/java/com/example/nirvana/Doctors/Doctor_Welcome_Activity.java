@@ -36,7 +36,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
     ActionBarDrawerToggle mDrawerToggle;
     FirebaseAuth auth;
     public TextView doctor_name,doctor_address;
-    private String phone;
+    private String phone,Id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +57,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         {
             Intent intent=getIntent();
             phone=intent.getStringExtra("phone");
+            Id=intent.getStringExtra("Id");
             Intent intent1=new Intent(this, SinchService.class);
             intent1.putExtra("phone",phone);
             startService(intent1);
@@ -70,7 +71,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
 
     private void RetrieveDoctorDetails() {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors").child(phone);
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors").child(Id);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -26,15 +26,15 @@ import java.util.List;
 
 public class AlChannelInfoTask extends AsyncTask<Void, Void, ChannelModel> {
 
-    private WeakReference<Context> context;
-    private Integer groupId;
-    private String clientGroupId;
-    private ChannelInfoListener listener;
-    private ChannelDatabaseService channelDatabaseService;
+    private final WeakReference<Context> context;
+    private final Integer groupId;
+    private final String clientGroupId;
+    private final ChannelInfoListener listener;
+    private final ChannelDatabaseService channelDatabaseService;
     private ChannelService channelService;
-    private boolean isUserListRequest;
+    private final boolean isUserListRequest;
     private static final String BASE_URL_METADATA = "com.applozic.server.url";
-    private String DEFAULT_URL = "https://apps.applozic.com";
+    private final String DEFAULT_URL = "https://apps.applozic.com";
     private static final String CHANNEL_INFO_URL = "/rest/ws/group/info";
     private static final String GROUP_ID = "groupId";
     private static final String CLIENT_GROUPID = "clientGroupId";

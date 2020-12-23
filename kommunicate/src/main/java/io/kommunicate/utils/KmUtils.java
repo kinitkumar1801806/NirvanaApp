@@ -101,7 +101,7 @@ public class KmUtils {
         EARLY_BIRD_MONTHLY(107),
         EARLY_BIRD_YEARLY(108);
 
-        private int value;
+        private final int value;
 
         PackageType(int value) {
             this.value = value;

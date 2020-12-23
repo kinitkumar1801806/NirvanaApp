@@ -1430,7 +1430,7 @@ public abstract class MobiComConversationFragment extends Fragment implements Vi
             boolean updateQuickConversation = false;
             int index;
             for (Message message : messageList) {
-                boolean value = message.getKeyString() != null ? message.getKeyString().equals(messageKeyString) : false;
+                boolean value = message.getKeyString() != null && message.getKeyString().equals(messageKeyString);
                 if (value) {
                     index = messageList.indexOf(message);
                     if (index != -1) {
@@ -2055,11 +2055,7 @@ public abstract class MobiComConversationFragment extends Fragment implements Vi
 
         // check if conversation is a resolved one, and display the respective feedback layouts
         // also open the feedback input fragment if feedback isn't set
-        if (channel != null && channel.getKmStatus() == Channel.CLOSED_CONVERSATIONS && !KmUtils.isAgent(getContext())) {
-            setFeedbackDisplay(true);
-        } else {
-            setFeedbackDisplay(false);
-        }
+        setFeedbackDisplay(channel != null && channel.getKmStatus() == Channel.CLOSED_CONVERSATIONS && !KmUtils.isAgent(getContext()));
     }
 
 
@@ -3498,7 +3494,7 @@ public abstract class MobiComConversationFragment extends Fragment implements Vi
             for (position = messageList.size() - 1; position >= 0; position--) {
                 Message message = messageList.get(position);
                 if (!TextUtils.isEmpty(message.getMessage()) && message.getMessage().toLowerCase(Locale.getDefault()).indexOf(
-                        searchString.toString().toLowerCase(Locale.getDefault())) != -1) {
+                        searchString.toLowerCase(Locale.getDefault())) != -1) {
                     return position;
                 }
             }
@@ -3878,14 +3874,14 @@ public abstract class MobiComConversationFragment extends Fragment implements Vi
 
     public class DownloadConversation extends AsyncTask<Void, Integer, Long> {
 
-        private RecyclerView recyclerView;
-        private int firstVisibleItem;
-        private boolean initial;
-        private Contact contact;
-        private Channel channel;
-        private Integer conversationId;
+        private final RecyclerView recyclerView;
+        private final int firstVisibleItem;
+        private final boolean initial;
+        private final Contact contact;
+        private final Channel channel;
+        private final Integer conversationId;
         private List<Conversation> conversationList;
-        private String messageSearchString;
+        private final String messageSearchString;
         private List<Message> nextMessageList = new ArrayList<Message>();
 
         public DownloadConversation(RecyclerView recyclerView, boolean initial, int firstVisibleItem, int amountVisible, int totalItems, Contact contact, Channel channel, Integer conversationId, String messageSearchString) {

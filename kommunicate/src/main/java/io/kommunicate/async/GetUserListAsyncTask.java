@@ -15,12 +15,12 @@ import io.kommunicate.services.KmUserService;
  */
 
 public class GetUserListAsyncTask extends AsyncTask<Void, Void, KmUserResponse> {
-    private WeakReference<Context> context;
-    private List<String> userRoleList;
-    private int startIndex;
-    private int pageSize;
-    private int orderBy;
-    private KMGetContactsHandler handler;
+    private final WeakReference<Context> context;
+    private final List<String> userRoleList;
+    private final int startIndex;
+    private final int pageSize;
+    private final int orderBy;
+    private final KMGetContactsHandler handler;
 
     public GetUserListAsyncTask(Context context, List<String> userRoleList, int startIndex, int pageSize, int orderBy, KMGetContactsHandler handler) {
         this.context = new WeakReference<Context>(context);

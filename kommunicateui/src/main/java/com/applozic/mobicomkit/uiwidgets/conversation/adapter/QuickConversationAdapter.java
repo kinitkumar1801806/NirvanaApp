@@ -62,7 +62,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class QuickConversationAdapter extends RecyclerView.Adapter implements Filterable {
 
-    private static Map<Short, Integer> messageTypeColorMap = new HashMap<Short, Integer>();
+    private static final Map<Short, Integer> messageTypeColorMap = new HashMap<Short, Integer>();
 
     static {
         messageTypeColorMap.put(Message.MessageType.INBOX.getValue(), R.color.message_type_inbox);
@@ -76,18 +76,18 @@ public class QuickConversationAdapter extends RecyclerView.Adapter implements Fi
 
     public ImageLoader contactImageLoader, channelImageLoader;
     public String searchString = null;
-    private Context context;
-    private MessageDatabaseService messageDatabaseService;
+    private final Context context;
+    private final MessageDatabaseService messageDatabaseService;
     private List<Message> messageList;
-    private BaseContactService contactService;
-    private EmojiconHandler emojiconHandler;
+    private final BaseContactService contactService;
+    private final EmojiconHandler emojiconHandler;
     private List<Message> originalList;
-    private TextAppearanceSpan highlightTextSpan;
+    private final TextAppearanceSpan highlightTextSpan;
     private AlCustomizationSettings alCustomizationSettings;
     private View view;
-    private ConversationUIService conversationUIService;
-    private int loggedInUserRoleType;
-    private String loggedInUserId;
+    private final ConversationUIService conversationUIService;
+    private final int loggedInUserRoleType;
+    private final String loggedInUserId;
 
     public void setAlCustomizationSettings(AlCustomizationSettings alCustomizationSettings) {
         this.alCustomizationSettings = alCustomizationSettings;
@@ -288,7 +288,7 @@ public class QuickConversationAdapter extends RecyclerView.Adapter implements Fi
                     // Sets the span to start at the starting point of the match and end at "length"
                     // characters beyond the starting point
                     highlightedName.setSpan(highlightTextSpan, startIndex,
-                            startIndex + searchString.toString().length(), 0);
+                            startIndex + searchString.length(), 0);
 
                     myholder.messageTextView.setText(highlightedName);
                 }
@@ -317,7 +317,7 @@ public class QuickConversationAdapter extends RecyclerView.Adapter implements Fi
     private int indexOfSearchQuery(String message) {
         if (!TextUtils.isEmpty(searchString)) {
             return message.toLowerCase(Locale.getDefault()).indexOf(
-                    searchString.toString().toLowerCase(Locale.getDefault()));
+                    searchString.toLowerCase(Locale.getDefault()));
         }
         return -1;
     }

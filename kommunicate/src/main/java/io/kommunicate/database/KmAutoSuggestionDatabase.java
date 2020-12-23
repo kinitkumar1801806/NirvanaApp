@@ -17,8 +17,8 @@ import java.util.List;
 import io.kommunicate.models.KmAutoSuggestionModel;
 
 public class KmAutoSuggestionDatabase {
-    private Context context;
-    private KmDatabaseHelper dbHelper;
+    private final Context context;
+    private final KmDatabaseHelper dbHelper;
     private static KmAutoSuggestionDatabase kmAutoSuggestionDatabase;
 
     private KmAutoSuggestionDatabase(Context context) {

@@ -26,8 +26,8 @@ import java.util.Date;
 
 public class ApplozicAudioRecordManager implements MediaRecorder.OnInfoListener, MediaRecorder.OnErrorListener {
 
-    private FragmentActivity context;
-    private ConversationUIService conversationUIService;
+    private final FragmentActivity context;
+    private final ConversationUIService conversationUIService;
     private MediaRecorder audioRecorder;
     private String outputFile = null;
     private boolean isRecording;

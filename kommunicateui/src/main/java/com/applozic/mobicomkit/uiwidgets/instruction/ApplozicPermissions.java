@@ -15,8 +15,8 @@ import com.applozic.mobicommons.commons.core.utils.PermissionsUtils;
  * Created by sunil on 22/1/16.
  */
 public class ApplozicPermissions {
-    private LinearLayout snackBarLayout;
-    private Activity activity;
+    private final LinearLayout snackBarLayout;
+    private final Activity activity;
 
     //CODES: all permission request codes here are between 900 and 999 to avoid conflicts
     //CODES: refer to the PermissionUtils.java request codes to avoid conflicts

@@ -25,9 +25,9 @@ public class MobiComKitBroadcastReceiver extends BroadcastReceiver {
 
     private static final String TAG = "MTBroadcastReceiver";
 
-    private ConversationUIService conversationUIService;
-    private BaseContactService baseContactService;
-    private boolean hideActionMessages;
+    private final ConversationUIService conversationUIService;
+    private final BaseContactService baseContactService;
+    private final boolean hideActionMessages;
 
     public MobiComKitBroadcastReceiver(FragmentActivity fragmentActivity) {
         this.conversationUIService = new ConversationUIService(fragmentActivity);

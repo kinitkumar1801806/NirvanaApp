@@ -7,8 +7,8 @@ import com.applozic.mobicommons.people.contact.Contact;
  */
 public class SpinnerNavItem {
 
-    private String type;
-    private int icon;
+    private final String type;
+    private final int icon;
     private Contact contact;
     private String contactNumber;
 

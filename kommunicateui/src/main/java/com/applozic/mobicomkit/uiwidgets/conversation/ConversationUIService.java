@@ -101,12 +101,12 @@ public class ConversationUIService {
     public static final String TOPIC_ID = "TOPIC_ID";
     private static final String TAG = "ConversationUIService";
     public static final String MESSAGE_SEARCH_STRING = "MESSAGE_SEARCH_STRING";
-    private FileClientService fileClientService;
-    private FragmentActivity fragmentActivity;
-    private BaseContactService baseContactService;
-    private MobiComUserPreference userPreference;
-    private NotificationManager notificationManager;
-    private boolean isActionMessageHidden;
+    private final FileClientService fileClientService;
+    private final FragmentActivity fragmentActivity;
+    private final BaseContactService baseContactService;
+    private final MobiComUserPreference userPreference;
+    private final NotificationManager notificationManager;
+    private final boolean isActionMessageHidden;
 
     public ConversationUIService(FragmentActivity fragmentActivity) {
         this.fragmentActivity = fragmentActivity;
@@ -213,11 +213,11 @@ public class ConversationUIService {
                 File file = null;
                 if (selectedFileUri == null) {
                     file = ((ConversationActivity) fragmentActivity).getFileObject();
-                    selectedFileUri = ((ConversationActivity) fragmentActivity).getCapturedImageUri();
+                    selectedFileUri = ConversationActivity.getCapturedImageUri();
                 }
 
                 if (selectedFileUri != null) {
-                    selectedFileUri = ((ConversationActivity) fragmentActivity).getCapturedImageUri();
+                    selectedFileUri = ConversationActivity.getCapturedImageUri();
                     file = ((ConversationActivity) fragmentActivity).getFileObject();
                 }
                 MediaScannerConnection.scanFile(fragmentActivity,

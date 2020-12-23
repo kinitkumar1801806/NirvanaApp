@@ -70,6 +70,7 @@ public class SplashScreen extends AppCompatActivity {
                                     String phone=(String)userData.get("phone");
                                     check="yes";
                                     intent.putExtra("phone",phone);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 }
@@ -100,6 +101,7 @@ public class SplashScreen extends AppCompatActivity {
                                     Intent intent=new Intent(SplashScreen.this, Patient_Welcome_Activity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 }
@@ -130,6 +132,7 @@ public class SplashScreen extends AppCompatActivity {
                                     Intent intent=new Intent(SplashScreen.this, SchoolWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 }
@@ -160,6 +163,7 @@ public class SplashScreen extends AppCompatActivity {
                                     Intent intent=new Intent(SplashScreen.this, ClinicWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 }
@@ -190,6 +194,7 @@ public class SplashScreen extends AppCompatActivity {
                                     Intent intent=new Intent(SplashScreen.this, HospitalWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 }
@@ -220,6 +225,7 @@ public class SplashScreen extends AppCompatActivity {
                                     Intent intent=new Intent(SplashScreen.this, OfficeWelcomeActivity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);
+                                    intent.putExtra("Id",Id);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 }

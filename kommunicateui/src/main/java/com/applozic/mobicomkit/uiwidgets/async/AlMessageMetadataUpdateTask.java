@@ -17,10 +17,10 @@ import java.util.Map;
 
 public class AlMessageMetadataUpdateTask extends AsyncTask<Void, Void, ApiResponse> {
 
-    private WeakReference<Context> context;
-    private String key;
-    private Map<String, String> metadata;
-    private MessageMetadataListener listener;
+    private final WeakReference<Context> context;
+    private final String key;
+    private final Map<String, String> metadata;
+    private final MessageMetadataListener listener;
 
     public AlMessageMetadataUpdateTask(Context context, String key, Map<String, String> metadata, MessageMetadataListener listener) {
         this.context = new WeakReference<Context>(context);

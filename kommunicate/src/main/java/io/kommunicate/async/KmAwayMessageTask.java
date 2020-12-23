@@ -20,9 +20,9 @@ import java.lang.reflect.Type;
 
 public class KmAwayMessageTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> context;
-    private Integer groupId;
-    private KmAwayMessageHandler handler;
+    private final WeakReference<Context> context;
+    private final Integer groupId;
+    private final KmAwayMessageHandler handler;
     private Exception exception;
 
     public KmAwayMessageTask(Context context, Integer groupId, KmAwayMessageHandler handler) {

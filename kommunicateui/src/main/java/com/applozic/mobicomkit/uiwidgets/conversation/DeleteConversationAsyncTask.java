@@ -18,8 +18,8 @@ import com.applozic.mobicommons.people.contact.Contact;
 public class DeleteConversationAsyncTask extends AsyncTask<Void, Integer, Long> {
 
     private Message message;
-    private Contact contact;
-    private MobiComConversationService conversationService;
+    private final Contact contact;
+    private final MobiComConversationService conversationService;
     private boolean isThreaddelete = false;
     private ProgressDialog progressDialog;
     private Context context;

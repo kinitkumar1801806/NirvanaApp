@@ -7,5 +7,5 @@ import com.applozic.mobicommons.people.contact.Contact;
 
 
 public interface KmToolbarClickListener {
-    public void onClick(Activity activity, Channel channel, Contact contact);
+    void onClick(Activity activity, Channel channel, Contact contact);
 }

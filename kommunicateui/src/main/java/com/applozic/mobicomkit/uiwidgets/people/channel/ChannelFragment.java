@@ -63,8 +63,8 @@ public class ChannelFragment extends ListFragment implements
     private OnContactsInteractionListener mOnChannelSelectedListener;
     private Button shareButton;
     private TextView resultTextView;
-    private boolean syncStatus = true;
-    private int mPreviouslySelectedSearchItem = 0;
+    private final boolean syncStatus = true;
+    private final int mPreviouslySelectedSearchItem = 0;
 
     public ChannelFragment() {
 
@@ -260,9 +260,9 @@ public class ChannelFragment extends ListFragment implements
 
     private class ChannelAdapter extends CursorAdapter implements SectionIndexer {
         Context context;
-        private LayoutInflater mInflater; // Stores the layout inflater
-        private AlphabetIndexer mAlphabetIndexer; // Stores the AlphabetIndexer instance
-        private TextAppearanceSpan highlightTextSpan; // Stores the highlight text appearance style
+        private final LayoutInflater mInflater; // Stores the layout inflater
+        private final AlphabetIndexer mAlphabetIndexer; // Stores the AlphabetIndexer instance
+        private final TextAppearanceSpan highlightTextSpan; // Stores the highlight text appearance style
 
         /**
          * Instantiates a new Contacts Adapter.

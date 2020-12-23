@@ -12,8 +12,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.nirvana.Blogs.BlogActivity;
 import com.example.nirvana.Doctors.Doctors_GridView;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
@@ -39,7 +42,8 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
     ActionBarDrawerToggle mDrawerToggle;
     public TextView patient_name,patient_address;
     FirebaseAuth auth;
-    private String phone;
+    ImageView Niri,Blogs,Home,Goal_Planning,Profile,p_profile;
+    private String Id,phone,link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,24 +59,76 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
         patient_name=hView.findViewById(R.id.header_name);
         patient_address=hView.findViewById(R.id.header_address);
+        p_profile=hView.findViewById(R.id.doctor_image);
+        Home=findViewById(R.id.home);
+        Blogs=findViewById(R.id.blogs);
+        Niri=findViewById(R.id.niri);
+        Goal_Planning=findViewById(R.id.goal_planning);
+        Profile=findViewById(R.id.profile);
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null)
         {
             Intent intent=getIntent();
+            Id=intent.getStringExtra("Id");
             phone=intent.getStringExtra("phone");
             Intent intent1=new Intent(this, SinchService.class);
             intent1.putExtra("phone",phone);
             startService(intent1);
         }
         RetrievePatientDetails();
-        HomeFragment homeFragment=new HomeFragment();
+        PatientHomeFragment homeFragment=new PatientHomeFragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
         fragmentTransaction.commit();
+        Home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PatientHomeFragment homeFragment=new PatientHomeFragment();
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
+                fragmentTransaction.commit();
+            }
+        });
+        Blogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Patient_Welcome_Activity.this, BlogActivity.class);
+                intent.putExtra("Id",Id);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+            }
+        });
+        Niri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Patient_Welcome_Activity.this, Niri.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+            }
+        });
+        Goal_Planning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Patient_Welcome_Activity.this,GoalPlanning.class);
+                intent.putExtra("Id",Id);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+            }
+        });
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Patient_Welcome_Activity.this, ProfileActivity.class);
+                intent.putExtra("Id",Id);
+                intent.putExtra("who","patient");
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+            }
+        });
     }
     private void RetrievePatientDetails() {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient").child(phone);
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient").child(Id);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -80,6 +136,12 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
                 String fname=hashMap.get("fname").toString();
                 String lname=hashMap.get("lname").toString();
                 String address=hashMap.get("address").toString();
+                link=hashMap.get("link").toString();
+                if(!link.equals("None"))
+                {
+                    Glide.with(Patient_Welcome_Activity.this).load(link).into(Profile);
+                    Glide.with(Patient_Welcome_Activity.this).load(link).into(p_profile);
+                }
                 patient_name.setText("Mr."+fname+" "+lname);
                 patient_address.setText(address);
             }
@@ -100,17 +162,6 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
             fragmentTransaction.commit();
         }
-        else if(id==R.id.blogs)
-        {
-           Intent intent=new Intent(this, BlogActivity.class);
-           intent.putExtra("phone",phone);
-           startActivity(intent);
-        }
-        else if(id==R.id.niri)
-        {
-            Intent intent=new Intent(this, Niri.class);
-            startActivity(intent);
-        }
         else if(id==R.id.book_appointment)
         {
             ECounselFragment eCounselFragment=new ECounselFragment();
@@ -129,29 +180,9 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         {
 
         }
-        else if(id==R.id.niri)
+        else if(id==R.id.product)
         {
-            Intent intent=new Intent(this,Niri.class);
-            startActivity(intent);
-        }
-        else if(id==R.id.logout)
-        {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent=new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-        else if(id==R.id.patient_profile)
-        {
-            Intent intent=new Intent(this, ProfileActivity.class);
-            intent.putExtra("phone",phone);
-            intent.putExtra("who","patient");
-            startActivity(intent);
-        }
-        else if(id==R.id.goal_planning)
-        {
-          Intent intent=new Intent(this,GoalPlanning.class);
-          intent.putExtra("phone",phone);
-          startActivity(intent);
+
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -164,7 +195,8 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
 
     public void meeting_already_fixed(View view) {
         Intent intent=new Intent(this, Meeting_Already_Fixed_step1.class);
-        intent.putExtra("phone",phone);
+        intent.putExtra("Id",Id);
         startActivity(intent);
     }
+
 }

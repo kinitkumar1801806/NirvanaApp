@@ -82,7 +82,8 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
 
     //List of available Audio files
     private ArrayList<Audio> audioList;
-    private int audioIndex = -1,tt=0;
+    private int audioIndex = -1;
+    private final int tt=0;
     private Audio activeAudio; //an object on the currently playing audio
 
 
@@ -293,12 +294,9 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     private boolean requestAudioFocus() {
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         int result = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
-        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            //Focus gained
-            return true;
-        }
+        //Focus gained
+        return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
         //Could not gain focus
-        return false;
     }
 
 
@@ -415,7 +413,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     /**
      * ACTION_AUDIO_BECOMING_NOISY -- change in audio outputs
      */
-    private BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -670,7 +668,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     /**
      * Play new Audio
      */
-    private BroadcastReceiver playNewAudio = new BroadcastReceiver() {
+    private final BroadcastReceiver playNewAudio = new BroadcastReceiver() {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -704,11 +702,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     }
     public boolean check()
     {
-        if(!mediaPlayer.isPlaying())
-        {
-            return false;
-        }
-        return true;
+        return mediaPlayer.isPlaying();
     }
     public void clearMediaPlayer() {
         mediaPlayer.stop();

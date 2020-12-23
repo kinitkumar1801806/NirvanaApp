@@ -11,7 +11,7 @@ import com.applozic.mobicommons.json.JsonMarker;
 public class KmFontManager extends JsonMarker {
 
     @Exclude
-    private transient Context context;
+    private final transient Context context;
     private static final String FONT_PATH = "fonts/";
     private Typeface messageTextFont;
     private Typeface createdAtTimeFont;

@@ -15,7 +15,7 @@ public class CustomTouchListener implements RecyclerView.OnItemTouchListener {
 
     //Gesture detector to intercept the touch events
     GestureDetector gestureDetector;
-    private onItemClickListener clickListener;
+    private final onItemClickListener clickListener;
 
     public CustomTouchListener(Context context, final onItemClickListener clickListener) {
         this.clickListener = clickListener;

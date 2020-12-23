@@ -16,7 +16,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
-    private Drawable divider;
+    private final Drawable divider;
 
     /**
      * Default divider will be used

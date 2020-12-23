@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class MobicomMessageTemplateAdapter extends RecyclerView.Adapter<MobicomMessageTemplateAdapter.ViewHolder> {
 
-    private MobicomMessageTemplate messageTemplate;
+    private final MobicomMessageTemplate messageTemplate;
     private MessageTemplateDataListener listener;
     private List<String> messageList;
     private Map<String, String> messageMap;

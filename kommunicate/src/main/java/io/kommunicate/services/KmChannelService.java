@@ -17,7 +17,7 @@ public class KmChannelService {
 
     private static final String CHANNEL_USER_X = "channel_User_X";
     private static KmChannelService kmChannelService;
-    private MobiComDatabaseHelper dbHelper;
+    private final MobiComDatabaseHelper dbHelper;
 
     private KmChannelService(Context context) {
         this.dbHelper = MobiComDatabaseHelper.getInstance(context);
@@ -34,7 +34,7 @@ public class KmChannelService {
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-            String query = "select * from " + CHANNEL_USER_X + " where channelKey = " + String.valueOf(channelKey) + " and role = " + String.valueOf(3);
+            String query = "select * from " + CHANNEL_USER_X + " where channelKey = " + channelKey + " and role = " + 3;
 
             Cursor cursor = db.rawQuery(query, null);
             List<ChannelUserMapper> channelUserMappers = getListOfUsers(cursor);
@@ -57,7 +57,7 @@ public class KmChannelService {
         Cursor cursor = null;
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-            String query = "select * from " + CHANNEL_USER_X + " where channelKey = " + String.valueOf(channelKey) + " and role = " + String.valueOf(role);
+            String query = "select * from " + CHANNEL_USER_X + " where channelKey = " + channelKey + " and role = " + role;
             cursor = db.rawQuery(query, null);
             return getListOfUserIds(cursor);
         } catch (Exception e) {

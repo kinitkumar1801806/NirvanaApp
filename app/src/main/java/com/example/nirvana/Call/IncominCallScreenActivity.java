@@ -177,7 +177,7 @@ public void getCallerName()
         @Override
         public void onCallEnded(Call call) {
             CallEndCause cause = call.getDetails().getEndCause();
-            Toast.makeText(IncominCallScreenActivity.this,"Call Ended : "+cause.toString(),Toast.LENGTH_SHORT).show();;
+            Toast.makeText(IncominCallScreenActivity.this,"Call Ended : "+cause.toString(),Toast.LENGTH_SHORT).show();
             mAudioPlayer.stopRingtone();
             finish();
         }
@@ -190,7 +190,7 @@ public void getCallerName()
 
         @Override
         public void onCallProgressing(Call call) {
-            Toast.makeText(IncominCallScreenActivity.this,"Call Processing",Toast.LENGTH_SHORT).show();;
+            Toast.makeText(IncominCallScreenActivity.this,"Call Processing",Toast.LENGTH_SHORT).show();
         }
 
         @Override

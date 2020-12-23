@@ -29,8 +29,8 @@ import static android.view.View.GONE;
 
 public class AlCardRMAdapter extends ALRichMessageAdapter {
 
-    private List<ALRichMessageModel.ALPayloadModel> payloadList;
-    private KmThemeHelper themeHelper;
+    private final List<ALRichMessageModel.ALPayloadModel> payloadList;
+    private final KmThemeHelper themeHelper;
 
     AlCardRMAdapter(Context context, ALRichMessageModel model, ALRichMessageListener listener, Message message, KmThemeHelper themeHelper) {
         super(context, model, listener, message, themeHelper);

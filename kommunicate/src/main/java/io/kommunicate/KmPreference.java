@@ -17,7 +17,7 @@ public class KmPreference {
     private static final String KM_CONVERSATION_BUILDER = "KM_CONVERSATION_BUILDER";
     private static final String IS_FCM_REGISTRATION_CALL_DONE = "IS_FCM_REGISTRATION_CALL_DONE";
 
-    private String HELPDOCS_ACCESS_KEY = "HELPDOCS_ACCESS_KEY";
+    private final String HELPDOCS_ACCESS_KEY = "HELPDOCS_ACCESS_KEY";
 
     private KmPreference(Context context) {
         preferences = context.getSharedPreferences(KM_USER_PREFERENCES, Context.MODE_PRIVATE);

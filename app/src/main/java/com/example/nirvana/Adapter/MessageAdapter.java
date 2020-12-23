@@ -18,14 +18,15 @@ import com.example.nirvana.R;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    private Context mContext;
+    private final Context mContext;
     public static final int MSG_TYPE_LEFT=0;
     public static final int MSG_TYPE_RIGHT=1;
     public static final int MSG_TYPE_IMAGE_LEFT=2;
     public static final int MSG_TYPE_IMAGE_RIGHT=3;
-    private List<Chat> mChat;
-    private String imageurl;
-    private String sender,reciever;
+    private final List<Chat> mChat;
+    private final String imageurl;
+    private final String sender;
+    private final String reciever;
     public MessageAdapter(Context mContext, List<Chat> mChat, String imageurl,String sender,String reciever) {
         this.mContext = mContext;
         this.mChat = mChat;

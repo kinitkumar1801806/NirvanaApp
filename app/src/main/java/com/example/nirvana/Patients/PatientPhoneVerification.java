@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.R;
 import com.example.nirvana.Model.details_patient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,7 +71,7 @@ public class PatientPhoneVerification extends AppCompatActivity {
                 mCallbacks);                       // OnVerificationStateChangedCallbacks
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -137,16 +138,38 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                             Fname,
                                             Lname,
                                             Password,
+                                            "None",
                                             Id,
-                                            "None"
+                                            ""
                                     );
-                                    databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(Phone)
+                                    databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(Id)
                                             .setValue(details_patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(PatientPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
+                                                    BackgroundMail.newBuilder(PatientPhoneVerification.this)
+                                                            .withUsername("nirvana.ieee.01@gmail.com")
+                                                            .withPassword("nirvana_IEEE")
+                                                            .withMailto(Email)
+                                                            .withType(BackgroundMail.TYPE_PLAIN)
+                                                            .withSubject("Welcome to Nirvana")
+                                                            .withBody("Welcome to Nirvana.This is your Id "+Id)
+                                                            .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                                                                @Override
+                                                                public void onSuccess() {
+                                                                    //do some magic
+                                                                }
+                                                            })
+                                                            .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                                                                @Override
+                                                                public void onFail() {
+                                                                    //do some magic
+                                                                }
+                                                            })
+                                                            .send();
                                                     Intent intent=new Intent(PatientPhoneVerification.this, Patient_Welcome_Activity.class);
+                                                    intent.putExtra("Id",Id);
                                                     intent.putExtra("phone",Phone);
                                                     startActivity(intent);
 

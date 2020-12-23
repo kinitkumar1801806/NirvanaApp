@@ -18,7 +18,7 @@ import com.applozic.mobicommons.commons.core.utils.Utils;
 public class DimensionsUtils {
 
     private static float density = 1;
-    private static Point displaySize = new Point();
+    private static final Point displaySize = new Point();
     public static DisplayMetrics displayMetrics = new DisplayMetrics();
 
     public static float convertPixelsToDp(float px) {

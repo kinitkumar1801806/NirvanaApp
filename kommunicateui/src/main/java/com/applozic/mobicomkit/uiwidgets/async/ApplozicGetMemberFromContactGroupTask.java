@@ -18,8 +18,8 @@ public class ApplozicGetMemberFromContactGroupTask extends AsyncTask<Void, Void,
     Context context;
     GroupMemberListener groupMemberListener;
     ProgressDialog dialog;
-    private ChannelService channelService;
-    private String groupType;
+    private final ChannelService channelService;
+    private final String groupType;
 
     public ApplozicGetMemberFromContactGroupTask(Context context, String contactGroupId, String groupType, GroupMemberListener groupMemberListener) {
         this.context = context;
@@ -45,7 +45,7 @@ public class ApplozicGetMemberFromContactGroupTask extends AsyncTask<Void, Void,
                 ChannelFeed channelFeed = channelService.getMembersFromContactGroup(contactGroupId, groupType);
                 if (channelFeed != null && channelFeed.getContactGroupMembersId() != null) {
 
-                    String userIdArray[] = channelFeed.getContactGroupMembersId().toArray(new String[channelFeed.getContactGroupMembersId().size()]);
+                    String[] userIdArray = channelFeed.getContactGroupMembersId().toArray(new String[channelFeed.getContactGroupMembersId().size()]);
                     for (int i = 0; i < userIdArray.length; i++) {
                         if (MobiComUserPreference.getInstance(context).getUserId().equals(userIdArray[i])) {
                             userIdArray[i] = "";

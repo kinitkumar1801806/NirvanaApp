@@ -15,14 +15,14 @@ import io.kommunicate.callbacks.KmRemoveMemberCallback;
 
 public class KmConversationRemoveMemberTask extends AsyncTask<Void, Void, Boolean> {
 
-    private WeakReference<Context> context;
-    private Integer channelKey;
-    private String userId;
-    private KmRemoveMemberCallback removeMemberCallback;
-    private ChannelService channelService;
+    private final WeakReference<Context> context;
+    private final Integer channelKey;
+    private final String userId;
+    private final KmRemoveMemberCallback removeMemberCallback;
+    private final ChannelService channelService;
     private Exception exception;
     private String removeResponse;
-    private int index;
+    private final int index;
 
     public KmConversationRemoveMemberTask(Context context, Integer channelKey, String userId, int index, KmRemoveMemberCallback removeMemberCallback) {
         this.channelKey = channelKey;

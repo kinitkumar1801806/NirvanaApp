@@ -71,7 +71,7 @@ public class ProfileFragment extends Fragment {
     private TextView displayNameText;
     private TextView statusText;
     private TextView contactNumberText;
-    private String DEFAULT_CONATCT_IMAGE = "applozic_default_contactImg.jpeg";
+    private final String DEFAULT_CONATCT_IMAGE = "applozic_default_contactImg.jpeg";
     private ImageLoader mImageLoader; // Handles loading the contact image in a background thread
     private String changedStatusString;
     private String displayName;

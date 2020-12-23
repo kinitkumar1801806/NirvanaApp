@@ -15,8 +15,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nirvana.Doctors.DoctorPhoneVerification;
+import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
 import com.example.nirvana.Model.CountryCode;
 import com.example.nirvana.R;
+import com.example.nirvana.SplashScreen;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -163,14 +167,22 @@ public class PatientSignupActivity extends AppCompatActivity {
             arr.add(7,Password);
 
             FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patients").child(phonenumber);
+            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patients");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists())
                     {
-                        Toast.makeText(PatientSignupActivity.this,"This number is already register with an account",Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+                        HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
+                        for(String key:hashMap.keySet()) {
+                            Object data = hashMap.get(key);
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            String phone = (String) userData.get("phone");
+                            if (phone.equals(phonenumber)) {
+                                Toast.makeText(PatientSignupActivity.this, "This number is already register with an account", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }
                     }
                     else
                     {

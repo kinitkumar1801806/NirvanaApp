@@ -31,11 +31,11 @@ public class MobiComAttachmentGridViewAdapter extends BaseAdapter {
     private TextView fileSize;
     private ImageView attachmentImageView;
     private TextView fileName;
-    private AlCustomizationSettings alCustomizationSettings;
-    private boolean disableNewAttachment;
-    private Context context;
-    private ArrayList<Uri> uris;
-    private FileUtils.GalleryFilterOptions filterOptions;
+    private final AlCustomizationSettings alCustomizationSettings;
+    private final boolean disableNewAttachment;
+    private final Context context;
+    private final ArrayList<Uri> uris;
+    private final FileUtils.GalleryFilterOptions filterOptions;
 
 
     public MobiComAttachmentGridViewAdapter(Context context, ArrayList<Uri> uris, AlCustomizationSettings alCustomizationSettings, boolean disableNewAttachment, FileUtils.GalleryFilterOptions filterOptions) {

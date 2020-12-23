@@ -563,9 +563,7 @@ public class Kommunicate {
         tempList.add(userId);
 
         if (botIds != null && !botIds.isEmpty()) {
-            if (botIds.contains(KM_BOT)) {
-                botIds.remove(KM_BOT);
-            }
+            botIds.remove(KM_BOT);
             Collections.sort(botIds);
             tempList.addAll(botIds);
         }
@@ -601,7 +599,7 @@ public class Kommunicate {
     }
 
     private static String generateUserId() {
-        StringBuilder text = new StringBuilder("");
+        StringBuilder text = new StringBuilder();
         SecureRandom random = new SecureRandom();
         String possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

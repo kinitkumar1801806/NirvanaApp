@@ -28,7 +28,9 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".YogaTutorials.YoutubePlayerActivity"></activity>
+        <activity android:name=".EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".YogaTutorials.YoutubePlayerActivity" />
         <activity android:name=".YogaTutorials.YogaVideosActivity" />
         <activity android:name=".Payments.PaymentFailureActivity" />
         <activity android:name=".Payments.PaymentSuccessActivity" />

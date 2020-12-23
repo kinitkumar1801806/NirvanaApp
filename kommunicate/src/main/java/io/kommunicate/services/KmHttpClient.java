@@ -15,11 +15,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class KmHttpClient {
 
     private static final String TAG = "KmHttpClient";
-    private Context context;
+    private final Context context;
 
     public KmHttpClient(Context context) {
         this.context = ApplozicService.getContext(context);
@@ -48,7 +49,7 @@ public class KmHttpClient {
             connection.connect();
 
             if (data != null) {
-                byte[] dataBytes = data.getBytes("UTF-8");
+                byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
                 DataOutputStream os = new DataOutputStream(connection.getOutputStream());
                 os.write(dataBytes);
                 os.flush();
@@ -57,7 +58,7 @@ public class KmHttpClient {
             BufferedReader br = null;
             if (connection.getResponseCode() == 200 || connection.getResponseCode() == 201) {
                 InputStream inputStream = connection.getInputStream();
-                br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             }
             StringBuilder sb = new StringBuilder();
             try {

@@ -102,12 +102,12 @@ public class ContactSelectionFragment extends ListFragment implements SearchList
     String contactsGroupId;
     private String mSearchTerm; // Stores the current search query term
     private ContactsAdapter mAdapter;
-    private boolean isScrolling = false;
-    private int visibleThreshold = 0;
+    private final boolean isScrolling = false;
+    private final int visibleThreshold = 0;
     private int currentPage = 0;
     private int previousTotalItemCount = 0;
     private boolean loading = true;
-    private int startingPageIndex = 0;
+    private final int startingPageIndex = 0;
     private ImageLoader mImageLoader;
     private int mPreviouslySelectedSearchItem = 0;
     private String imageUrl;
@@ -257,12 +257,7 @@ public class ContactSelectionFragment extends ListFragment implements SearchList
                     if (totalItemsCount < previousTotalItemCount) {
                         currentPage = startingPageIndex;
                         previousTotalItemCount = totalItemsCount;
-                        if (totalItemsCount == 0) {
-                            loading = true;
-                        } else {
-                            loading = false;
-
-                        }
+                        loading = totalItemsCount == 0;
                     }
 
                     if (loading && (totalItemsCount > previousTotalItemCount)) {
@@ -536,10 +531,10 @@ public class ContactSelectionFragment extends ListFragment implements SearchList
     private class ContactsAdapter extends CursorAdapter implements SectionIndexer {
 
 
-        private Context context;
-        private LayoutInflater mInflater; // Stores the layout inflater
-        private AlphabetIndexer mAlphabetIndexer; // Stores the AlphabetIndexer instance
-        private TextAppearanceSpan highlightTextSpan; // Stores the highlight text appearance style
+        private final Context context;
+        private final LayoutInflater mInflater; // Stores the layout inflater
+        private final AlphabetIndexer mAlphabetIndexer; // Stores the AlphabetIndexer instance
+        private final TextAppearanceSpan highlightTextSpan; // Stores the highlight text appearance style
 
         /**
          * Instantiates a new Contacts Adapter.

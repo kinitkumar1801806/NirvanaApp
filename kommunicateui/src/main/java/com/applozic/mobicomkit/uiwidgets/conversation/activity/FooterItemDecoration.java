@@ -14,7 +14,7 @@ import android.view.View;
 
 public class FooterItemDecoration extends RecyclerView.ItemDecoration {
 
-    private View mLayout;
+    private final View mLayout;
 
     public FooterItemDecoration(final Context context, RecyclerView parent, @LayoutRes int resId) {
         // inflate and measure the layout

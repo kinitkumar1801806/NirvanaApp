@@ -25,7 +25,14 @@ import java.util.List;
 public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     Context mContext;
     private OnItemClickListener mListener;
-    private ArrayList<String>like_list,comment_list,body_list,title_list,head_list,time_list,date_list,Expand_List;
+    private final ArrayList<String>like_list;
+    private final ArrayList<String> comment_list;
+    private final ArrayList<String> body_list;
+    private final ArrayList<String> title_list;
+    private final ArrayList<String> head_list;
+    private final ArrayList<String> time_list;
+    private final ArrayList<String> date_list;
+    private final ArrayList<String> Expand_List;
     public interface OnItemClickListener
     {
         void onItemClick(int position);

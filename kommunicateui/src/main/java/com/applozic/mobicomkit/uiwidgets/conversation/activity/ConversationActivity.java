@@ -948,6 +948,7 @@ public class ConversationActivity extends AppCompatActivity implements MessageCo
         } else {
             super.onBackPressed();
         }
+        overridePendingTransition(R.anim.no_animation, R.animator.slide_in_bottom);
     }
 
     @Override
@@ -1465,4 +1466,5 @@ public class ConversationActivity extends AppCompatActivity implements MessageCo
             activity.startActivity(faqIntent);
         }
     }
+
 }

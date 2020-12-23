@@ -237,11 +237,7 @@ public class ChannelInfoActivity extends AppCompatActivity {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
                 // Pause image loader to ensure smoother scrolling when flinging
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    contactImageLoader.setPauseWork(true);
-                } else {
-                    contactImageLoader.setPauseWork(false);
-                }
+                contactImageLoader.setPauseWork(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING);
             }
 
             @Override
@@ -628,7 +624,7 @@ public class ChannelInfoActivity extends AppCompatActivity {
 
     private class ContactsAdapter extends BaseAdapter {
         Context context;
-        private LayoutInflater mInflater;
+        private final LayoutInflater mInflater;
 
         public ContactsAdapter(Context context) {
             this.context = context;
@@ -677,7 +673,7 @@ public class ChannelInfoActivity extends AppCompatActivity {
                     holder.lastSeenAtTextView.setText(getString(R.string.user_online));
                 } else if (contact.getLastSeenAt() != 0) {
                     holder.lastSeenAtTextView.setVisibility(View.VISIBLE);
-                    holder.lastSeenAtTextView.setText(getString(R.string.subtitle_last_seen_at_time) + " " + String.valueOf(DateUtils.getDateAndTimeForLastSeen(ChannelInfoActivity.this, contact.getLastSeenAt(), R.string.JUST_NOW, R.plurals.MINUTES_AGO, R.plurals.HOURS_AGO, R.string.YESTERDAY)));
+                    holder.lastSeenAtTextView.setText(getString(R.string.subtitle_last_seen_at_time) + " " + DateUtils.getDateAndTimeForLastSeen(ChannelInfoActivity.this, contact.getLastSeenAt(), R.string.JUST_NOW, R.plurals.MINUTES_AGO, R.plurals.HOURS_AGO, R.string.YESTERDAY));
                 } else {
                     holder.lastSeenAtTextView.setVisibility(View.GONE);
                     holder.lastSeenAtTextView.setText("");
@@ -754,11 +750,11 @@ public class ChannelInfoActivity extends AppCompatActivity {
 
     public class ChannelMember extends AsyncTask<Void, Integer, Long> {
         String responseForRemove;
-        private ChannelUserMapper channelUserMapper;
-        private ChannelService channelService;
+        private final ChannelUserMapper channelUserMapper;
+        private final ChannelService channelService;
         private ProgressDialog progressDialog;
-        private Context context;
-        private Channel channel;
+        private final Context context;
+        private final Channel channel;
 
 
         public ChannelMember(ChannelUserMapper channelUserMapper, Channel channel, Context context) {
@@ -820,10 +816,10 @@ public class ChannelInfoActivity extends AppCompatActivity {
         ApiResponse apiResponse;
         String responseForDeleteGroup;
         String userId;
-        private ChannelService channelService;
+        private final ChannelService channelService;
         private ProgressDialog progressDialog;
-        private Context context;
-        private Channel channel;
+        private final Context context;
+        private final Channel channel;
 
 
         public ChannelMemberAdd(Channel channel, String userId, Context context) {
@@ -914,9 +910,9 @@ public class ChannelInfoActivity extends AppCompatActivity {
         GroupInfoUpdate groupInfoUpdate;
         String responseForExit;
         String responseForChannelUpdate;
-        private ChannelService channelService;
+        private final ChannelService channelService;
         private ProgressDialog progressDialog;
-        private Context context;
+        private final Context context;
         private Channel channel;
 
         public ChannelAsync(Channel channel, Context context) {
@@ -1027,9 +1023,9 @@ public class ChannelInfoActivity extends AppCompatActivity {
 
 
     public class ChannelUserRoleAsyncTask extends AsyncTask<Void, Integer, Long> {
-        private ChannelService channelService;
+        private final ChannelService channelService;
         private ProgressDialog progressDialog;
-        private Context context;
+        private final Context context;
         ChannelUserMapper channelUserMapper;
         String response;
         GroupInfoUpdate groupInfoUpdate;

@@ -157,7 +157,7 @@ public void change()
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(duration);
                 String sec;
                 if(seconds<10)
-                    sec="0"+String.valueOf(seconds);
+                    sec="0"+ seconds;
                 else
                     sec=String.valueOf(seconds);
                 String dur="0"+minutes+":"+sec;
@@ -170,7 +170,7 @@ public void change()
                 long curr_seconds = TimeUnit.MILLISECONDS.toSeconds(curr_duration);
                 String curr_sec;
                 if(curr_seconds<10)
-                    curr_sec="0"+String.valueOf(curr_seconds);
+                    curr_sec="0"+ curr_seconds;
                 else
                     curr_sec=String.valueOf(curr_seconds);
                 String curr_dur="0"+curr_minutes+":"+curr_sec;

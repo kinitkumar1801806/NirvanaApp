@@ -16,7 +16,7 @@ public class StorageUtil {
 
     private final String STORAGE = " com.valdioveliu.valdio.audioplayer.STORAGE";
     private SharedPreferences preferences;
-    private Context context;
+    private final Context context;
 
     public StorageUtil(Context context) {
         this.context = context;

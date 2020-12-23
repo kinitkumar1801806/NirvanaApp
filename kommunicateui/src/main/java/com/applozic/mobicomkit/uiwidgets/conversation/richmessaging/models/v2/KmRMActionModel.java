@@ -35,7 +35,7 @@ public class KmRMActionModel<T> extends JsonMarker {
 
     public enum Type {
         SUBMIT("submit"), LINK("link"), SUGGESTED_REPLY("suggestedReply");
-        private String value;
+        private final String value;
 
         Type(String s) {
             value = s;

@@ -13,8 +13,8 @@ import io.kommunicate.services.KmService;
 
 public class KmAutoSuggestionsAsyncTask extends AsyncTask<Void, Void, KmApiResponse<List<KmAutoSuggestionModel>>> {
 
-    private KmService kmService;
-    private KmAutoSuggestionListener listener;
+    private final KmService kmService;
+    private final KmAutoSuggestionListener listener;
 
     public KmAutoSuggestionsAsyncTask(Context context, KmAutoSuggestionListener listener) {
         this.listener = listener;

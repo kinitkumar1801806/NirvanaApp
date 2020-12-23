@@ -23,10 +23,10 @@ import io.kommunicate.services.KmService;
  */
 public class KmConversationFeedbackTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> contextWeakReference;
-    private KmFeedback kmFeedback; //will pe passed null if getting the feedback
-    private String conversationId;
-    private KmFeedbackCallback kmFeedbackCallback;
+    private final WeakReference<Context> contextWeakReference;
+    private final KmFeedback kmFeedback; //will pe passed null if getting the feedback
+    private final String conversationId;
+    private final KmFeedbackCallback kmFeedbackCallback;
     Exception e;
 
     public KmConversationFeedbackTask(Context context, String conversationId, KmFeedback kmFeedback, KmFeedbackCallback kmFeedbackCallback) {

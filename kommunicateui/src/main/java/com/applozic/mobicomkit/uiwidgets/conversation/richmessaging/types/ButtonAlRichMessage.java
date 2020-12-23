@@ -31,8 +31,8 @@ public class ButtonAlRichMessage extends AlRichMessage {
     @Override
     public void createRichMessage() {
         super.createRichMessage();
-        final List<ALRichMessageModel.ALPayloadModel> payloadList = Arrays.asList((ALRichMessageModel.ALPayloadModel[])
-                GsonUtils.getObjectFromJson(model.getPayload(), ALRichMessageModel.ALPayloadModel[].class));
+        final ALRichMessageModel.ALPayloadModel[] payloadList = (ALRichMessageModel.ALPayloadModel[])
+                GsonUtils.getObjectFromJson(model.getPayload(), ALRichMessageModel.ALPayloadModel[].class);
 
         flowLayout.removeAllViews();
         for (final ALRichMessageModel.ALPayloadModel payloadModel : payloadList) {

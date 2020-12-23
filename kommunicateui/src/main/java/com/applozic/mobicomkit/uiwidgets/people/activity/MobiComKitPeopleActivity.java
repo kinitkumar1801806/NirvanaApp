@@ -343,11 +343,8 @@ public class MobiComKitPeopleActivity extends AppCompatActivity implements OnCon
         this.searchTerm = query;
         if (getSearchListFragment() != null) {
             getSearchListFragment().onQueryTextChange(query);
-            isSearching = true;
 
-            if (query.isEmpty()) {
-                isSearching = false;
-            }
+            isSearching = !query.isEmpty();
         }
         return true;
     }

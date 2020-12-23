@@ -13,10 +13,10 @@ import io.kommunicate.services.KmUserClientService;
 
 public class KmUserPasswordResetTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> context;
-    private String userId;
-    private String applicationId;
-    private KmPassResetHandler handler;
+    private final WeakReference<Context> context;
+    private final String userId;
+    private final String applicationId;
+    private final KmPassResetHandler handler;
 
     public KmUserPasswordResetTask(Context context, String userId, String applicationId, KmPassResetHandler handler) {
         this.context = new WeakReference<Context>(context);

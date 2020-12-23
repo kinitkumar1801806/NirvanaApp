@@ -10,12 +10,12 @@ import io.kommunicate.services.KmHttpClient;
 
 public class KmPostDataAsyncTask extends AsyncTask<Void, Void, String> {
 
-    private WeakReference<Context> context;
-    private KmCallback callback;
-    private String contentType;
-    private String data;
-    private String accept;
-    private String url;
+    private final WeakReference<Context> context;
+    private final KmCallback callback;
+    private final String contentType;
+    private final String data;
+    private final String accept;
+    private final String url;
     private Exception exception = null;
 
     public KmPostDataAsyncTask(Context context, String url, String accept, String contentType, String data, KmCallback callback) {

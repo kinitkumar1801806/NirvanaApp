@@ -19,9 +19,9 @@ import io.kommunicate.services.KmUserClientService;
  * you can modify it to get user(agent) details if required
  */
 public class AgentGetStatusTask extends AsyncTask<Void, Void, String> {
-    private WeakReference<Context> contextWeakReference;
-    private String userId;
-    private KmAgentGetStatusHandler kmAgentGetStatusHandler;
+    private final WeakReference<Context> contextWeakReference;
+    private final String userId;
+    private final KmAgentGetStatusHandler kmAgentGetStatusHandler;
 
     public AgentGetStatusTask(Context context, String userId, KmAgentGetStatusHandler kmAgentGetStatusHandler) {
         contextWeakReference = new WeakReference<>(context);

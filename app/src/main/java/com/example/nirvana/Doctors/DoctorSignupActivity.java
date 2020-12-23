@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nirvana.Model.CountryCode;
+import com.example.nirvana.Patients.PatientSignupActivity;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,10 +44,8 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
     String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice;
     private Spinner spinner;
     private Uri Imagepath,Filepath;
-    private StorageReference mStorageRef;
     private Button upload_file,upload_image;
     ArrayList<String> arr;
-    StorageReference Ref;
     int img,file=0;
     private TextView image_text,file_text;
     FirebaseDatabase firebaseDatabase;
@@ -63,7 +63,7 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
         image_text=findViewById(R.id.image_text);
         file_text=findViewById(R.id.certi_text);
         firebaseDatabase=FirebaseDatabase.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+
     }
     private boolean isValidEmailId(String email){
 
@@ -225,48 +225,31 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
             arr.add(10,Year_Of_Practice);
             arr.add(11,Place_Of_Practice);
 
-            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors").child(Phone);
+            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists())
                     {
-                        Toast.makeText(DoctorSignupActivity.this,"This number is already register with an account",Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+                        HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
+                        for(String key:hashMap.keySet()) {
+                            Object data = hashMap.get(key);
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            String phone = (String) userData.get("phone");
+                            if (phone.equals(phonenumber)) {
+                                Toast.makeText(DoctorSignupActivity.this, "This number is already register with an account", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }
                     }
                     else
                     {
+                        Intent intent=new Intent(DoctorSignupActivity.this, DoctorPhoneVerification.class);
+                        intent.putStringArrayListExtra("arr",arr);
+                        intent.putExtra("Filepath",Filepath.toString());
+                        intent.putExtra("Imagepath",Imagepath.toString());
+                        startActivity(intent);
 
-                        StorageReference Ref1 =mStorageRef.child("Doctors").child(Phone).child("Certificate");
-                        Ref1.putFile(Filepath);
-                        Ref =mStorageRef.child("Doctors").child(Phone).child("Image");
-                        Ref.putFile(Imagepath)
-                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        // Get a URL to the uploaded content
-                                      Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                          @Override
-                                          public void onSuccess(Uri uri) {
-                                              String link=uri.toString();
-                                              arr.add(12,link);
-                                              Intent intent=new Intent(DoctorSignupActivity.this, DoctorPhoneVerification.class);
-                                              intent.putStringArrayListExtra("arr",arr);
-                                              startActivity(intent);
-                                          }
-                                      }) ;
-
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception exception) {
-                                        // Handle unsuccessful uploads
-                                        progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(DoctorSignupActivity.this,"We are getting some issue.We will come back very soon",Toast.LENGTH_SHORT).show();
-                                        // ...
-                                    }
-                                });
            }
 
                 }

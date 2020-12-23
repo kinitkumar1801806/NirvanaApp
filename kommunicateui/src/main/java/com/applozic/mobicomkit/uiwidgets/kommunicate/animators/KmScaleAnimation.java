@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 public class KmScaleAnimation {
-    private View view;
-    private String SCALE_Y = "scaleY";
-    private String SCALE_X = "scaleX";
+    private final View view;
+    private final String SCALE_Y = "scaleY";
+    private final String SCALE_X = "scaleX";
 
     public KmScaleAnimation(View view) {
         this.view = view;

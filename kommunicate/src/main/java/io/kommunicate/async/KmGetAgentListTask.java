@@ -13,10 +13,10 @@ import io.kommunicate.services.KmUserService;
 
 public class KmGetAgentListTask extends AsyncTask<Void, Void, KmAppSettingModel> {
 
-    private String appKey;
-    private KmUserService userService;
+    private final String appKey;
+    private final KmUserService userService;
     private Exception exception;
-    private KmCallback callback;
+    private final KmCallback callback;
 
     public KmGetAgentListTask(Context context, String appKey, KmCallback callback) {
         this.appKey = appKey;

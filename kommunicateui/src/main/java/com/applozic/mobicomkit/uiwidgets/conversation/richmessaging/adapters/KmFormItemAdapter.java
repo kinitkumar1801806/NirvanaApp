@@ -35,15 +35,15 @@ import java.util.Map;
 
 public class KmFormItemAdapter extends RecyclerView.Adapter {
 
-    private Context context;
-    private List<KmFormPayloadModel> payloadList;
+    private final Context context;
+    private final List<KmFormPayloadModel> payloadList;
 
     private SparseArray<String> textFieldArray;
     private SparseArray<HashSet<Integer>> checkBoxStateArray;
     private SparseIntArray radioButtonSelectedIndices;
     private Map<String, String> hiddenFields;
     private KmFormStateModel formStateModel;
-    private String messageKey;
+    private final String messageKey;
 
     private static final int VIEW_TYPE_TEXT_FIELD = 1;
     private static final int VIEW_TYPE_SELECTION = 2;

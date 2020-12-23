@@ -20,7 +20,7 @@ import io.kommunicate.services.KmUserService;
 
 public class KmCreateConversationTask extends AsyncTask<Void, Void, KmConversationResponse> {
 
-    private WeakReference<Context> context;
+    private final WeakReference<Context> context;
     private Integer groupId;
     private String userId;
     private String applicationId;

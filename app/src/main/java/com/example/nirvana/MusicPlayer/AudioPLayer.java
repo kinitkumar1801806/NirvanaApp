@@ -18,7 +18,7 @@ public class AudioPLayer {
 
     static final String LOG_TAG = AudioPLayer.class.getSimpleName();
 
-    private Context mContext;
+    private final Context mContext;
 
     private MediaPlayer mPlayer;
 

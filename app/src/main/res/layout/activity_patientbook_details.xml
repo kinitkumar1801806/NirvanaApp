@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:id="@+id/signup_doctor">
+    android:id="@+id/signup_patient">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Doctors.DoctorSignupActivity"
+        tools:context=".Patients.PatientSignupActivity"
         android:orientation="vertical"
         >
+
         <ImageView
             android:layout_width="200dp"
             android:layout_height="126dp"
@@ -22,14 +23,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Doctor Information"
+            android:text="Patient Information"
             android:textSize="35sp"
             android:layout_marginTop="-15dp"
             android:layout_gravity="center_horizontal"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
@@ -48,7 +50,7 @@
                     android:layout_marginLeft="13dp"
                     android:src="@drawable/person_secondary" />
                 <EditText
-                    android:id="@+id/fname_doctor"
+                    android:id="@+id/fname_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -83,7 +85,7 @@
                     android:layout_marginLeft="13dp"
                     android:src="@drawable/person_secondary" />
                 <EditText
-                    android:id="@+id/lname_doctor"
+                    android:id="@+id/lname_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -110,6 +112,42 @@
                 android:focusable="true"
                 android:theme="@style/MyTextInputLayout"
                 >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="-35dp"
+                    android:layout_marginLeft="13dp"
+                    android:src="@drawable/person_secondary" />
+
+                <EditText
+                    android:id="@+id/age_patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:ems="10"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:paddingLeft="48dp"
+                    android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:theme="@style/MyTextInputLayout"
+                >
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -119,7 +157,7 @@
                     android:src="@drawable/email" />
 
                 <EditText
-                    android:id="@+id/email_doctor"
+                    android:id="@+id/email_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -132,6 +170,7 @@
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,7 +201,7 @@
                     android:src="@drawable/ic_smartphone_black_24dp" />
 
                 <EditText
-                    android:id="@+id/mob_doctor"
+                    android:id="@+id/mob_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -191,158 +230,14 @@
                 android:theme="@style/MyTextInputLayout"
                 >
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-40dp"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/location" />
-                <EditText
-                    android:id="@+id/place_of_practice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="48dp"
-                    android:hint="Place of practice"
-                    android:textSize="18sp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusable="true"
-                android:theme="@style/MyTextInputLayout"
-                >
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-45dp"
-                    android:layout_marginLeft="7dp"
-                    android:src="@drawable/hospitalicon" />
-                <EditText
-                    android:id="@+id/year_of_practice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="48dp"
-                    android:hint="Year of practice"
-                    android:textSize="18sp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusable="true"
-                android:theme="@style/MyTextInputLayout"
-                >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-35dp"
-                    android:layout_marginLeft="13dp"
-                    android:src="@drawable/person_secondary" />
-                <EditText
-                    android:id="@+id/affiliation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="48dp"
-                    android:hint="Affiliation"
-                    android:textSize="18sp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusable="true"
-                android:theme="@style/MyTextInputLayout"
-                >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-35dp"
-                    android:layout_marginLeft="13dp"
-                    android:src="@drawable/person_secondary" />
-                <EditText
-                    android:id="@+id/address_doctor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="48dp"
-                    android:hint="Address"
-                    android:textSize="18sp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusable="true"
-                android:theme="@style/MyTextInputLayout"
-                >
-                <ImageView
                     android:layout_width="40dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="-40dp"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/linkedin" />
+                    android:src="@drawable/location" />
                 <EditText
-                    android:id="@+id/linkedIn_doctor"
+                    android:id="@+id/address_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -351,15 +246,11 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:paddingLeft="48dp"
-                    android:hint="LinkedIn Profile"
+                    android:hint="City, State"
                     android:textSize="18sp"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -372,8 +263,8 @@
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
                 android:focusable="true"
-                app:passwordToggleEnabled="true"
                 android:theme="@style/MyTextInputLayout"
+                app:passwordToggleEnabled="true"
                 >
                 <ImageView
                     android:layout_width="20dp"
@@ -384,7 +275,7 @@
                     android:src="@drawable/baseline_vpn_key_black_18dp" />
 
                 <EditText
-                    android:id="@+id/password1_doctor"
+                    android:id="@+id/password1_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -411,8 +302,8 @@
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
                 android:focusable="true"
-                app:passwordToggleEnabled="true"
                 android:theme="@style/MyTextInputLayout"
+                app:passwordToggleEnabled="true"
                 >
                 <ImageView
                     android:layout_width="20dp"
@@ -423,7 +314,7 @@
                     android:src="@drawable/baseline_vpn_key_black_18dp" />
 
                 <EditText
-                    android:id="@+id/password2_doctor"
+                    android:id="@+id/password2_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -442,7 +333,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/doctor_gender"
+            android:id="@+id/patient_gender"
             android:theme="@style/MyTextInputLayout"
             >
             <TextView
@@ -451,7 +342,8 @@
                 android:text="Gender"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -459,65 +351,28 @@
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="40dp"
-                android:id="@+id/male_doctor"
+                android:id="@+id/male_patient"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Female"
                 android:textSize="18sp"
-                android:id="@+id/female_doctor"
+                android:id="@+id/female_patient"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 />
         </RadioGroup>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/image"
-                android:text="Upload Image"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:id="@+id/image_text"
-                android:layout_marginTop="15dp"
-                android:text="No Image selected"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/certi_file"
-                android:text="Upload Certificate"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="190dp"
-                android:id="@+id/certi_text"
-                android:layout_marginTop="15dp"
-                android:text="No file selected"/>
-        </RelativeLayout>
-
         <Button
-            android:id="@+id/signup_btn_doctor"
+            android:id="@+id/signup_btn_patient"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
             android:text="Register"
-            android:padding="10dp"
-            android:onClick="register_doctor"
+            android:onClick="register_patient"
             android:textColor="@color/white"
+            android:padding="10dp"
             android:background="@drawable/button_rounded"
             android:textSize="20sp" />
         <LinearLayout
@@ -529,31 +384,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Already Registered?"
+                android:textColor="@android:color/black"
                 android:textSize="18dp"
-               android:textColor="@android:color/black"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Login"
-                android:id="@+id/already_register_doctor"
+                android:id="@+id/register_patient"
                 android:textColor="@color/green"
                 android:textSize="16dp"
-                android:onClick="login_doctor"
+                android:onClick="login_patient"
                 android:layout_marginTop="10dp"/>
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/progressBar2_doctor"
+            android:id="@+id/progressBar2_patient"
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:visibility="invisible" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </ScrollView>

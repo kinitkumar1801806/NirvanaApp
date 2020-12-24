@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Patients.PatientQueue"
+    android:orientation="vertical"
+    android:id="@+id/patient_queue">
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="edit_account"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/edit_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Account "
+            android:onClick="edit_account"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="my_meetinglist"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/my_meetingslist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Data and History"
+            android:onClick="my_meetingslist"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Login Security"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:padding="5dp"/>
+
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="user_password"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="user_password"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/user_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Password"
+            android:onClick="user_password"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="twofactor_authentication"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="twofactor_authentication"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/twofactor_authentication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Two-factor authentication "
+            android:onClick="twofactor_authentication"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="About"
+            android:onClick="scheduled_meetings"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="App updates"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Data Policy"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Terms of Use"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Notifications"
+            android:onClick="scheduled_meetings"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Feeds"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Meetings/Alerts"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Emails/SMS"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Notifications"
+            android:onClick="scheduled_meetings"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"
+        android:background="#727272"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Report a problem"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="scheduled_meetings"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:onClick="unscheduled_meetings"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/baseline_vpn_key_black_18dp"
+            />
+
+        <TextView
+            android:id="@+id/scheduled_meetings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Help Centre"
+            android:onClick="scheduled_meetings"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            tools:ignore="OnClick" />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

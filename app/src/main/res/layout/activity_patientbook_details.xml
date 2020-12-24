@@ -49,19 +49,20 @@
                     android:layout_marginTop="-35dp"
                     android:layout_marginLeft="13dp"
                     android:src="@drawable/person_secondary" />
+
                 <EditText
                     android:id="@+id/fname_patient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:ems="10"
+                    android:hint="First  Name"
                     android:inputType="textPersonName"
                     android:paddingLeft="48dp"
-                    android:hint="First  Name"
-                    android:textSize="18sp"
-                    /></com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class Doctors_GridView extends AppCompatActivity {
     ArrayList<String> ImageArray;
     ArrayList<String> NameList;
-    ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList;
+    ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList,Id_List;
     RecyclerView recyclerView;
     ImageAdapter_Doctor imageAdapter_doctor;
     ProgressDialog progressDialog;
@@ -48,6 +48,7 @@ public class Doctors_GridView extends AppCompatActivity {
         BioList=new ArrayList<>();
         Expand_List=new ArrayList<>();
         ImageArray=new ArrayList<>();
+        Id_List=new ArrayList<>();
         textview=findViewById(R.id.text_view);
         progressDialog =new ProgressDialog(Doctors_GridView.this);
         progressDialog.show();
@@ -78,6 +79,7 @@ public void retrieveData()
                     String Name=fname+" "+lname;
                     String username=(String)userData.get("email");//username removed,now we will be using email in placxe of username
                     String phone=(String)userData.get("phone");
+                    String Id=(String)userData.get("Id");
                     String link=(String)userData.get("link");
                     String affiliation=(String)userData.get("affiliation");
                     NameList.add(Name);
@@ -86,6 +88,7 @@ public void retrieveData()
                     ImageArray.add(link);
                     BioList.add(affiliation);
                     Expand_List.add("0");
+                    Id_List.add(Id);
                     initRecyclerView();
                 }
             }
@@ -111,11 +114,13 @@ public void initRecyclerView()
             String phone=Phone_List.get(position);
             String name=NameList.get(position);
             String username=Username_List.get(position);
+            String Id=Id_List.get(position);
             arr.add(0,name);
             arr.add(1,phone);
             arr.add(2,username);
             arr.add(3,BioList.get(position));
             arr.add(4,ImageArray.get(position));
+            arr.add(5,Id);
             Intent i = new Intent(getApplicationContext(), Fix_Meeting_step2.class);
             // Pass image index
             i.putStringArrayListExtra("arr",arr);

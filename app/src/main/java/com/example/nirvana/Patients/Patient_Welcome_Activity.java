@@ -157,19 +157,14 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         int id=item.getItemId();
         if(id==R.id.doctor_consultation)
         {
-            HomeFragment homeFragment=new HomeFragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
-            fragmentTransaction.commit();
+            Intent intent=new Intent(this, Meeting_Already_Fixed_step1.class);
+            intent.putExtra("Id",Id);
+            startActivity(intent);
         }
         else if(id==R.id.book_appointment)
         {
-            ECounselFragment eCounselFragment=new ECounselFragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout,eCounselFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-
+            Intent intent=new Intent(this, Doctors_GridView.class);
+            startActivity(intent);
         }
         else if(id==R.id.yoga_tutorial)
         {
@@ -188,15 +183,5 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         return true;
     }
 
-    public void fix_meeting(View view) {
-        Intent intent=new Intent(this, Doctors_GridView.class);
-        startActivity(intent);
-    }
-
-    public void meeting_already_fixed(View view) {
-        Intent intent=new Intent(this, Meeting_Already_Fixed_step1.class);
-        intent.putExtra("Id",Id);
-        startActivity(intent);
-    }
 
 }

@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 public class Fix_Meeting_step2 extends AppCompatActivity {
     ProgressDialog progressDialog;
-    private String phone,linkedIn,doctor_name;
+    private String phone,linkedIn,doctor_name,Id;
     private TextView nameText,Qualitext,linkedINtext,totaltext,satisfiedtext,ratingtext;
     ArrayList<String> arr;
     ImageView image;
@@ -40,6 +40,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
         Intent intent=getIntent();
         arr=intent.getStringArrayListExtra("arr");
         phone=arr.get(1);
+        Id=arr.get(5);
         doctor_name=arr.get(0);
         nameText=findViewById(R.id.doctor_name);
         Qualitext=findViewById(R.id.qualification);
@@ -70,7 +71,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors").child(phone);
+            DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors").child(Id);
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,7 +94,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
                         String ratingby=(String)hashMap.get("ratingby");
                         ratingtext.setText(rating+" (By "+ratingby+" people)");
                         String phone=(String)hashMap.get("phone");
-                        StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("Doctors").child(phone).child("Image");
+                        StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("Profile Images").child(Id);
                         final long ONE_MEGABYTE = 1024 * 1024 * 5;
                         if(storageReference!=null)
                         {

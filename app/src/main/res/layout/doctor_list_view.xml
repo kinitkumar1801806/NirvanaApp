@@ -9,6 +9,11 @@
     android:layout_marginTop="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src=""
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,19 +50,50 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="12dp"
-                android:text="priyanshkhare123"/>
+                android:text="OCD Expert and Consultant"/>
         </LinearLayout>
     </LinearLayout>
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green">
+    <ImageView
+        android:layout_width="25dp"
         android:layout_height="25dp"
         android:paddingBottom="5dp"
-        android:background="@color/green"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="0dp"
         android:id="@+id/show_more"
         android:onClick="expand_information"
-        android:src="@drawable/ic_baseline_expand_more_24"
+        android:src="@drawable/ic_star_black_24dp"
         />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingBottom="5dp"
+            android:layout_gravity="left"
+            android:id="@+id/show_more1"
+            android:onClick="expand_information"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingBottom="5dp"
+            android:layout_marginRight="0dp"
+            android:id="@+id/show_more"
+            android:onClick="expand_information"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingBottom="5dp"
+            android:layout_gravity="left"
+            android:id="@+id/show_more1"
+            android:onClick="expand_information"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/show_head_layout"
         android:layout_width="match_parent"

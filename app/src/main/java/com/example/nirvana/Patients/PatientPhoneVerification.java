@@ -139,8 +139,8 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                             Lname,
                                             Password,
                                             "None",
-                                            Id,
-                                            ""
+                                            "",
+                                            Id
                                     );
                                     databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(Id)
                                             .setValue(details_patient).addOnCompleteListener(new OnCompleteListener<Void>() {

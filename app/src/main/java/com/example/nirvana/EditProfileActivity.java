@@ -105,66 +105,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 }
             });
-        } else if (Who.equals("clinic")) {
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = firebaseDatabase.getReference().child("Clinics").child(Id);
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    HashMap<String, Object> userData = (HashMap<String, Object>) dataSnapshot.getValue();
-                    //get the data of clinic
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        } else if (Who.equals("hospital")) {
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = firebaseDatabase.getReference().child("Hospitals").child(Id);
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    HashMap<String, Object> userData = (HashMap<String, Object>) dataSnapshot.getValue();
-                    //get the data of hospital
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        } else if (Who.equals("school")) {
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = firebaseDatabase.getReference().child("Schools").child(Id);
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    HashMap<String, Object> userData = (HashMap<String, Object>) dataSnapshot.getValue();
-                    //get the data of school
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        } else if (Who.equals("office")) {
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = firebaseDatabase.getReference().child("Offices").child(Id);
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    HashMap<String, Object> userData = (HashMap<String, Object>) dataSnapshot.getValue();
-                    //get the data of office
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
         }
     }
 
@@ -260,6 +200,13 @@ public class EditProfileActivity extends AppCompatActivity {
             Save.setVisibility(View.VISIBLE);
         }
         else{
+            if(fname.equals(First_Name.getText().toString())&&lname.equals(Last_Name.getText().toString())&&age.equals(Age.getText().toString())&&
+                    email.equals(Email.getText().toString())&&address.equals(City_State.getText().toString())&&img==0)
+            {
+                progressBar.setVisibility(View.GONE);
+                finish();
+                overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
+            }
             fname=First_Name.getText().toString();
             lname=Last_Name.getText().toString();
             age=Age.getText().toString();

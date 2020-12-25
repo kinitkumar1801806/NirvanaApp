@@ -12,8 +12,6 @@ import android.widget.Toast;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.Doctors.DoctorLoginActivity;
 import com.example.nirvana.Doctors.DoctorSignupActivity;
-import com.example.nirvana.Organisations.OrganisationActivity;
-import com.example.nirvana.Organisations.rganisationLoginActivity;
 import com.example.nirvana.Patients.PatientLoginActivity;
 import com.example.nirvana.Patients.PatientSignupActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -223,17 +221,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void patient_signin(View view) {
         Intent intent =new Intent(this, PatientLoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void organisation_register(View view) {
-        Intent intent=new Intent(this, OrganisationActivity.class);
-        startActivity(intent);
-    }
-
-    public void organisation_signin(View view) {
-
-        Intent intent=new Intent(this, rganisationLoginActivity.class);
         startActivity(intent);
     }
 }

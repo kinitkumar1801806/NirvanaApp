@@ -16,13 +16,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -180,110 +175,6 @@ ProgressDialog progressDialog;
 
                             }
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-            else if(Who.equals("clinic"))
-            {
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference=firebaseDatabase.getReference().child("Clinics").child(Id);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HashMap<String,Object> userData=(HashMap<String, Object>)dataSnapshot.getValue();
-                        String Name=(String)userData.get("hospital_name");
-                        String email=(String)userData.get("email");
-                        String phone=(String)userData.get("contact");
-                        String link=(String)userData.get("link");
-                        String address=(String)userData.get("address");
-                        WHO.setText(Name);
-                        Email.setText(email);
-                        Mobile.setText(phone);
-                        Address.setText(address);
-                        if(!link.equals("None"))
-                            Glide.with(ProfileActivity.this).load(link).into(image);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-            else if(Who.equals("hospital"))
-            {
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference=firebaseDatabase.getReference().child("Hospitals").child(Id);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HashMap<String,Object> userData=(HashMap<String, Object>)dataSnapshot.getValue();
-                        String Name=(String)userData.get("hospital_name");
-                        String email=(String)userData.get("email");
-                        String phone=(String)userData.get("contact");
-                        String link=(String)userData.get("link");
-                        String address=(String)userData.get("address");
-                        WHO.setText(Name);
-                        Email.setText(email);
-                        Mobile.setText(phone);
-                        Address.setText(address);
-                        if(!link.equals("None"))
-                            Glide.with(ProfileActivity.this).load(link).into(image);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-            else if(Who.equals("school"))
-            {
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference=firebaseDatabase.getReference().child("Schools").child(Id);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HashMap<String,Object> userData=(HashMap<String, Object>)dataSnapshot.getValue();
-                        String Name=(String)userData.get("school_name");
-                        String email=(String)userData.get("email");
-                        String phone=(String)userData.get("contact");
-                        String link=(String)userData.get("link");
-                        String address=(String)userData.get("address");
-                        WHO.setText(Name);
-                        Email.setText(email);
-                        Mobile.setText(phone);
-                        Address.setText(address);
-                        if(!link.equals("None"))
-                            Glide.with(ProfileActivity.this).load(link).into(image);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-            else if(Who.equals("office"))
-            {
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference=firebaseDatabase.getReference().child("Offices").child(Id);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HashMap<String,Object> userData=(HashMap<String, Object>)dataSnapshot.getValue();
-                        String Name=(String)userData.get("school_name");
-                        String email=(String)userData.get("email");
-                        String phone=(String)userData.get("contact");
-                        String link=(String)userData.get("link");
-                        String address=(String)userData.get("address");
-                        WHO.setText(Name);
-                        Email.setText(email);
-                        Mobile.setText(phone);
-                        Address.setText(address);
-                        if(!link.equals("None"))
-                            Glide.with(ProfileActivity.this).load(link).into(image);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {

@@ -12,14 +12,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.nirvana.Clinics.ClinicWelcomeActivity;
 import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
-import com.example.nirvana.Hospitals.HospitalWelcomeActivity;
-import com.example.nirvana.Offices.OfficeWelcomeActivity;
 import com.example.nirvana.Patients.Patient_Welcome_Activity;
-import com.example.nirvana.Schools.SchoolLoginActivity;
-import com.example.nirvana.Schools.SchoolLoginVerification;
-import com.example.nirvana.Schools.SchoolWelcomeActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,53 +70,6 @@ public class LoginByPasswordActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-            } else if (who.equals("clinic")) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference().child("Clinics").child(phone);
-                String result=CheckPassword(password);
-                progressBar.setVisibility(View.GONE);
-                if(result.equals("Success")) {
-                    progressBar.setVisibility(View.GONE);
-                    Intent intent=new Intent(LoginByPasswordActivity.this, ClinicWelcomeActivity.class);
-                    intent.putExtra("phone",phone);
-                    startActivity(intent);
-                }
-
-            } else if (who.equals("school")) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference().child("Schools").child(phone);
-                String result=CheckPassword(password);
-                progressBar.setVisibility(View.GONE);
-                if(result.equals("Success")) {
-                    progressBar.setVisibility(View.GONE);
-                    Intent intent=new Intent(LoginByPasswordActivity.this, SchoolWelcomeActivity.class);
-                    intent.putExtra("phone",phone);
-                    startActivity(intent);
-                }
-
-            } else if (who.equals("hospital")) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference().child("Hospitals").child(phone);
-                String result=CheckPassword(password);
-                progressBar.setVisibility(View.GONE);
-                if(result.equals("Success")) {
-                    progressBar.setVisibility(View.GONE);
-                    Intent intent=new Intent(LoginByPasswordActivity.this, HospitalWelcomeActivity.class);
-                    intent.putExtra("phone",phone);
-                    startActivity(intent);
-                }
-
-            } else if (who.equals("office")) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference().child("Offices").child(phone);
-                String result=CheckPassword(password);
-                progressBar.setVisibility(View.GONE);
-                if(result.equals("Success")) {
-                    progressBar.setVisibility(View.GONE);
-                    Intent intent=new Intent(LoginByPasswordActivity.this, OfficeWelcomeActivity.class);
-                    intent.putExtra("phone",phone);
-                    startActivity(intent);
-                }
             }
         }
     }

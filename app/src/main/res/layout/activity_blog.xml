@@ -16,4 +16,6 @@
 
     <include
         layout="@layout/blogs_bottom_drawer"/>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

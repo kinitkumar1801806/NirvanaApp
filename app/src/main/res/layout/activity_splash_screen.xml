@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="100dp"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:fontFamily="@font/helveticaneuemedium"
         android:gravity="center_horizontal"
         android:text="Nirvana"
         android:textSize="30sp"

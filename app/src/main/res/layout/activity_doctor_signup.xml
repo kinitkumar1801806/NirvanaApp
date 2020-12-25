@@ -227,12 +227,12 @@
                 android:theme="@style/MyTextInputLayout"
                 >
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="-35dp"
-                    android:layout_marginLeft="13dp"
-                    android:src="@drawable/person_secondary" />
+                    android:layout_marginTop="-45dp"
+                    android:layout_marginLeft="7dp"
+                    android:src="@drawable/hospitalicon" />
                 <EditText
                     android:id="@+id/year_of_practice"
                     android:layout_width="match_parent"

@@ -32,7 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PatientSignupActivity extends AppCompatActivity {
-    String Pass,Fname,Password;
+    String Pass,Fname,Password,Phone;
     private Spinner spinner;
     private ArrayList<String> arr;
     @Override
@@ -109,10 +109,9 @@ public class PatientSignupActivity extends AppCompatActivity {
             Fname=fname1;
             Pass=pass1;
             arr=new ArrayList<String>();
-            arr.add(0,Phone1);
-            arr.add(1,Address);
-            arr.add(2,Fname);
-            arr.add(3,Password);
+            arr.add(0,Fname);
+            arr.add(1,Phone);
+            arr.add(2,Password);
 
             FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
             DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patients");

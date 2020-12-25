@@ -25,17 +25,18 @@
        android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/logo"
         android:textColor="@color/green"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register as"
-        android:layout_alignTop="@+id/nirvana"
+        android:layout_above="@+id/doctor"
         android:layout_centerHorizontal="true"
-        android:textSize="22sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
         android:fontFamily="@font/helveticaneuemedium"
-        android:layout_marginTop="180dp"
+        android:text="Register as"
         android:textColorHint="@color/white"
-        android:layout_gravity="center_horizontal"/>
+        android:textSize="22sp" />
 
 
 <RelativeLayout

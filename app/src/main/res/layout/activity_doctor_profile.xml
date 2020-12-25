@@ -55,7 +55,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/helveticaneuemedium"
             android:text="BOOK NOW"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/green"/>
 
 
         <androidx.cardview.widget.CardView
@@ -147,7 +147,8 @@
             android:textSize="20sp"
             android:textColor="?android:attr/textColorPrimary"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="20dp"/>
+        <include layout="@layout/ratings_grid_view" />
 
 
         <LinearLayout

@@ -84,7 +84,6 @@
         android:layout_height="wrap_content"
 
         android:layout_margin="16dp"
-        android:contentDescription="@string/NIRIFAB"
         android:src="@drawable/white_logonew"
         android:backgroundTint="@color/green"
 

@@ -56,7 +56,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/blog_btn1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/niri"
+            app:layout_constraintEnd_toStartOf="@id/niri"
             app:layout_constraintStart_toEndOf="@+id/home"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
             android:id="@+id/niri"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_baseline_home_24"
+            android:src="@drawable/new_niri"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_home_24"
+            android:src="@drawable/clock_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/profile"
             app:layout_constraintStart_toEndOf="@+id/niri"

@@ -6,25 +6,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/doctor_consultation"
-            android:icon="@drawable/profile_photo"
-            android:title="DOCTOR CONSULTATION"
+            android:icon="@drawable/new_my_meetings"
+            android:title="UPCOMING MEETINGS"
             />
         <item
             android:id="@+id/book_appointment"
-            android:icon="@drawable/alarm_button"
+            android:icon="@drawable/new_consultadoctor"
             android:title="BOOK APPOINTMENT"/>
         <item
             android:id="@+id/yoga_tutorial"
-            android:icon="@drawable/tutorial_icon"
-            android:title="YOGA TUTORIAL"/>
+            android:icon="@drawable/stresstest"
+            android:title="STRESS TEST"/>
         <item
             android:id="@+id/meditation_tutorial"
-            android:icon="@drawable/tutorial_icon"
-            android:title="MEDITATION TUTORIAL"/>
-        <item
-            android:id="@+id/product"
-            android:icon="@drawable/star"
-            android:title="PRODUCT"/>
+            android:icon="@drawable/new_help_centre"
+            android:title="HELP"/>
+
         
 
     </group>

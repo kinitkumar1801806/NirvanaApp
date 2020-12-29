@@ -11,33 +11,23 @@
             />
         <item
             android:id="@+id/welcome_doctor_schedule"
-            android:icon="@drawable/alarm_button"
+            android:icon="@drawable/new_my_meetings"
             android:title="SCHEDULE"/>
 
         <item
             android:id="@+id/welcome_doctor_blogs"
             android:icon="@drawable/chat_secondary"
             android:title="BLOGS"/>
-        <item
-            android:id="@+id/doctor_product"
-            android:icon="@drawable/cube"
-            android:title="PRODUCTS"/>
+
         <item
             android:id="@+id/doctor_help"
-            android:icon="@drawable/question_mark"
+            android:icon="@drawable/new_help_centre"
             android:title="HELP"/>
         <item
             android:id="@+id/wdoctor_coupons"
             android:icon="@drawable/chat_secondary"
             android:title="MY COUPONS"/>
-        <item
-            android:id="@+id/rate_doctor"
-            android:icon="@drawable/star"
-            android:title="RATE APP"/>
-        <item
-            android:id="@+id/doctor_invite"
-            android:icon="@drawable/profile_photo"
-            android:title="INVITE"/>
+
         <item
             android:id="@+id/logout_doctor"
             android:icon="@drawable/power_button"

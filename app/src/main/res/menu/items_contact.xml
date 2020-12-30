@@ -5,7 +5,7 @@
 <item
     android:id="@+id/video_call"
     android:title=""
-    android:icon="@drawable/ic_videocam_black_24dp"
+    android:icon="@drawable/ic_videocam_white_24px"
     app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/voice_call"
@@ -15,6 +15,6 @@
     <item
         android:id="@+id/chat"
         android:title=""
-        android:icon="@drawable/ic_chat_black_24dp"
+        android:icon="@drawable/ic_round_chat_24"
         app:showAsAction="ifRoom|withText"/>
 </menu>

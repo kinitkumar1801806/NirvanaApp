@@ -175,10 +175,6 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         {
 
         }
-        else if(id==R.id.product)
-        {
-
-        }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

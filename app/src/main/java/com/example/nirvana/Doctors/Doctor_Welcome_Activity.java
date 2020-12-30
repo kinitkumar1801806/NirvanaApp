@@ -118,10 +118,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
             intent.putExtra("phone",phone);
             startActivity(intent);
         }
-        else if(id==R.id.doctor_product)
-        {
 
-        }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

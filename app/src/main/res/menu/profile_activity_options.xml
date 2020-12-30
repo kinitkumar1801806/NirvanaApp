@@ -7,14 +7,14 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item android:title="Change Phone Number"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"
+                    android:icon="@drawable/ic_phone_black_24dp"
                     android:id="@+id/change_phone"/>
                 <item android:title="Password"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"
+                    android:icon="@drawable/new_password"
                     android:id="@+id/password"/>
                 <item android:id="@+id/two_factor_auth"
                     android:title="Two Factor Authentication"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"/>
+                    android:icon="@drawable/two_factor_auth"/>
             </group>
         </menu>
     </item>
@@ -26,10 +26,10 @@
                     android:id="@+id/app_updates"/>
                 <item android:id="@+id/data_policy"
                     android:title="Data Policy"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"/>
+                    android:icon="@drawable/security"/>
                 <item android:id="@+id/terms_of_use"
                     android:title="Terms of Use"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"/>
+                    android:icon="@drawable/file"/>
             </group>
         </menu>
     </item>
@@ -41,10 +41,10 @@
                     android:icon="@drawable/baseline_vpn_key_black_18dp"/>
                 <item android:id="@+id/meetings_alerts"
                     android:title="Meetings/Alerts"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"/>
+                    android:icon="@drawable/new_my_meetings"/>
                 <item android:id="@+id/emails_sms"
                     android:title="Emails/SMS"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"/>
+                    android:icon="@drawable/ic_email_black_24dp"/>
 
             </group>
         </menu>

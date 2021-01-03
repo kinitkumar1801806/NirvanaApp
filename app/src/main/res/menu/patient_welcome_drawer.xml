@@ -14,11 +14,11 @@
             android:icon="@drawable/new_consultadoctor"
             android:title="BOOK APPOINTMENT"/>
         <item
-            android:id="@+id/yoga_tutorial"
+            android:id="@+id/stress_test"
             android:icon="@drawable/stresstest"
             android:title="STRESS TEST"/>
         <item
-            android:id="@+id/meditation_tutorial"
+            android:id="@+id/help"
             android:icon="@drawable/new_help_centre"
             android:title="HELP"/>
 

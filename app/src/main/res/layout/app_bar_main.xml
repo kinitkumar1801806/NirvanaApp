@@ -39,12 +39,12 @@
         tools:layout_editor_absoluteX="-16dp">
 
         <ImageView
-            android:id="@+id/home"
+            android:id="@+id/video_player"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_baseline_home_24"
+            android:src="@drawable/ic_baseline_ondemand_video_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
             android:src="@drawable/blog_btn1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/niri"
-            app:layout_constraintStart_toEndOf="@+id/home"
+            app:layout_constraintStart_toEndOf="@+id/video_player"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView

@@ -44,7 +44,7 @@ public class YogaVideosActivity extends AppCompatActivity {
     public void retrieveData()
     {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Videos").child("YogaVideos");
+        DatabaseReference databaseReference=firebaseDatabase.getReference("YogaVideos");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,10 +79,15 @@ public class YogaVideosActivity extends AppCompatActivity {
                 Intent intent=new Intent(YogaVideosActivity.this,YoutubePlayerActivity.class);
                 intent.putExtra("link",link);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
         progressDialog.dismiss();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.no_animation, R.anim.slide_in_bottom);
+    }
 }

@@ -18,7 +18,7 @@
         android:backgroundTint="@color/green"
         app:itemIconTint="@color/white"
         app:itemIconSize="@dimen/doctor_icons"
-        app:itemIconPadding="-10dp"
+        app:itemIconPadding="10dp"
         android:layout_gravity="start"
         app:itemTextColor="@color/white"
         app:menu="@menu/patient_welcome_drawer" />

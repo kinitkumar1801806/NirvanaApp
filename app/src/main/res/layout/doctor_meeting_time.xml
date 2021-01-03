@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_centerInParent="true"
+    >
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="30dp"
+           android:text="Select your Preffered time for the meetings."
+           android:layout_centerHorizontal="true"
+           android:id="@+id/top_text"
+           />
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="80dp"
+           android:layout_alignParentBottom="true"
+           android:layout_centerVertical="true"
+           android:layout_marginBottom="50dp">
+
+           <EditText
+               android:id="@+id/editText3"
+               android:layout_width="70dp"
+               android:layout_height="40dp"
+               android:inputType="time"
+               android:textAlignment="center"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/textView13"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <ImageView
+               android:id="@+id/fromtimeclock"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:src="@drawable/clock_black"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/textView13"
+               app:layout_constraintStart_toEndOf="@+id/editText3"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:id="@+id/textView13"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
+               android:paddingVertical="8dp"
+               android:text="to"
+               android:textAlignment="center"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <EditText
+               android:id="@+id/editText4"
+               android:layout_width="70dp"
+               android:layout_height="40dp"
+               android:layout_alignParentRight="true"
+               android:inputType="time"
+               android:textAlignment="center"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/textView13"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <ImageView
+               android:id="@+id/totimeclock"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:src="@drawable/clock_black"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/editText4"
+               app:layout_constraintStart_toEndOf="@+id/textView13"
+               app:layout_constraintTop_toTopOf="parent" />
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+       <Button
+           android:id="@+id/cancel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Cancel"
+           android:background="@drawable/button_decline"
+           android:layout_alignParentBottom="true"
+           android:layout_alignParentLeft="true"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="50dp"/>
+       <Button
+           android:id="@+id/save"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Save"
+           android:background="@drawable/button_accept"
+           android:layout_alignParentBottom="true"
+           android:layout_alignParentRight="true"
+           android:layout_marginBottom="10dp"
+           android:layout_marginRight="50dp"/>
+   </RelativeLayout>
+</androidx.cardview.widget.CardView>
+</RelativeLayout>

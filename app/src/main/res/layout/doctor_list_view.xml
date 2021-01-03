@@ -50,7 +50,7 @@
                 android:text="OCD Expert and Consultant"/>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/green">
@@ -58,7 +58,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:paddingBottom="5dp"
-        android:layout_marginRight="0dp"
+        android:layout_marginLeft="2dp"
         android:onClick="rate1"
         android:src="@drawable/ic_star_black_24dp"
         />
@@ -66,17 +66,8 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:paddingBottom="5dp"
-            android:layout_gravity="left"
             android:onClick="rate2"
-            android:src="@drawable/ic_star_black_24dp"
-            />
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:paddingBottom="5dp"
-            android:layout_marginRight="0dp"
-            android:id="@+id/show_more"
-            android:onClick="rate3"
+            android:layout_marginLeft="22dp"
             android:src="@drawable/ic_star_black_24dp"
             />
         <ImageView
@@ -84,11 +75,31 @@
             android:layout_height="25dp"
             android:paddingBottom="5dp"
             android:layout_gravity="left"
-            android:id="@+id/show_more1"
+            android:id="@+id/rate3"
+            android:layout_marginLeft="42dp"
             android:onClick="rate4"
             android:src="@drawable/ic_star_black_24dp"
             />
-    </LinearLayout>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingBottom="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="62dp"
+            android:id="@+id/rate4"
+            android:onClick="rate4"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/show_more"
+            android:onClick="rate3"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_baseline_expand_more_24"
+            />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/show_head_layout"
         android:layout_width="match_parent"

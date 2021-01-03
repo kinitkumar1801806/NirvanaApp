@@ -17,10 +17,10 @@
         android:fitsSystemWindows="true"
         android:background="@color/green"
         app:itemTextColor="@color/white"
-        app:itemIconPadding="-10dp"
         android:layout_gravity="start"
         app:itemIconTint="@color/white"
         app:itemIconSize="@dimen/doctor_icons"
+        app:itemIconPadding="10dp"
         app:menu="@menu/doctor_welcome_drawer" />
 
 

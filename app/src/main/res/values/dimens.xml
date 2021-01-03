@@ -7,7 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="doctor_icons">66dp</dimen>
+    <dimen name="doctor_icons">26dp</dimen>
     <dimen name="doctor_icons_xlarge">66dp</dimen>
     <dimen name="doctor_icons_large">40dp</dimen>
 </resources>

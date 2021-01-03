@@ -42,7 +42,7 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
     ActionBarDrawerToggle mDrawerToggle;
     public TextView patient_name,patient_address;
     FirebaseAuth auth;
-    ImageView Niri,Blogs,Home,Goal_Planning,Profile,p_profile;
+    ImageView Niri,Blogs,VideoPlayer,Goal_Planning,Profile,p_profile;
     private String Id,phone,link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         patient_name=hView.findViewById(R.id.header_name);
         patient_address=hView.findViewById(R.id.header_address);
         p_profile=hView.findViewById(R.id.doctor_image);
-        Home=findViewById(R.id.home);
+        VideoPlayer=findViewById(R.id.video_player);
         Blogs=findViewById(R.id.blogs);
         Niri=findViewById(R.id.niri);
         Goal_Planning=findViewById(R.id.goal_planning);
@@ -80,13 +80,12 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
         fragmentTransaction.commit();
-        Home.setOnClickListener(new View.OnClickListener() {
+        VideoPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PatientHomeFragment homeFragment=new PatientHomeFragment();
-                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
-                fragmentTransaction.commit();
+                Intent intent=new Intent(Patient_Welcome_Activity.this,YogaVideosActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
         Blogs.setOnClickListener(new View.OnClickListener() {
@@ -166,12 +165,11 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             Intent intent=new Intent(this, Doctors_GridView.class);
             startActivity(intent);
         }
-        else if(id==R.id.yoga_tutorial)
+        else if(id==R.id.stress_test)
         {
-            Intent intent=new Intent(this,YogaVideosActivity.class);
-            startActivity(intent);
+
         }
-        else if(id==R.id.meditation_tutorial)
+        else if(id==R.id.help)
         {
 
         }

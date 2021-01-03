@@ -48,22 +48,13 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
     @Override
     public void onBindViewHolder(@NonNull YoutubeVideosAdapter.ViewHolder holder, int position) {
      holder.video_title.setText(TitleList.get(position));
-        try
-        {
-            videoId=extractYoutubeId("http://www.youtube.com/watch?v="+VideosList.get(position));
-            String img_url="http://img.youtube.com/vi/"+videoId+"/0.jpg"; // this is link which will give u thumnail image of that video
+     String img_url="http://img.youtube.com/vi/"+VideosList.get(position)+"/mqdefault.jpg"; // this is link which will give u thumnail image of that video
 
             // picasso jar file download image for u and set image in imagview
-           Glide.with(mContext).load(img_url)
-                   .placeholder(R.drawable.signup_bg)
-                   .into(holder.video_image);
-           System.out.println(img_url);
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
-
+     Glide.with(mContext).load(img_url)
+            .placeholder(R.drawable.signup_bg)
+            .into(holder.video_image);
+     System.out.println(img_url);
     }
 
     @Override
@@ -98,17 +89,4 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
             return 1;
         }
 
-    public String extractYoutubeId(String url) throws MalformedURLException {
-        String query = new URL(url).getQuery();
-        String[] param = query.split("&");
-        String id = null;
-        for (String row : param) {
-            String[] param1 = row.split("=");
-            if (param1[0].equals("v")) {
-                id = param1[1];
-            }
-        }
-        System.out.println(id);
-        return id;
-    }
 }

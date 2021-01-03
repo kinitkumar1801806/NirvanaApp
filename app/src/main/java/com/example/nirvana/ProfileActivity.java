@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -112,7 +113,14 @@ ProgressDialog progressDialog;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        int id=item.getItemId();
+        if(id==R.id.logout)
+        {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent=new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 
     private class AsyncTaskRunner extends AsyncTask<String,String,String>

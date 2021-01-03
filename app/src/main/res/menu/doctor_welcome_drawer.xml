@@ -5,20 +5,9 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/welcome_doctor_profile"
-            android:icon="@drawable/profile_photo"
-            android:title="PROFILE"
-            />
-        <item
             android:id="@+id/welcome_doctor_schedule"
             android:icon="@drawable/new_my_meetings"
             android:title="SCHEDULE"/>
-
-        <item
-            android:id="@+id/welcome_doctor_blogs"
-            android:icon="@drawable/chat_secondary"
-            android:title="BLOGS"/>
-
         <item
             android:id="@+id/doctor_help"
             android:icon="@drawable/new_help_centre"
@@ -28,10 +17,5 @@
             android:icon="@drawable/chat_secondary"
             android:title="MY COUPONS"/>
 
-        <item
-            android:id="@+id/logout_doctor"
-            android:icon="@drawable/power_button"
-            android:title="LOGOUT"
-            />
     </group>
 </menu>

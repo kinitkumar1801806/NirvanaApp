@@ -26,6 +26,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.R;
 import com.example.nirvana.Model.doctor_details;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -163,25 +164,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Id=mAuth.getCurrentUser().getUid();
                                     //verification successful we will start the profile activity
-                                    doctor_details doctor_details=new doctor_details(
-                                            Email,
-                                            Phone,
-                                            Address,
-                                            Gender,
-                                            Fname,
-                                            Lname,
-                                            Password,
-                                            Affiliation,
-                                            Year_Of_Practice,
-                                            Place_Of_Practice,
-                                            LinkedIn,
-                                            totalpatient,
-                                            satisfiedpatient,
-                                            rating,
-                                            ratingby,
-                                            link,
-                                            Id
-                                    );
+
                                     StorageReference Ref1 =mStorageRef.child("Doctors").child(Id).child("Certificate");
                                     Ref1.putFile(Filepath);
                                     Ref =mStorageRef.child("Profile Images").child(Id);
@@ -194,8 +177,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                                         @Override
                                                         public void onSuccess(Uri uri) {
                                                             link=uri.toString();
-
-
+                                                            PostDetails();
                                                         }
                                                     }) ;
 
@@ -208,20 +190,6 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(DoctorPhoneVerification.this,"We are getting some issue.We will come back very soon",Toast.LENGTH_SHORT).show();
                                                     // ...
-                                                }
-                                            });
-                                    databaseReference= FirebaseDatabase.getInstance().getReference("Doctors").child(Id)
-                                            .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    progressBar.setVisibility(View.GONE);
-                                                    Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
-                                                    Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
-                                                    intent.putExtra("phone",Phone);
-                                                    intent.putExtra("Id",Id);
-                                                    startActivity(intent);
-
-
                                                 }
                                             });
 
@@ -239,36 +207,62 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                             }
                         });
     }
-public void sendEmail()
-{
-    Properties properties = new Properties();
-    properties.setProperty("mail.smtp.auth", "true");
-    properties.setProperty("mail.smtp.starttls.enable", "true");
-    properties.setProperty("mail.smtp.host", "smtp.gmail.com");
-    properties.setProperty("mail.smtp.port", "465");
 
-    Session session = Session.getInstance(properties,
-            new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
-    try {
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("nirvana.ieee.01@gmail.com"));
-        message.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse(Email));
-        message.setSubject("Thank you for registering in Nirvana");
-        message.setText("Dear "+Fname+" "+Lname+", "
-                + "\n\n Welcome to Nirvana.....Your doctor id is "+Id+".Please do not delete this email as every time you sign in into your account " +
-                "you will need this id.");
-        Transport.send(message);
-
-        System.out.println("Done");
-
-    } catch (MessagingException e) {
-        throw new RuntimeException(e);
+    private void PostDetails() {
+        doctor_details doctor_details=new doctor_details(
+                Email,
+                Phone,
+                Address,
+                Gender,
+                Fname,
+                Lname,
+                Password,
+                Affiliation,
+                Year_Of_Practice,
+                Place_Of_Practice,
+                LinkedIn,
+                totalpatient,
+                satisfiedpatient,
+                rating,
+                ratingby,
+                link,
+                Id
+        );
+        databaseReference= FirebaseDatabase.getInstance().getReference("Doctors").child(Id)
+                .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressBar.setVisibility(View.GONE);
+                        sendMail();
+                        Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up.Please check your email for your doctor id.",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
+                        intent.putExtra("phone",Phone);
+                        intent.putExtra("Id",Id);
+                        startActivity(intent);
+                    }
+                });
     }
-}
 
+    private void sendMail() {
+        BackgroundMail.newBuilder(this)
+                .withUsername("nirvana.ieee.01@gmail.com")
+                .withPassword("nirvana_IEEE")
+                .withMailto(Email)
+                .withType(BackgroundMail.TYPE_PLAIN)
+                .withSubject("Welcome to Nirvana")
+                .withBody("This is your Doctor Id "+Id+".Please don't share this with anyone.")
+                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                    @Override
+                    public void onSuccess() {
+                        //do some magic
+                    }
+                })
+                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                    @Override
+                    public void onFail() {
+                        //do some magic
+                    }
+                })
+                .send();
+    }
 }

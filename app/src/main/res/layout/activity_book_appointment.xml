@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="350dp"
-        android:text="Please Enter yor relevant Personal Details so that we can find a best councellor for you"
+        android:text="Please Enter your problem, Details and Time Slot so that we can fix a meetings for you with our councellors"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

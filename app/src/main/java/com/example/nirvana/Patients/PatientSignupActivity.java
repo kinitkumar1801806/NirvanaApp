@@ -110,6 +110,7 @@ public class PatientSignupActivity extends AppCompatActivity {
             Pass=pass1;
             arr=new ArrayList<String>();
             arr.add(0,Fname);
+
             arr.add(1,Phone);
             arr.add(2,Password);
 

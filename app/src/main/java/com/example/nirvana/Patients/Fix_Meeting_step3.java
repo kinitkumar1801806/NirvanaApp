@@ -3,10 +3,13 @@ package com.example.nirvana.Patients;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,21 +30,44 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
 public class Fix_Meeting_step3 extends AppCompatActivity {
-ArrayList<String>arr,Patient_Detail,Doctor_Detail;
-private String doctor_name,doctor_phone,Uid,patient_phone,username_doctor,bio;
-FirebaseAuth mauth;
-Task<Void> databaseReference;
-Task<Void> databaseReference1;
-ProgressBar progressBar;
+    ArrayList<String>arr,Patient_Detail,Doctor_Detail;
+    private String doctor_name,doctor_phone,Uid,patient_phone,username_doctor,bio;
+    FirebaseAuth mauth;
+    Task<Void> databaseReference;
+    Task<Void> databaseReference1;
+    ProgressBar progressBar;
+    EditText dateformat;
+    int year;
+    int month;
+    int day;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix__meeting_step3);
+        dateformat = findViewById(R.id.dateformatID);
+        Calendar calendar = Calendar.getInstance();
+        dateformat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Fix_Meeting_step3.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dateformat.setText(SimpleDateFormat.getDateInstance().format(calendar.getTime()));
+                        
+                    }
+                }, year,month,day);
+                datePickerDialog.show();
+            }
+        });
         Intent intent=getIntent();
         arr=intent.getStringArrayListExtra("arr");
         doctor_name=arr.get(0);

@@ -28,9 +28,11 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".patientbook_details"></activity>
+        <activity android:name=".stress_test_main"></activity>
+        <activity
+            android:name=".EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".patientbook_details" />
         <activity android:name=".book_appointment" />
         <activity android:name=".patient_settings_options" />
         <activity android:name=".Doctors.activity_doctor_profile" />

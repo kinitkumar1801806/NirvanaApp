@@ -14,18 +14,13 @@
         tools:context=".Doctors.DoctorSignupActivity"
         android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enter the Details"
             android:textSize="30sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:gravity="center_horizontal"
             />
         <com.google.android.material.textfield.TextInputLayout
@@ -69,6 +64,9 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
 
+
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,6 +88,18 @@
                 android:hint="Tell us about your problem"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp" /></com.google.android.material.textfield.TextInputLayout>
+
+        <EditText
+                android:id="@+id/dateformatID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
+                android:padding="8dp"
+                android:hint="Select Date using Calender"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" />
 
             <RadioGroup
             android:layout_width="match_parent"
@@ -127,12 +137,43 @@
                 />
         </RadioGroup>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Slot Timings"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginLeft="30dp"
+            android:textSize="18sp" />
+
+
+
+            <Spinner
+                android:id="@+id/spinnerCountries"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center_horizontal"
+                 />
+        </LinearLayout>
+
+
+
+
+
+
+
         <Button
             android:id="@+id/signup_btn_doctor"
             android:layout_width="180dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="100dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"
             android:text="Submit"
             android:padding="8dp"
             android:onClick="Fix_the_Meeting"

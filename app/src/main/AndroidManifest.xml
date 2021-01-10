@@ -28,21 +28,30 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".stress_test_main"></activity>
+        <activity android:name=".Blogs.DetailDoctorViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/title_activity_doctor_view">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".stress_test_main" />
         <activity
             android:name=".EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".patientbook_details" />
         <activity android:name=".book_appointment" />
         <activity android:name=".patient_settings_options" />
-        <activity android:name=".Doctors.activity_doctor_profile" />
         <activity android:name=".YogaTutorials.YoutubePlayerActivity" />
         <activity android:name=".YogaTutorials.YogaVideosActivity" />
         <activity android:name=".Payments.PaymentFailureActivity" />
         <activity android:name=".Payments.PaymentSuccessActivity" />
         <activity android:name=".LoginByPasswordActivity" />
         <activity android:name=".Payments.MainPaymentActivity" />
-        <activity android:name=".Blogs.Blog_Detail_Activity" />
         <activity android:name=".GoalPlanning.StressTestReport" />
         <activity android:name=".GoalPlanning.StressTest" />
         <activity android:name=".GoalPlanning.SessionWithStudent" />
@@ -78,52 +87,8 @@
         <activity android:name=".Call.IncomingVideoCallActivity" />
         <activity android:name=".Call.VideoCallScreenActivity" />
         <activity
-            android:name=".Schools.MyDoctorActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Offices.OfficeWelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Clinics.ClinicWelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Hospitals.HospitalWelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Schools.SchoolWelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Organisations.rganisationLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Blogs.BlogActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Offices.OfficeLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Schools.SchoolLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Clinics.ClinicLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Hospitals.HospitalLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Offices.OfficePhoneVerification" />
-        <activity android:name=".Schools.SchoolPhoneVerification" />
-        <activity android:name=".Clinics.ClinicPhoneVerification" />
-        <activity android:name=".Hospitals.HospitalPhoneVerification" />
-        <activity
-            android:name=".Organisations.OrganisationActivity"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.MainActivity" />
-        </activity>
         <activity android:name=".Patients.Meeting_Alresdy_fixed_step2" />
         <activity
             android:name=".Patients.Meeting_Already_Fixed_step1"
@@ -171,7 +136,8 @@
         </activity>
         <activity
             android:name=".Patients.Fix_Meeting_step2"
-            android:parentActivityName=".Doctors.Doctors_GridView">
+            android:parentActivityName=".Doctors.Doctors_GridView"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.Doctors.Doctors_GridView" />
@@ -238,13 +204,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
         </activity>
-        <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".Blogs.DoctorViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
     implementation project(path: ':kommunicateui')
     implementation project(path: ':kommunicate')
+    implementation 'androidx.wear:wear:1.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.bumptech.glide:glide:4.8.0'

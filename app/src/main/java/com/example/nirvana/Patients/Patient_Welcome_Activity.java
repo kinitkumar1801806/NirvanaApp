@@ -14,14 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.nirvana.Blogs.BlogActivity;
+import com.example.nirvana.Blogs.DetailBlogFragment;
+import com.example.nirvana.Blogs.HomeBlogFragment;
 import com.example.nirvana.Doctors.Doctors_GridView;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
-import com.example.nirvana.HomeFragment;
-import com.example.nirvana.MainActivity;
 import com.example.nirvana.Niri;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;
@@ -35,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Patient_Welcome_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +41,7 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
     ActionBarDrawerToggle mDrawerToggle;
     public TextView patient_name,patient_address;
     FirebaseAuth auth;
-    ImageView Niri,Blogs,VideoPlayer,Goal_Planning,Profile,p_profile;
+    ImageView Niri,VideoPlayer,Goal_Planning,Profile,p_profile,Home;
     private String Id,phone,link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +59,8 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         patient_name=hView.findViewById(R.id.header_name);
         patient_address=hView.findViewById(R.id.header_address);
         p_profile=hView.findViewById(R.id.doctor_image);
+        Home=findViewById(R.id.home);
         VideoPlayer=findViewById(R.id.video_player);
-        Blogs=findViewById(R.id.blogs);
         Niri=findViewById(R.id.niri);
         Goal_Planning=findViewById(R.id.goal_planning);
         Profile=findViewById(R.id.profile);
@@ -76,23 +75,35 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             startService(intent1);
         }
         RetrievePatientDetails();
-        PatientHomeFragment homeFragment=new PatientHomeFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("Id",Id);
+        HomeBlogFragment homeFragment=new HomeBlogFragment();
+        homeFragment.setArguments(bundle);
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home");
         fragmentTransaction.commit();
+        Home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailBlogFragment detailBlogFragment=new DetailBlogFragment();
+                HomeBlogFragment homeBlogFragment=new HomeBlogFragment();
+                getSupportFragmentManager().beginTransaction().remove(detailBlogFragment);
+                getSupportFragmentManager().beginTransaction().remove(homeBlogFragment);
+                RetrievePatientDetails();
+                Bundle bundle=new Bundle();
+                bundle.putString("Id",Id);
+                bundle.putString("who","patient");
+                HomeBlogFragment homeFragment=new HomeBlogFragment();
+                homeFragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout,homeFragment,"Home1");
+                fragmentTransaction.commit();
+            }
+        });
         VideoPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Patient_Welcome_Activity.this,YogaVideosActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
-            }
-        });
-        Blogs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Patient_Welcome_Activity.this, BlogActivity.class);
-                intent.putExtra("Id",Id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
@@ -159,11 +170,14 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             Intent intent=new Intent(this, Meeting_Already_Fixed_step1.class);
             intent.putExtra("Id",Id);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         }
         else if(id==R.id.book_appointment)
         {
             Intent intent=new Intent(this, Doctors_GridView.class);
+            intent.putExtra("Id",Id);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         }
         else if(id==R.id.stress_test)
         {
@@ -176,6 +190,4 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }

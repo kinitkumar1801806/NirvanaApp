@@ -35,7 +35,7 @@ public class PatientPhoneVerification extends AppCompatActivity {
     Task<Void> databaseReference;
     EditText code;
     ProgressBar progressBar;
-    String Uname,Email,Phone,Address,Gender,Fname,Lname,Password,Id,code1;
+    String Age,Email,Phone,Address,Gender,Fname,Lname,Password,Id,code1;
     String mVerificationId;
     ArrayList<String> arr;
     Button verify;
@@ -47,10 +47,14 @@ public class PatientPhoneVerification extends AppCompatActivity {
         progressBar=findViewById(R.id.progress_verify1);
         Intent intent=getIntent();
         arr=intent.getStringArrayListExtra("arr");
-        Fname= arr.get(0);
-        Phone= arr.get(1);
-        Password= arr.get(2);
-
+        Age= arr.get(0);
+        Email= arr.get(1);
+        Phone= arr.get(2);
+        Address=arr.get(3);
+        Gender=arr.get(4);
+        Fname=arr.get(5);
+        Lname=arr.get(6);
+        Password=arr.get(7);
         sendVerificationCode(Phone);
     }
     public void verify_patient(View view){
@@ -127,15 +131,15 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                     Id=mAuth.getCurrentUser().getUid();
                                     //verification successful we will start the profile activity
                                     details_patient details_patient=new details_patient(
-                                            "",
+                                            Email,
                                             Phone,
-                                            "",
-                                            "",
+                                            Address,
+                                            Gender,
                                             Fname,
-                                            "",
+                                            Lname,
                                             Password,
                                             "None",
-                                            "",
+                                            Age,
                                             Id
                                     );
                                     databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(Id)

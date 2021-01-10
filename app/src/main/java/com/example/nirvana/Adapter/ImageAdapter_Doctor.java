@@ -88,7 +88,7 @@ public class ImageAdapter_Doctor extends RecyclerView.Adapter<ImageAdapter_Docto
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name,username,bio;
         public ImageView User_image,Expand_btn;
-        public LinearLayout linearLayout,linearLayout1;
+        public LinearLayout linearLayout,linearLayout1,linearLayout2;
         public ViewHolder(@NonNull View itemView,OnItemClickListener listener) {
             super(itemView);
             name=itemView.findViewById(R.id.doctor_name);
@@ -97,8 +97,9 @@ public class ImageAdapter_Doctor extends RecyclerView.Adapter<ImageAdapter_Docto
             Expand_btn=itemView.findViewById(R.id.show_more);
             linearLayout=itemView.findViewById(R.id.show_head_layout);
             linearLayout1=itemView.findViewById(R.id.linearLayout1);
+            linearLayout2=itemView.findViewById(R.id.linearLayout2);
             bio=itemView.findViewById(R.id.show_bio);
-            linearLayout1.setOnClickListener(new View.OnClickListener() {
+            linearLayout2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener!=null)

@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,9 +24,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.nirvana.Blogs.BlogActivity;
+import com.example.nirvana.Blogs.DetailBlogFragment;
+import com.example.nirvana.Blogs.HomeBlogFragment;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
-import com.example.nirvana.MainActivity;
 import com.example.nirvana.Model.MeetingTime;
 import com.example.nirvana.Patients.PatientQueue;
 import com.example.nirvana.ProfileActivity;
@@ -46,9 +45,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -59,7 +58,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
     FirebaseAuth auth;
     public TextView doctor_name,doctor_address;
     private int mHour,mMinute;
-    ImageView Niri,Blogs,VideoPlayer,Goal_Planning,Profile,d_profile;
+    ImageView Niri,VideoPlayer,Goal_Planning,Profile,d_profile,Home;
     private String phone,Id,link,time,from_time,to_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +77,8 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         doctor_name=hView.findViewById(R.id.header_name);
         doctor_address=hView.findViewById(R.id.header_address);
         d_profile=hView.findViewById(R.id.doctor_image);
+        Home=findViewById(R.id.home);
         VideoPlayer=findViewById(R.id.video_player);
-        Blogs=findViewById(R.id.blogs);
         Niri=findViewById(R.id.niri);
         Goal_Planning=findViewById(R.id.goal_planning);
         Profile=findViewById(R.id.profile);
@@ -93,23 +92,30 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
             startService(intent1);
         }
         RetrieveDoctorDetails();
-        Doctor_Home_Fragment doctor_home_fragment=new Doctor_Home_Fragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("Id",Id);
+        HomeBlogFragment homeFragment=new HomeBlogFragment();
+        homeFragment.setArguments(bundle);
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,doctor_home_fragment);
+        fragmentTransaction.replace(R.id.frame_layout,homeFragment);
         fragmentTransaction.commit();
+        Home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("Id",Id);
+                bundle.putString("who","doctor");
+                HomeBlogFragment homeFragment=new HomeBlogFragment();
+                homeFragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout,homeFragment);
+                fragmentTransaction.commit();
+            }
+        });
         VideoPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Doctor_Welcome_Activity.this, YogaVideosActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
-            }
-        });
-        Blogs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Doctor_Welcome_Activity.this, BlogActivity.class);
-                intent.putExtra("Id",Id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
@@ -382,5 +388,4 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

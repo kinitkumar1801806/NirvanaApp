@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nirvana.Adapter.ImageAdapter_Doctor;
 import com.example.nirvana.Patients.Fix_Meeting_step2;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 public class Doctors_GridView extends AppCompatActivity {
     ArrayList<String> ImageArray;
     ArrayList<String> NameList;
+    String Id,Id1;
     ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList,Id_List;
     RecyclerView recyclerView;
     ImageAdapter_Doctor imageAdapter_doctor;
@@ -41,6 +43,8 @@ public class Doctors_GridView extends AppCompatActivity {
         setContentView(R.layout.activity_doctors__grid_view);
         Toolbar toolbar=findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        Intent intent=getIntent();
+        Id1=intent.getStringExtra("Id");
         NameList=new ArrayList<>();
         Username_List=new ArrayList<>();
         Phone_List=new ArrayList<>();
@@ -124,7 +128,9 @@ public void initRecyclerView()
             Intent i = new Intent(getApplicationContext(), Fix_Meeting_step2.class);
             // Pass image index
             i.putStringArrayListExtra("arr",arr);
+            i.putExtra("Id1",Id1);
             startActivity(i);
+            overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         }
 
         @Override
@@ -142,4 +148,10 @@ public void initRecyclerView()
     });
     progressDialog.dismiss();
 }
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        overridePendingTransition(R.anim.no_animation, R.anim.slide_in_bottom);
+    }
 }

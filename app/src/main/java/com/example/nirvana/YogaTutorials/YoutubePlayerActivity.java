@@ -1,7 +1,10 @@
 package com.example.nirvana.YogaTutorials;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.nirvana.Model.PlayerConfig;
@@ -16,11 +19,17 @@ public class YoutubePlayerActivity extends YouTubeBaseActivity implements YouTub
 
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
+    private YouTubePlayer player;
     public String link;
+    private boolean mAutoRotation = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube_player);
+        mAutoRotation = Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) == 1;
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Intent intent=getIntent();
         link=intent.getStringExtra("link");
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_player);
@@ -29,8 +38,18 @@ public class YoutubePlayerActivity extends YouTubeBaseActivity implements YouTub
 
     @Override
     public void onInitializationSuccess(Provider provider, YouTubePlayer player, boolean wasRestored) {
+        if(mAutoRotation) {
+            player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION
+                    | YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI
+                    | YouTubePlayer.FULLSCREEN_FLAG_ALWAYS_FULLSCREEN_IN_LANDSCAPE
+                    | YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT);
+        }else {
+            player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION
+                    | YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI
+                    | YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT);
+        }
         if (!wasRestored) {
-            player.cueVideo(link); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            player.loadVideo(link);
         }
     }
 
@@ -56,6 +75,12 @@ public class YoutubePlayerActivity extends YouTubeBaseActivity implements YouTub
         return youTubeView;
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -46,7 +46,8 @@
         <activity android:name=".patientbook_details" />
         <activity android:name=".book_appointment" />
         <activity android:name=".patient_settings_options" />
-        <activity android:name=".YogaTutorials.YoutubePlayerActivity" />
+        <activity android:name=".YogaTutorials.YoutubePlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode|screenLayout|keyboard"/>
         <activity android:name=".YogaTutorials.YogaVideosActivity" />
         <activity android:name=".Payments.PaymentFailureActivity" />
         <activity android:name=".Payments.PaymentSuccessActivity" />

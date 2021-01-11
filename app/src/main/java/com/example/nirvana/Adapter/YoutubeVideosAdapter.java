@@ -22,6 +22,7 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
     private  OnItemClickListener mListener;
     private final ArrayList<String> VideosList;
     private final ArrayList<String> TitleList;
+    private final ArrayList<String> ThumbnailList;
     public interface OnItemClickListener
     {
         void onItemClick(int position);
@@ -31,10 +32,11 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
         mListener=listener;
     }
 
-    public YoutubeVideosAdapter(Context mContext,ArrayList<String> VideosList,ArrayList<String> TitleList) {
+    public YoutubeVideosAdapter(Context mContext,ArrayList<String> VideosList,ArrayList<String> TitleList,ArrayList<String> ThumbnailList) {
         this.mContext = mContext;
         this.VideosList=VideosList;
         this.TitleList=TitleList;
+        this.ThumbnailList=ThumbnailList;
     }
 
     @NonNull
@@ -48,9 +50,7 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
     @Override
     public void onBindViewHolder(@NonNull YoutubeVideosAdapter.ViewHolder holder, int position) {
      holder.video_title.setText(TitleList.get(position));
-     String img_url="http://img.youtube.com/vi/"+VideosList.get(position)+"/mqdefault.jpg"; // this is link which will give u thumnail image of that video
-
-            // picasso jar file download image for u and set image in imagview
+     String img_url=ThumbnailList.get(position);
      Glide.with(mContext).load(img_url)
             .placeholder(R.drawable.signup_bg)
             .into(holder.video_image);

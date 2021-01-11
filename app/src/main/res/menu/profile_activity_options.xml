@@ -22,7 +22,7 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item android:title="App Updates"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"
+                    android:icon="@drawable/ic_baseline_system_update_24"
                     android:id="@+id/app_updates"/>
                 <item android:id="@+id/data_policy"
                     android:title="Data Policy"
@@ -38,7 +38,7 @@
             <group android:checkableBehavior="single">
                 <item android:title="Feeds"
                     android:id="@+id/feeds"
-                    android:icon="@drawable/baseline_vpn_key_black_18dp"/>
+                    android:icon="@drawable/feed"/>
                 <item android:id="@+id/meetings_alerts"
                     android:title="Meetings/Alerts"
                     android:icon="@drawable/new_my_meetings"/>

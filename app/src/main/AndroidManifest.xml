@@ -28,8 +28,10 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Blogs.DetailDoctorViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".fix_metting"></activity>
+        <activity
+            android:name=".Blogs.DetailDoctorViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashScreen"
             android:label="@string/title_activity_doctor_view">
@@ -46,8 +48,9 @@
         <activity android:name=".patientbook_details" />
         <activity android:name=".book_appointment" />
         <activity android:name=".patient_settings_options" />
-        <activity android:name=".YogaTutorials.YoutubePlayerActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode|screenLayout|keyboard"/>
+        <activity
+            android:name=".YogaTutorials.YoutubePlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode|screenLayout|keyboard" />
         <activity android:name=".YogaTutorials.YogaVideosActivity" />
         <activity android:name=".Payments.PaymentFailureActivity" />
         <activity android:name=".Payments.PaymentSuccessActivity" />

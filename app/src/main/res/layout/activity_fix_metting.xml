@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout1"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="20sp"
+        android:text="Please Enter your relevant Personal Details so that we can find  a Best Councellor for you."/>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#289860"
+        app:cardElevation="50dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="20dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/continueAs"
+                android:gravity="center_horizontal"
+                android:text="CONTINUE AS ▼"
+                android:padding="8dp"
+                android:textSize="18sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/continueAs"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:id="@+id/recycler_view"/>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#289860"
+        app:cardElevation="50dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="20dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addnew"
+                android:gravity="center_horizontal"
+                android:text="ADD NEW ▼"
+                android:padding="8dp"
+                android:textSize="18sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/addnew">
+            <EditText
+                android:id="@+id/pname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addnew"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:hint="Enter patient's name"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/pmobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pname"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:hint="Enter the mob no,"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/pemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pmobile"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:hint="Enter email id"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/pdoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pemail"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:hint="Enter preferred doctor"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/green"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

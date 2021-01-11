@@ -24,7 +24,7 @@ public class YogaVideosActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     YoutubeVideosAdapter youtubeVideosAdapter;
     ProgressDialog progressDialog;
-    ArrayList<String> VideosList,TitleList;
+    ArrayList<String> VideosList,TitleList,ThumbnailList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,7 @@ public class YogaVideosActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         VideosList=new ArrayList<>();
         TitleList=new ArrayList<>();
+        ThumbnailList=new ArrayList<>();
         retrieveData();
     }
     public void retrieveData()
@@ -56,8 +57,10 @@ public class YogaVideosActivity extends AppCompatActivity {
                         HashMap<String, Object> userData = (HashMap<String, Object>) data;
                         String link=userData.get("link").toString();
                         String title=userData.get("title").toString();
+                        String thumbnail=userData.get("thumbnail").toString();
                         VideosList.add(link);
                         TitleList.add(title);
+                        ThumbnailList.add(thumbnail);
                         initRecyclerView();
                     }
                 }
@@ -70,7 +73,7 @@ public class YogaVideosActivity extends AppCompatActivity {
     }
     public void initRecyclerView()
     {
-        youtubeVideosAdapter= new YoutubeVideosAdapter(YogaVideosActivity.this, VideosList,TitleList);
+        youtubeVideosAdapter= new YoutubeVideosAdapter(YogaVideosActivity.this, VideosList,TitleList,ThumbnailList);
         recyclerView.setAdapter(youtubeVideosAdapter);
         youtubeVideosAdapter.setOnItemClickListener(new YoutubeVideosAdapter.OnItemClickListener() {
             @Override

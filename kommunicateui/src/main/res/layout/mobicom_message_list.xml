@@ -443,7 +443,7 @@
                                 android:layout_marginEnd="56dp"
                                 android:layout_marginRight="5dp"
                                 android:adjustViewBounds="true"
-                                android:background="@drawable/button_circle"
+                                android:background="@drawable/blue_button"
                                 android:clickable="true"
                                 android:gravity="end"
                                 android:padding="8dp"

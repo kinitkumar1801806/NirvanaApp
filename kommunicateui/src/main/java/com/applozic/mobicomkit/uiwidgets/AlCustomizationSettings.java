@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public class AlCustomizationSettings extends JsonMarker {
 
-    private final String customMessageBackgroundColor = "#e6e5ec";
-    private final String sentMessageBackgroundColor = "";
-    private final String receivedMessageBackgroundColor = "#e6e5ec";
-    private final String sendButtonBackgroundColor = "";
+    private final String customMessageBackgroundColor = "#339966";
+    private final String sentMessageBackgroundColor = "#339966";
+    private final String receivedMessageBackgroundColor = "#339966";
+    private final String sendButtonBackgroundColor = "#339966";
     private final String attachmentIconsBackgroundColor = "#FF03A9F4";
     private String chatBackgroundColorOrDrawable;
     private String editTextBackgroundColorOrDrawable;
@@ -24,7 +24,7 @@ public class AlCustomizationSettings extends JsonMarker {
     private final String sentContactMessageTextColor = "#5fba7d";
     private final String receivedContactMessageTextColor = "#646262";
     private final String sentMessageTextColor = "#FFFFFFFF";
-    private final String receivedMessageTextColor = "#646262";
+    private final String receivedMessageTextColor = "#FFFFFFFF";
     private final String messageEditTextTextColor = "#000000";
     private final String sentMessageLinkTextColor = "#FFFFFFFF";
     private final String receivedMessageLinkTextColor = "#5fba7d";

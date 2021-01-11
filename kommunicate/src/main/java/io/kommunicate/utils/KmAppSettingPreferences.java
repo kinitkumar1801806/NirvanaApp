@@ -61,7 +61,7 @@ public class KmAppSettingPreferences {
     }
 
     public String getPrimaryColor() {
-        return preferences.getString(KM_THEME_PRIMARY_COLOR, null);
+        return preferences.getString(KM_THEME_PRIMARY_COLOR, "#339966");
     }
 
     public String getSecondaryColor() {

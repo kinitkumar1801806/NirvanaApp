@@ -17,6 +17,11 @@
             android:id="@+id/stress_test"
             android:icon="@drawable/stresstest"
             android:title="STRESS TEST"/>
+
+        <item
+            android:id="@+id/goal_planning"
+            android:icon="@drawable/clock_black"
+            android:title="SAARINI"/>
         <item
             android:id="@+id/help"
             android:icon="@drawable/new_help_centre"

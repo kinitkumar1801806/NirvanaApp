@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="270dp"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thumbnail">
    <ImageView
        android:layout_width="match_parent"
        android:layout_height="200dp"
@@ -13,36 +17,68 @@
        android:src="@drawable/signup_bg"
        android:scaleType="fitXY"
        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        android:src="@drawable/ic_baseline_play_circle_outline_24_white"
+        android:layout_centerInParent="true"
+        />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:id="@+id/titlecard"
+        android:layout_below="@+id/thumbnail"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/niri"
-            android:id="@+id/logo"
-            app:civ_border_color="@color/green"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            app:civ_border_width="1dp"/>
-        <TextView
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/video_title"
-            android:layout_marginStart="46dp"
-            android:layout_marginEnd="16dp"
-            android:layout_alignLeft="@+id/logo"
-            android:text="First Song"
-            android:layout_centerVertical="true"
-            android:inputType="textMultiLine"
-            android:textSize="17sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="#289860"
+            app:cardElevation="50dp"
+            android:backgroundTint="#f5f5f5"
+            app:cardCornerRadius="20dp"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/niri"
+                android:id="@+id/logo"
+                app:civ_border_color="@color/green"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                app:civ_border_width="1dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/video_title"
+                android:layout_marginStart="46dp"
+                android:layout_marginEnd="16dp"
+                android:layout_alignLeft="@+id/logo"
+                android:text="First Song"
+                android:layout_centerVertical="true"
+                android:inputType="textMultiLine"
+                android:textSize="17sp"
+
+                android:textColor="@color/black"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
     </RelativeLayout>
     <Space
         android:layout_height="2dp"
         android:layout_width="match_parent"
+        android:id="@+id/space"
+        android:layout_below="@+id/titlecard"
         android:layout_marginTop="10dp"
         android:outlineSpotShadowColor="@color/black"/>
-</LinearLayout>
+</RelativeLayout>

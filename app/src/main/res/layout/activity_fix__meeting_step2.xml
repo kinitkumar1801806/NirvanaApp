@@ -58,7 +58,9 @@
             android:fontFamily="@font/helveticaneuemedium"
             android:text="BOOK NOW"
             android:onClick="fix_the_meeting"
-            android:backgroundTint="@color/green"/>
+            android:backgroundTint="@color/green"
+
+             />
 
 
         <androidx.cardview.widget.CardView
@@ -67,7 +69,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             app:cardBackgroundColor="#289860"
-            android:backgroundTint="#AFDCEB"
+            app:cardElevation="50dp"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="20dp" >
 
             <LinearLayout
@@ -133,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#669933"
+                    android:backgroundTint="@color/green"
                     android:onClick="ShowDoctorBlogs"
                     android:text="View Activity"/>
 

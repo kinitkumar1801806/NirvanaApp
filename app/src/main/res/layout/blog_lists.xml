@@ -47,7 +47,7 @@
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="342dp"
-           android:background="@color/green">
+           android:background="@color/background_offwhite">
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                android:layout_marginTop="10dp"
                android:layout_marginLeft="10dp"
                android:textSize="18sp"
-               android:textColor="@color/white"
+               android:textColor="@color/black"
                />
            <TextView
                android:id="@+id/blog_body"
@@ -67,7 +67,7 @@
                android:layout_marginBottom="10dp"
                android:layout_marginStart="15dp"
                android:layout_marginEnd="15dp"
-               android:textColor="@color/white"
+               android:textColor="@color/black"
                android:textSize="15sp"
                android:maxLines="14"
                android:text="fdijfdijfd jfiojifdk sijsg isj"/>

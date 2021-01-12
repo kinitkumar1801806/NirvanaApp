@@ -13,4 +13,5 @@
     <color name="bg_gradient_end">#6b394c</color>
     <color name="green">#339966</color>
     <color name="greenish_white">#2E8B57</color>
+    <color name="background_offwhite">#F5F5F5</color>
 </resources>

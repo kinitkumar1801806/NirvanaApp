@@ -77,6 +77,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
     public void fix_the_meeting(View view) {
         Intent intent =new Intent(this, Fix_Meeting_step3.class);
         intent.putStringArrayListExtra("arr",arr);
+        intent.putExtra("Id",Id);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
     }
@@ -104,8 +105,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
                         String lname = (String) hashMap.get("lname");
                         String name = fname + " " + lname;
                         nameText.setText(name);
-                        String quali = (String) hashMap.get("qualification");
-                        doctor_qualification.setText(quali);
+                        doctor_qualification.setText(arr.get(3));
                         String link=(String)hashMap.get("link");
                         Glide.with(Fix_Meeting_step2.this).load(link).into(image);
                         String address=(String)hashMap.get("address");

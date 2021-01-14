@@ -30,24 +30,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/titlecard"
+        android:layout_centerVertical="true"
         android:layout_below="@+id/thumbnail"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            app:cardBackgroundColor="#289860"
-            app:cardElevation="50dp"
-            android:backgroundTint="#f5f5f5"
-            app:cardCornerRadius="20dp"
-            >
-
+        android:background="@color/background_offwhite"
+        android:layout_height="80dp">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/niri"
                 android:id="@+id/logo"
                 app:civ_border_color="@color/green"
@@ -58,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/video_title"
-                android:layout_marginStart="46dp"
+                android:layout_marginStart="56dp"
                 android:layout_marginEnd="16dp"
                 android:layout_alignLeft="@+id/logo"
                 android:text="First Song"
@@ -67,9 +56,6 @@
                 android:textSize="17sp"
 
                 android:textColor="@color/black"/>
-
-
-        </androidx.cardview.widget.CardView>
 
 
 

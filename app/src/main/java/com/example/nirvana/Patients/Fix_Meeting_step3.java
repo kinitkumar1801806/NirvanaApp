@@ -2,21 +2,32 @@ package com.example.nirvana.Patients;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nirvana.Adapter.ContinueMeeting;
 import com.example.nirvana.Doctors.Doctor_Meeting;
+import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
+import com.example.nirvana.Model.CountryCode;
 import com.example.nirvana.Payments.MainPaymentActivity;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +39,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,150 +53,276 @@ import java.util.Locale;
 
 public class Fix_Meeting_step3 extends AppCompatActivity {
     ArrayList<String>arr,Patient_Detail,Doctor_Detail;
-    private String doctor_name,doctor_phone,Uid,patient_phone,username_doctor,bio;
-    FirebaseAuth mauth;
-    Task<Void> databaseReference;
-    Task<Void> databaseReference1;
-    ProgressBar progressBar;
-    EditText dateformat;
-    int year;
-    int month;
-    int day;
+    private String doctor_name,doctor_phone,Did,Pid,Pname,Problem,child_date;
+    RecyclerView recyclerView;
+    private int mYear, mMonth, mDay;
+    String fromTime,toTime,lastDateChange,slot_details,slots_no,final_date,final_slot,name,problem;
+    Date mindate,maxdate;
+    JSONObject json;
+    ContinueMeeting continueMeeting;
+    ArrayList<String> Avaiable_Slots,Patient_Name,Patient_Problem;
+    HashMap<String,String> Slots_map;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix__meeting_step3);
-        dateformat = findViewById(R.id.dateformatID);
-        Calendar calendar = Calendar.getInstance();
-        dateformat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Fix_Meeting_step3.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateformat.setText(SimpleDateFormat.getDateInstance().format(calendar.getTime()));
-                        
-                    }
-                }, year,month,day);
-                datePickerDialog.show();
-            }
-        });
         Intent intent=getIntent();
+        Pid=intent.getStringExtra("Id");
         arr=intent.getStringArrayListExtra("arr");
         doctor_name=arr.get(0);
         doctor_phone=arr.get(1);
-        username_doctor=arr.get(2);
-        bio=arr.get(3);
-        mauth=FirebaseAuth.getInstance();
-        Uid=mauth.getCurrentUser().getUid();
+        Did=arr.get(5);
+        Avaiable_Slots=new ArrayList<>();
         Patient_Detail=new ArrayList<>();
         Doctor_Detail=new ArrayList<>();
-        DatabaseReference Reference=FirebaseDatabase.getInstance().getReference().child("Patient");
-        Reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                {
-                    HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
-                    for(String key:hashMap.keySet())
-                    {
-                        Object data = hashMap.get(key);
-                        HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                        String uid=(String)userData.get("Id");
-                        if(uid.equals(Uid))
-                        {
-                            patient_phone=(String)userData.get("phone");
-                        }
-                    }
-                }
+        Patient_Name=new ArrayList<>();
+        Patient_Problem=new ArrayList<>();
+        Slots_map=new HashMap<>();
+        recyclerView=findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        retrieveData();
+        retrievePreviousDetails();
+    }
 
+    private void retrievePreviousDetails() {
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(Pid).child(Did);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if(snapshot.exists())
+               {
+                   HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                   for(String key:hashMap.keySet())
+                   {
+                       Object data=hashMap.get(key);
+                       HashMap<String,Object> userdata= (HashMap<String, Object>) data;
+                       name=userdata.get("p_name").toString();
+                       problem=userdata.get("p_problem").toString();
+                       initRecyclerView();
+                   }
+               }
+               else
+               {
+                   TextView textView;
+                   textView=findViewById(R.id.no_meetings);
+                   textView.setVisibility(View.VISIBLE);
+               }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
     }
 
-    public void Fix_the_Meeting(View view) {
-        TextView name,age,problem;
-        RadioGroup gender;
-        RadioButton patient_gender;
-        progressBar=findViewById(R.id.progressBar_patient);
-        progressBar.setVisibility(View.VISIBLE);
-        name=findViewById(R.id.patient_name);
-        age=findViewById(R.id.patient_age);
-        problem=findViewById(R.id.patient_problem);
-        gender=findViewById(R.id.patient_gender);
-        int selectedId=gender.getCheckedRadioButtonId();
-        patient_gender=findViewById(selectedId);
-        if(TextUtils.isEmpty(name.getText()))
-        {
-            name.setError("Please enter your name");
-            progressBar.setVisibility(View.GONE);
-        }
-        else if(TextUtils.isEmpty(age.getText()))
-        {
-            age.setError("Please enter your age");
-            progressBar.setVisibility(View.GONE);
-        }
-        else if(TextUtils.isEmpty(problem.getText()))
-        {
-            problem.setError("Please enter your problem");
-            progressBar.setVisibility(View.GONE);
-        }
-        else if(gender.getCheckedRadioButtonId()==-1)
-        {
-            Toast.makeText(this,"Please select the gender",Toast.LENGTH_SHORT).show();
-            progressBar.setVisibility(View.GONE);
-        }
-        else
-        {
-            String name1=name.getText().toString().trim();
-            String age1=age.getText().toString().trim();
-            String problem1=problem.getText().toString().trim();
-            String patient_gender1=patient_gender.getText().toString().trim();
-            String time="We will inform you soon";
-            String date="We will inform you soon";
-            String time1="Not fixed";
-            String date1="Not fixed";
-            String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
-            Date todayDate = new Date();
-            String thisDate = currentDate.format(todayDate);
-            Patient_Detail.add(name1);
-            Patient_Detail.add(age1);
-            Patient_Detail.add(problem1);
-            Patient_Detail.add(patient_gender1);
-            Patient_Detail.add(doctor_name);
-            Patient_Detail.add(doctor_phone);
-            Patient_Detail.add(time);
-            Patient_Detail.add(date);
-            Patient_Detail.add(thisDate);
-            Patient_Detail.add(username_doctor);
-            Patient_Detail.add("None");
-            Patient_Detail.add(currentTime);
-            Doctor_Detail.add(patient_phone);
-            Doctor_Detail.add(time1);
-            Doctor_Detail.add(date1);
-            Doctor_Detail.add(arr.get(4));
-            Doctor_Detail.add(bio);
-            progressBar.setVisibility(View.GONE);
-            Intent intent=new Intent(this, MainPaymentActivity.class);
-            intent.putStringArrayListExtra("Patient_Detail",Patient_Detail);
-            intent.putStringArrayListExtra("Doctor_Detail",Doctor_Detail);
-            startActivity(intent);
+    private void initRecyclerView() {
+        continueMeeting=new ContinueMeeting(Fix_Meeting_step3.this,Patient_Name,Patient_Problem);
+        recyclerView.setAdapter(continueMeeting);
+        continueMeeting.setOnItemClickListener(new ContinueMeeting.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Pname=Patient_Name.get(position);
+                Problem=Patient_Problem.get(position);
+                DoAlter();
+            }
+        });
+    }
 
-        }
+    private void retrieveData() {
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Doctors_Meeting_Time").child(Did);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if(snapshot.exists())
+               {
+                   HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                   fromTime=hashMap.get("fromTime").toString();
+                   toTime=hashMap.get("toTime").toString();
+                   lastDateChange=hashMap.get("lastChangeDate").toString();
+                   slot_details=hashMap.get("slot_details").toString();
+                   slots_no=hashMap.get("no_of_slots").toString();
+                   try {
+                       json=new JSONObject(slot_details);
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
+
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     @Override
     public void onBackPressed() {
 
         super.onBackPressed();
         overridePendingTransition(R.anim.no_animation, R.anim.slide_in_bottom);
+    }
+
+    public void NextStep(View view) {
+      TextView Pname1,Problem1;
+      Pname1=findViewById(R.id.pname);
+      Problem1=findViewById(R.id.problem);
+      if(TextUtils.isEmpty(Pname1.getText()))
+      {
+          Pname1.setError("Please enter your name");
+      }
+      else if(TextUtils.isEmpty(Problem1.getText()))
+      {
+          Problem1.setError("Please enter yoour problem");
+      }
+      else
+      {
+           Pname=Pname1.getText().toString();
+           Problem=Problem1.getText().toString();
+           DoAlter();
+      }
+    }
+
+    private void DoAlter() {
+        final AlertDialog dialogBuilder = new AlertDialog.Builder(Fix_Meeting_step3.this).create();
+        LayoutInflater inflater = Fix_Meeting_step3.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.select_date_time, null);
+        TextView Date;
+        ImageView calendar=dialogView.findViewById(R.id.calendar);
+        Spinner spinner;
+        Date=dialogView.findViewById(R.id.date);
+        spinner=dialogView.findViewById(R.id.slots);
+        spinner.setAdapter(new ArrayAdapter<String>(Fix_Meeting_step3.this, android.R.layout.simple_spinner_dropdown_item,Avaiable_Slots));
+        Button Save=dialogView.findViewById(R.id.save);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Fix_Meeting_step3.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                               monthOfYear+=1;
+                               String mt;
+                               if(monthOfYear<10)
+                               {
+                                  mt="0"+String.valueOf(monthOfYear);
+                               }
+                               else
+                               {
+                                   mt=String.valueOf(monthOfYear);
+                               }
+                               final_date=String.valueOf(dayOfMonth)+"/"+mt+"/"+String.valueOf(year);
+                               child_date=String.valueOf(dayOfMonth)+"-"+mt+"-"+String.valueOf(year);
+                               Date.setText(final_date);
+                                System.out.println(monthOfYear);
+                                try {
+                                    Avaiable_Slots.clear();
+                                    Avaiable_Slots.add("Select a slot");
+                                    String sp=json.getString(final_date);
+                                    JSONObject json1=new JSONObject(sp);
+                                    int n=Integer.parseInt(slots_no);
+                                    for(int i=0;i<n;i++)
+                                    {
+                                        String slot="slot"+String.valueOf(i+1);
+                                        if(json1.getString(slot).equals("false"))
+                                        {
+                                            String start=String.valueOf(Integer.parseInt(fromTime.substring(0,2))+i)+fromTime.substring(2,5);
+                                            String end=String.valueOf(Integer.parseInt(fromTime.substring(0,2))+i+1)+fromTime.substring(2,5);
+                                            String time=start+" - "+end;
+                                            Avaiable_Slots.add(time);
+                                            Slots_map.put(time,slot);
+                                        }
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if(Avaiable_Slots.size()==1)
+                                {
+                                    Avaiable_Slots.add(0,"No slots available");
+                                }
+                                spinner.setAdapter(new ArrayAdapter<String>(Fix_Meeting_step3.this, android.R.layout.simple_spinner_dropdown_item,Avaiable_Slots));
+                            }
+                        }, mYear, mMonth, mDay);
+                SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    mindate=f.parse(lastDateChange);
+                    Calendar calendar=Calendar.getInstance();
+                    calendar.setTime(mindate);
+                    calendar.add(Calendar.DAY_OF_YEAR,6);
+                    maxdate=f.parse(f.format(calendar.getTime()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Date todayDate = new Date();
+                datePickerDialog.getDatePicker().setMinDate(todayDate.getTime());
+                datePickerDialog.getDatePicker().setMaxDate(maxdate.getTime());
+                datePickerDialog.show();
+            }
+        });
+        Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              int index=spinner.getSelectedItemPosition();
+              final_slot=Avaiable_Slots.get(index);
+              if(final_slot.equals("Select a slot"))
+              {
+                  Toast.makeText(Fix_Meeting_step3.this,"Please select a slot",Toast.LENGTH_SHORT).show();
+                  dialogBuilder.dismiss();
+              }
+              else
+              {
+                  String slot1=Slots_map.get(final_slot);
+                  try {
+                      String sp=json.getString(final_date);
+                      JSONObject json1=new JSONObject(sp);
+                      json1.remove(slot1);
+                      json1.put(slot1,"true");
+                      json.remove(json1.toString());
+                      json.put(final_date,json1.toString());
+                      Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctors_Meeting_Time").child(Did).child("slot_details").setValue(json.toString());
+                      dialogBuilder.dismiss();
+                      Fix_the_Meeting();
+
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+              }
+            }
+        });
+    }
+    public void Fix_the_Meeting() {
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date todayDate = new Date();
+        String thisDate = currentDate.format(todayDate);
+        Patient_Detail.add(Pid);
+        Patient_Detail.add(Pname);
+        Patient_Detail.add(Problem);
+        Patient_Detail.add(doctor_name);
+        Patient_Detail.add(final_slot);
+        Patient_Detail.add(final_date);
+        Patient_Detail.add(thisDate);
+        Patient_Detail.add(currentTime);
+        Patient_Detail.add(child_date);
+        Doctor_Detail.add(arr.get(4));
+        Doctor_Detail.add(arr.get(3));
+        Doctor_Detail.add(Did);
+        Intent intent=new Intent(this, MainPaymentActivity.class);
+        intent.putStringArrayListExtra("Patient_Detail",Patient_Detail);
+        intent.putStringArrayListExtra("Doctor_Detail",Doctor_Detail);
+        startActivity(intent);
     }
 }

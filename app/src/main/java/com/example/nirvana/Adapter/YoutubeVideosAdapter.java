@@ -49,8 +49,8 @@ public class YoutubeVideosAdapter extends RecyclerView.Adapter<YoutubeVideosAdap
 
     @Override
     public void onBindViewHolder(@NonNull YoutubeVideosAdapter.ViewHolder holder, int position) {
-     holder.video_title.setText(TitleList.get(position));
-     String img_url=ThumbnailList.get(position);
+     holder.video_title.setText(TitleList.get(TitleList.size()-position-1));
+     String img_url=ThumbnailList.get(ThumbnailList.size()-position-1);
      Glide.with(mContext).load(img_url)
             .placeholder(R.drawable.signup_bg)
             .into(holder.video_image);

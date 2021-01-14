@@ -12,23 +12,29 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.nirvana.Doctors.Doctor_Meeting;
 import com.example.nirvana.Patients.Patient_Meeting;
+import com.example.nirvana.Patients.Patient_Welcome_Activity;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainPaymentActivity extends AppCompatActivity implements PaymentResultListener {
     ArrayList<String> Patient_Detail,Doctor_Detail;
-    public String name1,age1,problem1,patient_phone,doctor_phone,username_doctor,patient_gender1,
-    doctor_name,time,date,time1,date1,currentTime,thisDate,link,bio,link1,amount;
+    public String name1,problem1,doctor_name,time,date,currentTime,thisDate,link,bio,amount,Did,Pid,email,phone;
     ProgressDialog progressDialog;
     public TextView Bio,Name,Problem,Phone,Amount;
     @Override
@@ -38,23 +44,17 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
         Intent intent=getIntent();
         Patient_Detail=intent.getStringArrayListExtra("Patient_Detail");
         Doctor_Detail=intent.getStringArrayListExtra("Doctor_Detail");
-        name1=Patient_Detail.get(0);
-        age1=Patient_Detail.get(1);
+        Pid=Patient_Detail.get(0);
+        name1=Patient_Detail.get(1);
         problem1=Patient_Detail.get(2);
-        patient_gender1=Patient_Detail.get(3);
-        doctor_name=Patient_Detail.get(4);
-        doctor_phone=Patient_Detail.get(5);
-        time=Patient_Detail.get(6);
-        date=Patient_Detail.get(7);
-        thisDate=Patient_Detail.get(8);
-        username_doctor=Patient_Detail.get(9);
-        link=Patient_Detail.get(10);
-        currentTime=Patient_Detail.get(11);
-        patient_phone=Doctor_Detail.get(0);
-        time1=Doctor_Detail.get(1);
-        date1=Doctor_Detail.get(2);
-        link1=Doctor_Detail.get(3);
-        bio=Doctor_Detail.get(4);
+        doctor_name=Patient_Detail.get(3);
+        time=Patient_Detail.get(4);
+        date=Patient_Detail.get(5);
+        thisDate=Patient_Detail.get(6);
+        currentTime=Patient_Detail.get(7);
+        link=Doctor_Detail.get(0);
+        bio=Doctor_Detail.get(1);
+        Did=Doctor_Detail.get(2);
         Bio=findViewById(R.id.bio);
         Problem=findViewById(R.id.problem);
         Name=findViewById(R.id.name);
@@ -65,7 +65,25 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
         Name.setText(doctor_name);
         amount="100";
         Amount.setText("Rs. "+amount);
+        retrieveData();
+    }
 
+    private void retrieveData() {
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient").child(Pid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
+                email=hashMap.get("email").toString();
+                phone=hashMap.get("phone").toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -76,35 +94,29 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
         progressDialog.show();
         Patient_Meeting patient_meeting=new Patient_Meeting(
                 name1,
-                age1,
                 problem1,
-                patient_gender1,
                 doctor_name,
-                doctor_phone,
                 time,
                 date,
                 thisDate,
-                username_doctor,
-                "None",
-                currentTime
+                bio,
+                link,
+                currentTime,
+                Did,
+                "0"
         );
         final Doctor_Meeting doctor_meeting=new Doctor_Meeting(
                 name1,
-                age1,
                 problem1,
-                patient_gender1,
-                patient_phone,
-                time1,
-                currentTime,
-                date1,
+                time,
+                date,
                 thisDate,
-                doctor_phone,
-                username_doctor,
-                link1,
-                bio
+                currentTime,
+                Pid,
+                "0"
         );
 
-        Task<Void> databaseReference = FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(patient_phone).child(doctor_phone)
+        Task<Void> databaseReference = FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(Pid).child(Did).child(Patient_Detail.get(8))
                 .setValue(patient_meeting).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -112,7 +124,7 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                     }
                 });
 
-        Task<Void> databaseReference1 = FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child("Not_Fixed_Meetings").child(doctor_phone).child(patient_phone)
+        Task<Void> databaseReference1 = FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(Did).child(Pid).child(Patient_Detail.get(8))
                 .setValue(doctor_meeting).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -120,12 +132,16 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                     }
                 });
         progressDialog.dismiss();
-        Toast.makeText(this, "Payment Successful "+s, Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(this,PaymentSuccessActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-        Toast.makeText(this, "Payment Failure", Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(this,PaymentFailureActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
     }
 
 
@@ -159,8 +175,8 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                 options.put("currency", "INR");
                 options.put("amount", String.valueOf(amt));//pass amount in currency subunits
                 JSONObject prefill=new JSONObject();
-                prefill.put("email","kinitkumar1801@gmail.com");
-                prefill.put("contact",patient_phone);
+                prefill.put("email",email);
+                prefill.put("contact",phone);
                 options.put("prefill",prefill);
                 checkout.open(activity, options);
             } catch(Exception e) {

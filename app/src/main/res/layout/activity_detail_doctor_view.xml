@@ -48,39 +48,39 @@
                 />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollview"
-        android:layout_alignTop="@id/card_view"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="60dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="16dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/title"
-            android:text="Yoga and Meditation"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignTop="@id/title"
-            android:inputType="textMultiLine"
-            android:layout_marginTop="30dp"
+            android:id="@+id/scrollview"
+            android:layout_alignTop="@id/card_view"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="60dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:text="Yoga and Meditation"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="16sp"
+                android:layout_marginTop="30dp"
                 android:breakStrategy="high_quality"
                 android:id="@+id/body"
                 android:text="kcsniosanoi  av"/>
+            </RelativeLayout>
         </ScrollView>
-    </RelativeLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"

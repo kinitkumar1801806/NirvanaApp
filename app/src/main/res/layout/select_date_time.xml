@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_centerVertical="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/select_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date :"
+            android:textSize="16sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/select_date"
+            android:layout_marginLeft="160dp"
+            android:hint="12/01/2021"/>
+        <ImageView
+            android:id="@+id/calendar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/calendar"
+            android:layout_alignBottom="@id/select_date"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"/>
+        <TextView
+            android:id="@+id/select_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Slot :"
+            android:layout_alignTop="@id/select_date"
+            android:textSize="16sp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <Spinner
+            android:id="@+id/slots"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/save"
+            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="160dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/save"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Save"
+            android:background="@drawable/button_accept"
+            android:layout_marginBottom="10dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+</RelativeLayout>

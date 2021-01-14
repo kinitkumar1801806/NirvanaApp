@@ -59,7 +59,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
     private StorageReference mStorageRef,Ref;
     private EditText code;
     private ProgressBar progressBar;
-    private String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice,Id,totalpatient,satisfiedpatient,rating,ratingby,link;
+    private String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice,Id,link;
     private String mVerificationId,code1;
     private ArrayList<String> arr;
     Button verify;
@@ -83,10 +83,6 @@ public class DoctorPhoneVerification extends AppCompatActivity {
         LinkedIn=arr.get(9);
         Year_Of_Practice=arr.get(10);
         Place_Of_Practice=arr.get(11);
-        totalpatient="0";
-        satisfiedpatient="0";
-        rating="0";
-        ratingby="0";
         Filepath=Uri.parse(intent.getStringExtra("Filepath"));
         Imagepath=Uri.parse(intent.getStringExtra("Imagepath"));
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -221,10 +217,6 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 Year_Of_Practice,
                 Place_Of_Practice,
                 LinkedIn,
-                totalpatient,
-                satisfiedpatient,
-                rating,
-                ratingby,
                 link,
                 Id
         );

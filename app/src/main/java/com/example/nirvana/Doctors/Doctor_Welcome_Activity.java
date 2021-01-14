@@ -322,9 +322,9 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
             calendar.setTime(date);
             calendar.add(Calendar.DAY_OF_YEAR,j);
             String nextDate=simpleDateFormat.format(calendar.getTime());
-            String day="day"+String.valueOf(j+1);
-            String obj="{'date':'"+nextDate+"'";
-            for(i=1;i<=diff;i++)
+            String day=nextDate;
+            String obj="{'slot1':'false'";
+            for(i=2;i<=diff;i++)
             {
                 String slot="slot"+String.valueOf(i);
                 obj+=","+slot+":'false'";

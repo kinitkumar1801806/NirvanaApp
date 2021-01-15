@@ -1,26 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Payments.PaymentSuccessActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <ImageView
+        android:layout_width="109dp"
+        android:layout_height="93dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/checktick"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/dateOfPayment"
+        android:text="15 Jan, 2021"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"/>
 
-        android:layout_margin="16dp"
-        android:src="@drawable/white_logonew"
-        android:backgroundTint="@color/green"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/paymentAmount"
+        android:text="₹650"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/green"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"/>
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.986"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:textSize="15dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doctor's Name"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/doctorname"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Dr. Ram Kumar"
+                android:textSize="20dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Referral ID"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/uniqueid"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="1234567895"
+                android:textSize="20dp"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Booking Date"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/bookdate"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="30/01/2021"
+                android:textSize="20dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Booking Time"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/BookTime"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="6:00pm"
+                android:textSize="20dp"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/retry"
+        android:text="Download"
+        android:textSize="20dp"
+        android:background="@color/green"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"/>
+
+
+</LinearLayout>

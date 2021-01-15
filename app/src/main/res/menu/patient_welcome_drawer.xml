@@ -7,7 +7,7 @@
         <item
             android:id="@+id/doctor_consultation"
             android:icon="@drawable/new_my_meetings"
-            android:title="UPCOMING MEETINGS"
+            android:title="MY MEETINGS"
             />
         <item
             android:id="@+id/book_appointment"

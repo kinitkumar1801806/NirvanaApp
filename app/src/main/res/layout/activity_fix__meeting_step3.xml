@@ -59,6 +59,7 @@
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:text="No previous Meetings"
+                 android:textColor="@color/black"
                  android:textSize="15sp"
                  android:id="@+id/no_meetings"
                  android:visibility="gone"
@@ -113,7 +114,7 @@
                     android:inputType="textPersonName"
                     android:padding="8dp"
                     android:hint="Enter your name"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <EditText
@@ -128,7 +129,7 @@
                     android:ems="10"
                     android:padding="8dp"
                     android:hint="Tell the counsellor your problem"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
                 <Button
                     android:layout_width="wrap_content"

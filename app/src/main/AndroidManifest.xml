@@ -64,7 +64,6 @@
         <activity android:name=".GoalPlanning.SessionWithFaculty" />
         <activity android:name=".GoalPlanning.ManagerialReport" />
         <activity android:name=".GoalPlanning.EmployerReport" />
-        <activity android:name=".GoalPlanning.BookSession" />
         <activity android:name=".GoalPlanning.GoalPlanning" />
 
         <receiver android:name="androidx.media.session.MediaButtonReceiver">

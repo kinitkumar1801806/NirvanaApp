@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/payment_main">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Payments.MainPaymentActivity">
@@ -10,7 +17,7 @@
     android:layout_height="150dp"
     android:src="@drawable/green_logo"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="20dp"
     android:id="@+id/logo"/>
     <TextView
         android:id="@+id/nirvana"
@@ -47,8 +54,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Doctor's Name"
-                android:layout_marginLeft="35dp"
+                android:text="Doctor's Name -"
+                android:layout_marginLeft="25dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
             <TextView
@@ -56,9 +63,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dr. Kinit Kumar"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="40dp"
                 android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -71,8 +78,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Doctor's Bio"
-                android:layout_marginLeft="35dp"
+                android:text="Doctor's Info-"
+                android:layout_marginLeft="25dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
             <TextView
@@ -81,9 +88,9 @@
                 android:layout_height="wrap_content"
                 android:text="nsoicnoisbdo"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="96dp"
+                android:layout_marginLeft="66dp"
                 android:inputType="textMultiLine"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
         </LinearLayout>
@@ -95,8 +102,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Mobile no."
-                android:layout_marginLeft="35dp"
+                android:text="Client's contact -"
+                android:layout_marginLeft="25dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
             <TextView
@@ -104,8 +111,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+919006317054"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="38dp"
                 android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -118,8 +125,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Problem Details"
-                android:layout_marginLeft="35dp"
+                android:text="Problem Details -"
+                android:layout_marginLeft="25dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
             <TextView
@@ -127,8 +134,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dfbbudsfsdf"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="62dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="32dp"
                 android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -141,8 +148,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Payment Amount"
-                android:layout_marginLeft="35dp"
+                android:text="Payment Amount -"
+                android:layout_marginLeft="25dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
             <TextView
@@ -150,8 +157,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rs. 540"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -165,7 +172,9 @@
             android:onClick="Proceed_For_Payment"
             android:background="@drawable/button_rounded"
             android:textColor="@color/white"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:elevation="10dp"/>
     </LinearLayout>
 
 </RelativeLayout>
+</ScrollView>

@@ -3,71 +3,74 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/nametag"
-        android:ems="8"
-        android:text="Name:"
-        android:padding="8dp"
-        android:textSize="18sp"/>
-
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/nametag"
-        android:id="@+id/name"
-        android:text="Any Name"
-        android:padding="8dp"
-        android:textSize="18sp"/>
-
-
-
-    <TextView
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:id="@+id/doctag"
-        android:layout_below="@+id/name"
-        android:ems="8"
-        android:text="Problem:"
-        android:padding="8dp"
-        android:textSize="18sp"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:id="@+id/doctor"
-        android:layout_below="@+id/name"
-        android:layout_toRightOf="@+id/doctag"
-        >
-        <TextView
+        android:layout_height="wrap_content">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Name"
-            android:id="@+id/problem"
-            android:padding="8dp"
-            android:textSize="18sp"/>
-    </ScrollView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_below="@+id/doctor"
-        android:text="Continue"
-        android:layout_centerInParent="true"
-        android:backgroundTint="@color/green"
-        android:textColor="@color/white"/>
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/nametag"
+                android:ems="8"
+                android:text="Name:"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/nametag"
+                android:id="@+id/name"
+                android:text="Any Name"
+                android:textSize="18sp"/>
 
 
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:id="@+id/doctag"
+                android:layout_below="@+id/name"
+                android:ems="8"
+                android:text="Problem:"
+                android:textSize="18sp"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:id="@+id/doctor"
+                android:layout_below="@+id/name"
+                android:layout_toRightOf="@+id/doctag"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Name"
+                    android:id="@+id/problem"
+                    android:textSize="18sp"/>
+            </ScrollView>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_below="@+id/doctor"
+                android:text="Continue"
+                android:layout_centerInParent="true"
+                android:backgroundTint="@color/green"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

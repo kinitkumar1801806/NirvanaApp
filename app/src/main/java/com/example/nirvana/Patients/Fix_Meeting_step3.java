@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -59,6 +60,8 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
     String fromTime,toTime,lastDateChange,slot_details,slots_no,final_date,final_slot,name,problem;
     Date mindate,maxdate;
     JSONObject json;
+    TextView ContinueAs;
+    private boolean Flag=false;
     ContinueMeeting continueMeeting;
     ArrayList<String> Avaiable_Slots,Patient_Name,Patient_Problem;
     HashMap<String,String> Slots_map;
@@ -82,6 +85,24 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
+        ContinueAs=findViewById(R.id.continueAs);
+        ContinueAs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(Flag)
+               {
+                   recyclerView.setVisibility(View.GONE);
+                   ContinueAs.setText("CONTINUE AS ▼");
+                   Flag=false;
+               }
+               else
+               {
+                   recyclerView.setVisibility(View.VISIBLE);
+                   ContinueAs.setText("CONTINUE AS ▲");
+                   Flag=true;
+               }
+            }
+        });
         retrieveData();
         retrievePreviousDetails();
     }
@@ -100,6 +121,7 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
                        HashMap<String,Object> userdata= (HashMap<String, Object>) data;
                        name=userdata.get("p_name").toString();
                        problem=userdata.get("p_problem").toString();
+                       check(name,problem);
                        initRecyclerView();
                    }
                }
@@ -116,6 +138,23 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void check(String name, String problem) {
+        int m=Patient_Problem.size();
+        boolean flag=true;
+        for(int i=0;i<m;i++)
+        {
+            if(name.equals(Patient_Name.get(i))&&problem.equals(Patient_Problem.get(i)))
+            {
+                flag=false;
+            }
+        }
+        if(flag)
+        {
+            Patient_Name.add(name);
+            Patient_Problem.add(problem);
+        }
     }
 
     private void initRecyclerView() {
@@ -206,8 +245,7 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
                 mYear = c.get(Calendar.YEAR);
                 mMonth = c.get(Calendar.MONTH);
                 mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Fix_Meeting_step3.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Fix_Meeting_step3.this,R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override

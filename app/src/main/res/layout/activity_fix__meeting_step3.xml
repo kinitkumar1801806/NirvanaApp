@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/continueAs"
                 android:layout_marginStart="6dp"
+                android:visibility="gone"
                 android:layout_marginEnd="6dp"
                 android:id="@+id/recycler_view"/>
              <TextView

@@ -53,7 +53,7 @@ public class HomeBlogFragment extends Fragment {
     private int mScrollY;
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2,Id,liked_blog;
+    private String mParam2,Id,liked_blog,BlogNo;
     View view1;
     ArrayList<String> BlogLiked_List;
     ArrayList<String> Like_List,Doctor_List,Doctor_Type,Date_List,Time_List,body_list,blog_No,TitleList,Link_List;
@@ -113,10 +113,26 @@ public class HomeBlogFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        if(savedInstanceState==null)
-        {
-            progressDialog.show();
-        }
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("Last_Scroll_Blog").child(Id);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if(snapshot.exists())
+               {
+                   HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                   BlogNo=hashMap.get("blog_no").toString();
+               }
+               else
+               {
+                   progressDialog.show();
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         retrieveData();
@@ -277,6 +293,10 @@ public class HomeBlogFragment extends Fragment {
                     body_list.add(body);
                     Link_List.add(link);
                     initRecyclerView();
+                }
+                if(BlogNo.equals(blog))
+                {
+                    mscroll=BlogLiked_List.size()-1;
                 }
             }
 

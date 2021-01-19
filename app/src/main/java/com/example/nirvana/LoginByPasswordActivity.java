@@ -48,8 +48,8 @@ public class LoginByPasswordActivity extends AppCompatActivity {
             String password = Password.getText().toString();
             if (who.equals("doctor")) {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference().child("Doctors").child(phone);
-                String result=CheckPassword(password);
+                databaseReference = firebaseDatabase.getReference().child("Doctors");
+                String result=CheckPassword(password,phone);
                 progressBar.setVisibility(View.GONE);
                 if(result.equals("Success")) {
                     progressBar.setVisibility(View.GONE);
@@ -60,8 +60,8 @@ public class LoginByPasswordActivity extends AppCompatActivity {
 
             } else if (who.equals("patient")) {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference().child("Patients").child(phone);
-                String result=CheckPassword(password);
+                databaseReference = firebaseDatabase.getReference().child("Patient");
+                String result=CheckPassword(password,phone);
                 progressBar.setVisibility(View.GONE);
                 if(result.equals("Success")) {
                     progressBar.setVisibility(View.GONE);
@@ -74,16 +74,30 @@ public class LoginByPasswordActivity extends AppCompatActivity {
         }
     }
 
-    public String CheckPassword(String pass) {
+    public String CheckPassword(String pass,String phone) {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
-                    String password = hashMap.get("password").toString();
-                    if (pass.equals(password)) {
-                       res="Success";
+                    for(String key:hashMap.keySet())
+                    {
+                        Object data=hashMap.get(key);
+                        HashMap<String,Object> userData= (HashMap<String, Object>) data;
+                        String phone1=userData.get("phone").toString();
+                        if(phone.equals(phone1))
+                        {
+                            String password = userData.get("password").toString();
+                            if (pass.equals(password)) {
+                                res="Success";
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginByPasswordActivity.this, "This number does not attach with any account.", Toast.LENGTH_SHORT).show();
+                            res="Failure";
+                        }
                     }
                 } else {
                     Toast.makeText(LoginByPasswordActivity.this, "This number does not attach with any account.", Toast.LENGTH_SHORT).show();

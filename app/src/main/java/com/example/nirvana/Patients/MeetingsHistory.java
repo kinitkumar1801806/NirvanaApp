@@ -1,4 +1,4 @@
-package com.example.nirvana;
+package com.example.nirvana.Patients;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nirvana.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UpcomingMeetings#newInstance} factory method to
+ * Use the {@link MeetingsHistory#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UpcomingMeetings extends Fragment {
+public class MeetingsHistory extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class UpcomingMeetings extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UpcomingMeetings() {
+    public MeetingsHistory() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class UpcomingMeetings extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UpcomingMeetings.
+     * @return A new instance of fragment MeetingsHistory.
      */
     // TODO: Rename and change types and number of parameters
-    public static UpcomingMeetings newInstance(String param1, String param2) {
-        UpcomingMeetings fragment = new UpcomingMeetings();
+    public static MeetingsHistory newInstance(String param1, String param2) {
+        MeetingsHistory fragment = new MeetingsHistory();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class UpcomingMeetings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upcoming_meetings, container, false);
+        return inflater.inflate(R.layout.fragment_meetings_history, container, false);
     }
 }

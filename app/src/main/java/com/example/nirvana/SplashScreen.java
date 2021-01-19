@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
 import com.example.nirvana.Patients.Patient_Welcome_Activity;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +63,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String uid=(String)userData.get("Id");
                                 if(uid.equals(Id))
                                 {
+                                    Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference().child("Last_Scroll_Blog").child(Id).removeValue();
                                     Intent intent=new Intent(SplashScreen.this, Doctor_Welcome_Activity.class);
                                     String phone=(String)userData.get("phone");
                                     check="yes";
@@ -94,6 +96,7 @@ public class SplashScreen extends AppCompatActivity {
                                 String phone=(String)userData.get("phone");
                                 if(uid.equals(Id))
                                 {
+                                    Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference().child("Last_Scroll_Blog").child(Id).removeValue();
                                     Intent intent=new Intent(SplashScreen.this, Patient_Welcome_Activity.class);
                                     check="yes";
                                     intent.putExtra("phone",phone);

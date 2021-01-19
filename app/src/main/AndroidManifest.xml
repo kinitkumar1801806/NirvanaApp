@@ -28,7 +28,6 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".my_meetings"></activity>
         <activity android:name=".fix_metting" />
         <activity
             android:name=".Blogs.DetailDoctorViewActivity"
@@ -48,7 +47,6 @@
             android:label="Edit Profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".patientbook_details" />
-        <activity android:name=".book_appointment" />
         <activity android:name=".patient_settings_options" />
         <activity
             android:name=".YogaTutorials.YoutubePlayerActivity"
@@ -99,8 +97,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Patients.Meeting_Alresdy_fixed_step2" />
         <activity
-            android:name=".Patients.Meeting_Already_Fixed_step1"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".Patients.Meeting_Already_Fixed_step1" />
         <activity android:name=".Niri" />
         <activity
             android:name=".Doctors.PendingMeetingsStep2"

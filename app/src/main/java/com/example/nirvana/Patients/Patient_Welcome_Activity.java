@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -74,6 +76,10 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             intent1.putExtra("phone",phone);
             startService(intent1);
         }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Filter","date");
+        editor.apply();
         RetrievePatientDetails();
         Bundle bundle=new Bundle();
         bundle.putString("Id",Id);

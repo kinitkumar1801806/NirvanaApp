@@ -1,8 +1,12 @@
 package com.example.nirvana.Blogs;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Path;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,15 +17,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nirvana.Adapter.BlogAdapter;
 import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
 import com.example.nirvana.Model.BlogModel;
+import com.example.nirvana.Model.LastScrolledBlog;
+import com.example.nirvana.Patients.Fix_Meeting_step3;
 import com.example.nirvana.Patients.Patient_Welcome_Activity;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +56,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -53,13 +75,16 @@ public class HomeBlogFragment extends Fragment {
     private int mScrollY;
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2,Id,liked_blog,BlogNo;
+    private String mParam2,Id,liked_blog,BlogNo="0",Filter;
     View view1;
     ArrayList<String> BlogLiked_List;
+    ArrayList<String> filter;
     ArrayList<String> Like_List,Doctor_List,Doctor_Type,Date_List,Time_List,body_list,blog_No,TitleList,Link_List;
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
     BlogAdapter blogAdapter;
+    private boolean isChecking = true;
+    private int selectedId=-1,total_blog=0;
     public HomeBlogFragment() {
         // Required empty public constructor
     }
@@ -85,12 +110,34 @@ public class HomeBlogFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         Bundle bundle=this.getArguments();
         Id=bundle.getString("Id");
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main,menu);
+        MenuItem filter=menu.findItem(R.id.filter);
+        Spannable s=new SpannableString(filter.getTitle());
+        s.setSpan(new TextAppearanceSpan(getActivity(),R.style.SpinnerTheme),0,s.length(),0);
+        filter.setTitle(s);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.filter:
+                DoAlter();
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -108,11 +155,40 @@ public class HomeBlogFragment extends Fragment {
         blog_No=new ArrayList<>();
         TitleList=new ArrayList<>();
         Link_List=new ArrayList<>();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Filter = preferences.getString("Filter", "");
         progressDialog =new ProgressDialog(getActivity());
         recyclerView=view1.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1=firebaseDatabase.getReference("Blogs").child("blogs");
+        databaseReference1.orderByChild("date").limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                    for(String key:hashMap.keySet())
+                    {
+                        Object data=hashMap.get(key);
+                        HashMap<String,Object> userdata= (HashMap<String, Object>) data;
+                        total_blog=Integer.parseInt(userdata.get("blog_no").toString());
+                        retrieveData(Filter);
+                    }
+                }
+                else
+                {
+                    progressDialog.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("Last_Scroll_Blog").child(Id);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,7 +196,7 @@ public class HomeBlogFragment extends Fragment {
                if(snapshot.exists())
                {
                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
-                   BlogNo=hashMap.get("blog_no").toString();
+                   BlogNo=hashMap.get("blogno").toString();
                }
                else
                {
@@ -135,56 +211,104 @@ public class HomeBlogFragment extends Fragment {
         });
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        retrieveData();
         return view1;
     }
-    public void retrieveData()
+    public void retrieveData(String type)
     {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=firebaseDatabase.getReference("Blogs").child("blogs");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                {
-                    BlogLiked_List.clear();
-                    Like_List.clear();
-                    Doctor_List.clear();
-                    Doctor_Type.clear();
-                    Date_List.clear();
-                    Time_List.clear();
-                    body_list.clear();
-                    blog_No.clear();
-                    TitleList.clear();
-                    Link_List.clear();
-                    HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
-                    for(String key:hashMap.keySet()) {
-                        Object data = hashMap.get(key);
-                        HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                        String title=(String)userData.get("title");
-                        String like=(String)userData.get("like");
-                        String body=(String)userData.get("body");
-                        String date=(String)userData.get("date");
-                        String time=(String)userData.get("time");
-                        String blog_no=(String)userData.get("blog_no");
-                        String doctor_name=(String)userData.get("doctor_name");
-                        String doctor_type=(String)userData.get("doctor_type");
-                        String link=(String)userData.get("link");
-                        retrieveLikeDetails(blog_no,time,date,doctor_name,doctor_type,title,like,body,link);
+        if(type.equals("date"))
+        {
+            databaseReference.orderByChild(type).limitToLast(total_blog).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        BlogLiked_List.clear();
+                        Like_List.clear();
+                        Doctor_List.clear();
+                        Doctor_Type.clear();
+                        Date_List.clear();
+                        Time_List.clear();
+                        body_list.clear();
+                        blog_No.clear();
+                        TitleList.clear();
+                        Link_List.clear();
+                        HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
+                        for(String key:hashMap.keySet()) {
+                            Object data = hashMap.get(key);
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            String title=(String)userData.get("title");
+                            String like=(String)userData.get("like");
+                            String body=(String)userData.get("body");
+                            String date=(String)userData.get("date");
+                            String time=(String)userData.get("time");
+                            String blog_no=(String)userData.get("blog_no");
+                            String doctor_name=(String)userData.get("doctor_name");
+                            String doctor_type=(String)userData.get("doctor_type");
+                            String link=(String)userData.get("link");
+                            retrieveLikeDetails(blog_no,time,date,doctor_name,doctor_type,title,like,body,link);
+                        }
+                    }
+                    else
+                    {
+                        TextView textView=view1.findViewById(R.id.text_view);
+                        textView.setText("We don't have any blog at this time");
+                        progressDialog.dismiss();
                     }
                 }
-                else
-                {
-                    TextView textView=view1.findViewById(R.id.text_view);
-                    textView.setText("We don't have any blog at this time");
-                    progressDialog.dismiss();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+        else
+        {
+            databaseReference.orderByChild("doctor_type").equalTo(type).limitToLast(total_blog).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        BlogLiked_List.clear();
+                        Like_List.clear();
+                        Doctor_List.clear();
+                        Doctor_Type.clear();
+                        Date_List.clear();
+                        Time_List.clear();
+                        body_list.clear();
+                        blog_No.clear();
+                        TitleList.clear();
+                        Link_List.clear();
+                        HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
+                        for(String key:hashMap.keySet()) {
+                            Object data = hashMap.get(key);
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            String title=(String)userData.get("title");
+                            String like=(String)userData.get("like");
+                            String body=(String)userData.get("body");
+                            String date=(String)userData.get("date");
+                            String time=(String)userData.get("time");
+                            String blog_no=(String)userData.get("blog_no");
+                            String doctor_name=(String)userData.get("doctor_name");
+                            String doctor_type=(String)userData.get("doctor_type");
+                            String link=(String)userData.get("link");
+                            retrieveLikeDetails(blog_no,time,date,doctor_name,doctor_type,title,like,body,link);
+                        }
+                    }
+                    else
+                    {
+                        TextView textView=view1.findViewById(R.id.text_view);
+                        textView.setText("We don't have any blog at this time");
+                        progressDialog.dismiss();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
     public void initRecyclerView()
     {
@@ -218,14 +342,23 @@ public class HomeBlogFragment extends Fragment {
                 arr.add(link);
                 arr.add(liked_blog);
                 arr.add(Id);
-                Bundle bundle=new Bundle();
-                bundle.putStringArrayList("arr",arr);
-                DetailBlogFragment detailBlogFragment=new DetailBlogFragment();
-                detailBlogFragment.setArguments(bundle);
-                FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout,detailBlogFragment,"detail");
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                LastScrolledBlog lastScrolledBlog=new LastScrolledBlog(
+                  blog_no
+                );
+                DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("Last_Scroll_Blog").child(Id);
+                databaseReference.setValue(lastScrolledBlog).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Bundle bundle=new Bundle();
+                        bundle.putStringArrayList("arr",arr);
+                        DetailBlogFragment detailBlogFragment=new DetailBlogFragment();
+                        detailBlogFragment.setArguments(bundle);
+                        FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout,detailBlogFragment,"detail");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                });
             }
             @Override
             public void onLikeChange(int position) {
@@ -303,6 +436,68 @@ public class HomeBlogFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+    public void DoAlter()
+    {
+        final AlertDialog alterDialog = new AlertDialog.Builder(getActivity()).create();
+        LayoutInflater inflater=getActivity().getLayoutInflater();
+        View dialogueview=inflater.inflate(R.layout.filter_blog, null);
+        RadioGroup radioGroup=dialogueview.findViewById(R.id.radio_group);
+        RadioGroup radioGroup2=dialogueview.findViewById(R.id.radio_group2);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1 && isChecking) {
+                    isChecking = false;
+                    radioGroup2.clearCheck();
+                    selectedId = checkedId;
+                }
+                isChecking = true;
+            }
+        });
+        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1 && isChecking) {
+                    isChecking = false;
+                    radioGroup.clearCheck();
+                    selectedId = checkedId;
+                }
+                isChecking = true;
+            }
+        });
+        alterDialog.setView(dialogueview);
+        alterDialog.show();
+        Button apply=dialogueview.findViewById(R.id.apply);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadioButton filter_by;
+                if(selectedId!=-1)
+                {
+                    if(selectedId==R.id.date_radio||selectedId==R.id.therapist_radio||selectedId==R.id.counsellor_raadio)
+                    {
+                        filter_by=radioGroup.findViewById(selectedId);
+                        Filter=filter_by.getText().toString();
+                    }
+                    else
+                    {
+                        filter_by=radioGroup2.findViewById(selectedId);
+                        Filter=filter_by.getText().toString();
+                    }
+                    if(Filter.equals("Date"))
+                    {
+                        Filter="date";
+                    }
+                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("Filter",Filter);
+                    editor.apply();
+                    retrieveData(Filter);
+                }
+                alterDialog.dismiss();
             }
         });
     }

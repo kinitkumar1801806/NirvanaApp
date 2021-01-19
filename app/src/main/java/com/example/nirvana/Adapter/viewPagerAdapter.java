@@ -1,4 +1,4 @@
-package com.example.nirvana;
+package com.example.nirvana.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

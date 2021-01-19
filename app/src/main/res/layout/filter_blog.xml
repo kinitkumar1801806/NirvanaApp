@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_centerVertical="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/radio_group"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/date_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textSize="15sp"
+                        android:layout_marginTop="15dp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/counsellor_raadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Counsellor"
+                        android:textSize="15sp"
+                        android:layout_marginTop="10dp"
+                        />
+                    <RadioButton
+                        android:id="@+id/therapist_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Therapist"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15sp"
+                        />
+
+                </RadioGroup>
+<RadioGroup
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:id="@+id/radio_group2"
+    android:layout_alignParentRight="true"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginBottom="40dp">
+    <RadioButton
+        android:id="@+id/psychiatrist_radio"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="Psychiatrist"
+        android:textSize="15sp"
+        />
+
+    <RadioButton
+        android:id="@+id/psycologist_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Psycologist"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        />
+</RadioGroup>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/apply"
+            android:background="@drawable/answer_call"
+            android:text="Apply" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+</RelativeLayout>

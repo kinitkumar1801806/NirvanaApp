@@ -33,7 +33,7 @@ public class DoctorViewActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
     BlogAdapter blogAdapter;
-
+    public Integer total_blog=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +60,39 @@ public class DoctorViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        retrieveData();
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1=firebaseDatabase.getReference("Blogs").child("blogs");
+        databaseReference1.orderByChild("date").limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                    for(String key:hashMap.keySet())
+                    {
+                        Object data=hashMap.get(key);
+                        HashMap<String,Object> userdata= (HashMap<String, Object>) data;
+                        total_blog=Integer.parseInt(userdata.get("blog_no").toString());
+                        retrieveData();
+                    }
+                }
+                else
+                {
+                    progressDialog.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     public void retrieveData()
     {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=firebaseDatabase.getReference("Blogs").child("blogs");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("date").limitToLast(total_blog).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())

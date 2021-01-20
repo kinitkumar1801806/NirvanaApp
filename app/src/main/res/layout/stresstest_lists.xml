@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Have you felt sad or depressed? Felt down or Empty? Felt grouchy or annoyed?"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/black"
         android:layout_marginLeft="10dp"
         android:textSize="18sp" />
 
@@ -30,14 +30,14 @@
         android:textSize="18sp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="40dp"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/black"
         android:id="@+id/slot1"
         />
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Generally"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:id="@+id/slot2"
         android:layout_marginLeft="40dp"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ocassionaly"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:id="@+id/slot3"
         android:layout_marginLeft="40dp"
@@ -61,6 +61,6 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
         android:text="Almost never"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/black"
         android:textSize="18sp" />
 </LinearLayout>

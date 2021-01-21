@@ -21,7 +21,7 @@
             android:gravity="center_horizontal"
             android:text="Major Depressive Episode"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MDE"
@@ -35,7 +35,7 @@
             android:gravity="center_horizontal"
             android:text="Sucidality"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/suicide"
@@ -49,7 +49,7 @@
             android:gravity="center_horizontal"
             android:text="Dysthymia"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dysThymia"
@@ -63,7 +63,7 @@
             android:gravity="center_horizontal"
             android:text="Hypo Maniac Episode"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/HME"
@@ -77,7 +77,7 @@
             android:gravity="center_horizontal"
             android:text="Panic Disorder"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/panicDisorder"
@@ -91,7 +91,7 @@
             android:gravity="center_horizontal"
             android:text="Aghoraphobia"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Aphobia"
@@ -105,7 +105,7 @@
             android:gravity="center_horizontal"
             android:text="Separation Anxiety Disorder"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SAD"
@@ -119,7 +119,7 @@
             android:gravity="center_horizontal"
             android:text="Social Phobia"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SocialPhobia"
@@ -133,7 +133,7 @@
             android:gravity="center_horizontal"
             android:text="Obsessive Compulsive Disorder"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/OCD"
@@ -147,7 +147,7 @@
             android:gravity="center_horizontal"
             android:text="Alcohol Abuse"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/AlcoholAbuse"
@@ -161,7 +161,7 @@
             android:gravity="center_horizontal"
             android:text="Psychoative substance use"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/PSU"
@@ -175,7 +175,7 @@
             android:gravity="center_horizontal"
             android:text="Conduct Disorder"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/CD"
@@ -189,7 +189,7 @@
             android:gravity="center_horizontal"
             android:text="TIC Disorder"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/TIC"

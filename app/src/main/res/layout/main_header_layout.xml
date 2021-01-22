@@ -18,7 +18,7 @@
             android:layout_marginLeft="15dp"
             android:padding="10dp"
             android:layout_marginTop="55dp"
-            android:src="@drawable/white_logo"
+            android:src="@drawable/green_logo"
             />
 
         <LinearLayout

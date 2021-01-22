@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,11 +26,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.nirvana.Blogs.DetailBlogFragment;
 import com.example.nirvana.Blogs.HomeBlogFragment;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
 import com.example.nirvana.Model.MeetingTime;
-import com.example.nirvana.Patients.PatientQueue;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;
 import com.example.nirvana.Call.SinchService;
@@ -47,7 +47,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -91,6 +90,10 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
             intent1.putExtra("phone",phone);
             startService(intent1);
         }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Filter","date");
+        editor.apply();
         RetrieveDoctorDetails();
         Bundle bundle=new Bundle();
         bundle.putString("Id",Id);
@@ -381,8 +384,8 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         int id=item.getItemId();
         if(id==R.id.welcome_doctor_schedule)
         {
-            Intent intent=new Intent(this, PatientQueue.class);
-            intent.putExtra("phone",phone);
+            Intent intent=new Intent(this, PendingMeetingsStep1.class);
+            intent.putExtra("Id",Id);
             startActivity(intent);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

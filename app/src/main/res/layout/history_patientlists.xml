@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="505dp"
+    android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -83,25 +83,15 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:fontFamily="@font/helveticaneuemedium"
-                android:text="JOIN NOW"
-                android:id="@+id/join"
+                android:text="Details"
+                android:id="@+id/details"
                 android:textSize="15dp"
                 android:backgroundTint="#49CD59"
-
                 />
-
-
-
-
-
-
-
-
-
-        </LinearLayout>
+     </LinearLayout>
 
 
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>

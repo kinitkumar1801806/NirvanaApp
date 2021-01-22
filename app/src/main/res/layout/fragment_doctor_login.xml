@@ -33,7 +33,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <Spinner
@@ -75,38 +75,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:focusable="true"
-        android:theme="@style/MyTextInputLayout"
-        android:focusableInTouchMode="true">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="-35dp"
-            android:layout_marginLeft="17dp"
-            android:paddingBottom="10dp"
-            android:src="@drawable/person_secondary" />
-
-        <EditText
-            android:id="@+id/id_doctor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="Enter your nirvana Id"
-            android:inputType="text"
-            android:paddingLeft="40dp"
-            android:textColorHint="@android:color/white"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
 
     <Button
         android:id="@+id/signin_doctor"

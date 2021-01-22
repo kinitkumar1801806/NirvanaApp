@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +33,7 @@ public class Doctors_GridView extends AppCompatActivity {
     ArrayList<String> ImageArray;
     ArrayList<String> NameList;
     String Id,Id1;
-    ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList,Id_List;
+    ArrayList<String> Username_List,Phone_List,arr,Expand_List,BioList,Id_List,AmountList,RatingList,LinkedInList;
     RecyclerView recyclerView;
     ImageAdapter_Doctor imageAdapter_doctor;
     ProgressDialog progressDialog;
@@ -51,7 +52,10 @@ public class Doctors_GridView extends AppCompatActivity {
         arr=new ArrayList<>();
         BioList=new ArrayList<>();
         Expand_List=new ArrayList<>();
+        AmountList=new ArrayList<>();
+        RatingList=new ArrayList<>();
         ImageArray=new ArrayList<>();
+        LinkedInList=new ArrayList<>();
         Id_List=new ArrayList<>();
         textview=findViewById(R.id.text_view);
         progressDialog =new ProgressDialog(Doctors_GridView.this);
@@ -86,13 +90,21 @@ public void retrieveData()
                     String Id=(String)userData.get("Id");
                     String link=(String)userData.get("link");
                     String affiliation=(String)userData.get("affiliation");
+                    String amount=(String)userData.get("amount");
+                    String rating=(String)userData.get("total_rating");
+                    String rated_by=(String)userData.get("rated_by");
+                    String linkedIn=(String)userData.get("linkedIn");
                     NameList.add(Name);
                     Username_List.add(username);
                     Phone_List.add(phone);
                     ImageArray.add(link);
-                    BioList.add(affiliation);
+                    BioList.add(affiliation);//biolist contains the affliation
                     Expand_List.add("0");
                     Id_List.add(Id);
+                    AmountList.add(amount);
+                    LinkedInList.add(linkedIn);
+                    int r=Integer.parseInt(rating)/Integer.parseInt(rated_by);
+                    RatingList.add(String.valueOf(r));
                     initRecyclerView();
                 }
             }
@@ -110,7 +122,7 @@ public void retrieveData()
 }
 public void initRecyclerView()
 {
-    imageAdapter_doctor= new ImageAdapter_Doctor(Doctors_GridView.this, ImageArray, NameList,Username_List,Expand_List,BioList);
+    imageAdapter_doctor= new ImageAdapter_Doctor(Doctors_GridView.this, ImageArray, NameList,Username_List,Expand_List,BioList,AmountList,RatingList,LinkedInList);
     recyclerView.setAdapter(imageAdapter_doctor);
     imageAdapter_doctor.setOnItemClickListener(new ImageAdapter_Doctor.OnItemClickListener() {
         @Override
@@ -125,6 +137,7 @@ public void initRecyclerView()
             arr.add(3,BioList.get(position));
             arr.add(4,ImageArray.get(position));
             arr.add(5,Id);
+            arr.add(6,AmountList.get(position));
             Intent i = new Intent(getApplicationContext(), Fix_Meeting_step2.class);
             // Pass image index
             i.putStringArrayListExtra("arr",arr);
@@ -144,6 +157,14 @@ public void initRecyclerView()
                 Expand_List.set(position,"1");
             }
             imageAdapter_doctor.notifyItemChanged(position);
+        }
+
+        @Override
+        public void VisitLinkedIn(int position) {
+            String url=LinkedInList.get(position);
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
         }
     });
     progressDialog.dismiss();

@@ -12,9 +12,4 @@
         android:title=""
         android:icon="@drawable/ic_call_black_24dp"
         app:showAsAction="ifRoom|withText"/>
-    <item
-        android:id="@+id/chat"
-        android:title=""
-        android:icon="@drawable/ic_round_chat_24"
-        app:showAsAction="ifRoom|withText"/>
 </menu>

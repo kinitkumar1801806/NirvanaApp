@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.nirvana.Doctors.DoctorPhoneVerification;
 import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -38,12 +39,13 @@ import java.util.regex.Pattern;
 
 public class EditProfileActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 234;
-    public String Id, Who, fname, lname, age, email, address, link,link1;
-    public EditText First_Name, Last_Name, Age, Email, City_State;
+    public String Id, Who, fname, lname, age, email, address, link,link1,amount;
+    public EditText First_Name, Last_Name, Age, Email, City_State,Amount_EditText;
     public ImageView Profile_Image;
     private Uri Imagepath;
     private StorageReference mStorageRef;
     public Integer img=0;
+    public TextView Amount_TextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +63,15 @@ public class EditProfileActivity extends AppCompatActivity {
         Email = findViewById(R.id.email_patient);
         City_State = findViewById(R.id.address_patient);
         Profile_Image = findViewById(R.id.profile_image);
+        Amount_EditText=findViewById(R.id.amount_editText);
+        Amount_TextView=findViewById(R.id.amount_textView);
         RetrieveData();
     }
 
     private void RetrieveData() {
         if (Who.equals("doctor")) {
+            Amount_TextView.setVisibility(View.VISIBLE);
+            Amount_EditText.setVisibility(View.VISIBLE);
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference().child("Doctors").child(Id);
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -77,6 +83,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     email = (String) userData.get("email");
                     link1 = (String) userData.get("link");
                     address = (String) userData.get("address");
+                    amount =(String) userData.get("amount");
+                    Amount_EditText.setText(amount);
                     AssignData();
                 }
 
@@ -200,57 +208,156 @@ public class EditProfileActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             Save.setVisibility(View.VISIBLE);
         }
-        else{
-            if(fname.equals(First_Name.getText().toString())&&lname.equals(Last_Name.getText().toString())&&age.equals(Age.getText().toString())&&
-                    email.equals(Email.getText().toString())&&address.equals(City_State.getText().toString())&&img==0)
+        if(Who.equals("doctor"))
+        {
+            if(TextUtils.isEmpty(Amount_EditText.getText()))
             {
+                Amount_EditText.setError("Please enter the amount");
                 progressBar.setVisibility(View.GONE);
-                finish();
-                overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
-            }
-            fname=First_Name.getText().toString();
-            lname=Last_Name.getText().toString();
-            age=Age.getText().toString();
-            email=Email.getText().toString();
-            address=City_State.getText().toString();
-            Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("fname").setValue(fname);
-            Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("lname").setValue(lname);
-            Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("age").setValue(age);
-            Task<Void> databaseReference3=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("email").setValue(email);
-            Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("address").setValue(address);
-            if(img==1)
-            {
-                StorageReference Ref =mStorageRef.child("Profile Images").child(Id);
-                Ref.putFile(Imagepath)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                // Get a URL to the uploaded content
-                                Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        progressBar.setVisibility(View.GONE);
-                                        link=uri.toString();
-                                        Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("link").setValue(link);
-                                        RetrieveData();
-                                        finish();
-                                        overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
-                                    }
-                                }) ;
-
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle unsuccessful uploads
-                                progressBar.setVisibility(View.GONE);
-                                Save.setVisibility(View.VISIBLE);
-                                Toast.makeText(EditProfileActivity.this,"Profile Image is not Changed",Toast.LENGTH_SHORT).show();
-                                // ...
-                            }
-                        });
+                Save.setVisibility(View.VISIBLE);
             }
         }
+        else {
+            if (Who.equals("patient")) {
+                if(fname.equals(First_Name.getText().toString())&&lname.equals(Last_Name.getText().toString())&&age.equals(Age.getText().toString())&&
+                        email.equals(Email.getText().toString())&&address.equals(City_State.getText().toString())&&img==0)
+                {
+                    progressBar.setVisibility(View.GONE);
+                    finish();
+                    overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
+                }
+                fname=First_Name.getText().toString();
+                lname=Last_Name.getText().toString();
+                age=Age.getText().toString();
+                email=Email.getText().toString();
+                address=City_State.getText().toString();
+                Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("fname").setValue(fname);
+                Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("lname").setValue(lname);
+                Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("age").setValue(age);
+                Task<Void> databaseReference3=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("email").setValue(email);
+                Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("address").setValue(address);
+                if(img==1)
+                {
+                    StorageReference Ref =mStorageRef.child("Profile Images").child(Id);
+                    Ref.putFile(Imagepath)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // Get a URL to the uploaded content
+                                    Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressBar.setVisibility(View.GONE);
+                                            link=uri.toString();
+                                            Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("link").setValue(link);
+                                            RetrieveData();
+                                            finish();
+                                            overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
+                                        }
+                                    }) ;
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle unsuccessful uploads
+                                    progressBar.setVisibility(View.GONE);
+                                    Save.setVisibility(View.VISIBLE);
+                                    Toast.makeText(EditProfileActivity.this,"Profile Image is not Changed",Toast.LENGTH_SHORT).show();
+                                    // ...
+                                }
+                            });
+                }
+            }
+            else
+            {
+                if(fname.equals(First_Name.getText().toString())&&lname.equals(Last_Name.getText().toString())&&age.equals(Age.getText().toString())&&
+                        email.equals(Email.getText().toString())&&address.equals(City_State.getText().toString())&&amount.equals(Amount_EditText.getText().toString())&&img==0)
+                {
+                    progressBar.setVisibility(View.GONE);
+                    finish();
+                    overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
+                }
+                fname=First_Name.getText().toString();
+                lname=Last_Name.getText().toString();
+                age=Age.getText().toString();
+                email=Email.getText().toString();
+                address=City_State.getText().toString();
+                amount=Amount_EditText.getText().toString();
+                Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("fname").setValue(fname);
+                Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("lname").setValue(lname);
+                Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("age").setValue(age);
+                Task<Void> databaseReference3=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("email").setValue(email);
+                Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("address").setValue(address);
+                Task<Void> databaseReference5=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("amount").setValue(amount);
+                if(img==1)
+                {
+                    StorageReference Ref =mStorageRef.child("Profile Images").child(Id);
+                    Ref.putFile(Imagepath)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // Get a URL to the uploaded content
+                                    Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressBar.setVisibility(View.GONE);
+                                            link=uri.toString();
+                                            Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("link").setValue(link);
+                                            UpdateBlogs();
+                                            RetrieveData();
+                                            finish();
+                                            overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
+                                        }
+                                    }) ;
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle unsuccessful uploads
+                                    progressBar.setVisibility(View.GONE);
+                                    Save.setVisibility(View.VISIBLE);
+                                    Toast.makeText(EditProfileActivity.this,"Profile Image is not Changed",Toast.LENGTH_SHORT).show();
+                                    // ...
+                                }
+                            });
+
+                }
+            }
+        }
+    }
+
+    private void UpdateBlogs() {
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Blogs").child("blogs");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    HashMap<String,Object>hashMap= (HashMap<String, Object>) snapshot.getValue();
+                    for(String key:hashMap.keySet())
+                    {
+                        Object data=hashMap.get(key);
+                        HashMap<String,Object> userdata= (HashMap<String, Object>) data;
+                        String blog=(String)userdata.get("blog_no");
+                        String id=(String)userdata.get("Id");
+                        if(id.equals(Id))
+                        {
+                            Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference().child("Blogs").child("blogs")
+                                    .child("Blogno"+blog).child("link").setValue(link);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

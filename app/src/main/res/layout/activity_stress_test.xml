@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
 
         android:layout_margin="16dp"
-        android:src="@drawable/white_logonew"
+        android:src="@drawable/green_logo"
         android:backgroundTint="@color/green"
 
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,4 +1,4 @@
-package com.example.nirvana.Patients;
+package com.example.nirvana.Doctors;
 
 import android.os.Bundle;
 
@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nirvana.Adapter.RecyclerView_Adapter;
+import com.example.nirvana.Adapter.Upcoming_Doctor_Meetings_Adapter;
 import com.example.nirvana.Adapter.Upcoming_Patient_Meetings_Adapter;
 import com.example.nirvana.R;
 import com.google.firebase.database.DataSnapshot;
@@ -23,16 +22,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UpcomingMeetings#newInstance} factory method to
+ * Use the {@link Doctor_UpcomingMeetings#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UpcomingMeetings extends Fragment {
+public class Doctor_UpcomingMeetings extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,13 +40,13 @@ public class UpcomingMeetings extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    public View view1;
     public RecyclerView recyclerView;
-    Upcoming_Patient_Meetings_Adapter upcoming_patient_meetings_adapter;
-    public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList;
+    Upcoming_Doctor_Meetings_Adapter upcoming_doctor_meetings_adapter;
+    public ArrayList<String> LinkList,NameList,ProblemList,DateList,TimeList;
     public String Id;
     TextView textView;
-    public UpcomingMeetings() {
+    View view1;
+    public Doctor_UpcomingMeetings() {
         // Required empty public constructor
     }
 
@@ -58,11 +56,11 @@ public class UpcomingMeetings extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UpcomingMeetings.
+     * @return A new instance of fragment Doctor_UpcomingMeetings.
      */
     // TODO: Rename and change types and number of parameters
-    public static UpcomingMeetings newInstance(String param1, String param2) {
-        UpcomingMeetings fragment = new UpcomingMeetings();
+    public static Doctor_UpcomingMeetings newInstance(String param1, String param2) {
+        Doctor_UpcomingMeetings fragment = new Doctor_UpcomingMeetings();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -85,14 +83,14 @@ public class UpcomingMeetings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view1= inflater.inflate(R.layout.fragment_upcoming_meetings, container, false);
+        view1 = inflater.inflate(R.layout.fragment_doctor__upcoming_meetings, container, false);
         LinkList=new ArrayList<>();
         NameList=new ArrayList<>();
-        TypeList=new ArrayList<>();
+        ProblemList=new ArrayList<>();
         DateList=new ArrayList<>();
         TimeList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
-        recyclerView=view1.findViewById(R.id.upcoming_patientlists);
+        recyclerView=view1.findViewById(R.id.upcoming_doctorlists);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -102,7 +100,7 @@ public class UpcomingMeetings extends Fragment {
     public void retrieveData()
     {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patient_Meetings").child(Id);
+        DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctor_Meetings").child(Id);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -111,27 +109,27 @@ public class UpcomingMeetings extends Fragment {
                     HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
                     for(String key:hashMap.keySet())
                     {
-                       HashMap<String,Object>hashMap1= (HashMap<String, Object>) hashMap.get(key);
-                       for(String key1:hashMap1.keySet())
-                       {
-                           Object data=hashMap1.get(key1);
-                           HashMap<String,Object> userData=(HashMap<String,Object>)data;
-                           String complete=userData.get("complete").toString();
-                           if(complete.equals("0"))
-                           {
-                               String name=userData.get("d_name").toString();
-                               String link=userData.get("link").toString();
-                               String date=userData.get("date").toString();
-                               String time=userData.get("time").toString();
-                               String type=userData.get("d_bio").toString();
-                               NameList.add(name);
-                               LinkList.add(link);
-                               DateList.add(date);
-                               TimeList.add(time);
-                               TypeList.add(type);
-                               initRecyclerView();
-                           }
-                       }
+                        HashMap<String,Object>hashMap1= (HashMap<String, Object>) hashMap.get(key);
+                        for(String key1:hashMap1.keySet())
+                        {
+                            Object data=hashMap1.get(key1);
+                            HashMap<String,Object> userData=(HashMap<String,Object>)data;
+                            String complete=userData.get("complete").toString();
+                            if(complete.equals("0"))
+                            {
+                                String name=userData.get("p_name").toString();
+                                String link=userData.get("link").toString();
+                                String date=userData.get("date").toString();
+                                String time=userData.get("time").toString();
+                                String problem=userData.get("p_problem").toString();
+                                NameList.add(name);
+                                LinkList.add(link);
+                                DateList.add(date);
+                                TimeList.add(time);
+                                ProblemList.add(problem);
+                                initRecyclerView();
+                            }
+                        }
                     }
                 }
                 else
@@ -148,9 +146,9 @@ public class UpcomingMeetings extends Fragment {
     }
 
     private void initRecyclerView() {
-        upcoming_patient_meetings_adapter =new Upcoming_Patient_Meetings_Adapter(getActivity(),NameList,TypeList,DateList,TimeList,LinkList);
-        recyclerView.setAdapter(upcoming_patient_meetings_adapter);
-        upcoming_patient_meetings_adapter.setOnItemClickListener(new Upcoming_Patient_Meetings_Adapter.OnItemClickListener() {
+        upcoming_doctor_meetings_adapter =new Upcoming_Doctor_Meetings_Adapter(getActivity(),NameList,ProblemList,DateList,TimeList,LinkList);
+        recyclerView.setAdapter(upcoming_doctor_meetings_adapter);
+        upcoming_doctor_meetings_adapter.setOnItemClickListener(new Upcoming_Doctor_Meetings_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(getActivity(),"Button Clicked",Toast.LENGTH_SHORT).show();

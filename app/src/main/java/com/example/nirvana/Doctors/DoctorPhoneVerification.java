@@ -217,8 +217,12 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 Year_Of_Practice,
                 Place_Of_Practice,
                 LinkedIn,
+                Id,
                 link,
-                Id
+                "0",
+                "5",
+                "5",
+                "18"
         );
         databaseReference= FirebaseDatabase.getInstance().getReference("Doctors").child(Id)
                 .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -242,7 +246,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 .withMailto(Email)
                 .withType(BackgroundMail.TYPE_PLAIN)
                 .withSubject("Welcome to Nirvana")
-                .withBody("This is your Doctor Id "+Id+".Please don't share this with anyone.")
+                .withBody("This is a automatic generated email please don't reply to it. ")
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {

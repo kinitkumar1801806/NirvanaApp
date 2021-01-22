@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
 public class DoctorSignupActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int PICK_IMAGE_REQUEST = 234;
     private static final int PICK_File_REQUEST = 134;
-    String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice;
+    String Email,Phone,Address,Gender,Fname,Lname,Password,Affiliation,LinkedIn,Year_Of_Practice,Place_Of_Practice,n="0";
     private Spinner spinner;
     private Uri Imagepath,Filepath;
     private Button upload_file,upload_image;

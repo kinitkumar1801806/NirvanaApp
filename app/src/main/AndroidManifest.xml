@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -27,6 +28,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
         <activity android:name=".fix_metting" />
         <activity
@@ -72,10 +74,6 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".Call.MessageActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
         <service android:name=".Call.SinchService" />
         <service
             android:name=".Service.Background"
@@ -97,41 +95,19 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Patients.Meeting_Alresdy_fixed_step2" />
         <activity
-            android:name=".Patients.Meeting_Already_Fixed_step1" />
+            android:name=".Patients.Meeting_Already_Fixed_step1"
+            android:parentActivityName=".Patients.Patient_Welcome_Activity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.nirvana.Patients.Patient_Welcome_Activity" />
+        </activity>
         <activity android:name=".Niri" />
         <activity
             android:name=".Doctors.PendingMeetingsStep2"
-            android:parentActivityName=".Doctors.PendingMeetingsStep1">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctors.PendingMeetingsStep1" />
-        </activity>
+            />
         <activity
             android:name=".Doctors.PendingMeetingsStep1"
-            android:parentActivityName=".Doctors.Doctor_Welcome_Activity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
-        </activity>
-        <activity
-            android:name=".Doctors.Not_Fixed_Meeting_step2"
-            android:parentActivityName=".Doctors.Not_Fixed_Meetings">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctors.Not_Fixed_Meetings" />
-        </activity>
-        <activity
-            android:name=".Doctors.Not_Fixed_Meetings"
-            android:parentActivityName=".Doctors.Doctor_Welcome_Activity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.nirvana.Doctors.Doctor_Welcome_Activity" />
-        </activity>
-        <activity
-            android:name=".Patients.PatientQueue"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".Patients.Fix_Meeting_step3"
             android:parentActivityName=".Doctors.Doctors_GridView">

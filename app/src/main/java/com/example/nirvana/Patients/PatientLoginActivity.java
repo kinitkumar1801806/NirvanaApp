@@ -143,7 +143,7 @@ public class PatientLoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     //verification successful we will start the profile activity
-
+                                    Id=mAuth.getCurrentUser().getUid();
                                     progressBar1.setVisibility(View.GONE);
                                     Intent intent=new Intent(PatientLoginActivity.this, Patient_Welcome_Activity.class);
                                     intent.putExtra("phone",phone1);

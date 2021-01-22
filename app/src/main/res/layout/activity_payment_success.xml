@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/linearLayout"
     tools:context=".Payments.PaymentSuccessActivity">
 
     <ImageView
@@ -165,9 +166,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="6:00pm"
                 android:textSize="20dp"/>
-
-
-        </LinearLayout>
+      </LinearLayout>
 
 
 
@@ -179,8 +178,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/retry"
+        android:id="@+id/download"
         android:text="Download"
+        android:visibility="gone"
         android:textSize="20dp"
         android:background="@color/green"
         android:layout_marginTop="60dp"

@@ -57,6 +57,7 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
     private String doctor_name,doctor_phone,Did,Pid,Pname,Problem,child_date;
     RecyclerView recyclerView;
     private int mYear, mMonth, mDay;
+    Boolean check=true;
     String fromTime,toTime,lastDateChange,slot_details,slots_no,final_date,final_slot,name,problem;
     Date mindate,maxdate;
     JSONObject json;
@@ -190,6 +191,10 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
                    }
 
                }
+               else
+               {
+                   check=false;
+               }
             }
 
             @Override
@@ -221,7 +226,10 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
       {
            Pname=Pname1.getText().toString();
            Problem=Problem1.getText().toString();
-           DoAlter();
+           if(check)
+               DoAlter();
+           else
+               Toast.makeText(Fix_Meeting_step3.this,"Doctor Slots Details are not available",Toast.LENGTH_SHORT).show();
       }
     }
 
@@ -313,31 +321,38 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              int index=spinner.getSelectedItemPosition();
-              final_slot=Avaiable_Slots.get(index);
-              if(final_slot.equals("Select a slot"))
-              {
-                  Toast.makeText(Fix_Meeting_step3.this,"Please select a slot",Toast.LENGTH_SHORT).show();
-                  dialogBuilder.dismiss();
-              }
-              else
-              {
-                  String slot1=Slots_map.get(final_slot);
-                  try {
-                      String sp=json.getString(final_date);
-                      JSONObject json1=new JSONObject(sp);
-                      json1.remove(slot1);
-                      json1.put(slot1,"true");
-                      json.remove(json1.toString());
-                      json.put(final_date,json1.toString());
-                      Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctors_Meeting_Time").child(Did).child("slot_details").setValue(json.toString());
-                      dialogBuilder.dismiss();
-                      Fix_the_Meeting();
+              try {
+                  int index=spinner.getSelectedItemPosition();
+                  final_slot=Avaiable_Slots.get(index);
+                  if(final_slot.equals("Select a slot"))
+                  {
+                      Toast.makeText(Fix_Meeting_step3.this,"Please select a slot",Toast.LENGTH_SHORT).show();
+                  }
+                  else
+                  {
+                      String slot1=Slots_map.get(final_slot);
+                      try {
+                          String sp=json.getString(final_date);
+                          JSONObject json1=new JSONObject(sp);
+                          json1.remove(slot1);
+                          json1.put(slot1,"true");
+                          json.remove(json1.toString());
+                          json.put(final_date,json1.toString());
+                          Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctors_Meeting_Time").child(Did).child("slot_details").setValue(json.toString());
+                          dialogBuilder.dismiss();
+                          Fix_the_Meeting();
 
-                  } catch (JSONException e) {
-                      e.printStackTrace();
+                      } catch (JSONException e) {
+                          e.printStackTrace();
+                      }
                   }
               }
+              catch (Exception e)
+              {
+                  Toast.makeText(Fix_Meeting_step3.this,"No Operation Performed",Toast.LENGTH_SHORT).show();
+                  dialogBuilder.dismiss();
+              }
+
             }
         });
     }
@@ -358,6 +373,7 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
         Doctor_Detail.add(arr.get(4));
         Doctor_Detail.add(arr.get(3));
         Doctor_Detail.add(Did);
+        Doctor_Detail.add(arr.get(6));
         Intent intent=new Intent(this, MainPaymentActivity.class);
         intent.putStringArrayListExtra("Patient_Detail",Patient_Detail);
         intent.putStringArrayListExtra("Doctor_Detail",Doctor_Detail);

@@ -186,5 +186,30 @@
                 android:hint="City, State"
                 android:textSize="15sp"
                 />
+            <TextView
+                android:id="@+id/amount_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
+
+            <EditText
+                android:id="@+id/amount_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="200"
+                android:textSize="15sp"
+                />
         </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

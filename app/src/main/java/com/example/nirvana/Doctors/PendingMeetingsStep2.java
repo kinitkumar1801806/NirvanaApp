@@ -30,7 +30,6 @@ import com.example.nirvana.Call.BaseActivity;
 import com.example.nirvana.Call.SinchService;
 import com.example.nirvana.Call.VideoCallScreenActivity;
 import com.example.nirvana.Call.VoiceCallScreenActivity;
-import com.example.nirvana.Call.MessageActivity;
 import com.example.nirvana.R;
 import com.example.nirvana.Service.CallerName;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -80,11 +79,6 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
         Intent intent = getIntent();
         phone = intent.getStringExtra("phone");
         patient_phone = intent.getStringExtra("phone1");
-        Pending_Meeting_Step2_Fragment pending_meeting_step2_fragment = new Pending_Meeting_Step2_Fragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout2, pending_meeting_step2_fragment);
-        fragmentTransaction.commit();
-
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute();
 
@@ -285,15 +279,6 @@ public class PendingMeetingsStep2 extends BaseActivity implements SinchService.S
                     startClientAndMakeCall();
                     makeCall();
                 }
-                break;
-            case R.id.chat:
-                Intent intent=new Intent(PendingMeetingsStep2.this, MessageActivity.class);
-                intent.putExtra("d_phone",phone);
-                intent.putExtra("p_phone",patient_phone);
-                intent.putExtra("link",link);
-                intent.putExtra("who","doctor");
-                intent.putExtra("name",name);
-                startActivity(intent);
                 break;
             case R.id.voice_call:
                 callType = "voice";

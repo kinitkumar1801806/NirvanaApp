@@ -34,7 +34,7 @@ import java.util.HashMap;
 
 public class MainPaymentActivity extends AppCompatActivity implements PaymentResultListener {
     ArrayList<String> Patient_Detail,Doctor_Detail;
-    public String name1,problem1,doctor_name,time,date,currentTime,thisDate,link,bio,amount,Did,Pid,email,phone;
+    public String name1,problem1,doctor_name,time,date,currentTime,thisDate,link,bio,amount,Did,Pid,email,phone,link1;
     ProgressDialog progressDialog;
     public TextView Bio,Name,Problem,Phone,Amount;
     @Override
@@ -63,7 +63,7 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
         Bio.setText(bio);
         Problem.setText(problem1);
         Name.setText(doctor_name);
-        amount="100";
+        amount=Doctor_Detail.get(3);
         Amount.setText("Rs. "+amount);
         retrieveData();
     }
@@ -77,6 +77,7 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                 HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
                 email=hashMap.get("email").toString();
                 phone=hashMap.get("phone").toString();
+                link1=hashMap.get("link").toString();
             }
 
             @Override
@@ -113,7 +114,8 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                 thisDate,
                 currentTime,
                 Pid,
-                "0"
+                "0",
+                link1
         );
 
         Task<Void> databaseReference = FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(Pid).child(Did).child(Patient_Detail.get(8))
@@ -132,7 +134,14 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                     }
                 });
         progressDialog.dismiss();
+        ArrayList<String> arr=new ArrayList<>();
+        arr.add(thisDate);
+        arr.add(date);
+        arr.add(time);
+        arr.add(amount);
+        arr.add(doctor_name);
         Intent intent=new Intent(this,PaymentSuccessActivity.class);
+        intent.putStringArrayListExtra("arr",arr);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
     }

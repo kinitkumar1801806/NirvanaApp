@@ -37,7 +37,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     String phone1;
     ProgressBar progressBar;
-    String code,Id1,flag="0",ID;
+    String code,Id1,flag="0";
     String phonenumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class DoctorLoginActivity extends AppCompatActivity {
         EditText phone,Id;
 
         spinner = findViewById(R.id.spinnerCountries);
-        Id=findViewById(R.id.id_doctor);
         progressBar=findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.VISIBLE);
         phone=findViewById(R.id.phone1_doctor);
@@ -78,19 +77,11 @@ public class DoctorLoginActivity extends AppCompatActivity {
             phone.setError("Please enter  the valid phone number");
             progressBar.setVisibility(View.GONE);
         }
-        if(TextUtils.isEmpty(Id.getText()))
-        {
-            Id.setError("Please enter your unique id");
-            progressBar.setVisibility(View.GONE);
-
-        }
-        Id1=Id.getText().toString();
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=firebaseDatabase.getReference().child("Doctors");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Id;
                 if(dataSnapshot.exists())
                 {
                     HashMap<String,Object> hashMap=(HashMap<String, Object>)dataSnapshot.getValue();
@@ -98,16 +89,12 @@ public class DoctorLoginActivity extends AppCompatActivity {
                         Object data = hashMap.get(key);
                         HashMap<String, Object> userData = (HashMap<String, Object>) data;
                         String phone = (String) userData.get("phone");
-                        Id=(String)userData.get("Id");
                         if (phone.equals(phonenumber)) {
                             flag="1";
                         }
-                        ID=Id;
                 }
                 if(flag.equals("1"))
                     progressBar.setVisibility(View.VISIBLE);
-                    if(Id1.equals(ID))
-                    {
                         Bundle bundle=new Bundle();
                         bundle.putString("phone",phonenumber);
                         DoctorLoginVerification doctorLoginVerification=new DoctorLoginVerification();
@@ -115,13 +102,6 @@ public class DoctorLoginActivity extends AppCompatActivity {
                         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.doctor_login_layout,doctorLoginVerification);
                         fragmentTransaction.commit();
-                    }
-                    else
-                    {
-                        Toast.makeText(DoctorLoginActivity.this,"Please enter the valid id",Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
-                    }
-
                 }
                 else
                 {
@@ -163,7 +143,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     //verification successful we will start the profile activity
-
+                                    Id1=mAuth.getCurrentUser().getUid();
                                     progressBar1.setVisibility(View.GONE);
                                     Intent intent=new Intent(DoctorLoginActivity.this, Doctor_Welcome_Activity.class);
                                     intent.putExtra("phone",phone1);

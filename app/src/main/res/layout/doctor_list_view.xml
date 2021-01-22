@@ -10,7 +10,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,14 +59,14 @@
         android:layout_height="25dp"
         android:paddingBottom="5dp"
         android:layout_marginLeft="2dp"
-        android:onClick="rate1"
+        android:id="@+id/rate1"
         android:src="@drawable/ic_star_black_24dp"
         />
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:paddingBottom="5dp"
-            android:onClick="rate2"
+            android:id="@+id/rate2"
             android:layout_marginLeft="22dp"
             android:src="@drawable/ic_star_black_24dp"
             />
@@ -95,6 +94,16 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:paddingBottom="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="82dp"
+            android:id="@+id/rate5"
+            android:onClick="rate4"
+            android:src="@drawable/ic_star_black_24dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingBottom="5dp"
             android:id="@+id/show_more"
             android:onClick="rate3"
             android:layout_centerHorizontal="true"
@@ -108,15 +117,51 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:background="@color/green">
-        <TextView
-            android:id="@+id/show_bio"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:inputType="textMultiLine"
-            android:padding="20dp"
-            android:maxLines="10"
-            android:text="sjkbfudbuiuisduidiubuidb"/>
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:id="@+id/amount"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/amount"
+                android:textColor="@color/white"
+                android:text="INR 200"
+                android:textSize="15sp"
+                android:id="@+id/Amount"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LinkedIn"
+                android:id="@+id/linkedIn"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:layout_alignTop="@id/amount"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="30dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinkedIn"
+                android:textSize="15sp"
+                android:layout_alignLeft="@id/linkedIn"
+                android:layout_marginLeft="100dp"
+                android:textColor="@color/white"
+                android:text="sidinsufduf"
+                android:textStyle="italic"
+                android:layout_alignTop="@id/amount"
+                android:layout_marginTop="40dp"/>
+
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

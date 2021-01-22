@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="290dp"
         android:scaleType="centerInside"
-        android:src="@drawable/white_logo" />
+        android:src="@drawable/green_logo" />
 
     <TextView
         android:id="@+id/textView"

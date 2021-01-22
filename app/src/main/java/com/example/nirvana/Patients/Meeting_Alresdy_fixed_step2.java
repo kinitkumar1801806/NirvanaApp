@@ -33,7 +33,6 @@ import com.example.nirvana.Call.BaseActivity;
 import com.example.nirvana.Call.SinchService;
 import com.example.nirvana.Call.VideoCallScreenActivity;
 import com.example.nirvana.Call.VoiceCallScreenActivity;
-import com.example.nirvana.Call.MessageActivity;
 import com.example.nirvana.R;
 import com.example.nirvana.Service.CallerName;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -281,15 +280,6 @@ public class Meeting_Alresdy_fixed_step2 extends BaseActivity implements SinchSe
                     makeCall();
                 }
 
-                break;
-            case R.id.chat:
-                Intent intent=new Intent(Meeting_Alresdy_fixed_step2.this, MessageActivity.class);
-                intent.putExtra("p_phone",phone);
-                intent.putExtra("d_phone",doctor_phone);
-                intent.putExtra("link",link);
-                intent.putExtra("who","patient");
-                intent.putExtra("name",name);
-                startActivity(intent);
                 break;
             case R.id.voice_call:
                 callType = "voice";

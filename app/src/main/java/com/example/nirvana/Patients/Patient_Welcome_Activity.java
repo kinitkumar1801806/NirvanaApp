@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.example.nirvana.Blogs.DetailBlogFragment;
 import com.example.nirvana.Blogs.HomeBlogFragment;
 import com.example.nirvana.Doctors.Doctors_GridView;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
+import com.example.nirvana.GoalPlanning.StressTest;
 import com.example.nirvana.Niri;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;
@@ -35,7 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Patient_Welcome_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -187,7 +188,9 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         }
         else if(id==R.id.stress_test)
         {
-
+           Intent intent=new Intent(this, StressTest.class);
+           startActivity(intent);
+           overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         }
         else if(id==R.id.help)
         {

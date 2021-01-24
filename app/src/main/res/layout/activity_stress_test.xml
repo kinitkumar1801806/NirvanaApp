@@ -6,42 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".GoalPlanning.StressTest">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#339966"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Stress Test"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"
-            android:src="@drawable/leftarrow"
-            android:tint="#FFFFFF" />
-    </androidx.appcompat.widget.Toolbar>
-
     <TextView
         android:id="@+id/textView9"
         android:layout_width="94dp"
         android:layout_height="43dp"
         android:text="Hello,"
-        android:textColor="#208815"
+        android:textColor="@color/green"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView11"
@@ -68,9 +38,10 @@
         android:id="@+id/button4"
         android:layout_width="217dp"
         android:layout_height="50dp"
-        android:background="#579E30"
+        android:background="@color/green"
         android:text="START TEST"
         android:textColor="#FAF8F5F5"
+        android:onClick="Start_Test"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,11 +53,9 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_margin="16dp"
         android:src="@drawable/green_logo"
         android:backgroundTint="@color/green"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.986"

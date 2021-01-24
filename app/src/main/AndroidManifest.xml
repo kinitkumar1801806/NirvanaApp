@@ -26,10 +26,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GoalPlanning.DepressiveModule"
+            android:label="Stress Test"></activity>
+        <activity android:name=".GoalPlanning.Stress_Test_Main"
+            android:label="Stress Test"/>
         <activity android:name=".fix_metting" />
         <activity
             android:name=".Blogs.DetailDoctorViewActivity"
@@ -43,7 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".stress_test_main" />
         <activity
             android:name=".EditProfileActivity"
             android:label="Edit Profile"
@@ -60,12 +63,9 @@
         <activity android:name=".Payments.PaymentSuccessActivity" />
         <activity android:name=".LoginByPasswordActivity" />
         <activity android:name=".Payments.MainPaymentActivity" />
-        <activity android:name=".GoalPlanning.StressTestReport" />
-        <activity android:name=".GoalPlanning.StressTest" />
-        <activity android:name=".GoalPlanning.SessionWithStudent" />
-        <activity android:name=".GoalPlanning.SessionWithFaculty" />
-        <activity android:name=".GoalPlanning.ManagerialReport" />
-        <activity android:name=".GoalPlanning.EmployerReport" />
+        <activity
+            android:name=".GoalPlanning.StressTest"
+            android:label="Stress Test" />
         <activity android:name=".GoalPlanning.GoalPlanning" />
 
         <receiver android:name="androidx.media.session.MediaButtonReceiver">
@@ -94,20 +94,10 @@
             android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Patients.Meeting_Alresdy_fixed_step2" />
-        <activity
-            android:name=".Patients.Meeting_Already_Fixed_step1"
-            android:parentActivityName=".Patients.Patient_Welcome_Activity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.nirvana.Patients.Patient_Welcome_Activity" />
-        </activity>
+        <activity android:name=".Patients.Meeting_Already_Fixed_step1" />
         <activity android:name=".Niri" />
-        <activity
-            android:name=".Doctors.PendingMeetingsStep2"
-            />
-        <activity
-            android:name=".Doctors.PendingMeetingsStep1"
-            />
+        <activity android:name=".Doctors.PendingMeetingsStep2" />
+        <activity android:name=".Doctors.PendingMeetingsStep1" />
         <activity
             android:name=".Patients.Fix_Meeting_step3"
             android:parentActivityName=".Doctors.Doctors_GridView">

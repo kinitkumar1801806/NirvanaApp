@@ -49,8 +49,6 @@ public class DoctorLoginActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.doctor_login_layout,doctorLoginFragment);
         fragmentTransaction.commit();
-
-
     }
 
     public void signup_doctor(View view) {

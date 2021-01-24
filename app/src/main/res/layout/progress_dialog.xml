@@ -26,7 +26,7 @@
         android:textColor="@color/black"
         android:layout_alignTop="@id/progress_circular"
         android:layout_gravity="center_horizontal"
-        android:text="Please Wait..."
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
     </RelativeLayout>
 

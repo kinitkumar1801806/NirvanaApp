@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -178,10 +179,6 @@ public class HomeBlogFragment extends Fragment {
                         retrieveData(Filter);
                     }
                 }
-                else
-                {
-                    progressDialog.show();
-                }
             }
 
             @Override
@@ -201,6 +198,9 @@ public class HomeBlogFragment extends Fragment {
                else
                {
                    progressDialog.show();
+                   progressDialog.setContentView(R.layout.progress_dialog);
+                   progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
                }
             }
 
@@ -209,8 +209,6 @@ public class HomeBlogFragment extends Fragment {
 
             }
         });
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         return view1;
     }
     public void retrieveData(String type)

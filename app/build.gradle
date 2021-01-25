@@ -63,4 +63,5 @@ dependencies {
     implementation 'com.razorpay:checkout:1.5.16'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
     implementation(name: 'sinch-android-rtc', version: '+', ext: 'aar')
+    compileOnly 'com.google.android.wearable:wearable:2.6.0'
 }

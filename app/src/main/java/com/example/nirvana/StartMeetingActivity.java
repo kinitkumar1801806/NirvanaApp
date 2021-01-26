@@ -145,7 +145,7 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
         SharedPreferences.Editor ed=getSharedPreferences("Sinch",MODE_PRIVATE).edit();
         ed.putBoolean("isLogin",true);
         ed.apply();
-        makeCall();
+        startClientAndMakeCall();
     }
     private void startClientAndMakeCall() {
         // start Sinch Client, it'll result onStarted() callback from where the place call activity will be started

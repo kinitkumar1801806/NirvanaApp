@@ -1,14 +1,16 @@
-package com.example.nirvana;
+package com.example.nirvana.GoalPlanning;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class patientbook_details extends AppCompatActivity {
+import com.example.nirvana.R;
+
+public class SuicidalityModule extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patientbook_details);
+        setContentView(R.layout.activity_suicidality_module);
     }
 }

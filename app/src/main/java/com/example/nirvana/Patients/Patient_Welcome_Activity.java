@@ -74,7 +74,7 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
             Id=intent.getStringExtra("Id");
             phone=intent.getStringExtra("phone");
             Intent intent1=new Intent(this, SinchService.class);
-            intent1.putExtra("phone",phone);
+            intent1.putExtra("Id",Id);
             startService(intent1);
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

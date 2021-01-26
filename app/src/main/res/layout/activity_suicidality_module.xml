@@ -7,31 +7,170 @@
     android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".GoalPlanning.DepressiveModule">
+    tools:context=".GoalPlanning.SuicidalityModule">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout1"
             android:layout_marginBottom="80dp">
             <TextView
-                android:id="@+id/modeuleA"
+                android:id="@+id/modeuleB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modeule A: Major Depressive Episode"
+                android:text="Modeule B: SUICIDALITY"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"/>
             <TextView
-                android:id="@+id/a1_head"
+                android:id="@+id/b1_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="A1"
-                android:layout_alignTop="@id/modeuleA"
+                android:text="B1"
+                android:layout_alignTop="@id/modeuleB"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b1_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b1_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Have you ever felt so bad that you wished you were dead?"
+                        android:padding="10dp"
+                        android:id="@+id/b1_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b1_q1_radioGroup"
+                        android:layout_alignTop="@id/b1_q1"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b1_q1_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b1_q1_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b1_q2_layout"
+                    android:layout_alignTop="@id/b1_q1_layout"
+                    android:layout_marginTop="110dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Have you ever tried to hurt or to injure yourself?"
+                        android:padding="10dp"
+                        android:id="@+id/b1_q2"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b1_q2_radioGroup"
+                        android:layout_alignTop="@id/b1_q2"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b1_q2_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b1_q2_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b1_q3_layout"
+                    android:layout_alignTop="@id/b1_q2_layout"
+                    android:layout_marginTop="100dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Have you ever tried to kill yourself?"
+                        android:padding="10dp"
+                        android:id="@+id/b1_q3"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b1_q3_radioGroup"
+                        android:layout_alignTop="@id/b1_q3"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b1_q3_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b1_q3_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout2"
+            android:layout_alignTop="@id/relativeLayout1"
+            android:layout_marginTop="360dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b2_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B2"
                 android:layout_marginTop="50dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -39,42 +178,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="In the past two weeks:"
-                android:layout_alignTop="@id/modeuleA"
+                android:paddingLeft="10dp"
+                android:text="In the past month did you:"
+                android:layout_alignLeft="@id/b2_head"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
                 android:textStyle="bold"
-                android:layout_alignLeft="@id/a1_head"
-                android:layout_marginLeft="40dp"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_alignTop="@id/a1_head"
+                android:layout_alignTop="@id/b2_head"
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/a1_q1_layout"
+                    android:id="@+id/b2_q1_layout"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Have you felt sad or depressed? Felt down or empty? Felt grouchy or annoyed?"
+                        android:text="Have any accident?"
                         android:padding="10dp"
-                        android:id="@+id/a1_q1"
+                        android:id="@+id/b2_q1"
                         android:layout_marginTop="20dp"
                         android:textSize="15sp"
                         android:textColor="@color/black"/>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/a1_q1_radioGroup"
-                        android:layout_alignTop="@id/a1_q1"
-                        android:layout_marginTop="20dp"
+                        android:id="@+id/b2_q1_radioGroup"
+                        android:layout_alignTop="@id/b2_q1"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a1_q1_radioGroup_Yes"
+                            android:id="@+id/b2_q1_radioGroup_Yes"
                             android:layout_marginLeft="20dp"
                             android:text="Yes"
                             android:layout_marginTop="30dp"
@@ -82,7 +221,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a1_q1_radioGroup_No"
+                            android:id="@+id/b2_q1_radioGroup_No"
                             android:text="No"
                             android:layout_marginLeft="20dp"
                             android:textSize="14sp"/>
@@ -90,29 +229,29 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/a1_q2_layout"
+                    android:id="@+id/b2_q2_layout"
                     android:visibility="gone"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Have you felt this way, most of the day, nearly every day, for the past 2 weeks?"
+                        android:text="Plan or intend to hurt yourself in that accident?"
                         android:padding="10dp"
-                        android:id="@+id/a1_q2"
+                        android:id="@+id/b2_q2"
                         android:layout_marginTop="20dp"
                         android:textSize="15sp"
                         android:textColor="@color/black"/>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/a1_q2_radioGroup"
-                        android:layout_alignTop="@id/a1_q2"
-                        android:layout_marginTop="20dp"
+                        android:id="@+id/b2_q2_radioGroup"
+                        android:layout_alignTop="@id/b2_q2"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a1_q2_radioGroup_Yes"
+                            android:id="@+id/b2_q2_radioGroup_Yes"
                             android:layout_marginLeft="20dp"
                             android:text="Yes"
                             android:layout_marginTop="30dp"
@@ -120,52 +259,97 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a1_q2_radioGroup_No"
+                            android:id="@+id/b2_q2_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b2_q3_layout"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Did you intend to die as a result of this accident?"
+                        android:padding="10dp"
+                        android:id="@+id/b2_q3"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b2_q3_radioGroup"
+                        android:layout_alignTop="@id/b2_q3"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b2_q3_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b2_q3_radioGroup_No"
                             android:text="No"
                             android:layout_marginLeft="20dp"
                             android:textSize="14sp"/>
                     </RadioGroup>
                 </RelativeLayout>
             </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout3"
+            android:layout_alignTop="@id/relativeLayout2"
+            android:layout_marginTop="135dp"
+            android:layout_marginBottom="80dp">
             <TextView
-                android:id="@+id/a2_head"
+                android:id="@+id/b3_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="A2"
-                android:layout_alignTop="@id/a1_head"
-                android:layout_marginTop="150dp"
+                android:text="B3"
+                android:layout_marginTop="50dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_alignTop="@id/a2_head"
+                android:layout_alignTop="@id/b3_head"
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/a2_q1_layout"
+                    android:id="@+id/b3_q1_layout"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Have you been bored a lot or much less interested in things (Like playing your favorite games)? Have you felt that you couldn't enjoy things?"
+                        android:text="Feel hopeless?"
                         android:padding="10dp"
-                        android:id="@+id/a2_q1"
+                        android:id="@+id/b3_q1"
                         android:layout_marginTop="20dp"
                         android:textSize="15sp"
                         android:textColor="@color/black"/>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/a2_q1_radioGroup"
-                        android:layout_alignTop="@id/a2_q1"
-                        android:layout_marginTop="40dp"
+                        android:id="@+id/b3_q1_radioGroup"
+                        android:layout_alignTop="@id/b3_q1"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a2_q1_radioGroup_Yes"
+                            android:id="@+id/b3_q1_radioGroup_Yes"
                             android:layout_marginLeft="20dp"
                             android:text="Yes"
                             android:layout_marginTop="30dp"
@@ -173,102 +357,59 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a2_q1_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a2_q2_layout"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Have you felt this way, most of the day, nearly every day, for the past 2 weeks?"
-                        android:padding="10dp"
-                        android:id="@+id/a2_q2"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a2_q2_radioGroup"
-                        android:layout_alignTop="@id/a2_q2"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a2_q2_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a2_q2_radioGroup_No"
+                            android:id="@+id/b3_q1_radioGroup_No"
                             android:text="No"
                             android:layout_marginLeft="20dp"
                             android:textSize="14sp"/>
                     </RadioGroup>
                 </RelativeLayout>
             </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout4"
+            android:layout_alignTop="@id/relativeLayout3"
+            android:layout_marginTop="135dp"
+            android:layout_marginBottom="80dp">
             <TextView
-                android:id="@+id/a3_head"
+                android:id="@+id/b4_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="A3"
-                android:layout_alignTop="@id/a2_head"
-                android:layout_marginTop="170dp"
+                android:text="B4"
+                android:layout_marginTop="50dp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="In the past two weeks, when you felt depressed / grouchy / uninterested:"
-                android:layout_alignTop="@id/a2_head"
-                android:layout_marginTop="170dp"
-                android:textStyle="bold"
-                android:layout_alignLeft="@id/a3_head"
-                android:layout_marginLeft="40dp"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_alignTop="@id/a3_head"
+                android:layout_alignTop="@id/b4_head"
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/a3_q1_layout"
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/b4_q1_layout"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Were you less hungry or hungrier most days? Did you lose orgain weight without trying? [i.e., by ± 5% of body weight in the past month]?"
+                        android:text="Think you would be better off dead or wish you were dead?"
                         android:padding="10dp"
-                        android:id="@+id/a3_q1"
+                        android:id="@+id/b4_q1"
                         android:layout_marginTop="20dp"
                         android:textSize="15sp"
                         android:textColor="@color/black"/>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/a3_q1_radioGroup"
-                        android:layout_alignTop="@id/a3_q1"
-                        android:layout_marginTop="40dp"
+                        android:id="@+id/b4_q1_radioGroup"
+                        android:layout_alignTop="@id/b4_q1"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical">
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a3_q1_radioGroup_Yes"
+                            android:id="@+id/b4_q1_radioGroup_Yes"
                             android:layout_marginLeft="20dp"
                             android:text="Yes"
                             android:layout_marginTop="30dp"
@@ -276,443 +417,59 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a3_q1_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q2_layout"
-                    android:layout_alignTop="@id/a3_q1_layout"
-                    android:layout_marginTop="135dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you have trouble sleeping almost every night (“trouble sleeping” means trouble falling asleep, waking up in the middle of the night, waking up
-too early or sleeping too much)?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q2"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q2_radioGroup"
-                        android:layout_alignTop="@id/a3_q2"
-                        android:layout_marginTop="55dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q2_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q2_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q3_layout"
-                    android:layout_alignTop="@id/a3_q2_layout"
-                    android:layout_marginTop="150dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you talk or move slower than usual? Were you fidgety, restless or couldn’t sit still?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q3"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q3_radioGroup"
-                        android:layout_alignTop="@id/a3_q3"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q3_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q3_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>1
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q4_layout"
-                    android:layout_alignTop="@id/a3_q3_layout"
-                    android:layout_marginTop="115dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you feel tired most of the time?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q4"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q4_radioGroup"
-                        android:layout_alignTop="@id/a3_q4"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q4_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q4_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q5_layout"
-                    android:layout_alignTop="@id/a3_q4_layout"
-                    android:layout_marginTop="105dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you feel bad about yourself most of the time? "
-                        android:padding="10dp"
-                        android:id="@+id/a3_q5"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q5_radioGroup"
-                        android:layout_alignTop="@id/a3_q5"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q5_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q5_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q6_layout"
-                    android:layout_alignTop="@id/a3_q5_layout"
-                    android:layout_marginTop="115dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you have trouble concentrating or did you have trouble making upyourmind?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q6"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q6_radioGroup"
-                        android:layout_alignTop="@id/a3_q6"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q6_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q6_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q7_layout"
-                    android:layout_alignTop="@id/a3_q6_layout"
-                    android:layout_marginTop="115dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you feel so bad that you wished that you were dead?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q7"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q7_radioGroup"
-                        android:layout_alignTop="@id/a3_q7"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q7_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q7_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q8_layout"
-                    android:layout_alignTop="@id/a3_q7_layout"
-                    android:layout_marginTop="115dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you think about hurting yourself?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q8"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q8_radioGroup"
-                        android:layout_alignTop="@id/a3_q8"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q8_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q8_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q9_layout"
-                    android:layout_alignTop="@id/a3_q8_layout"
-                    android:layout_marginTop="105dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you have thoughts of death?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q9"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q9_radioGroup"
-                        android:layout_alignTop="@id/a3_q9"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q9_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q9_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q10_layout"
-                    android:layout_alignTop="@id/a3_q9_layout"
-                    android:layout_marginTop="105dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you think about killing yourself?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q10"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q10_radioGroup"
-                        android:layout_alignTop="@id/a3_q10"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q10_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q10_radioGroup_No"
-                            android:text="No"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"/>
-                    </RadioGroup>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/a3_q11_layout"
-                    android:layout_alignTop="@id/a3_q10_layout"
-                    android:layout_marginTop="105dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Did you feel guilty most of the time?"
-                        android:padding="10dp"
-                        android:id="@+id/a3_q11"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"/>
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/a3_q11_radioGroup"
-                        android:layout_alignTop="@id/a3_q11"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q11_radioGroup_Yes"
-                            android:layout_marginLeft="20dp"
-                            android:text="Yes"
-                            android:layout_marginTop="30dp"
-                            android:textSize="14sp"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/a3_q11_radioGroup_No"
+                            android:id="@+id/b4_q1_radioGroup_No"
                             android:text="No"
                             android:layout_marginLeft="20dp"
                             android:textSize="14sp"/>
                     </RadioGroup>
                 </RelativeLayout>
             </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout5"
+            android:layout_alignTop="@id/relativeLayout4"
+            android:layout_marginTop="145dp"
+            android:layout_marginBottom="80dp">
             <TextView
-                android:id="@+id/a4_head"
+                android:id="@+id/b5_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="A4"
-                android:layout_alignTop="@id/a3_head"
-                android:layout_marginTop="1320dp"
+                android:text="B5"
+                android:layout_marginTop="50dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_alignTop="@id/a4_head"
+                android:layout_alignTop="@id/b5_head"
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/a4_q1_layout"
+                    android:id="@+id/b5_q1_layout"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Did you ever have other times of two weeks or more when you felt depressed or not interested in most things,and had most of the problems we just talked about ?"
+                        android:text="Want to hurt yourself?"
                         android:padding="10dp"
-                        android:id="@+id/a4_q1"
+                        android:id="@+id/b5_q1"
                         android:layout_marginTop="20dp"
                         android:textSize="15sp"
                         android:textColor="@color/black"/>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/a4_q1_radioGroup"
-                        android:layout_alignTop="@id/a4_q1"
-                        android:layout_marginTop="55dp"
+                        android:id="@+id/b5_q1_radioGroup"
+                        android:layout_alignTop="@id/b5_q1"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a4_q1_radioGroup_Yes"
+                            android:id="@+id/b5_q1_radioGroup_Yes"
                             android:layout_marginLeft="20dp"
                             android:text="Yes"
                             android:layout_marginTop="30dp"
@@ -720,7 +477,67 @@ too early or sleeping too much)?"
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a4_q1_radioGroup_No"
+                            android:id="@+id/b5_q1_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout6"
+            android:layout_alignTop="@id/relativeLayout5"
+            android:layout_marginTop="135dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b6_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B6"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b6_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b6_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Think about killing yourself?"
+                        android:padding="10dp"
+                        android:id="@+id/b6_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b6_q1_radioGroup"
+                        android:layout_alignTop="@id/b6_q1"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b6_q1_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b6_q1_radioGroup_No"
                             android:text="No"
                             android:layout_marginLeft="20dp"
                             android:textSize="14sp"/>
@@ -728,29 +545,96 @@ too early or sleeping too much)?"
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/a4_q2_layout"
+                    android:id="@+id/b6_q2_layout"
                     android:visibility="gone"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" In between your times of depression, were you completely free of depression for of at least 2 months?"
+                        android:text="How much you thought about your death?"
                         android:padding="10dp"
-                        android:id="@+id/a4_q2"
+                        android:id="@+id/b6_q2"
                         android:layout_marginTop="20dp"
                         android:textSize="15sp"
                         android:textColor="@color/black"/>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/a4_q2_radioGroup"
-                        android:layout_alignTop="@id/a4_q2"
-                        android:layout_marginTop="40dp"
+                        android:id="@+id/b6_q2_radioGroup"
+                        android:layout_alignTop="@id/b6_q2"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical">
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a4_q2_radioGroup_Yes"
+                            android:id="@+id/b6_q2_radioGroup_1"
+                            android:layout_marginLeft="20dp"
+                            android:text="Occasionally	"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b6_q2_radioGroup_2"
+                            android:text="Often"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b6_q2_radioGroup_3"
+                            android:text="Very Often"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout7"
+            android:layout_alignTop="@id/relativeLayout6"
+            android:layout_marginTop="145dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b7_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B7"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b7_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b7_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Feel unable to control these impulses?"
+                        android:padding="10dp"
+                        android:id="@+id/b7_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b7_q1_radioGroup"
+                        android:layout_alignTop="@id/b7_q1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b7_q1_radioGroup_Yes"
                             android:layout_marginLeft="20dp"
                             android:text="Yes"
                             android:layout_marginTop="30dp"
@@ -758,8 +642,248 @@ too early or sleeping too much)?"
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/a4_q2_radioGroup_No"
+                            android:id="@+id/b7_q1_radioGroup_No"
                             android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout8"
+            android:layout_alignTop="@id/relativeLayout7"
+            android:layout_marginTop="145dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b8_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B8"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b8_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b8_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Have a plan to kill yourself?"
+                        android:padding="10dp"
+                        android:id="@+id/b8_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b8_q1_radioGroup"
+                        android:layout_alignTop="@id/b8_q1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b8_q1_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b8_q1_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout9"
+            android:layout_alignTop="@id/relativeLayout8"
+            android:layout_marginTop="145dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b9_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B9"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b9_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b9_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Take active steps to prepare to hurt yourself or to prepare to kill yourself and expect to die as a result?"
+                        android:padding="10dp"
+                        android:id="@+id/b9_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b9_q1_radioGroup"
+                        android:layout_alignTop="@id/b9_q1"
+                        android:layout_marginTop="40dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b9_q1_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b9_q1_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout10"
+            android:layout_alignTop="@id/relativeLayout9"
+            android:layout_marginTop="155dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b10_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B10"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b10_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b10_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Try to deliberately hurt yourself without intending to kill yourself?"
+                        android:padding="10dp"
+                        android:id="@+id/b10_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b10_q1_radioGroup"
+                        android:layout_alignTop="@id/b10_q1"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b10_q1_radioGroup_Yes"
+                            android:layout_marginLeft="20dp"
+                            android:text="Yes"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b10_q1_radioGroup_No"
+                            android:text="No"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="14sp"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout11"
+            android:layout_alignTop="@id/relativeLayout10"
+            android:layout_marginTop="145dp"
+            android:layout_marginBottom="80dp">
+            <TextView
+                android:id="@+id/b11_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="B11"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_alignTop="@id/b11_head"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/b11_q1_layout"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Try to kill yourself?"
+                        android:padding="10dp"
+                        android:id="@+id/b11_q1"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b11_q1_radioGroup"
+                        android:layout_alignTop="@id/b11_q1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b11_q1_radioGroup_1"
+                            android:layout_marginLeft="20dp"
+                            android:text="Hoped to be rescued/survive	"
+                            android:layout_marginTop="30dp"
+                            android:textSize="14sp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/b11_q1_radioGroup_2"
+                            android:text="Expected/intended to die"
                             android:layout_marginLeft="20dp"
                             android:textSize="14sp"/>
                     </RadioGroup>

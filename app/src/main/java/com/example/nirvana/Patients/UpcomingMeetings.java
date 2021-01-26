@@ -1,5 +1,6 @@
 package com.example.nirvana.Patients;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.nirvana.Adapter.RecyclerView_Adapter;
 import com.example.nirvana.Adapter.Upcoming_Patient_Meetings_Adapter;
 import com.example.nirvana.R;
+import com.example.nirvana.StartMeetingActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +47,7 @@ public class UpcomingMeetings extends Fragment {
     public View view1;
     public RecyclerView recyclerView;
     Upcoming_Patient_Meetings_Adapter upcoming_patient_meetings_adapter;
-    public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList;
+    public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList,RecieverIdList;
     public String Id;
     TextView textView;
     public UpcomingMeetings() {
@@ -91,6 +93,7 @@ public class UpcomingMeetings extends Fragment {
         TypeList=new ArrayList<>();
         DateList=new ArrayList<>();
         TimeList=new ArrayList<>();
+        RecieverIdList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
         recyclerView=view1.findViewById(R.id.upcoming_patientlists);
         recyclerView.setHasFixedSize(true);
@@ -119,11 +122,13 @@ public class UpcomingMeetings extends Fragment {
                            String complete=userData.get("complete").toString();
                            if(complete.equals("0"))
                            {
+                               String Did=userData.get("Did").toString();
                                String name=userData.get("d_name").toString();
                                String link=userData.get("link").toString();
                                String date=userData.get("date").toString();
                                String time=userData.get("time").toString();
                                String type=userData.get("d_bio").toString();
+                               RecieverIdList.add(Did);
                                NameList.add(name);
                                LinkList.add(link);
                                DateList.add(date);
@@ -153,7 +158,14 @@ public class UpcomingMeetings extends Fragment {
         upcoming_patient_meetings_adapter.setOnItemClickListener(new Upcoming_Patient_Meetings_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(),"Button Clicked",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), StartMeetingActivity.class);
+                intent.putExtra("SenderId",Id);
+                intent.putExtra("ReceiverId",RecieverIdList.get(position));
+                intent.putExtra("UserName",NameList.get(position));
+                intent.putExtra("Who","Patient");
+                intent.putExtra("link",LinkList.get(position));
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
     }

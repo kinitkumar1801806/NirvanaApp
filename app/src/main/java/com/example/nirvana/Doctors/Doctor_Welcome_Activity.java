@@ -87,7 +87,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
             phone=intent.getStringExtra("phone");
             Id=intent.getStringExtra("Id");
             Intent intent1=new Intent(this, SinchService.class);
-            intent1.putExtra("phone",phone);
+            intent1.putExtra("Id",Id);
             startService(intent1);
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

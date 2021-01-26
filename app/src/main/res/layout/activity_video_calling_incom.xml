@@ -14,7 +14,7 @@
         android:layout_marginTop="50dp"
         android:contentDescription="Call background"
         android:src="@drawable/image1">
-        </de.hdodenhof.circleimageview.CircleImageView>
+    </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
         android:id="@+id/patient_name"

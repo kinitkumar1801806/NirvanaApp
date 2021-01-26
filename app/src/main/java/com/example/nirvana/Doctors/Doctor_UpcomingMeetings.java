@@ -1,5 +1,6 @@
 package com.example.nirvana.Doctors;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.nirvana.Adapter.Upcoming_Doctor_Meetings_Adapter;
 import com.example.nirvana.Adapter.Upcoming_Patient_Meetings_Adapter;
 import com.example.nirvana.R;
+import com.example.nirvana.StartMeetingActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,7 +44,7 @@ public class Doctor_UpcomingMeetings extends Fragment {
     private String mParam2;
     public RecyclerView recyclerView;
     Upcoming_Doctor_Meetings_Adapter upcoming_doctor_meetings_adapter;
-    public ArrayList<String> LinkList,NameList,ProblemList,DateList,TimeList;
+    public ArrayList<String> LinkList,NameList,ProblemList,DateList,TimeList,RecieverIdList;
     public String Id;
     TextView textView;
     View view1;
@@ -89,6 +91,7 @@ public class Doctor_UpcomingMeetings extends Fragment {
         ProblemList=new ArrayList<>();
         DateList=new ArrayList<>();
         TimeList=new ArrayList<>();
+        RecieverIdList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
         recyclerView=view1.findViewById(R.id.upcoming_doctorlists);
         recyclerView.setHasFixedSize(true);
@@ -117,11 +120,13 @@ public class Doctor_UpcomingMeetings extends Fragment {
                             String complete=userData.get("complete").toString();
                             if(complete.equals("0"))
                             {
+                                String pid=userData.get("Pid").toString();
                                 String name=userData.get("p_name").toString();
                                 String link=userData.get("link").toString();
                                 String date=userData.get("date").toString();
                                 String time=userData.get("time").toString();
                                 String problem=userData.get("p_problem").toString();
+                                RecieverIdList.add(pid);
                                 NameList.add(name);
                                 LinkList.add(link);
                                 DateList.add(date);
@@ -151,7 +156,14 @@ public class Doctor_UpcomingMeetings extends Fragment {
         upcoming_doctor_meetings_adapter.setOnItemClickListener(new Upcoming_Doctor_Meetings_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(),"Button Clicked",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), StartMeetingActivity.class);
+                intent.putExtra("SenderId",Id);
+                intent.putExtra("ReceiverId",RecieverIdList.get(position));
+                intent.putExtra("UserName",NameList.get(position));
+                intent.putExtra("Who","Doctors");
+                intent.putExtra("link",LinkList.get(position));
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
     }

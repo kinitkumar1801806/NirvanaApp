@@ -345,7 +345,6 @@ public class Stress_Test_Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Stress_Test_Main.this,DepressiveModule.class);
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }

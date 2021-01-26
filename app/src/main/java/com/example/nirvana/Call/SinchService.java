@@ -66,7 +66,7 @@ public class SinchService extends Service {
     private PersistedSettings mSettings;
     private final SinchServiceInterface mSinchServiceInterface = new SinchServiceInterface();
     private SinchClient mSinchClient;
-    public String phone;
+    public String Id;
     private StartFailedListener mListener;
 
     @Override
@@ -83,12 +83,12 @@ public class SinchService extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        phone=intent.getStringExtra("phone");
+        Id=intent.getStringExtra("Id");
         i=intent.getIntExtra("i",0);
         if(i==0||i%10==0)
         {
             stop();
-            createClient(phone);
+            createClient(Id);
             i++;
         }
         onTaskRemoved(intent);
@@ -99,7 +99,7 @@ public class SinchService extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
         restartServiceIntent.setPackage(getPackageName());
-        restartServiceIntent.putExtra("phone",phone);
+        restartServiceIntent.putExtra("Id",Id);
         restartServiceIntent.putExtra("i",i);
         startService(restartServiceIntent);
         super.onTaskRemoved(rootIntent);

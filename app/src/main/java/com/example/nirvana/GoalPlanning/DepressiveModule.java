@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -392,12 +391,12 @@ public class DepressiveModule extends AppCompatActivity {
             lastReport.setText(LastTest);
         }
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("LastIntroductionTest",Result);
+        editor.putString("LastDepressiveTest",Result);
         editor.apply();
         TextView currentReport=view.findViewById(R.id.currentTestReport);
         currentReport.setText(Result.toUpperCase());
         TextView currentModule=view.findViewById(R.id.currentModule);
-        currentModule.setText("Introductory Module Report");
+        currentModule.setText("MAJOR DEPRESSIVE EPISODE");
         Button FinishTest=view.findViewById(R.id.finishTest);
         Button NextModule=view.findViewById(R.id.nextModule);
         FinishTest.setOnClickListener(new View.OnClickListener() {
@@ -410,7 +409,9 @@ public class DepressiveModule extends AppCompatActivity {
         NextModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(DepressiveModule.this,SuicidalityModule.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
         alertDialog.setView(view);

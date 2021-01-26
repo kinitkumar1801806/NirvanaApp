@@ -31,6 +31,8 @@ import com.sinch.android.rtc.calling.CallListener;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.example.nirvana.Call.SinchService.CALL_ID;
+
 public class IncominCallScreenActivity extends BaseActivity {
 
     static final String TAG = IncominCallScreenActivity.class.getSimpleName();
@@ -41,7 +43,7 @@ public class IncominCallScreenActivity extends BaseActivity {
     public static final String ACTION_IGNORE = "ignore";
     public static final String EXTRA_ID = "id";
     public static int MESSAGE_ID = 14;
-    private String mAction;
+    private String mAction,Id,name,link,Who;
     ImageView profile_image;
     TextView textViewRemoteUser;
     Animation answer_bounce,hangup_bounce;
@@ -61,7 +63,7 @@ public class IncominCallScreenActivity extends BaseActivity {
         mAudioPlayer.playRingtone();
 
         Intent intent = getIntent();
-        mCallId = intent.getStringExtra(SinchService.CALL_ID);
+        mCallId = intent.getStringExtra(CALL_ID);
         mAction = "";
         answer_bounce= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
         answerbtn.startAnimation(answer_bounce);
@@ -90,18 +92,9 @@ public void getCallerName()
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     HashMap<String,Object> hashMap=(HashMap)snapshot.getValue();
-                    String name=(String)hashMap.get("caller_name");
-                    String link=(String)hashMap.get("link");
-                    if(link.equals("None"))
-                    {
-                        Glide.with(IncominCallScreenActivity.this).load(R.drawable.person_secondary).into(profile_image);
-                    }
-                    else
-                    {
-                        Glide.with(IncominCallScreenActivity.this).load(link).into(profile_image);
-                    }
-                    textViewRemoteUser.setText(name);
-                    Task<Void> databaseReference2= FirebaseDatabase.getInstance().getReference("CallerName").child(mCallId).removeValue();
+                    Id=(String)hashMap.get("Id");
+                    Who=(String)hashMap.get("Who");
+                    getCallerDetails();
                 }
 
                 @Override
@@ -110,13 +103,38 @@ public void getCallerName()
                 }
             });
 }
+
+    private void getCallerDetails() {
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference(Who).child(Id);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if(snapshot.exists())
+               {
+                   HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                   name=hashMap.get("fname").toString()+" "+hashMap.get("lname").toString();
+                   link=hashMap.get("link").toString();
+                   textViewRemoteUser.setText(name);
+                   Glide.with(IncominCallScreenActivity.this).load(link).into(profile_image);
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
         if (intent != null) {
-            if (intent.getStringExtra(SinchService.CALL_ID) != null) {
-                mCallId = getIntent().getStringExtra(SinchService.CALL_ID);
+            if (intent.getStringExtra(CALL_ID) != null) {
+                mCallId = getIntent().getStringExtra(CALL_ID);
             }
             final int id = intent.getIntExtra(EXTRA_ID, -1);
             if (id > 0) {
@@ -154,10 +172,14 @@ public void getCallerName()
         if (call != null) {
             Log.d(TAG, "Answering call");
             call.answer();
-            Intent intent = new Intent(this, VoiceCallScreenActivity.class);
-            intent.putExtra(SinchService.CALL_ID, mCallId);
-            intent.putExtra("userid",call.getRemoteUserId());
+            Intent intent=new Intent(this, VoiceCallScreenActivity.class);
+            intent.putExtra("SenderId",Id);
+            intent.putExtra("UserName",name);
+            intent.putExtra("Who",Who);
+            intent.putExtra("link",link);
+            intent.putExtra(CALL_ID, mCallId);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         } else {
             finish();
         }

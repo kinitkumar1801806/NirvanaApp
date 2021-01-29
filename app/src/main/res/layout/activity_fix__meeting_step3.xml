@@ -25,7 +25,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
@@ -52,18 +53,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/continueAs"
-                android:layout_marginStart="6dp"
                 android:visibility="gone"
+                android:layout_marginStart="6dp"
                 android:layout_marginEnd="6dp"
                 android:id="@+id/recycler_view"/>
              <TextView
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:text="No previous Meetings"
+                 android:visibility="gone"
                  android:textColor="@color/black"
                  android:textSize="15sp"
                  android:id="@+id/no_meetings"
-                 android:visibility="gone"
                  android:layout_alignTop="@id/continueAs"
                  android:layout_marginTop="50dp"
                  android:layout_marginBottom="10dp"
@@ -75,7 +76,8 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"

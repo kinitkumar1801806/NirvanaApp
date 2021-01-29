@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/niri"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartMeetingActivity"></activity>
+        <activity android:name=".Messages_Alerts"></activity>
+        <activity android:name=".StartMeetingActivity" />
         <activity android:name=".GoalPlanning.SuicidalityModule" />
         <activity
             android:name=".GoalPlanning.DepressiveModule"

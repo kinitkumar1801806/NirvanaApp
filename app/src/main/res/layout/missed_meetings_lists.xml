@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:background="@drawable/gradient"
+            android:paddingVertical="15dp"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Shreyashi Sahay"
+                    android:id="@+id/patient_name"
                     android:layout_weight="2"
                     android:textSize="18sp"/>
 
@@ -60,7 +62,6 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="30dp"
                     android:text="Appointment :"
-
                     android:textSize="18sp"/>
 
                 <TextView
@@ -68,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="28/01/2021"
+                    android:id="@+id/appointment_time"
                     android:layout_weight="2"
                     android:textSize="18sp"/>
 
@@ -79,18 +81,20 @@
                 android:text="MISSED CALLS"
                 android:textColor="@color/black"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp"/>
 
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="2pm, 2;10pm, 2;15pm"
-                    android:layout_weight="2"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2"
+                android:text="2pm, 2;10pm, 2;15pm"
+                android:id="@+id/missedcall_time"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
 
 
@@ -115,6 +119,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Depression and anxiety"
+                    android:id="@+id/patient_problem"
                     android:layout_weight="2"
                     android:textSize="18sp"/>
 

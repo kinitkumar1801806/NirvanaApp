@@ -27,7 +27,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:padding="3dp"
+                android:padding="4dp"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -45,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Shreyashi Sahay"
+                    android:id="@+id/patient_name"
                     android:layout_weight="1"
                     android:textSize="22sp"/>
 
@@ -62,6 +63,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="30dp"
                     android:text="12/01/2021"
+                    android:id="@+id/date"
                     android:layout_weight="1"
                     android:textSize="13sp"/>
 
@@ -70,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="09:30"
+                    android:id="@+id/time"
                     android:gravity="right"
                     android:layout_marginRight="30dp"
                     android:layout_weight="1"
@@ -81,7 +84,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/addnew"
+                android:id="@+id/more"
                 android:gravity="center_horizontal"
                 android:text="MORE ▼"
                 android:padding="8dp"
@@ -114,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="27/01/2020"
+                    android:id="@+id/appointment_time"
                     android:layout_weight="2"
                     android:textSize="18sp"/>
 
@@ -139,6 +143,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:text="xyz@gmail.com"
+                        android:id="@+id/email"
                         android:layout_weight="2"
                         android:textSize="18sp"/>
 
@@ -163,6 +168,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:text="Depression"
+
+                        android:id="@+id/patient_problem"
                         android:layout_weight="2"
                         android:textSize="18sp"/>
 

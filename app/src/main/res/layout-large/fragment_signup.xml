@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="200dp"
-        android:layout_height="126dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="130dp"
         android:src="@drawable/logo_white"
@@ -22,8 +22,8 @@
         android:text="Nirvana"
         android:id="@+id/nirvana"
         android:fontFamily="@font/helveticaneuemedium"
-        android:textSize="28sp"
-        android:layout_marginTop="130dp"
+        android:textSize="38sp"
+        android:layout_marginTop="200dp"
        android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/logo"
         android:textColor="@color/green"/>
@@ -34,26 +34,26 @@
         android:layout_above="@+id/relativeLayout2"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/helveticaneuemedium"
         android:text="Register as"
         android:textColorHint="@color/white"
-        android:textSize="22sp" />
+        android:textSize="32sp" />
 
 
 <RelativeLayout
     android:id="@+id/relativeLayout1"
     android:layout_width="wrap_content"
-    android:layout_height="130dp"
+    android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="90dp"
-    android:layout_marginLeft="60dp">
+    android:layout_marginLeft="80dp">
 
     <ImageView
         android:id="@+id/patient"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:onClick="patient_register"
         android:padding="10dp"
         android:src="@drawable/new_patient" />
@@ -63,23 +63,23 @@
                 android:text="Client"
                 android:layout_alignParentLeft="true"
                 android:fontFamily="@font/helvetica"
-                android:layout_alignTop="@+id/patient"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="100dp"
-                android:textSize="18sp"
+                android:layout_below="@+id/patient"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="0dp"
+                android:textSize="28sp"
                 android:layout_gravity="center_horizontal"/>
 </RelativeLayout>
           <RelativeLayout
               android:layout_width="wrap_content"
-              android:layout_height="130dp"
+              android:layout_height="wrap_content"
               android:layout_alignParentBottom="true"
               android:layout_marginBottom="90dp"
               android:layout_alignParentRight="true"
-              android:layout_marginRight="60dp"
+              android:layout_marginRight="80dp"
               android:id="@+id/relativeLayout2">
               <ImageView
-                  android:layout_width="100dp"
-                  android:layout_height="100dp"
+                  android:layout_width="150dp"
+                  android:layout_height="150dp"
                   android:id="@+id/doctor"
                   android:layout_gravity="center_horizontal"
                   android:padding="10dp"
@@ -91,8 +91,8 @@
                   android:text="Practitioner"
                   android:layout_alignTop="@+id/doctor"
                   android:layout_centerHorizontal="true"
-                  android:layout_marginTop="100dp"
-                  android:textSize="18sp"
+                  android:layout_marginTop="155dp"
+                  android:textSize="28sp"
                   android:layout_gravity="center_horizontal"/>
           </RelativeLayout>
 </RelativeLayout>

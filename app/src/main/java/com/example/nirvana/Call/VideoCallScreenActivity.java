@@ -2,6 +2,7 @@ package com.example.nirvana.Call;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.nirvana.MusicPlayer.AudioPLayer;
 import com.example.nirvana.R;
 import com.sinch.android.rtc.AudioController;
@@ -33,15 +37,15 @@ public class VideoCallScreenActivity extends BaseActivity {
 
     private AudioPLayer mAudioPlayer;
 
-    private String mCallId;
+    private String mCallId,recieverImage,recieverUsername,Who,senderId;
     private boolean mAddedListener = false;
     private boolean mLocalVideoViewAdded = false;
     private boolean mRemoteVideoViewAdded = false;
-    ImageView micbutton,videobutton;
-    ImageView endCallButton;
+    ImageView micbutton,videobutton,endCallButton,CameraSwap,profileImage;
     Call call1;
-    boolean mToggleVideoViewPositions = false;
-
+    TextView mCallState,RecieverUserName;
+    boolean mToggleVideoViewPositions = true;
+    RelativeLayout remoteVideo,localVideo;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
@@ -62,10 +66,19 @@ public class VideoCallScreenActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video_call_screen);
         getSupportActionBar().hide();
+        Intent intent=getIntent();
+        senderId=intent.getStringExtra("senderId");
+        Who=intent.getStringExtra("Who");
+        recieverImage=intent.getStringExtra("link");
+        recieverUsername=intent.getStringExtra("UserName");
         mAudioPlayer = new AudioPLayer(this);
         endCallButton=findViewById(R.id.hangupButton);
         micbutton=findViewById(R.id.micbutton);
-        videobutton=findViewById(R.id.videobutton);
+        videobutton=findViewById(R.id.video_off);
+        CameraSwap=findViewById(R.id.camera_swap);
+        profileImage=findViewById(R.id.profile_image_calling);
+        RecieverUserName=findViewById(R.id.receiver_name);
+        mCallState=findViewById(R.id.callState);
         endCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +116,24 @@ public class VideoCallScreenActivity extends BaseActivity {
                 }
             }
         });
+        CameraSwap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             VideoController vc=getSinchServiceInterface().getVideoController();
+             vc.toggleCaptureDevicePosition();
+            }
+        });
+        videobutton.setEnabled(false);
         mCallId = getIntent().getStringExtra(SinchService.CALL_ID);
+        RecieverUserName.setText(recieverUsername);
+        if(recieverImage.equals("None"))
+        {
+            Glide.with(this).load(R.drawable.green_person_logo).into(profileImage);
+        }
+        else
+        {
+            Glide.with(this).load(recieverImage).into(profileImage);
+        }
     }
 
     @Override
@@ -118,7 +148,6 @@ public class VideoCallScreenActivity extends BaseActivity {
             Log.e(TAG, "Started with invalid callId, aborting.");
             finish();
         }
-
         updateUI();
     }
 
@@ -131,7 +160,6 @@ public class VideoCallScreenActivity extends BaseActivity {
         if (call != null) {
             if (call.getDetails().isVideoOffered()) {
                 if (call.getState() == CallState.ESTABLISHED) {
-                    micbutton.setVisibility(View.VISIBLE);
                     videobutton.setVisibility(View.VISIBLE);
                     setVideoViewsVisibility(true, true);
                 } else {
@@ -185,7 +213,12 @@ public class VideoCallScreenActivity extends BaseActivity {
             runOnUiThread(() -> {
                 ViewGroup localView = getVideoView(true);
                 localView.addView(vc.getLocalView());
-                localView.setOnClickListener(v -> vc.toggleCaptureDevicePosition());
+                localView.setOnClickListener((View v) -> {
+                    Call call = getSinchServiceInterface().getCall(mCallId);
+                    if(call.getState()==CallState.ESTABLISHED) {
+                        vc.toggleCaptureDevicePosition();
+                    }
+                });
                 mLocalVideoViewAdded = true;
                 vc.setLocalVideoZOrder(!mToggleVideoViewPositions);
             });
@@ -201,10 +234,14 @@ public class VideoCallScreenActivity extends BaseActivity {
                 ViewGroup remoteView = getVideoView(false);
                 remoteView.addView(vc.getRemoteView());
                 remoteView.setOnClickListener((View v) -> {
-                    removeVideoViews();
-                    mToggleVideoViewPositions = !mToggleVideoViewPositions;
-                    addRemoteView();
-                    addLocalView();
+                    Call call = getSinchServiceInterface().getCall(mCallId);
+                    if(call.getState()==CallState.ESTABLISHED)
+                    {
+                        removeVideoViews();
+                        mToggleVideoViewPositions = !mToggleVideoViewPositions;
+                        addRemoteView();
+                        addLocalView();
+                    }
                 });
                 mRemoteVideoViewAdded = true;
                 vc.setLocalVideoZOrder(!mToggleVideoViewPositions);
@@ -258,7 +295,6 @@ public class VideoCallScreenActivity extends BaseActivity {
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
             String endMsg = "Call ended";
             Toast.makeText(VideoCallScreenActivity.this, endMsg, Toast.LENGTH_LONG).show();
-
             endCall();
         }
 
@@ -280,7 +316,7 @@ public class VideoCallScreenActivity extends BaseActivity {
 
         @Override
         public void onCallProgressing(Call call) {
-            Log.d(TAG, "Call progressing");
+            mCallState.setText("Ringing..");
             mAudioPlayer.playProgressTone();
         }
 

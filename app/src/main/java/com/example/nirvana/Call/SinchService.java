@@ -22,6 +22,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -85,9 +86,8 @@ public class SinchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId){
         Id=intent.getStringExtra("Id");
         i=intent.getIntExtra("i",0);
-        if(i==0||i%10==0)
+        if(i==0)
         {
-            stop();
             createClient(Id);
             i++;
         }
@@ -111,7 +111,6 @@ public class SinchService extends Service {
                 .applicationSecret("2dEpHTchh0SLCsnYyv2gPw==")
                 .userId(username)
                 .environmentHost("clientapi.sinch.com").build();
-
 
         mSinchClient.setSupportCalling(true);
         mSinchClient.setSupportManagedPush(true);

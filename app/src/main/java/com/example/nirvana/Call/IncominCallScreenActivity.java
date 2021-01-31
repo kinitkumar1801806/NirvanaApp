@@ -116,7 +116,14 @@ public void getCallerName()
                    name=hashMap.get("fname").toString()+" "+hashMap.get("lname").toString();
                    link=hashMap.get("link").toString();
                    textViewRemoteUser.setText(name);
-                   Glide.with(IncominCallScreenActivity.this).load(link).into(profile_image);
+                   if(link.equals("None"))
+                   {
+                       Glide.with(IncominCallScreenActivity.this).load(R.drawable.green_person_logo).into(profile_image);
+                   }
+                   else
+                   {
+                       Glide.with(IncominCallScreenActivity.this).load(link).into(profile_image);
+                   }
                }
             }
 
@@ -175,6 +182,14 @@ public void getCallerName()
             Intent intent=new Intent(this, VoiceCallScreenActivity.class);
             intent.putExtra("SenderId",Id);
             intent.putExtra("UserName",name);
+            if(Who.equals("Doctors"))
+            {
+                Who="Patient";
+            }
+            else
+            {
+                Who="Doctors";
+            }
             intent.putExtra("Who",Who);
             intent.putExtra("link",link);
             intent.putExtra(CALL_ID, mCallId);

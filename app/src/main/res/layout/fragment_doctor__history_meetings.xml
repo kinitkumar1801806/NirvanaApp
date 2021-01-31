@@ -19,5 +19,5 @@
             android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="No Upcoming meetings"/>
+            android:text="No History meetings"/>
     </RelativeLayout>

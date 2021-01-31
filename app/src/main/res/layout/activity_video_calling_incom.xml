@@ -17,7 +17,7 @@
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
-        android:id="@+id/patient_name"
+        android:id="@+id/senderId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -29,18 +29,6 @@
         android:textColor="@color/white"
         />
 
-    <TextView
-        android:id="@+id/patient_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Male, 21 Years"
-        android:textSize="16sp"
-        android:textAllCaps="true"
-        android:layout_below="@id/patient_name"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        />
 
     <TextView
         android:id="@+id/callState"
@@ -50,7 +38,7 @@
         android:text="Incoming Video Call"
         android:textSize="16sp"
         android:textAllCaps="true"
-        android:layout_below="@id/patient_info"
+        android:layout_below="@id/senderId"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         />
@@ -65,17 +53,17 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
+            android:src="@drawable/endcall_red"
             android:padding="10dp"
             android:layout_marginBottom="40dp"
-            android:src="@drawable/endcall_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/video_off"
+            android:id="@+id/answer"
             android:layout_width="70dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:layout_marginBottom="10dp"
             android:src="@drawable/video_call"
@@ -83,17 +71,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/mute"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/micoff_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 

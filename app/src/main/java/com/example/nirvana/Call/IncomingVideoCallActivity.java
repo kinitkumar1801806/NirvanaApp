@@ -11,15 +11,25 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
 import com.example.nirvana.MusicPlayer.AudioPLayer;
 import com.example.nirvana.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallEndCause;
 import com.sinch.android.rtc.video.VideoCallListener;
 
+import java.util.HashMap;
 import java.util.List;
+
+import static com.example.nirvana.Call.SinchService.CALL_ID;
 
 public class IncomingVideoCallActivity extends BaseActivity {
 
@@ -32,9 +42,9 @@ public class IncomingVideoCallActivity extends BaseActivity {
     public static final String ACTION_IGNORE = "ignore";
     public static final String EXTRA_ID = "id";
     public static int MESSAGE_ID = 14;
-    private String mAction;
+    private String mAction,Id,Who,name,link;
     Animation answer_bounce,hangup_bounce;
-    ImageView answerbtn,hangupbtn;
+    ImageView answerbtn,hangupbtn,profileImage;
     DatabaseReference userRef;
     TextView remoteUser;
 
@@ -45,9 +55,10 @@ public class IncomingVideoCallActivity extends BaseActivity {
         setContentView(R.layout.activity_incomin_call_screen);
 
         TextView callState=findViewById(R.id.callState);
-         answerbtn =  findViewById(R.id.accept_swipe_btn);
-         hangupbtn =  findViewById(R.id.reject_swipe_btn);
-        remoteUser = findViewById(R.id.remoteUser);
+         answerbtn =  findViewById(R.id.answer);
+         hangupbtn =  findViewById(R.id.end_call);
+        remoteUser = findViewById(R.id.senderId);
+        profileImage=findViewById(R.id.profile_image_calling);
         callState.setText("Incoming Video Call");
 
         mAudioPlayer = new AudioPLayer(this);
@@ -62,6 +73,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
         hangup_bounce=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
         hangupbtn.startAnimation(hangup_bounce);
         hangup_bounce.setRepeatCount(Animation.INFINITE);
+        getCallerName();
         answerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +87,54 @@ public class IncomingVideoCallActivity extends BaseActivity {
            }
        });
     }
+    public void getCallerName()
+    {
+        DatabaseReference databaseReference= (DatabaseReference) FirebaseDatabase.getInstance().getReference("CallerName").child(mCallId);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String,Object> hashMap=(HashMap)snapshot.getValue();
+                Id=(String)hashMap.get("Id");
+                Who=(String)hashMap.get("Who");
+                getCallerDetails();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void getCallerDetails() {
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=firebaseDatabase.getReference(Who).child(Id);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                    name=hashMap.get("fname").toString()+" "+hashMap.get("lname").toString();
+                    link=hashMap.get("link").toString();
+                    remoteUser.setText(name);
+                    if(link.equals("None"))
+                    {
+                       Glide.with(IncomingVideoCallActivity.this).load(R.drawable.green_person_logo).into(profileImage);
+                    }
+                    else
+                    {
+                        Glide.with(IncomingVideoCallActivity.this).load(link).into(profileImage);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -117,9 +176,22 @@ public class IncomingVideoCallActivity extends BaseActivity {
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
             call.answer();
-            Intent intent = new Intent(this, VideoCallScreenActivity.class);
-            intent.putExtra(SinchService.CALL_ID, mCallId);
+            Intent intent=new Intent(this, VoiceCallScreenActivity.class);
+            intent.putExtra("SenderId",Id);
+            intent.putExtra("UserName",name);
+            if(Who.equals("Doctors"))
+            {
+                Who="Patient";
+            }
+            else
+            {
+                Who="Doctors";
+            }
+            intent.putExtra("Who",Who);
+            intent.putExtra("link",link);
+            intent.putExtra(CALL_ID, mCallId);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         } else {
             finish();
         }

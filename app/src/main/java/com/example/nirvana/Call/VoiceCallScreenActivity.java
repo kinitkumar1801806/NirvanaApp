@@ -2,12 +2,18 @@ package com.example.nirvana.Call;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.nirvana.MusicPlayer.AudioPLayer;
@@ -21,16 +27,22 @@ import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallEndCause;
 import com.sinch.android.rtc.calling.CallListener;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 public class VoiceCallScreenActivity extends BaseActivity {
 
     ImageView rejectSwipeBtn;
-    private TextView mCallDuration;
-    private TextView mCallState;
+    private TextView mCallState,mcallDuration;
     private TextView mCallerName;
     ImageView profileImageCalling;
     ImageView micbutton,speakerbutton,Recorder;
@@ -66,9 +78,9 @@ public class VoiceCallScreenActivity extends BaseActivity {
         micbutton=findViewById(R.id.mute);
         speakerbutton=findViewById(R.id.speakerbutton);
         mAudioPlayer = new AudioPLayer(this);
-        mCallDuration = (TextView) findViewById(R.id.callDuration);
         mCallerName = (TextView) findViewById(R.id.remoteUser);
         mCallState = (TextView) findViewById(R.id.callState);
+        mcallDuration=findViewById(R.id.callDuration);
         Recorder=findViewById(R.id.video_on);
         rejectSwipeBtn=findViewById(R.id.hangupButton);
         profileImageCalling=findViewById(R.id.profile_image_calling);
@@ -107,20 +119,60 @@ public class VoiceCallScreenActivity extends BaseActivity {
                 audioManager.setMode(AudioManager.MODE_IN_CALL);
                 if(speakerbutton.getDrawable().getConstantState()==getResources().getDrawable(R.drawable.ic_baseline_phone_in_talk_24).getConstantState())
                 {
-                    speakerbutton.setImageResource(R.drawable.ic_baseline_phone_24);
+                    Recorder.setImageResource(R.drawable.ic_baseline_phone_24);
                     audioManager.setSpeakerphoneOn(true);
 
                 }
                 else{
-                    speakerbutton.setImageResource(R.drawable.ic_baseline_phone_in_talk_24);
+                    Recorder.setImageResource(R.drawable.ic_baseline_phone_in_talk_24);
                     audioManager.setSpeakerphoneOn(false);
                 }
             }
         });
         Recorder.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-
+                File direct = new File(Environment.getExternalStorageDirectory() + "/Nirvana/Recordings/Voice Recordings/"+receiverUserName+"/");
+                if(!direct.exists()) {
+                    direct.mkdirs(); //directory is created;
+                }
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                Date todaydate = new Date();
+                String uuid = UUID.randomUUID().toString();
+                String thisDate = simpleDateFormat.format(todaydate);
+                String name="/"+uuid+thisDate+".mp3";
+                MediaRecorder recorder = new MediaRecorder();
+                recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                recorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+                recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                if(speakerbutton.getDrawable().getConstantState()==getResources().getDrawable(R.drawable.ic_baseline_videocam_white).getConstantState())
+                {
+                    speakerbutton.setImageResource(R.drawable.ic_baseline_phone_24);
+                    try {
+                        File filePath = new File(direct,name);
+                        if (!filePath.exists()) {
+                            if (!filePath.createNewFile()) {
+                                Toast.makeText(VoiceCallScreenActivity.this, "Can't create file", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        recorder.setOutputFile(filePath);
+                        recorder.prepare();
+                        recorder.start();
+                        Toast.makeText(VoiceCallScreenActivity.this,"Recording Started",Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    speakerbutton.setImageResource(R.drawable.ic_baseline_videocam_white);
+                    if(recorder!=null)
+                    {
+                        recorder.release();
+                        recorder=null;
+                        Toast.makeText(VoiceCallScreenActivity.this,"Recording is  saved to"+direct+name,Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         Recorder.setEnabled(false);
@@ -193,7 +245,7 @@ public class VoiceCallScreenActivity extends BaseActivity {
     private void updateCallDuration() {
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
-            mCallDuration.setText(formatTimespan(call.getDetails().getDuration()));
+            mcallDuration.setText(formatTimespan(call.getDetails().getDuration()));
         }
     }
 
@@ -221,6 +273,8 @@ public class VoiceCallScreenActivity extends BaseActivity {
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
             AudioController audioController = getSinchServiceInterface().getAudioController();
             audioController.disableSpeaker();
+            mCallState.setVisibility(View.GONE);
+            mcallDuration.setVisibility(View.VISIBLE);
         }
 
         @Override

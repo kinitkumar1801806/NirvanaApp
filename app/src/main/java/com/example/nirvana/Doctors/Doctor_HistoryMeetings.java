@@ -45,6 +45,7 @@ public class Doctor_HistoryMeetings extends Fragment {
     public String Id;
     TextView textView;
     View view1;
+    boolean check=false;
     public Doctor_HistoryMeetings() {
         // Required empty public constructor
     }
@@ -127,8 +128,13 @@ public class Doctor_HistoryMeetings extends Fragment {
                                 TimeList.add(time);
                                 ProblemList.add(problem);
                                 initRecyclerView();
+                                check=true;
                             }
                         }
+                    }
+                    if(!check)
+                    {
+                        textView.setVisibility(View.VISIBLE);
                     }
                 }
                 else

@@ -1,7 +1,6 @@
 package com.example.nirvana;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -25,7 +24,6 @@ import com.example.nirvana.Call.BaseActivity;
 import com.example.nirvana.Call.SinchService;
 import com.example.nirvana.Call.VideoCallScreenActivity;
 import com.example.nirvana.Call.VoiceCallScreenActivity;
-import com.example.nirvana.Patients.Meeting_Alresdy_fixed_step2;
 import com.example.nirvana.Service.CallerName;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -331,4 +329,4 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
             Toast.makeText(this,"No internet.Please make sure that you are connected to internet",Toast.LENGTH_SHORT).show();
         }
         }
-    }
+}

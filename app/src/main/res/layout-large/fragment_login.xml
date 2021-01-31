@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="200dp"
         android:id="@+id/logo"
-        android:layout_height="126dp"
+        android:layout_height="166dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:src="@drawable/logo_white"
@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:text="Nirvana"
         android:textSize="28sp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@+id/logo"
+        android:layout_below="@+id/logo"
         android:textColor="@color/green"/>
     <TextView
         android:layout_width="wrap_content"
@@ -39,40 +39,41 @@
         android:textSize="22sp" />
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="90dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="80dp"
         android:id="@+id/relativeLayout1">
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:padding="10dp"
                 android:id="@+id/patient"
                 android:onClick="patient_signin"
                 app:civ_circle_background_color="@color/green"
                 android:src="@drawable/new_patient"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Client"
-                android:textSize="15sp"
-                android:layout_alignTop="@+id/patient"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="100dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/patient"
+            android:text="Client"
+            android:textSize="25sp" />
     </RelativeLayout>
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="130dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="90dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="60dp"
+                android:layout_marginRight="80dp"
                 android:id="@+id/relativeLayout2">
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:padding="10dp"
                 android:id="@+id/doctor"
@@ -83,10 +84,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Doctor"
-                android:layout_alignTop="@+id/doctor"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="100dp"
-                android:textSize="15sp"
+                android:layout_below="@+id/doctor"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="0dp"
+                android:textSize="25sp"
                 android:layout_gravity="center_horizontal"/>
             </RelativeLayout>
 </RelativeLayout>

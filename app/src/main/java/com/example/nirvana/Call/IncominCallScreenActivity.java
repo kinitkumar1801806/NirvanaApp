@@ -5,16 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GestureDetectorCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.nirvana.Gestures.SwipeUpGesture;
 import com.example.nirvana.MusicPlayer.AudioPLayer;
 import com.example.nirvana.R;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +42,7 @@ public class IncominCallScreenActivity extends BaseActivity {
     static final String TAG = IncominCallScreenActivity.class.getSimpleName();
     private String mCallId;
     private AudioPLayer mAudioPlayer;
-
+    private GestureDetectorCompat gestureDetectorCompat=null;
     public static final String ACTION_ANSWER = "answer";
     public static final String ACTION_IGNORE = "ignore";
     public static final String EXTRA_ID = "id";
@@ -46,13 +50,11 @@ public class IncominCallScreenActivity extends BaseActivity {
     private String mAction,Id,name,link,Who;
     ImageView profile_image;
     TextView textViewRemoteUser;
-    Animation answer_bounce,hangup_bounce;
     ImageView answerbtn,hangupbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incomin_call_screen);
-
         TextView callState=findViewById(R.id.callState);
         answerbtn = findViewById(R.id.accept_swipe_btn);
         hangupbtn = findViewById(R.id.reject_swipe_btn);
@@ -65,23 +67,35 @@ public class IncominCallScreenActivity extends BaseActivity {
         Intent intent = getIntent();
         mCallId = intent.getStringExtra(CALL_ID);
         mAction = "";
-        answer_bounce= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
-        answerbtn.startAnimation(answer_bounce);
-        answer_bounce.setRepeatCount(Animation.INFINITE);
-        hangup_bounce=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
-        hangupbtn.startAnimation(hangup_bounce);
-        hangup_bounce.setRepeatCount(Animation.INFINITE);
+        Animation Bounce=  new TranslateAnimation(
+                TranslateAnimation.ABSOLUTE, 0f,
+                TranslateAnimation.ABSOLUTE, 0.0f,
+                TranslateAnimation.ABSOLUTE, 0.0f,
+                TranslateAnimation.RELATIVE_TO_SELF, -1.5f);
+        Bounce.setDuration(800);
+        Bounce.setRepeatCount(-1);
+        Bounce.setRepeatMode(Animation.REVERSE);
+        answerbtn.setAnimation(Bounce);
+        hangupbtn.setAnimation(Bounce);
         getCallerName();
-        answerbtn.setOnClickListener(new View.OnClickListener() {
+        answerbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                answerClicked();
+            public boolean onTouch(View v, MotionEvent event) {
+                SwipeUpGesture swipeUpGesture=new SwipeUpGesture();
+                swipeUpGesture.setActivity(IncominCallScreenActivity.this,"answer");
+                gestureDetectorCompat=new GestureDetectorCompat(IncominCallScreenActivity.this,swipeUpGesture);
+                gestureDetectorCompat.onTouchEvent(event);
+                return true;
             }
         });
-        hangupbtn.setOnClickListener(new View.OnClickListener() {
+        hangupbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                declineClicked();
+            public boolean onTouch(View v, MotionEvent event) {
+                SwipeUpGesture swipeUpGesture=new SwipeUpGesture();
+                swipeUpGesture.setActivity(IncominCallScreenActivity.this,"hangup");
+                gestureDetectorCompat=new GestureDetectorCompat(IncominCallScreenActivity.this,swipeUpGesture);
+                gestureDetectorCompat.onTouchEvent(event);
+                return true;
             }
         });
     }
@@ -173,7 +187,7 @@ public void getCallerName()
         }
     }
 
-    private void answerClicked() {
+    public void answerClicked() {
         mAudioPlayer.stopRingtone();
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
@@ -200,7 +214,7 @@ public void getCallerName()
         }
     }
 
-    private void declineClicked() {
+    public void declineClicked() {
         mAudioPlayer.stopRingtone();
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {

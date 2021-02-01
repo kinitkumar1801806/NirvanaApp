@@ -52,7 +52,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_incomin_call_screen);
+        setContentView(R.layout.activity_video_calling_incom);
 
         TextView callState=findViewById(R.id.callState);
          answerbtn =  findViewById(R.id.answer);
@@ -176,7 +176,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
             call.answer();
-            Intent intent=new Intent(this, VoiceCallScreenActivity.class);
+            Intent intent=new Intent(this, VideoCallScreenActivity.class);
             intent.putExtra("SenderId",Id);
             intent.putExtra("UserName",name);
             if(Who.equals("Doctors"))

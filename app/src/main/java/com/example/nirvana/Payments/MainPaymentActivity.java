@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.Doctors.Doctor_Meeting;
+import com.example.nirvana.Patients.PatientPhoneVerification;
 import com.example.nirvana.Patients.Patient_Meeting;
 import com.example.nirvana.Patients.Patient_Welcome_Activity;
 import com.example.nirvana.R;
@@ -34,7 +36,7 @@ import java.util.HashMap;
 
 public class MainPaymentActivity extends AppCompatActivity implements PaymentResultListener {
     ArrayList<String> Patient_Detail,Doctor_Detail;
-    public String name1,problem1,doctor_name,time,date,currentTime,thisDate,link,bio,amount,Did,Pid,email,phone,link1;
+    public String name1,email1,p_name,problem1,doctor_name,time,date,currentTime,thisDate,link,bio,amount,Did,Pid,email,phone,link1;
     ProgressDialog progressDialog;
     public TextView Bio,Name,Problem,Phone,Amount;
     @Override
@@ -78,6 +80,21 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                 email=hashMap.get("email").toString();
                 phone=hashMap.get("phone").toString();
                 link1=hashMap.get("link").toString();
+                p_name=hashMap.get("fname").toString()+hashMap.get("lname").toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase firebaseDatabase1=FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1=firebaseDatabase1.getReference().child("Doctors").child(Did);
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
+                email1=hashMap.get("email").toString();
             }
 
             @Override
@@ -140,10 +157,56 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
         arr.add(time);
         arr.add(amount);
         arr.add(doctor_name);
+        sendEmail();
         Intent intent=new Intent(this,PaymentSuccessActivity.class);
         intent.putStringArrayListExtra("arr",arr);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+    }
+
+    private void sendEmail() {
+        BackgroundMail.newBuilder(MainPaymentActivity.this)
+                .withUsername("nirvana.ieee.01@gmail.com")
+                .withPassword("nirvana_IEEE")
+                .withMailto(email)
+                .withType(BackgroundMail.TYPE_PLAIN)
+                .withSubject("Nirvana")
+                .withBody("Your meeting is successfully fixed with the doctor "+doctor_name+". The meeting details are follows\n Date:"+
+                        date+"\n time"+time)
+                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                    @Override
+                    public void onSuccess() {
+                        //do some magic
+                    }
+                })
+                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                    @Override
+                    public void onFail() {
+                        //do some magic
+                    }
+                })
+                .send();
+        BackgroundMail.newBuilder(MainPaymentActivity.this)
+                .withUsername("nirvana.ieee.01@gmail.com")
+                .withPassword("nirvana_IEEE")
+                .withMailto(email1)
+                .withType(BackgroundMail.TYPE_PLAIN)
+                .withSubject("Nirvana")
+                .withBody("You have a meeting fixed by"+p_name+". The meeting details are follows\n Date:"+
+                        date+"\n time"+time)
+                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                    @Override
+                    public void onSuccess() {
+                        //do some magic
+                    }
+                })
+                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                    @Override
+                    public void onFail() {
+                        //do some magic
+                    }
+                })
+                .send();
     }
 
     @Override

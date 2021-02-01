@@ -189,7 +189,6 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
                    } catch (JSONException e) {
                        e.printStackTrace();
                    }
-
                }
                else
                {
@@ -269,10 +268,17 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
                                {
                                    mt=String.valueOf(monthOfYear);
                                }
-                               final_date=String.valueOf(dayOfMonth)+"/"+mt+"/"+String.valueOf(year);
-                               child_date=String.valueOf(dayOfMonth)+"-"+mt+"-"+String.valueOf(year);
+                               if(dayOfMonth<10) {
+                                   String str = "0" + String.valueOf(dayOfMonth);
+                                   final_date = str + "/" + mt + "/" + String.valueOf(year);
+                                   child_date = str + "-" + mt + "-" + String.valueOf(year);
+                               }
+                               else
+                               {
+                                   final_date = String.valueOf(dayOfMonth) + "/" + mt + "/" + String.valueOf(year);
+                                   child_date = String.valueOf(dayOfMonth) + "-" + mt + "-" + String.valueOf(year);
+                               }
                                Date.setText(final_date);
-                                System.out.println(monthOfYear);
                                 try {
                                     Avaiable_Slots.clear();
                                     Avaiable_Slots.add("Select a slot");
@@ -297,6 +303,7 @@ public class Fix_Meeting_step3 extends AppCompatActivity {
                                 }
                                 if(Avaiable_Slots.size()==1)
                                 {
+                                    Avaiable_Slots.clear();
                                     Avaiable_Slots.add(0,"No slots available");
                                 }
                                 spinner.setAdapter(new ArrayAdapter<String>(Fix_Meeting_step3.this, android.R.layout.simple_spinner_dropdown_item,Avaiable_Slots));

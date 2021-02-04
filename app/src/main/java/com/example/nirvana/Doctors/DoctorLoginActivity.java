@@ -165,7 +165,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
     }
     public void LoginByPassword(View view) {
         Intent intent=new Intent(this, LoginByPasswordActivity.class);
-        intent.putExtra("phone",phone1);
+        intent.putExtra("phone",phonenumber);
         intent.putExtra("who","doctor");
         startActivity(intent);
     }

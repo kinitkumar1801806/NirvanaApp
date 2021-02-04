@@ -164,7 +164,7 @@ public class PatientSignupActivity extends AppCompatActivity {
             arr.add(4,Gender);
             arr.add(5,Fname);
             arr.add(6,Lname);
-            arr.add(7,Password);
+            arr.add(7,Pass);
 
             FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
             DatabaseReference databaseReference=firebaseDatabase.getReference().child("Patients");

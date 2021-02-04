@@ -301,6 +301,10 @@ public class VideoCallScreenActivity extends BaseActivity {
         @Override
         public void onCallEstablished(Call call) {
             Log.d(TAG, "Call established");
+            videobutton.setEnabled(true);
+            profileImage.setVisibility(View.GONE);
+            mCallState.setVisibility(View.GONE);
+            RecieverUserName.setVisibility(View.GONE);
             mAudioPlayer.stopProgressTone();
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
             AudioController audioController = getSinchServiceInterface().getAudioController();

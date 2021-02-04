@@ -35,7 +35,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -45,6 +47,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.security.AuthProvider;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -228,6 +231,13 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 .setValue(doctor_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        AuthCredential credential1 = EmailAuthProvider.getCredential(Email, Password);
+                        mAuth.getCurrentUser().linkWithCredential(credential1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            }
+                        });
                         progressBar.setVisibility(View.GONE);
                         sendMail();
                         Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up.Please check your email for your doctor id.",Toast.LENGTH_SHORT).show();

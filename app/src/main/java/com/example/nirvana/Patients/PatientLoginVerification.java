@@ -112,7 +112,7 @@ public class PatientLoginVerification extends Fragment {
 
                 @Override
                 public void onVerificationFailed(FirebaseException e) {
-                    Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+
                 }
 
                 //when the code is generated then this method will receive the code.

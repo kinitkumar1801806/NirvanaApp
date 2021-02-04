@@ -44,16 +44,4 @@ public class SwipeUpVideoGesture extends GestureDetector.SimpleOnGestureListener
         }
         return true;
     }
-
-    @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
-        Toast.makeText(activity,"Single Tap",Toast.LENGTH_SHORT).show();
-        return true;
-    }
-
-    @Override
-    public boolean onDoubleTap(MotionEvent e) {
-        Toast.makeText(activity,"Double Tap",Toast.LENGTH_SHORT).show();
-        return true;
-    }
 }

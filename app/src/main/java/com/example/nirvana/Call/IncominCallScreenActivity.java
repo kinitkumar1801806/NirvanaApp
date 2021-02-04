@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,26 +44,35 @@ public class IncominCallScreenActivity extends BaseActivity {
     private String mCallId;
     private AudioPLayer mAudioPlayer;
     private GestureDetectorCompat gestureDetectorCompat=null;
+    private GestureDetectorCompat gestureDetectorCompat1=null;
     public static final String ACTION_ANSWER = "answer";
     public static final String ACTION_IGNORE = "ignore";
     public static final String EXTRA_ID = "id";
     public static int MESSAGE_ID = 14;
     private String mAction,Id,name,link,Who;
-    ImageView profile_image;
+    ImageView profile_image,Red_arrow,Green_arrow;
     TextView textViewRemoteUser;
     ImageView answerbtn,hangupbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_incomin_call_screen);
+        setContentView(R.layout.activity_voice_call_incom);
         TextView callState=findViewById(R.id.callState);
-        answerbtn = findViewById(R.id.accept_swipe_btn);
-        hangupbtn = findViewById(R.id.reject_swipe_btn);
-        profile_image=findViewById(R.id.incoming_profile_image);
+        answerbtn = findViewById(R.id.pick_call);
+        hangupbtn = findViewById(R.id.hangup);
+        profile_image=findViewById(R.id.profile_image_calling);
         textViewRemoteUser=findViewById(R.id.remoteUser);
+        Red_arrow=findViewById(R.id.red_arrow);
+        Green_arrow=findViewById(R.id.green_arrow);
         callState.setText("Incoming Voice Call");
         mAudioPlayer = new AudioPLayer(this);
         mAudioPlayer.playRingtone();
+        SwipeUpGesture swipeUpGesture=new SwipeUpGesture();
+        swipeUpGesture.setActivity(IncominCallScreenActivity.this,"answer");
+        gestureDetectorCompat=new GestureDetectorCompat(IncominCallScreenActivity.this,swipeUpGesture);
+        SwipeUpGesture swipeUpGesture1=new SwipeUpGesture();
+        swipeUpGesture1.setActivity(IncominCallScreenActivity.this,"hangup");
+        gestureDetectorCompat1=new GestureDetectorCompat(IncominCallScreenActivity.this,swipeUpGesture1);
 
         Intent intent = getIntent();
         mCallId = intent.getStringExtra(CALL_ID);
@@ -71,30 +81,27 @@ public class IncominCallScreenActivity extends BaseActivity {
                 TranslateAnimation.ABSOLUTE, 0f,
                 TranslateAnimation.ABSOLUTE, 0.0f,
                 TranslateAnimation.ABSOLUTE, 0.0f,
-                TranslateAnimation.RELATIVE_TO_SELF, -1.5f);
+                TranslateAnimation.RELATIVE_TO_SELF, -0.5f);
         Bounce.setDuration(800);
-        Bounce.setRepeatCount(-1);
+        Bounce.setRepeatCount(Animation.INFINITE);
         Bounce.setRepeatMode(Animation.REVERSE);
-        answerbtn.setAnimation(Bounce);
-        hangupbtn.setAnimation(Bounce);
+        Red_arrow.setAnimation(Bounce);
+        Green_arrow.setAnimation(Bounce);
+        Bounce.setInterpolator(new LinearInterpolator());
         getCallerName();
         answerbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                SwipeUpGesture swipeUpGesture=new SwipeUpGesture();
-                swipeUpGesture.setActivity(IncominCallScreenActivity.this,"answer");
-                gestureDetectorCompat=new GestureDetectorCompat(IncominCallScreenActivity.this,swipeUpGesture);
-                gestureDetectorCompat.onTouchEvent(event);
+               gestureDetectorCompat.onTouchEvent(event);
+                answerbtn.clearAnimation();
                 return true;
             }
         });
         hangupbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                SwipeUpGesture swipeUpGesture=new SwipeUpGesture();
-                swipeUpGesture.setActivity(IncominCallScreenActivity.this,"hangup");
-                gestureDetectorCompat=new GestureDetectorCompat(IncominCallScreenActivity.this,swipeUpGesture);
-                gestureDetectorCompat.onTouchEvent(event);
+                gestureDetectorCompat1.onTouchEvent(event);
+                hangupbtn.clearAnimation();
                 return true;
             }
         });

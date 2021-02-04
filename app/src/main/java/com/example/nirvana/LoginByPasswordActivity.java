@@ -2,7 +2,6 @@ package com.example.nirvana;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nirvana.Doctors.Doctor_Welcome_Activity;
+import com.example.nirvana.Patients.PatientLoginActivity;
 import com.example.nirvana.Patients.Patient_Welcome_Activity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class LoginByPasswordActivity extends AppCompatActivity {
-    public String phone, who,res;
+    public String phone, who, Id,Email;
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
+    EditText Password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +44,6 @@ public class LoginByPasswordActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        EditText Password;
-        ProgressBar progressBar;
         Password = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -49,32 +55,16 @@ public class LoginByPasswordActivity extends AppCompatActivity {
             if (who.equals("doctor")) {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 databaseReference = firebaseDatabase.getReference().child("Doctors");
-                String result=CheckPassword(password,phone);
-                progressBar.setVisibility(View.GONE);
-                if(result.equals("Success")) {
-                    progressBar.setVisibility(View.GONE);
-                    Intent intent=new Intent(LoginByPasswordActivity.this, Doctor_Welcome_Activity.class);
-                    intent.putExtra("phone",phone);
-                    startActivity(intent);
-                }
-
+                CheckPassword(password,phone);
             } else if (who.equals("patient")) {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 databaseReference = firebaseDatabase.getReference().child("Patient");
-                String result=CheckPassword(password,phone);
-                progressBar.setVisibility(View.GONE);
-                if(result.equals("Success")) {
-                    progressBar.setVisibility(View.GONE);
-                    Intent intent=new Intent(LoginByPasswordActivity.this, Patient_Welcome_Activity.class);
-                    intent.putExtra("phone",phone);
-                    startActivity(intent);
-                }
-
+                CheckPassword(password,phone);
             }
         }
     }
 
-    public String CheckPassword(String pass,String phone) {
+    public void CheckPassword(String pass,String phone) {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,22 +76,53 @@ public class LoginByPasswordActivity extends AppCompatActivity {
                         Object data=hashMap.get(key);
                         HashMap<String,Object> userData= (HashMap<String, Object>) data;
                         String phone1=userData.get("phone").toString();
+                        Id=userData.get("Id").toString();
+                        Email=userData.get("email").toString();
                         if(phone.equals(phone1))
                         {
-                            String password = userData.get("password").toString();
+                            String password = userData.get("pass").toString();
                             if (pass.equals(password)) {
-                                res="Success";
+                                if(who.equals("doctor"))
+                                {
+                                        progressBar.setVisibility(View.GONE);
+                                        FirebaseAuth mAuth=FirebaseAuth.getInstance();
+                                        mAuth.signInWithEmailAndPassword(Email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                Intent intent=new Intent(LoginByPasswordActivity.this, Doctor_Welcome_Activity.class);
+                                                intent.putExtra("phone",phone);
+                                                intent.putExtra("Id",Id);
+                                                startActivity(intent);
+                                            }
+                                        });
+
+
+                                }
+                                else
+                                {
+                                    progressBar.setVisibility(View.GONE);
+                                    FirebaseAuth mAuth=FirebaseAuth.getInstance();
+                                    mAuth.signInWithEmailAndPassword(Email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            Intent intent=new Intent(LoginByPasswordActivity.this, Patient_Welcome_Activity.class);
+                                            intent.putExtra("phone",phone);
+                                            intent.putExtra("Id",Id);
+                                            startActivity(intent);
+                                        }
+                                    });
+
+                                }
                             }
-                        }
-                        else
-                        {
-                            Toast.makeText(LoginByPasswordActivity.this, "This number does not attach with any account.", Toast.LENGTH_SHORT).show();
-                            res="Failure";
+                            else
+                            {
+                                Password.setError("Enter the correct password");
+                                progressBar.setVisibility(View.GONE);
+                            }
                         }
                     }
                 } else {
                     Toast.makeText(LoginByPasswordActivity.this, "This number does not attach with any account.", Toast.LENGTH_SHORT).show();
-                    res="Failure";
                 }
             }
 
@@ -110,6 +131,5 @@ public class LoginByPasswordActivity extends AppCompatActivity {
 
             }
         });
-        return res;
     }
 }

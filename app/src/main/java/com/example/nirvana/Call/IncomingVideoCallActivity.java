@@ -44,12 +44,13 @@ public class IncomingVideoCallActivity extends BaseActivity {
     private AudioPLayer mAudioPlayer;
     private boolean mAcceptVideo = true;
     private GestureDetectorCompat gestureDetectorCompat=null;
+    private GestureDetectorCompat gestureDetectorCompat1=null;
     public static final String ACTION_ANSWER = "answer";
     public static final String ACTION_IGNORE = "ignore";
     public static final String EXTRA_ID = "id";
     public static int MESSAGE_ID = 14;
     private String mAction,Id,Who,name,link;
-    ImageView answerbtn,hangupbtn,profileImage;
+    ImageView answerbtn,hangupbtn,profileImage,Red_arrow,Green_arrow;
     DatabaseReference userRef;
     TextView remoteUser;
 
@@ -63,7 +64,15 @@ public class IncomingVideoCallActivity extends BaseActivity {
          hangupbtn =  findViewById(R.id.end_call);
         remoteUser = findViewById(R.id.senderId);
         profileImage=findViewById(R.id.profile_image_calling);
+        Red_arrow=findViewById(R.id.red_arrow);
+        Green_arrow=findViewById(R.id.green_arrow);
         callState.setText("Incoming Video Call");
+        SwipeUpVideoGesture swipeUpVideoGesture=new SwipeUpVideoGesture();
+        swipeUpVideoGesture.setActivity(IncomingVideoCallActivity.this,"answer");
+        gestureDetectorCompat=new GestureDetectorCompat(IncomingVideoCallActivity.this,swipeUpVideoGesture);
+        SwipeUpVideoGesture swipeUpVideoGesture1=new SwipeUpVideoGesture();
+        swipeUpVideoGesture1.setActivity(IncomingVideoCallActivity.this,"hangup");
+        gestureDetectorCompat1=new GestureDetectorCompat(IncomingVideoCallActivity.this,swipeUpVideoGesture1);
 
         mAudioPlayer = new AudioPLayer(this);
         mAudioPlayer.playRingtone();
@@ -75,20 +84,17 @@ public class IncomingVideoCallActivity extends BaseActivity {
                 TranslateAnimation.ABSOLUTE, 0f,
                 TranslateAnimation.ABSOLUTE, 0.0f,
                 TranslateAnimation.ABSOLUTE, 0.0f,
-                TranslateAnimation.RELATIVE_TO_SELF, -1.5f);
-        Bounce.setDuration(800);
-        Bounce.setRepeatCount(-1);
+                TranslateAnimation.RELATIVE_TO_SELF, -0.5f);
+        Bounce.setDuration(500);
+        Bounce.setRepeatCount(Animation.INFINITE);
         Bounce.setRepeatMode(Animation.REVERSE);
-        answerbtn.setAnimation(Bounce);
-        hangupbtn.setAnimation(Bounce);
+        Red_arrow.setAnimation(Bounce);
+        Green_arrow.setAnimation(Bounce);
         Bounce.setInterpolator(new LinearInterpolator());
         getCallerName();
         answerbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                SwipeUpVideoGesture swipeUpVideoGesture=new SwipeUpVideoGesture();
-                swipeUpVideoGesture.setActivity(IncomingVideoCallActivity.this,"answer");
-                gestureDetectorCompat=new GestureDetectorCompat(IncomingVideoCallActivity.this,swipeUpVideoGesture);
                 gestureDetectorCompat.onTouchEvent(event);
                 return true;
             }
@@ -96,10 +102,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
         hangupbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                SwipeUpVideoGesture swipeUpVideoGesture=new SwipeUpVideoGesture();
-                swipeUpVideoGesture.setActivity(IncomingVideoCallActivity.this,"hangup");
-                gestureDetectorCompat=new GestureDetectorCompat(IncomingVideoCallActivity.this,swipeUpVideoGesture);
-                gestureDetectorCompat.onTouchEvent(event);
+                gestureDetectorCompat1.onTouchEvent(event);
                 return true;
             }
         });

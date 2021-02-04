@@ -18,7 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -146,6 +148,13 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                             .setValue(details_patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
+                                                    AuthCredential credential1 = EmailAuthProvider.getCredential(Email, Password);
+                                                    mAuth.getCurrentUser().linkWithCredential(credential1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                                        }
+                                                    });
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(PatientPhoneVerification.this,"Successfully signed up",Toast.LENGTH_SHORT).show();
                                                     BackgroundMail.newBuilder(PatientPhoneVerification.this)

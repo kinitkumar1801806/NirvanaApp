@@ -254,9 +254,97 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 .withUsername("nirvana.ieee.01@gmail.com")
                 .withPassword("nirvana_IEEE")
                 .withMailto(Email)
-                .withType(BackgroundMail.TYPE_PLAIN)
+                .withType(BackgroundMail.TYPE_HTML)
                 .withSubject("Welcome to Nirvana")
-                .withBody("This is a automatic generated email please don't reply to it. ")
+                .withBody("<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>EMAIL</title>\n" +
+                        "    <style>\n" +
+                        "        .container{\n" +
+                        "            margin-left: 10%;\n" +
+                        "            margin-right: 10%;\n" +
+                        "            word-wrap: break-word ;\n" +
+                        "        }\n" +
+                        "        .head{\n" +
+                        "            width: 100%;\n" +
+                        "            height: 15%;\n" +
+                        "\n" +
+                        "\n" +
+                        "        }\n" +
+                        "        .button{\n" +
+                        "            width: 20%;\n" +
+                        "            height: 8vh;\n" +
+                        "            border-radius: 8px;\n" +
+                        "            margin: auto;\n" +
+                        "            background-color: green;\n" +
+                        "            font-size: large;\n" +
+                        "            text-align: center;\n" +
+                        "            text-decoration: none;\n" +
+                        "            padding: 15px 30px;\n" +
+                        "            color: white;\n" +
+                        "        }\n" +
+                        "        .button:hover {\n" +
+                        "        \tbackground-color: darkgreen;\n" +
+                        "        }\n" +
+                        "\n" +
+                        "        .social{\n" +
+                        "            width: 4%;\n" +
+                        "            height: 4%;\n" +
+                        "            margin-right:2%;\n" +
+                        "        }\n" +
+                        "        .logo{\n" +
+                        "        \tposition: absolute;\n" +
+                        "        \tright: 10px;\n" +
+                        "        \theight: 100%;\n" +
+                        "        \ttop: 0;\n" +
+                        "\t\t}\n" +
+                        "        div{\n" +
+                        "            max-width: inherit;\n" +
+                        "        }\n" +
+                        "\t\t.btn {\n" +
+                        "        \ttext-align: center;\n" +
+                        "        \tmargin-top: 15px;\n" +
+                        "        \tmargin-bottom: 15px;\n" +
+                        "        }\n" +
+                        "           \n" +
+                        "        footer{\n" +
+                        "            background-color: #90EE90;\n" +
+                        "            width: 100%;\n" +
+                        "            padding: 14px 1px;\n" +
+                        "        }\n" +
+                        "        .link{\n" +
+                        "            width: 40%;\n" +
+                        "            height: 8vh;\n" +
+                        "            margin-right: 25%;\n" +
+                        "        }\n" +
+                        "        @media only screen and (max-width: 600px) {\n" +
+                        "            .button{\n" +
+                        "                font-size: medium;\n" +
+                        "                width: 90%;\n" +
+                        "                text-align: center;\n" +
+                        "            }\n" +
+                        "        }\n" +
+                        "  \n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "\t<div class=\"container\">\n" +
+                        "    <img class=\"head\" src=\"https://nirvana-logintolife.github.io/Nirvana-email/todogif.png\" alt=\"\" srcset=\"\">\n" +
+                        "    <div>\n" +
+                        "        <h1>Greetings!!</h1><br><h3>WELCOME to NIRVANA. <br> You've successfully registerd with us as and have joined our exuberant team of Practioners, <br> which includes doctors with specialisation under categories like Councellors, Psychiatrist, Therapist and Psycologist.<br>Explore with US!</h3><h2>Please fill your appointment charges and your area of Expertise so as to facilitate the meeting process</h2>\n" +
+                        "    <br><div class=\"btn\"><a href=\"#\" class=\"button\">VISIT WEBSITE</a></div><br>\n" +
+                        "    <h4>We hope you will have a good time with us <br>Thanks <br>Team NIRVANA</h4>\n" +
+                        "\t</div>\n" +
+                        "</div>\n" +
+                        "    <footer>\n" +
+                        "    \t<div class=\"container\" style=\"position: relative;\">\n" +
+                        "        <h4>Reach out to us at</h4> <br><a href=\"#\"><img class=\"social\" src=\"https://nirvana-logintolife.github.io/Nirvana-email/instagramicon.png\" alt=\"\" srcset=\"\"></a><a href=\"#\"><img class=\"social\" src=\"https://nirvana-logintolife.github.io/Nirvana-email/facebook_icon.png\" alt=\"\" srcset=\"\"></a><a href=\"#\"><img class=\"social\" src=\"https://nirvana-logintolife.github.io/Nirvana-email/email.png\" alt=\"\" srcset=\"\"></a><a href=\"#\"><img class=\"social\" src=\"https://nirvana-logintolife.github.io/Nirvana-email/calender.png\" alt=\"\" srcset=\"\"></a>\n" +
+                        "        </div>\n" +
+                        "    </footer>\n" +
+                        "</body>\n" +
+                        "</html>")
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {

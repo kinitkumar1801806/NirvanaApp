@@ -11,6 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@drawable/gradient_clean_mirror"
         android:layout_height="match_parent">
                 <RadioGroup
                     android:layout_width="wrap_content"
@@ -52,7 +53,7 @@
     android:id="@+id/radio_group2"
     android:layout_alignParentRight="true"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="20dp"
     android:layout_marginRight="30dp"
     android:layout_marginBottom="40dp">
     <RadioButton

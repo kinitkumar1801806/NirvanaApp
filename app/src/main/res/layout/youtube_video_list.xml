@@ -32,7 +32,7 @@
         android:id="@+id/titlecard"
         android:layout_centerVertical="true"
         android:layout_below="@+id/thumbnail"
-        android:background="@color/background_offwhite"
+        android:background="@drawable/photo"
         android:layout_height="80dp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="40dp"
@@ -55,7 +55,7 @@
                 android:inputType="textMultiLine"
                 android:textSize="17sp"
 
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"/>
 
 
 

@@ -38,7 +38,7 @@
         android:id="@+id/button4"
         android:layout_width="217dp"
         android:layout_height="50dp"
-        android:background="@color/green"
+        android:background="@drawable/answer_call"
         android:text="START TEST"
         android:textColor="#FAF8F5F5"
         android:onClick="Start_Test"

@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.example.nirvana.Blogs.HomeBlogFragment;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
 import com.example.nirvana.Model.MeetingTime;
+import com.example.nirvana.MusicPlayer.NirvanaAudioPlayer;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;
 import com.example.nirvana.Call.SinchService;
@@ -55,9 +57,10 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
     FirebaseAuth auth;
+    public Integer Launch_Activity=123;
     public TextView doctor_name,doctor_address;
     private int mHour,mMinute;
-    ImageView Niri,VideoPlayer,Goal_Planning,Profile,d_profile,Home;
+    ImageView Niri,VideoPlayer,MusicPlayer,Profile,d_profile,Home;
     private String phone,Id,link,time,from_time,to_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +82,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
         Home=findViewById(R.id.home);
         VideoPlayer=findViewById(R.id.video_player);
         Niri=findViewById(R.id.niri);
-        Goal_Planning=findViewById(R.id.goal_planning);
+        MusicPlayer=findViewById(R.id.music_player);
         Profile=findViewById(R.id.profile);
         if(auth.getCurrentUser()!=null)
         {
@@ -131,10 +134,10 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
-        Goal_Planning.setOnClickListener(new View.OnClickListener() {
+        MusicPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Doctor_Welcome_Activity.this, GoalPlanning.class);
+                Intent intent=new Intent(Doctor_Welcome_Activity.this, NirvanaAudioPlayer.class);
                 intent.putExtra("Id",Id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
@@ -146,11 +149,25 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
                 Intent intent=new Intent(Doctor_Welcome_Activity.this, ProfileActivity.class);
                 intent.putExtra("Id",Id);
                 intent.putExtra("who","doctor");
-                startActivity(intent);
+                startActivityForResult(intent,Launch_Activity);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
         checkforMeetingTime();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Launch_Activity) {
+            if(resultCode == Activity.RESULT_OK){
+                link=data.getStringExtra("link");
+                RetrieveDoctorDetails();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 
     private void checkforMeetingTime() {

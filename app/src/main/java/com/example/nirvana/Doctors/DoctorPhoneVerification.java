@@ -245,6 +245,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                         intent.putExtra("phone",Phone);
                         intent.putExtra("Id",Id);
                         startActivity(intent);
+                        DoctorPhoneVerification.this.finish();
                     }
                 });
     }

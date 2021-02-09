@@ -25,7 +25,7 @@ public class DetailMusicFragment extends Fragment{
     SeekBar seekBar;
     TextView marquee_music, detail_music_artist,Duration,currentDuration;
     ImageView detail_play;
-    String action,phone;
+    String action,Id;
     boolean ch;
     ArrayList<String> dataList,titleList,albumList,artistList;
     ArrayList<Audio> audioList;
@@ -83,7 +83,7 @@ public class DetailMusicFragment extends Fragment{
            titleList=bundle.getStringArrayList("titleList");
            albumList=bundle.getStringArrayList("albumList");
            artistList=bundle.getStringArrayList("artistList");
-           phone=bundle.getString("phone");
+           Id=bundle.getString("Id");
             loadAudioPlayer();
         }
 

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -250,7 +251,9 @@ public class EditProfileActivity extends AppCompatActivity {
                                             progressBar.setVisibility(View.GONE);
                                             link=uri.toString();
                                             Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Patient").child(Id).child("link").setValue(link);
-                                            RetrieveData();
+                                            Intent returnIntent = getIntent();
+                                            returnIntent.putExtra("link",link);
+                                            setResult(Activity.RESULT_OK, returnIntent);
                                             finish();
                                             overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
                                         }
@@ -306,7 +309,9 @@ public class EditProfileActivity extends AppCompatActivity {
                                             link=uri.toString();
                                             Task<Void> databaseReference4=FirebaseDatabase.getInstance().getReference("Doctors").child(Id).child("link").setValue(link);
                                             UpdateBlogs();
-                                            RetrieveData();
+                                            Intent returnIntent = getIntent();
+                                            returnIntent.putExtra("link",link);
+                                            setResult(Activity.RESULT_OK, returnIntent);
                                             finish();
                                             overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
                                         }

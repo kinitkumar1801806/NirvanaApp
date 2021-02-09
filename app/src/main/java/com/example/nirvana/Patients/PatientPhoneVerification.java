@@ -269,6 +269,7 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                                     intent.putExtra("Id",Id);
                                                     intent.putExtra("phone",Phone);
                                                     startActivity(intent);
+                                                    PatientPhoneVerification.this.finish();
 
                                                 }
                                             });

@@ -149,6 +149,7 @@ public class PatientLoginActivity extends AppCompatActivity {
                                     intent.putExtra("phone",phone1);
                                     intent.putExtra("Id",Id);
                                     startActivity(intent);
+                                    PatientLoginActivity.this.finish();
 
 
                                 } else {

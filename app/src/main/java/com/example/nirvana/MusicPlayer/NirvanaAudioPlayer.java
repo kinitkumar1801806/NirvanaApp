@@ -67,7 +67,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public ArrayList<Audio> audioList;
     private final int STORAGE_PERMISSION_CODE = 1;
     public static final String Broadcast_PLAY_NEW_AUDIO = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.PlayNewAudio";
-    public String phone;
+    public String Id,isPlaying;
     // Change to your package name
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +86,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         titleList=new ArrayList<>();
         artistList=new ArrayList<>();
         albumList=new ArrayList<>();
-        phone=getIntent().getStringExtra("phone");
-        System.out.println(Integer.valueOf(Build.VERSION.SDK_INT));
+        Id=getIntent().getStringExtra("Id");
         if (ContextCompat.checkSelfPermission(NirvanaAudioPlayer.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)+ContextCompat.checkSelfPermission(NirvanaAudioPlayer.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -144,6 +143,15 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 music_name = findViewById(R.id.music_name);
                 artist_name = findViewById(R.id.music_artist);
                 music_action_image = findViewById(R.id.music_action_btn);
+                if(isPlaying.equals("true"))
+                {
+                    music_action_image.setImageResource(ic_media_pause);
+                }
+                if(music_index>audioList.size())
+                {
+                    music_name.setText(audioList.get(music_index).getTitle());
+                    artist_name.setText(audioList.get(music_index).getArtist());
+                }
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
                 recyclerView.setVisibility(View.VISIBLE);
                 progressBar=findViewById(R.id.progressBar);
@@ -235,7 +243,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
 
     public void loadAudio() {
         audioList=new ArrayList<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference("Musics").child("musics");
+        databaseReference= FirebaseDatabase.getInstance().getReference("Music").child("music");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -278,7 +286,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
 
             Intent playerIntent = new Intent(this, MediaPLayerService.class);
             playerIntent.putExtra("music_index",music_index);
-            playerIntent.putExtra("phone",phone);
+            playerIntent.putExtra("Id",Id);
             startService(playerIntent);
             bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 
@@ -291,7 +299,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             //Send a broadcast to the service -> PLAY_NEW_AUDIO
             Intent broadcastIntent = new Intent(Broadcast_PLAY_NEW_AUDIO);
             broadcastIntent.putExtra("music_index",music_index);
-            broadcastIntent.putExtra("phone",phone);
+            broadcastIntent.putExtra("Id",Id);
             sendBroadcast(broadcastIntent);
 
         }
@@ -328,7 +336,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 bundle.putStringArrayList("titleList",titleList);
                 bundle.putStringArrayList("albumList",albumList);
                 bundle.putStringArrayList("artistList",artistList);
-                bundle.putString("phone",phone);
+                bundle.putString("Id",Id);
                 DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
                 detailMusicFragment.setArguments(bundle);
                 track=1;
@@ -344,7 +352,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 bundle.putStringArrayList("titleList",titleList);
                 bundle.putStringArrayList("albumList",albumList);
                 bundle.putStringArrayList("artistList",artistList);
-                bundle.putString("phone",phone);
+                bundle.putString("Id",Id);
                 DetailMusicFragment detailMusicFragment=new DetailMusicFragment();
                 detailMusicFragment.setArguments(bundle);
                 track=1;
@@ -452,7 +460,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     }
     public void LoadIndex()
     {
-        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("Music_Index").child(phone);
+        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id);
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -460,6 +468,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 {
                     HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
                     music_index=Integer.parseInt((String) hashMap.get("music_index"));
+                    isPlaying=hashMap.get("isPlaying").toString();
                 }
             }
 
@@ -473,5 +482,11 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
     }
 }

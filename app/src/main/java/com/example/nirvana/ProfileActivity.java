@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -30,10 +31,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-public String Id,Who;
+public String Id,Who,link;
 public ImageView image;
 DrawerLayout navDrawer;
 public TextView Email,Mobile,Adobe_App,Adobe_Xd,WHO,Address;
+public Integer Launch_Activity=123;
 ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,6 @@ ProgressDialog progressDialog;
         Who=intent.getStringExtra("who");
         Email=findViewById(R.id.email);
         Mobile=findViewById(R.id.mobile);
-        Adobe_App=findViewById(R.id.adope_app);
-        Adobe_Xd=findViewById(R.id.adobe_xd);
         WHO=findViewById(R.id.who);
         image=findViewById(R.id.imageView5);
         Address=findViewById(R.id.address);
@@ -103,14 +103,28 @@ ProgressDialog progressDialog;
                 Intent intent=new Intent(this,EditProfileActivity.class);
                 intent.putExtra("Id",Id);
                 intent.putExtra("Who",Who);
-                startActivity(intent);
+                startActivityForResult(intent,Launch_Activity);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
                 break;
         }
         return true;
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == Launch_Activity) {
+            if(resultCode == Activity.RESULT_OK){
+               link=data.getStringExtra("link");
+                AsyncTaskRunner runner=new AsyncTaskRunner();
+                runner.execute();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
@@ -168,7 +182,7 @@ ProgressDialog progressDialog;
                         String Name=fname+" "+lname;
                         String email=(String)userData.get("email");
                         String phone=(String)userData.get("phone");
-                        String link=(String)userData.get("link");
+                        link=(String)userData.get("link");
                         String address=(String)userData.get("address");
                         WHO.setText(Name);
                         Email.setText(email);
@@ -216,6 +230,9 @@ ProgressDialog progressDialog;
     public void onBackPressed() {
 
         super.onBackPressed();
+        Intent intent=getIntent();
+        intent.putExtra("link",link);
+        setResult(Activity.RESULT_OK,intent);
         overridePendingTransition(R.anim.no_animation, R.anim.slide_in_bottom);
     }
 }

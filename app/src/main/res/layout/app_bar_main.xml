@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/goal_planning"
+            android:id="@+id/music_player"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"

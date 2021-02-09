@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,11 +25,13 @@ import com.example.nirvana.Blogs.HomeBlogFragment;
 import com.example.nirvana.Doctors.Doctors_GridView;
 import com.example.nirvana.GoalPlanning.GoalPlanning;
 import com.example.nirvana.GoalPlanning.StressTest;
+import com.example.nirvana.MusicPlayer.NirvanaAudioPlayer;
 import com.example.nirvana.Niri;
 import com.example.nirvana.ProfileActivity;
 import com.example.nirvana.R;
 import com.example.nirvana.Call.SinchService;
 import com.example.nirvana.YogaTutorials.YogaVideosActivity;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +47,8 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
     ActionBarDrawerToggle mDrawerToggle;
     public TextView patient_name,patient_address;
     FirebaseAuth auth;
-    ImageView Niri,VideoPlayer,Goal_Planning,Profile,p_profile,Home;
+    public Integer Launch_Activity=123;
+    ImageView Niri,VideoPlayer,MusicPlayer,Profile,p_profile,Home;
     private String Id,phone,link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         Home=findViewById(R.id.home);
         VideoPlayer=findViewById(R.id.video_player);
         Niri=findViewById(R.id.niri);
-        Goal_Planning=findViewById(R.id.goal_planning);
+        MusicPlayer=findViewById(R.id.music_player);
         Profile=findViewById(R.id.profile);
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null)
@@ -123,10 +127,10 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
-        Goal_Planning.setOnClickListener(new View.OnClickListener() {
+        MusicPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Patient_Welcome_Activity.this,GoalPlanning.class);
+                Intent intent=new Intent(Patient_Welcome_Activity.this, NirvanaAudioPlayer.class);
                 intent.putExtra("Id",Id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
@@ -138,10 +142,26 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
                 Intent intent=new Intent(Patient_Welcome_Activity.this, ProfileActivity.class);
                 intent.putExtra("Id",Id);
                 intent.putExtra("who","patient");
-                startActivity(intent);
+                startActivityForResult(intent,Launch_Activity);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }
         });
+        Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id)
+                .child("isPlaying").setValue("false");
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Launch_Activity) {
+            if(resultCode == Activity.RESULT_OK){
+                link=data.getStringExtra("link");
+                RetrievePatientDetails();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
     private void RetrievePatientDetails() {
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
@@ -195,6 +215,13 @@ public class Patient_Welcome_Activity extends AppCompatActivity implements Navig
         else if(id==R.id.help)
         {
 
+        }
+        else if(id==R.id.goal_planning)
+        {
+            Intent intent=new Intent(Patient_Welcome_Activity.this,GoalPlanning.class);
+            intent.putExtra("Id",Id);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

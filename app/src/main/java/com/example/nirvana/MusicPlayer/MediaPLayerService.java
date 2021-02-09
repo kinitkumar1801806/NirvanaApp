@@ -34,15 +34,9 @@ import com.example.nirvana.R;
 import com.example.nirvana.Service.Music_detail;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Valdio Veliu on 16-07-11.
@@ -54,13 +48,13 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
         AudioManager.OnAudioFocusChangeListener {
 
     public int music_index;
-    public String phone1,phone;
+    public String Id;
     public static final String ACTION_PLAY = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.ACTION_PLAY";
     public static final String ACTION_PAUSE = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.ACTION_PAUSE";
     public static final String ACTION_PREVIOUS = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.ACTION_PREVIOUS";
     public static final String ACTION_NEXT = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.ACTION_NEXT";
     public static final String ACTION_STOP = "com.example.nirvana.MusicPlayer.NirvanaAudioPlayer.ACTION_STOP";
-
+    NotificationCompat.Builder notificationCompact;
     private MediaPlayer mediaPlayer;
 
     //MediaSession
@@ -130,8 +124,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
             audioList = storage.loadAudio();
             audioIndex = storage.loadAudioIndex();
             music_index=intent.getIntExtra("music_index",0);
-            phone=intent.getStringExtra("phone");
-            System.out.println(phone);
+            Id=intent.getStringExtra("Id");
             if (audioIndex != -1 && audioIndex < audioList.size()) {
                 //index is in a valid range
                 activeAudio = audioList.get(audioIndex);
@@ -573,69 +566,81 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
          */
         int notificationAction = android.R.drawable.ic_media_pause;//needs to be initialized
         PendingIntent play_pauseAction = null;
-
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
+                R.mipmap.niri);
         //Build a new notification according to the current state of the MediaPlayer
         if (playbackStatus == PlaybackStatus.PLAYING) {
             notificationAction = android.R.drawable.ic_media_pause;
             //create the pause action
             play_pauseAction = playbackAction(1);
+            notificationCompact=new NotificationCompat.Builder(this,"101")
+                    // Hide the timestamp
+                    // Set the large and small icons
+                    .setPriority(Notification.PRIORITY_MAX)
+                    .setLargeIcon(largeIcon)
+                    .setSmallIcon(R.mipmap.niri)
+                    // Set Notification content information
+                    .setContentText(activeAudio.getArtist())
+                    .setContentTitle(activeAudio.getTitle())
+                    // Add playback actions
+                    .addAction(android.R.drawable.ic_media_previous, "previous", playbackAction(3))
+                    .addAction(notificationAction, "Pause", play_pauseAction)
+                    .addAction(android.R.drawable.ic_media_next, "next", playbackAction(2))
+                     .setOngoing(true);
+            NotificationChannel notificationChannel = new NotificationChannel("101", "Music_Player", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+            notificationManager.notify(1,notificationCompact.build());
         } else if (playbackStatus == PlaybackStatus.PAUSED) {
             notificationAction = android.R.drawable.ic_media_play;
-            //create the play action
             play_pauseAction = playbackAction(0);
+            //create the play action
+            notificationCompact=new NotificationCompat.Builder(this,"101")
+                    // Hide the timestamp
+                    // Set the large and small icons
+                    .setPriority(Notification.PRIORITY_MAX)
+                    .setLargeIcon(largeIcon)
+                    .setSmallIcon(R.mipmap.niri)
+                    // Set Notification content information
+                    .setContentText(activeAudio.getArtist())
+                    .setContentTitle(activeAudio.getTitle())
+                    // Add playback actions
+                    .addAction(android.R.drawable.ic_media_previous, "previous", playbackAction(3))
+                    .addAction(notificationAction, "Play", play_pauseAction)
+                    .addAction(android.R.drawable.ic_media_next, "next", playbackAction(2))
+                    .setOngoing(false);
+            NotificationChannel notificationChannel = new NotificationChannel("101", "Music_Player", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+            notificationManager.notify(1,notificationCompact.build());
+
         }
-
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.niri); //replace with your own image
-
-        // Create a new Notification
-        NotificationCompat.Builder notificationCompact=new NotificationCompat.Builder(this,"101")
-                // Hide the timestamp
-                // Set the large and small icons
-                .setPriority(Notification.PRIORITY_MAX)
-                .setLargeIcon(largeIcon)
-                .setSmallIcon(R.mipmap.niri)
-                // Set Notification content information
-                .setContentText(activeAudio.getArtist())
-                .setContentTitle(activeAudio.getAlbum())
-                .setContentInfo(activeAudio.getTitle())
-                // Add playback actions
-                .addAction(android.R.drawable.ic_media_previous, "previous", playbackAction(3))
-                .addAction(notificationAction, "pause", play_pauseAction)
-                .addAction(android.R.drawable.ic_media_next, "next", playbackAction(2))
-                .setOngoing(true);
-
-        NotificationChannel notificationChannel = new NotificationChannel("101", "Music_Player", NotificationManager.IMPORTANCE_HIGH);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(notificationChannel);
-        notificationManager.notify(1,notificationCompact.build());
 
     }
 
 
     private PendingIntent playbackAction(int actionNumber) {
         Intent playbackAction = new Intent(this, MediaPLayerService.class);
-        System.out.println(phone);
         switch (actionNumber) {
             case 0:
                 // Play
                 playbackAction.setAction(ACTION_PLAY);
-                playbackAction.putExtra("phone",phone);
+                playbackAction.putExtra("Id",Id);
                 return PendingIntent.getService(this, actionNumber, playbackAction, 0);
             case 1:
                 // Pause
                 playbackAction.setAction(ACTION_PAUSE);
-                playbackAction.putExtra("phone",phone);
+                playbackAction.putExtra("Id",Id);
                 return PendingIntent.getService(this, actionNumber, playbackAction, 0);
             case 2:
                 // Next track
                 playbackAction.setAction(ACTION_NEXT);
-                playbackAction.putExtra("phone",phone);
+                playbackAction.putExtra("Id",Id);
                 return PendingIntent.getService(this, actionNumber, playbackAction, 0);
             case 3:
                 // Previous track
                 playbackAction.setAction(ACTION_PREVIOUS);
-                playbackAction.putExtra("phone",phone);
+                playbackAction.putExtra("Id",Id);
                 return PendingIntent.getService(this, actionNumber, playbackAction, 0);
             default:
                 break;
@@ -675,7 +680,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
 
             //Get the new media index form SharedPreferences
             music_index=intent.getIntExtra("music_index",0);
-            phone=intent.getStringExtra("phone");
+            Id=intent.getStringExtra("Id");
             audioIndex = new StorageUtil(getApplicationContext()).loadAudioIndex();
             if (audioIndex != -1 && audioIndex < audioList.size()) {
                 //index is in a valid range
@@ -720,33 +725,16 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     public void UpdateMusicIndex()
     {
         Music_detail music_detail=new Music_detail(
-                String.valueOf(music_index)
+                String.valueOf(music_index),
+                "true"
         );
-        Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Music_Index").child(phone)
+        Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id)
                 .setValue(music_detail).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
                     }
                 });
-    }
-    public void LoadIndex()
-    {
-        DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("Music_Index").child(phone);
-        databaseReference1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                {
-                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
-                    music_index=Integer.parseInt((String) hashMap.get("music_index"));
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
     public void Seekto(int  progress)
     {

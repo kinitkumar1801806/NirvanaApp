@@ -147,7 +147,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 {
                     music_action_image.setImageResource(ic_media_pause);
                 }
-                if(music_index>audioList.size())
+                if(music_index<audioList.size())
                 {
                     music_name.setText(audioList.get(music_index).getTitle());
                     artist_name.setText(audioList.get(music_index).getArtist());
@@ -325,7 +325,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     }
 
     public void show_detail_musicplayer(View view) {
-        if(player.check()&&player!=null)
+        if(player!=null)
         {
             retrieve();
             if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_pause).getConstantState()) {

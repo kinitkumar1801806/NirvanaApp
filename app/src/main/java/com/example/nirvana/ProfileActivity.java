@@ -64,19 +64,15 @@ ProgressDialog progressDialog;
         MenuItem data_and_history= myMenu.findItem(R.id.data_and_history);
         MenuItem login_security=myMenu.findItem(R.id.login_security);
         MenuItem about=myMenu.findItem(R.id.about);
-        MenuItem notifications=myMenu.findItem(R.id.notification);
         SpannableString s = new SpannableString(data_and_history.getTitle());
         SpannableString s1=new SpannableString(login_security.getTitle());
         SpannableString s2=new SpannableString(about.getTitle());
-        SpannableString s3=new SpannableString(notifications.getTitle());
         s.setSpan(new TextAppearanceSpan(this, R.style.MyTheme), 0, s.length(), 0);
         s1.setSpan(new TextAppearanceSpan(this, R.style.MyTheme), 0, s1.length(), 0);
         s2.setSpan(new TextAppearanceSpan(this, R.style.MyTheme), 0, s2.length(), 0);
-        s3.setSpan(new TextAppearanceSpan(this, R.style.MyTheme), 0, s3.length(), 0);
         data_and_history.setTitle(s);
         login_security.setTitle(s1);
         about.setTitle(s2);
-        notifications.setTitle(s3);
         navigationView.setNavigationItemSelectedListener(this);
     }
 

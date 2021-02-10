@@ -81,7 +81,8 @@
             android:padding="10dp"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="50dp"
-            android:src="@drawable/endcall_red"
+            android:src="@drawable/ic_baseline_call_24"
+            android:background="@drawable/hangup"
             android:layout_alignParentBottom="true" />
         <ImageView
             android:id="@+id/pick_call"
@@ -89,7 +90,7 @@
             android:layout_height="70dp"
             android:layout_above="@+id/buttons"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/hangup"
+            android:background="@drawable/answer_call"
             android:backgroundTint="@color/green"
             android:padding="10dp"
             android:layout_marginRight="50dp"

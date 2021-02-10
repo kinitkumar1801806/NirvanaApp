@@ -1,4 +1,5 @@
 package com.example.nirvana.Call;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -6,21 +7,32 @@ import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.nirvana.Model.Rating_Model;
 import com.example.nirvana.MusicPlayer.AudioPLayer;
 import com.example.nirvana.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinch.android.rtc.AudioController;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.calling.Call;
@@ -33,6 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -47,12 +60,12 @@ public class VoiceCallScreenActivity extends BaseActivity {
     ImageView profileImageCalling;
     ImageView micbutton,speakerbutton,Recorder;
     static final String TAG = VoiceCallScreenActivity.class.getSimpleName();
-
+    public Integer rating=0;
     private AudioPLayer mAudioPlayer;
     private Timer mTimer;
     private UpdateCallDurationTask mDurationTask;
     String receiverUserId="",receiverUserImage="",receiverUserName="",senderUserId="";
-    private String mCallId,Who;
+    private String mCallId,Who,review,receiverId,patientName,key;
 
     Intent intent;
 
@@ -87,9 +100,12 @@ public class VoiceCallScreenActivity extends BaseActivity {
         intent=getIntent();
         senderUserId= intent.getStringExtra("SenderId");
         Who=intent.getStringExtra("Who");
+        review=intent.getStringExtra("review");
         mCallId = intent.getStringExtra(SinchService.CALL_ID);
         receiverUserName=intent.getStringExtra("UserName");
         receiverUserImage=intent.getStringExtra("link");
+        receiverId=intent.getStringExtra("receiverId");
+        key=intent.getStringExtra("key");
         rejectSwipeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,6 +273,14 @@ public class VoiceCallScreenActivity extends BaseActivity {
             mAudioPlayer.stopProgressTone();
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
             Task<Void> databaseReference= FirebaseDatabase.getInstance().getReference("CallerName").child(mCallId).removeValue();
+            if(Who.equals("Patient")&&review.equals("true"))
+            {
+                Review();
+            }
+            if(review.equals("true"))
+            {
+                Complete();
+            }
             endCall();
         }
 
@@ -289,5 +313,150 @@ public class VoiceCallScreenActivity extends BaseActivity {
 
         }
 
+    }
+    public void Review()
+    {
+        final AlertDialog alertDialog=new AlertDialog.Builder(VoiceCallScreenActivity.this).create();
+        LayoutInflater layoutInflater=VoiceCallScreenActivity.this.getLayoutInflater();
+        View view=layoutInflater.inflate(R.layout.review_layout,null);
+        Button Save,Cancel;
+        EditText Review;
+        ImageView star1,star2,star3,star4,star5;
+        Save=view.findViewById(R.id.save);
+        Cancel=view.findViewById(R.id.cancel);
+        Review=view.findViewById(R.id.editText);
+        star1=view.findViewById(R.id.star1);
+        star2=view.findViewById(R.id.star2);
+        star3=view.findViewById(R.id.star3);
+        star4=view.findViewById(R.id.star4);
+        star5=view.findViewById(R.id.star5);
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        star1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                star1.setImageResource(R.drawable.ic_baseline_star_24);
+                star2.setImageResource(R.drawable.ic_star_black_24dp);
+                star3.setImageResource(R.drawable.ic_star_black_24dp);
+                star4.setImageResource(R.drawable.ic_star_black_24dp);
+                star5.setImageResource(R.drawable.ic_star_black_24dp);
+                rating=1;
+            }
+        });
+        star2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    star1.setImageResource(R.drawable.ic_baseline_star_24);
+                    star2.setImageResource(R.drawable.ic_baseline_star_24);
+                    star3.setImageResource(R.drawable.ic_star_black_24dp);
+                    star4.setImageResource(R.drawable.ic_star_black_24dp);
+                    star5.setImageResource(R.drawable.ic_star_black_24dp);
+                    rating=2;
+            }
+        });
+        star3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                star1.setImageResource(R.drawable.ic_baseline_star_24);
+                star2.setImageResource(R.drawable.ic_baseline_star_24);
+                star3.setImageResource(R.drawable.ic_baseline_star_24);
+                star4.setImageResource(R.drawable.ic_star_black_24dp);
+                star5.setImageResource(R.drawable.ic_star_black_24dp);
+                rating=3;
+            }
+        });
+        star4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                star1.setImageResource(R.drawable.ic_baseline_star_24);
+                star2.setImageResource(R.drawable.ic_baseline_star_24);
+                star3.setImageResource(R.drawable.ic_baseline_star_24);
+                star4.setImageResource(R.drawable.ic_baseline_star_24);
+                star5.setImageResource(R.drawable.ic_star_black_24dp);
+                rating=4;
+            }
+        });
+        star5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                star1.setImageResource(R.drawable.ic_baseline_star_24);
+                star2.setImageResource(R.drawable.ic_baseline_star_24);
+                star3.setImageResource(R.drawable.ic_baseline_star_24);
+                star4.setImageResource(R.drawable.ic_baseline_star_24);
+                star5.setImageResource(R.drawable.ic_baseline_star_24);
+                rating=5;
+            }
+        });
+        Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rating==0)
+                {
+                    Toast.makeText(VoiceCallScreenActivity.this,"Please select the rating",Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(Review.getText()))
+                {
+                    Review.setError("Please give your reviews");
+                }
+                else
+                {
+                    String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                    SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                    Date todayDate = new Date();
+                    String thisDate = currentDate.format(todayDate);
+                    DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference(Who).child(receiverId);
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                            String fname=hashMap.get("fname").toString();
+                            String lname=hashMap.get("lname").toString();
+                            patientName=fname+" "+lname;
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    Rating_Model rating_model=new Rating_Model(
+                            patientName,
+                            String.valueOf(rating),
+                            Review.getText().toString(),
+                            thisDate,
+                            currentTime
+                    );
+                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference1=firebaseDatabase.getReference().child("Doctors_Reviews").child(senderUserId).child(receiverId);
+                    databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+    public void Complete()
+    {
+        if(Who.equals("Doctors"))
+        {
+            Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(senderUserId).child(receiverId).child("Complete")
+                    .child(key).setValue("1");
+            Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(receiverId).child(senderUserId).child("Complete")
+                    .child(key).setValue("1");
+        }
+        else
+        {
+            Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(receiverId).child(senderUserId).child("Complete")
+                    .child(key).setValue("1");
+            Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(senderUserId).child(receiverId).child("Complete")
+                    .child(key).setValue("1");
+        }
     }
 }

@@ -126,8 +126,7 @@ public class PaymentSuccessActivity extends AppCompatActivity {
             Toast.makeText(this, "PDF downloaded to "+filePath.toString(), Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "There is an error while downloading the pdf please take the screenshot of the receipt." , Toast.LENGTH_LONG).show();
         }
 
         // close the document

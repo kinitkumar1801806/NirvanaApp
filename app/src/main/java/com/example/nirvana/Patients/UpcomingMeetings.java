@@ -47,7 +47,7 @@ public class UpcomingMeetings extends Fragment {
     public View view1;
     public RecyclerView recyclerView;
     Upcoming_Patient_Meetings_Adapter upcoming_patient_meetings_adapter;
-    public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList,RecieverIdList;
+    public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList,RecieverIdList,KeyList;
     public String Id;
     TextView textView;
     public UpcomingMeetings() {
@@ -93,6 +93,7 @@ public class UpcomingMeetings extends Fragment {
         TypeList=new ArrayList<>();
         DateList=new ArrayList<>();
         TimeList=new ArrayList<>();
+        KeyList=new ArrayList<>();
         RecieverIdList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
         recyclerView=view1.findViewById(R.id.upcoming_patientlists);
@@ -134,6 +135,7 @@ public class UpcomingMeetings extends Fragment {
                                DateList.add(date);
                                TimeList.add(time);
                                TypeList.add(type);
+                               KeyList.add(key1);
                                initRecyclerView();
                            }
                        }
@@ -164,6 +166,7 @@ public class UpcomingMeetings extends Fragment {
                 intent.putExtra("UserName",NameList.get(position));
                 intent.putExtra("Who","Patient");
                 intent.putExtra("link",LinkList.get(position));
+                intent.putExtra("key",KeyList.get(position));
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
             }

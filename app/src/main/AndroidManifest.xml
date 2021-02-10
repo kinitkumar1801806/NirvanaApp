@@ -94,10 +94,8 @@
             android:name=".ProfileActivity"
             android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Patients.Meeting_Alresdy_fixed_step2" />
         <activity android:name=".Patients.Meeting_Already_Fixed_step1" />
         <activity android:name=".Niri" />
-        <activity android:name=".Doctors.PendingMeetingsStep2" />
         <activity android:name=".Doctors.PendingMeetingsStep1" />
         <activity
             android:name=".Patients.Fix_Meeting_step3"

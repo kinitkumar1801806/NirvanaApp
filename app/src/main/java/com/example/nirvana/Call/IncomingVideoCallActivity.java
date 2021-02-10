@@ -49,7 +49,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
     public static final String ACTION_IGNORE = "ignore";
     public static final String EXTRA_ID = "id";
     public static int MESSAGE_ID = 14;
-    private String mAction,Id,Who,name,link;
+    private String mAction,Id,Who,name,link,receiverId;
     ImageView answerbtn,hangupbtn,profileImage,Red_arrow,Green_arrow;
     DatabaseReference userRef;
     TextView remoteUser;
@@ -114,7 +114,8 @@ public class IncomingVideoCallActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 HashMap<String,Object> hashMap=(HashMap)snapshot.getValue();
-                Id=(String)hashMap.get("Id");
+                Id=(String)hashMap.get("senderId");
+                receiverId=(String)hashMap.get("receiverId");
                 Who=(String)hashMap.get("Who");
                 getCallerDetails();
             }
@@ -210,6 +211,8 @@ public class IncomingVideoCallActivity extends BaseActivity {
             intent.putExtra("Who",Who);
             intent.putExtra("link",link);
             intent.putExtra(CALL_ID, mCallId);
+            intent.putExtra("review","true");
+            intent.putExtra("receiverId",receiverId);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
         } else {

@@ -41,7 +41,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class StartMeetingActivity extends BaseActivity implements SinchService.StartFailedListener, PushTokenRegistrationCallback, UserRegistrationCallback {
-    public String senderId,recieverId,UserName,link,Who;
+    public String senderId,recieverId,UserName,link,Who,key;
     private static final String APP_KEY = "6a9ce4e2-e655-4a59-a2b0-b76c84132546";
     private static final String APP_SECRET ="2dEpHTchh0SLCsnYyv2gPw==";
     private static final String ENVIRONMENT ="clientapi.sinch.com";
@@ -64,6 +64,7 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
         UserName=intent.getStringExtra("UserName");
         Who=intent.getStringExtra("Who");
         link=intent.getStringExtra("link");
+        key=intent.getStringExtra("key");
     }
 
     public void Start_Voice_Call(View view) {
@@ -284,6 +285,7 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
     {
         CallerName callerName=new CallerName(
                 senderId,
+                recieverId,
                 Who
         );
         Task<Void> databaseReference= FirebaseDatabase.getInstance().getReference("CallerName").child(call.getCallId())
@@ -306,6 +308,9 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
                 intent.putExtra("UserName",UserName);
                 intent.putExtra("Who",Who);
                 intent.putExtra("link",link);
+                intent.putExtra("review","false");
+                intent.putExtra("receiverId",recieverId);
+                intent.putExtra("key",key);
                 intent.putExtra(CALL_ID, callId);
                 SetCallerName();
                 startActivity(intent);
@@ -318,6 +323,9 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
                 intent.putExtra("UserName",UserName);
                 intent.putExtra("Who",Who);
                 intent.putExtra("link",link);
+                intent.putExtra("key",key);
+                intent.putExtra("review","false");
+                intent.putExtra("receiverId",recieverId);
                 intent.putExtra(CALL_ID, callId);
                 SetCallerName();
                 startActivity(intent);

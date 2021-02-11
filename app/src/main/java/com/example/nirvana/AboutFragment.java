@@ -90,18 +90,7 @@ public class AboutFragment extends Fragment {
                 "A strong doctor-patient relationship is the foundation for high-quality patient care and reducing health care costs. Nirvana provides a simple and convenient way for healthcare providers to meet with their patients remotely, improving the health care experience.\n" +
                 "We as a team tried our best to bring a solution to the most neglected and prime problem. For suggestions please mail us at: nirvana@gmail.com\n" +
                 "\n"+
-                "The Nirvana Team;\n" +
-                "\n"+
-                "Anand Swaroop\n" +
-                "Kinit Kumar\n" +
-                "Mohit Kumar\n" +
-                "Pratik Kumar\n" +
-                "Priyansh Khare\n" +
-                "Ranjana Kumari\n" +
-                "Saket Srivastava\n" +
-                "Shitij Sahu\n" +
-                "Tanishq Singh\n" +
-                " \n";
+                "Team Nirvana;\n";
         text=view.findViewById(R.id.about_text);
         text.setText(content);
         return view;

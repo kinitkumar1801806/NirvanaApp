@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WhatToDo"
-    android:id="@+id/whatToDo_fragment">
+    android:layout_width="match_parent" android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,16 +17,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
-                android:text="What We Do?"
+                android:text="DATA POLICY"
                 android:textColor="@color/green"
                 android:textSize="30dp" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/whatwedo_text"
+            android:id="@+id/dataPolicy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What we do Fragment"
+            android:text="All the users of the app has to follow the followings terms and conditions\n1) Allpractitioner must set their fees and payment status alongside while regsitering.\n2) It is mandatory for all users to enter the correct details while registering to the app.\n3) If any user is found is malpractice shhall be subjected to judicial actions."
             android:textColor="@color/black"
             android:textSize="16dp"
             android:layout_marginTop="30dp"
@@ -38,5 +34,4 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"/>
     </LinearLayout>
-
 </ScrollView>

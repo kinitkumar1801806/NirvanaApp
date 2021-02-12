@@ -1,9 +1,9 @@
 package com.example.nirvana.Doctors;
 
 public class Doctor_Meeting {
-   public String p_name,p_problem,time,date,submission_date,submission_time,Pid,complete,link;
+   public String p_name,p_problem,time,date,submission_date,submission_time,Pid,complete;
 
-    public Doctor_Meeting(String p_name, String p_problem, String time, String date, String submission_date, String submission_time, String pid, String complete, String link) {
+    public Doctor_Meeting(String p_name, String p_problem, String time, String date, String submission_date, String submission_time, String pid, String complete) {
         this.p_name = p_name;
         this.p_problem = p_problem;
         this.time = time;
@@ -12,6 +12,5 @@ public class Doctor_Meeting {
         this.submission_time = submission_time;
         Pid = pid;
         this.complete = complete;
-        this.link = link;
     }
 }

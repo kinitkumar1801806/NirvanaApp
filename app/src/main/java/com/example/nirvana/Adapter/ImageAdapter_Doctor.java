@@ -94,14 +94,14 @@ public class ImageAdapter_Doctor extends RecyclerView.Adapter<ImageAdapter_Docto
         }
         if(Expand_List.get(position).equals("1"))
         {
-            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,480);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,780);
             holder.linearLayout1.setLayoutParams(layoutParams);
             holder.Expand_btn.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
 
         }
         else
         {
-            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,260);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,440);
             holder.linearLayout1.setLayoutParams(layoutParams);
             holder.Expand_btn.setImageResource(R.drawable.ic_baseline_expand_more_24);
 

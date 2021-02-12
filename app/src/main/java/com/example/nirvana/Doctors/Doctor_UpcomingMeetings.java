@@ -45,7 +45,7 @@ public class Doctor_UpcomingMeetings extends Fragment {
     public RecyclerView recyclerView;
     Upcoming_Doctor_Meetings_Adapter upcoming_doctor_meetings_adapter;
     public ArrayList<String> LinkList,NameList,ProblemList,DateList,TimeList,RecieverIdList,KeyList;
-    public String Id;
+    public String Id,link;
     TextView textView;
     View view1;
     boolean check=false;
@@ -95,6 +95,7 @@ public class Doctor_UpcomingMeetings extends Fragment {
         KeyList=new ArrayList<>();
         RecieverIdList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
+        textView.setVisibility(View.VISIBLE);
         recyclerView=view1.findViewById(R.id.upcoming_doctorlists);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
@@ -122,28 +123,46 @@ public class Doctor_UpcomingMeetings extends Fragment {
                             String complete=userData.get("complete").toString();
                             if(complete.equals("0"))
                             {
-                                String pid=userData.get("Pid").toString();
-                                String name=userData.get("p_name").toString();
-                                String link=userData.get("link").toString();
-                                String date=userData.get("date").toString();
-                                String time=userData.get("time").toString();
-                                String problem=userData.get("p_problem").toString();
-                                RecieverIdList.add(pid);
-                                NameList.add(name);
-                                LinkList.add(link);
-                                DateList.add(date);
-                                TimeList.add(time);
-                                KeyList.add(key1);
-                                ProblemList.add(problem);
-                                initRecyclerView();
-                                check=true;
+                                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                DatabaseReference databaseReference=firebaseDatabase.getReference("Patient").child(key);
+                                databaseReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if(snapshot.exists())
+                                        {
+                                            HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                            link=hashMap.get("link").toString();
+                                            String pid=userData.get("Pid").toString();
+                                            String name=userData.get("p_name").toString();
+                                            String date=userData.get("date").toString();
+                                            String time=userData.get("time").toString();
+                                            String problem=userData.get("p_problem").toString();
+                                            RecieverIdList.add(pid);
+                                            NameList.add(name);
+                                            LinkList.add(link);
+                                            DateList.add(date);
+                                            TimeList.add(time);
+                                            KeyList.add(key1);
+                                            ProblemList.add(problem);
+                                            initRecyclerView();
+                                            check=true;
+                                        }
+                                        if(check)
+                                        {
+                                            textView.setVisibility(View.GONE);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
                             }
                         }
                     }
-                    if(!check)
-                    {
-                        textView.setVisibility(View.VISIBLE);
-                    }
+
                 }
                 else
                 {

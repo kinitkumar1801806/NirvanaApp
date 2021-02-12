@@ -322,10 +322,8 @@ public class SinchService extends Service {
         public void onIncomingCall(CallClient callClient, Call call) {
             Intent intent;
             if (call.getDetails().isVideoOffered()) {
-                Toast.makeText(SinchService.this,"skdkfnoisdnif",Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), IncomingVideoCallActivity.class);
             } else {
-                Toast.makeText(SinchService.this,"zjkdnfs skdkfnoisdnif",Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), IncominCallScreenActivity.class);
             }
 

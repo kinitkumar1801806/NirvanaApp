@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -59,6 +60,8 @@ public class IncomingVideoCallActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_calling_incom);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         TextView callState=findViewById(R.id.callState);
          answerbtn =  findViewById(R.id.answer);
          hangupbtn =  findViewById(R.id.end_call);
@@ -121,6 +124,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
             }
 
             @Override
+
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
@@ -200,6 +204,7 @@ public class IncomingVideoCallActivity extends BaseActivity {
             Intent intent=new Intent(this, VideoCallScreenActivity.class);
             intent.putExtra("SenderId",Id);
             intent.putExtra("UserName",name);
+            intent.putExtra("calling",Who);
             if(Who.equals("Doctors"))
             {
                 Who="Patient";

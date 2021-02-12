@@ -46,7 +46,7 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
     private Uri Imagepath,Filepath;
     private Button upload_file,upload_image;
     ArrayList<String> arr;
-    int img,file=0;
+    int img,file=0,check=0,count=0;
     private TextView image_text,file_text;
     FirebaseDatabase firebaseDatabase;
 
@@ -236,22 +236,30 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
                             Object data = hashMap.get(key);
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             String phone = (String) userData.get("phone");
+                            count++;
                             if (phone.equals(phonenumber)) {
+                                check=1;
                                 Toast.makeText(DoctorSignupActivity.this, "This number is already register with an account", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                             }
+                            if(check==0&&count==hashMap.size())
+                            {
+                                Intent intent=new Intent(DoctorSignupActivity.this, DoctorPhoneVerification.class);
+                                intent.putStringArrayListExtra("arr",arr);
+                                intent.putExtra("Filepath",Filepath.toString());
+                                intent.putExtra("Imagepath",Imagepath.toString());
+                                startActivity(intent);
+                                DoctorSignupActivity.this.finish();
+                            }
                         }
                     }
-                    else
-                    {
-                        Intent intent=new Intent(DoctorSignupActivity.this, DoctorPhoneVerification.class);
-                        intent.putStringArrayListExtra("arr",arr);
-                        intent.putExtra("Filepath",Filepath.toString());
-                        intent.putExtra("Imagepath",Imagepath.toString());
+                    else {
+                        Intent intent = new Intent(DoctorSignupActivity.this, DoctorPhoneVerification.class);
+                        intent.putStringArrayListExtra("arr", arr);
+                        intent.putExtra("Filepath", Filepath.toString());
+                        intent.putExtra("Imagepath", Imagepath.toString());
                         startActivity(intent);
-
-           }
-
+                    }
                 }
 
                 @Override
@@ -259,6 +267,7 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
 
                 }
             });
+
         }
     }
     public static boolean isValidPassword(final String password) {

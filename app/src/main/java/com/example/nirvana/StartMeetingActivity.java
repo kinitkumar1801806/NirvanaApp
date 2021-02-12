@@ -27,7 +27,11 @@ import com.example.nirvana.Call.VoiceCallScreenActivity;
 import com.example.nirvana.Service.CallerName;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sinch.android.rtc.ClientRegistration;
 import com.sinch.android.rtc.PushTokenRegistrationCallback;
 import com.sinch.android.rtc.Sinch;
@@ -39,6 +43,7 @@ import com.sinch.android.rtc.calling.Call;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.HashMap;
 
 public class StartMeetingActivity extends BaseActivity implements SinchService.StartFailedListener, PushTokenRegistrationCallback, UserRegistrationCallback {
     public String senderId,recieverId,UserName,link,Who,key;
@@ -65,6 +70,23 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
         Who=intent.getStringExtra("Who");
         link=intent.getStringExtra("link");
         key=intent.getStringExtra("key");
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference=firebaseDatabase.getReference(Who).child(senderId);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                   if(snapshot.exists())
+                   {
+                       HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                       link=hashMap.get("link").toString();
+                   }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
     }
 
     public void Start_Voice_Call(View view) {
@@ -285,8 +307,8 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
     {
         CallerName callerName=new CallerName(
                 senderId,
-                recieverId,
-                Who
+                Who,
+                recieverId
         );
         Task<Void> databaseReference= FirebaseDatabase.getInstance().getReference("CallerName").child(call.getCallId())
                 .setValue(callerName).addOnCompleteListener(new OnCompleteListener<Void>() {

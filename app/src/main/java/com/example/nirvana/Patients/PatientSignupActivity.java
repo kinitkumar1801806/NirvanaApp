@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 public class PatientSignupActivity extends AppCompatActivity {
     String Age,Email,Pass,Phone,Address,Gender,Fname,Lname,Password;
     private Spinner spinner;
+    int check=0,count=0;
     private ArrayList<String> arr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,9 +179,18 @@ public class PatientSignupActivity extends AppCompatActivity {
                             Object data = hashMap.get(key);
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             String phone = (String) userData.get("phone");
+                            count++;
                             if (phone.equals(phonenumber)) {
+                                check=1;
                                 Toast.makeText(PatientSignupActivity.this, "This number is already register with an account", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
+                            }
+                            if(check==0&&count==hashMap.size())
+                            {
+                                Intent intent=new Intent(PatientSignupActivity.this, PatientPhoneVerification.class);
+                                intent.putStringArrayListExtra("arr",arr);
+                                startActivity(intent);
+                                PatientSignupActivity.this.finish();
                             }
                         }
                     }

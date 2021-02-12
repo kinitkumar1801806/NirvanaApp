@@ -43,7 +43,7 @@ public class MeetingsHistory extends Fragment {
     public RecyclerView recyclerView;
     History_Patient_Meetings_Adapter history_patient_meetings_adapter;
     public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList;
-    public String Id;
+    public String Id,link;
     TextView textView;
     Boolean check=false;
     public MeetingsHistory() {
@@ -90,6 +90,7 @@ public class MeetingsHistory extends Fragment {
         DateList=new ArrayList<>();
         TimeList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
+        textView.setVisibility(View.VISIBLE);
         recyclerView=view1.findViewById(R.id.history_patientlists);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
@@ -117,24 +118,41 @@ public class MeetingsHistory extends Fragment {
                             String complete=userData.get("complete").toString();
                             if(complete.equals("1"))
                             {
-                                String name=userData.get("d_name").toString();
-                                String link=userData.get("link").toString();
-                                String date=userData.get("date").toString();
-                                String time=userData.get("time").toString();
-                                String type=userData.get("d_bio").toString();
-                                NameList.add(name);
-                                LinkList.add(link);
-                                DateList.add(date);
-                                TimeList.add(time);
-                                TypeList.add(type);
-                                initRecyclerView();
-                                check=true;
+                                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                DatabaseReference databaseReference=firebaseDatabase.getReference("Doctors").child(key);
+                                databaseReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if(snapshot.exists())
+                                        {
+                                            HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                            link=hashMap.get("link").toString();
+                                            String name=userData.get("d_name").toString();
+                                            String date=userData.get("date").toString();
+                                            String time=userData.get("time").toString();
+                                            String type=userData.get("d_bio").toString();
+                                            NameList.add(name);
+                                            LinkList.add(link);
+                                            DateList.add(date);
+                                            TimeList.add(time);
+                                            TypeList.add(type);
+                                            initRecyclerView();
+                                            check=true;
+                                        }
+                                        if(check)
+                                        {
+                                            textView.setVisibility(View.GONE);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
                             }
                         }
-                    }
-                    if(!check)
-                    {
-                        textView.setVisibility(View.VISIBLE);
                     }
                 }
                 else

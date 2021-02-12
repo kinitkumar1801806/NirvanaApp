@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -57,6 +58,8 @@ public class IncominCallScreenActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_call_incom);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         TextView callState=findViewById(R.id.callState);
         answerbtn = findViewById(R.id.pick_call);
         hangupbtn = findViewById(R.id.hangup);
@@ -204,6 +207,7 @@ public void getCallerName()
             Intent intent=new Intent(this, VoiceCallScreenActivity.class);
             intent.putExtra("SenderId",Id);
             intent.putExtra("UserName",name);
+            intent.putExtra("calling",Who);
             if(Who.equals("Doctors"))
             {
                 Who="Patient";

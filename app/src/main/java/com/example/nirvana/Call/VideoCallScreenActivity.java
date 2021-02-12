@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.bumptech.glide.Glide;
 import com.example.nirvana.Model.Rating_Model;
@@ -40,26 +44,30 @@ import com.sinch.android.rtc.calling.CallState;
 import com.sinch.android.rtc.video.VideoCallListener;
 import com.sinch.android.rtc.video.VideoController;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class VideoCallScreenActivity extends BaseActivity {
 
     static final String TAG = VideoCallScreenActivity.class.getSimpleName();
     static final String ADDED_LISTENER = "addedListener";
     static final String VIEWS_TOGGLED = "viewsToggled";
-
+    MediaRecorder recorder;
     private AudioPLayer mAudioPlayer;
     public Integer rating=0;
-    private String mCallId,recieverImage,recieverUsername,Who,senderId,review,receiverId,patientName,key;
+    private String mCallId,recieverImage,recieverUsername,name,Who,senderId,review,receiverId,patientName,key,Calling;
     private boolean mAddedListener = false;
     private boolean mLocalVideoViewAdded = false;
     private boolean mRemoteVideoViewAdded = false;
     ImageView micbutton,videobutton,endCallButton,CameraSwap,profileImage;
     Call call1;
+    File direct;
     TextView mCallState,RecieverUserName;
     boolean mToggleVideoViewPositions = true;
     RelativeLayout remoteVideo,localVideo;
@@ -77,6 +85,7 @@ public class VideoCallScreenActivity extends BaseActivity {
         mToggleVideoViewPositions = savedInstanceState.getBoolean(VIEWS_TOGGLED);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,13 +93,14 @@ public class VideoCallScreenActivity extends BaseActivity {
         setContentView(R.layout.activity_video_call_screen);
         getSupportActionBar().hide();
         Intent intent=getIntent();
-        senderId=intent.getStringExtra("senderId");
+        senderId=intent.getStringExtra("SenderId");
         Who=intent.getStringExtra("Who");
         recieverImage=intent.getStringExtra("link");
         recieverUsername=intent.getStringExtra("UserName");
         review=intent.getStringExtra("review");
         receiverId=intent.getStringExtra("receiverId");
         key=intent.getStringExtra("key");
+        Calling=intent.getStringExtra("calling");
         mAudioPlayer = new AudioPLayer(this);
         endCallButton=findViewById(R.id.hangupButton);
         micbutton=findViewById(R.id.micbutton);
@@ -99,6 +109,7 @@ public class VideoCallScreenActivity extends BaseActivity {
         profileImage=findViewById(R.id.profile_image_calling);
         RecieverUserName=findViewById(R.id.receiver_name);
         mCallState=findViewById(R.id.callState);
+        StartRecording();
         endCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,12 +220,25 @@ public class VideoCallScreenActivity extends BaseActivity {
     }
 
     private void endCall() {
+        Complete();
+        if(Who.equals("Patient"))
+        {
+            Review();
+        }
+        else
+        {
+            hangup();
+        }
+    }
+    public void hangup()
+    {
         mAudioPlayer.stopProgressTone();
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
             call.hangup();
         }
         finish();
+        overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
     }
 
     private ViewGroup getVideoView(boolean localView) {
@@ -314,19 +338,21 @@ public class VideoCallScreenActivity extends BaseActivity {
             mAudioPlayer.stopProgressTone();
             setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
             String endMsg = "Call ended";
-            Task<Void> databaseReference= FirebaseDatabase.getInstance().getReference("CallerName").child(mCallId).removeValue();
-             if(Who.equals("Patient")&&review.equals("true"))
+            recorder.release();
+            recorder=null;
+            Toast.makeText(VideoCallScreenActivity.this,"Recording is  saved to"+direct+name,Toast.LENGTH_SHORT).show();
+            Complete();
+            if(Who.equals("Patient"))
              {
                  Review();
              }
-            if(review.equals("true"))
+            else
             {
-                Complete();
+                hangup();
             }
-            endCall();
-            Toast.makeText(VideoCallScreenActivity.this, endMsg, Toast.LENGTH_LONG).show();
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onCallEstablished(Call call) {
             Log.d(TAG, "Call established");
@@ -340,6 +366,12 @@ public class VideoCallScreenActivity extends BaseActivity {
             audioController.enableSpeaker();
             if (call.getDetails().isVideoOffered()) {
                 setVideoViewsVisibility(true, true);
+                try {
+                    recorder.prepare();
+                    recorder.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 micbutton.setVisibility(View.VISIBLE);
                 videobutton.setVisibility(View.VISIBLE);
                 call1=call;
@@ -389,10 +421,13 @@ public class VideoCallScreenActivity extends BaseActivity {
         star3=view.findViewById(R.id.star3);
         star4=view.findViewById(R.id.star4);
         star5=view.findViewById(R.id.star5);
+        alertDialog.setView(view);
+        alertDialog.show();
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                hangup();
             }
         });
         star1.setOnClickListener(new View.OnClickListener() {
@@ -467,55 +502,216 @@ public class VideoCallScreenActivity extends BaseActivity {
                     SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                     Date todayDate = new Date();
                     String thisDate = currentDate.format(todayDate);
-                    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference(Who).child(receiverId);
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
-                            String fname=hashMap.get("fname").toString();
-                            String lname=hashMap.get("lname").toString();
-                            patientName=fname+" "+lname;
-                        }
+                    if(Calling!=null)
+                    {
+                        if(Calling.equals("Doctors"))
+                        {
+                            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(receiverId);
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                    String fname=hashMap.get("fname").toString();
+                                    String lname=hashMap.get("lname").toString();
+                                    patientName=fname+" "+lname;
+                                    Rating_Model rating_model=new Rating_Model(
+                                            patientName,
+                                            String.valueOf(rating),
+                                            Review.getText().toString(),
+                                            thisDate,
+                                            currentTime
+                                    );
+                                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference1=firebaseDatabase.getReference().child("Doctors_Reviews").child(senderId).child(receiverId);
+                                    databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            hangup();
+                                        }
+                                    });
+                                }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
+                                }
+                            });
                         }
-                    });
-                    Rating_Model rating_model=new Rating_Model(
-                            patientName,
-                            String.valueOf(rating),
-                            Review.getText().toString(),
-                            thisDate,
-                            currentTime
-                    );
-                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                    DatabaseReference databaseReference1=firebaseDatabase.getReference().child("Doctors_Reviews").child(senderId).child(receiverId);
-                    databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+                        else
+                        {
+                            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(senderId);
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                    String fname=hashMap.get("fname").toString();
+                                    String lname=hashMap.get("lname").toString();
+                                    patientName=fname+" "+lname;
+                                    Rating_Model rating_model=new Rating_Model(
+                                            patientName,
+                                            String.valueOf(rating),
+                                            Review.getText().toString(),
+                                            thisDate,
+                                            currentTime
+                                    );
+                                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference1=firebaseDatabase.getReference().child("Doctors_Reviews").child(receiverId).child(senderId);
+                                    databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            hangup();
+                                        }
+                                    });
+                                }
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
-                    });
+                    }
+                    else
+                    {
+                        if(Who.equals("Doctors"))
+                        {
+                            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(receiverId);
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                    String fname=hashMap.get("fname").toString();
+                                    String lname=hashMap.get("lname").toString();
+                                    patientName=fname+" "+lname;
+                                    Rating_Model rating_model=new Rating_Model(
+                                            patientName,
+                                            String.valueOf(rating),
+                                            Review.getText().toString(),
+                                            thisDate,
+                                            currentTime
+                                    );
+                                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference1=firebaseDatabase.getReference().child("Doctors_Reviews").child(senderId).child(receiverId);
+                                    databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            hangup();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                        else
+                        {
+                            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Patient").child(senderId);
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                    String fname=hashMap.get("fname").toString();
+                                    String lname=hashMap.get("lname").toString();
+                                    patientName=fname+" "+lname;
+                                    Rating_Model rating_model=new Rating_Model(
+                                            patientName,
+                                            String.valueOf(rating),
+                                            Review.getText().toString(),
+                                            thisDate,
+                                            currentTime
+                                    );
+                                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference1=firebaseDatabase.getReference().child("Doctors_Reviews").child(receiverId).child(senderId);
+                                    databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            hangup();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    }
                 }
             }
         });
     }
     public void Complete()
     {
-       if(Who.equals("Doctors"))
+       if(Calling==null)
        {
-           Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(senderId).child(receiverId).child("Complete")
-                   .child(key).setValue("1");
-           Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(receiverId).child(senderId).child("Complete")
-                   .child(key).setValue("1");
+           if(Who.equals("Doctors"))
+           {
+               Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(senderId).child(receiverId)
+                       .child(key).child("complete").setValue("1");
+               Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(receiverId).child(senderId)
+                       .child(key).child("complete").setValue("1");
+           }
+           else
+           {
+               Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(receiverId).child(senderId)
+                       .child(key).child("complete").setValue("1");
+               Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(senderId).child(receiverId)
+                       .child(key).child("complete").setValue("1");
+           }
        }
-       else
-       {
-           Task<Void> databaseReference=FirebaseDatabase.getInstance().getReference("Doctor_Meetings").child(receiverId).child(senderId).child("Complete")
-                   .child(key).setValue("1");
-           Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(senderId).child(receiverId).child("Complete")
-                   .child(key).setValue("1");
-       }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void StartRecording()
+    {
+        if(Calling!=null)
+        {
+            if(Calling.equals("Doctors"))
+            {
+                direct = new File(Environment.getExternalStorageDirectory() + "/Nirvana/Recordings/Voice Recordings/"+receiverId+"/");
+            }
+            else
+            {
+               direct = new File(Environment.getExternalStorageDirectory() + "/Nirvana/Recordings/Voice Recordings/"+senderId+"/");
+            }
+        }
+        else
+        {
+            if(Who.equals("Doctors"))
+            {
+                direct = new File(Environment.getExternalStorageDirectory() + "/Nirvana/Recordings/Voice Recordings/"+receiverId+"/");
+            }
+            else
+            {
+               direct = new File(Environment.getExternalStorageDirectory() + "/Nirvana/Recordings/Voice Recordings/"+senderId+"/");
+            }
+        }
+        if(!direct.exists()) {
+            direct.mkdirs(); //directory is created;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date todaydate = new Date();
+        String uuid = UUID.randomUUID().toString();
+        String thisDate = simpleDateFormat.format(todaydate);
+        name="/"+uuid+thisDate+".mp3";
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            try {
+                File filePath = new File(direct,name);
+                if (!filePath.exists()) {
+                    if (!filePath.createNewFile()) {
+                        Toast.makeText(VideoCallScreenActivity.this, "Can't create file", Toast.LENGTH_LONG).show();
+                    }
+                }
+                recorder.setOutputFile(filePath);
+                Toast.makeText(VideoCallScreenActivity.this,"Recording Started",Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

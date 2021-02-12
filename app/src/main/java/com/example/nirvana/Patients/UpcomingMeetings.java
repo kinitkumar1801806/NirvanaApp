@@ -48,8 +48,9 @@ public class UpcomingMeetings extends Fragment {
     public RecyclerView recyclerView;
     Upcoming_Patient_Meetings_Adapter upcoming_patient_meetings_adapter;
     public ArrayList<String> LinkList,NameList,TypeList,DateList,TimeList,RecieverIdList,KeyList;
-    public String Id;
+    public String Id,link;
     TextView textView;
+    Boolean check=false;
     public UpcomingMeetings() {
         // Required empty public constructor
     }
@@ -96,6 +97,7 @@ public class UpcomingMeetings extends Fragment {
         KeyList=new ArrayList<>();
         RecieverIdList=new ArrayList<>();
         textView=view1.findViewById(R.id.textView);
+        textView.setVisibility(View.VISIBLE);
         recyclerView=view1.findViewById(R.id.upcoming_patientlists);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
@@ -123,20 +125,41 @@ public class UpcomingMeetings extends Fragment {
                            String complete=userData.get("complete").toString();
                            if(complete.equals("0"))
                            {
-                               String Did=userData.get("Did").toString();
-                               String name=userData.get("d_name").toString();
-                               String link=userData.get("link").toString();
-                               String date=userData.get("date").toString();
-                               String time=userData.get("time").toString();
-                               String type=userData.get("d_bio").toString();
-                               RecieverIdList.add(Did);
-                               NameList.add(name);
-                               LinkList.add(link);
-                               DateList.add(date);
-                               TimeList.add(time);
-                               TypeList.add(type);
-                               KeyList.add(key1);
-                               initRecyclerView();
+                               FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                               DatabaseReference databaseReference=firebaseDatabase.getReference("Doctors").child(key);
+                               databaseReference.addValueEventListener(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                       if(snapshot.exists())
+                                       {
+                                           HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
+                                           link=hashMap.get("link").toString();
+                                           String Did=userData.get("Did").toString();
+                                           String name=userData.get("d_name").toString();
+                                           String date=userData.get("date").toString();
+                                           String time=userData.get("time").toString();
+                                           String type=userData.get("d_bio").toString();
+                                           RecieverIdList.add(Did);
+                                           NameList.add(name);
+                                           LinkList.add(link);
+                                           DateList.add(date);
+                                           TimeList.add(time);
+                                           TypeList.add(type);
+                                           KeyList.add(key1);
+                                           initRecyclerView();
+                                           check=true;
+                                       }
+                                       if(check)
+                                       {
+                                           textView.setVisibility(View.GONE);
+                                       }
+                                   }
+
+                                   @Override
+                                   public void onCancelled(@NonNull DatabaseError error) {
+
+                                   }
+                               });
                            }
                        }
                     }

@@ -118,7 +118,6 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                 date,
                 thisDate,
                 bio,
-                link,
                 currentTime,
                 Did,
                 "0"
@@ -131,8 +130,7 @@ public class MainPaymentActivity extends AppCompatActivity implements PaymentRes
                 thisDate,
                 currentTime,
                 Pid,
-                "0",
-                link1
+                "0"
         );
 
         Task<Void> databaseReference = FirebaseDatabase.getInstance().getReference("Patient_Meetings").child(Pid).child(Did).child(Patient_Detail.get(8))

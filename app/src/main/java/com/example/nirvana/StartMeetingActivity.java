@@ -46,7 +46,7 @@ import java.security.MessageDigest;
 import java.util.HashMap;
 
 public class StartMeetingActivity extends BaseActivity implements SinchService.StartFailedListener, PushTokenRegistrationCallback, UserRegistrationCallback {
-    public String senderId,recieverId,UserName,link,Who,key;
+    public String senderId,recieverId,UserName,link,Who,key,link1;
     private static final String APP_KEY = "6a9ce4e2-e655-4a59-a2b0-b76c84132546";
     private static final String APP_SECRET ="2dEpHTchh0SLCsnYyv2gPw==";
     private static final String ENVIRONMENT ="clientapi.sinch.com";
@@ -78,7 +78,7 @@ public class StartMeetingActivity extends BaseActivity implements SinchService.S
                    if(snapshot.exists())
                    {
                        HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
-                       link=hashMap.get("link").toString();
+                       link1=hashMap.get("link").toString();
                    }
                 }
 

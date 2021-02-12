@@ -190,7 +190,7 @@ public class PatientSignupActivity extends AppCompatActivity {
                                 Intent intent=new Intent(PatientSignupActivity.this, PatientPhoneVerification.class);
                                 intent.putStringArrayListExtra("arr",arr);
                                 startActivity(intent);
-                                PatientSignupActivity.this.finish();
+                                break;
                             }
                         }
                     }

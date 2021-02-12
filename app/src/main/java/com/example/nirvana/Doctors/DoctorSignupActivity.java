@@ -249,7 +249,7 @@ public class DoctorSignupActivity extends AppCompatActivity implements View.OnCl
                                 intent.putExtra("Filepath",Filepath.toString());
                                 intent.putExtra("Imagepath",Imagepath.toString());
                                 startActivity(intent);
-                                DoctorSignupActivity.this.finish();
+                                break;
                             }
                         }
                     }

@@ -61,7 +61,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
     public TextView doctor_name,doctor_address;
     private int mHour,mMinute;
     ImageView Niri,VideoPlayer,MusicPlayer,Profile,d_profile,Home;
-    private String phone,Id,link,time,from_time,to_time;
+    private String phone,Id,link,time,from_time="0",to_time="0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -303,6 +303,14 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
                     fromTime.setError("Please set the time for meetings.");
                 }
                 else if(TextUtils.isEmpty(toTime.getText()))
+                {
+                    toTime.setError("Please set the time for meetings.");
+                }
+                else if(from_time.equals("0"))
+                {
+                    fromTime.setError("Please select the time using the clock");
+                }
+                else if(to_time.equals("0"))
                 {
                     toTime.setError("Please set the time for meetings.");
                 }

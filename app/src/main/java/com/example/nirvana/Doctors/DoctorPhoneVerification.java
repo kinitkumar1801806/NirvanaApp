@@ -29,6 +29,7 @@ import javax.mail.internet.MimeMultipart;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.R;
 import com.example.nirvana.Model.doctor_details;
+import com.example.nirvana.Service.Music_detail;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -241,6 +242,17 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         sendMail();
                         Toast.makeText(DoctorPhoneVerification.this,"Successfully signed up.Please check your email for your doctor id.",Toast.LENGTH_SHORT).show();
+                        Music_detail music_detail=new Music_detail(
+                               "0",
+                                "true"
+                        );
+                        Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id)
+                                .setValue(music_detail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
                         Intent intent=new Intent(DoctorPhoneVerification.this, Doctor_Welcome_Activity.class);
                         intent.putExtra("phone",Phone);
                         intent.putExtra("Id",Id);

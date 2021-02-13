@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.example.nirvana.R;
 import com.example.nirvana.Model.details_patient;
+import com.example.nirvana.Service.Music_detail;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -265,6 +266,17 @@ public class PatientPhoneVerification extends AppCompatActivity {
                                                                 }
                                                             })
                                                             .send();
+                                                    Music_detail music_detail=new Music_detail(
+                                                            "0",
+                                                            "true"
+                                                    );
+                                                    Task<Void> databaseReference2=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id)
+                                                            .setValue(music_detail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                                }
+                                                            });
                                                     Intent intent=new Intent(PatientPhoneVerification.this, Patient_Welcome_Activity.class);
                                                     intent.putExtra("Id",Id);
                                                     intent.putExtra("phone",Phone);

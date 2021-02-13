@@ -12,10 +12,5 @@
             android:id="@+id/doctor_help"
             android:icon="@drawable/new_help_centre"
             android:title="HELP"/>
-        <item
-            android:id="@+id/wdoctor_coupons"
-            android:icon="@drawable/chat_secondary"
-            android:title="MY COUPONS"/>
-
     </group>
 </menu>

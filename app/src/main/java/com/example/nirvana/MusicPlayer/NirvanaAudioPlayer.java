@@ -115,6 +115,18 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                         music_action_image.setImageResource(R.drawable.ic_media_play);
                     }
                 }
+                detail_play=findViewById(R.id.detail_play);
+                if(detail_play!=null&&player!=null)
+                {
+                    if(player.isPLaying())
+                    {
+                        detail_play.setImageResource(R.drawable.filled_pause);
+                    }
+                    else
+                    {
+                        detail_play.setImageResource(R.drawable.filled_play);
+                    }
+                }
                 mHandler.postDelayed(this,1000);
             }
         });
@@ -441,12 +453,13 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             else
             {
                 playAudio(music_index);
-                player.buildNotification(PlaybackStatus.PAUSED);
+                player.buildNotification(PlaybackStatus.PLAYING);
                 id=1;
             }
         } else {
             detail_play.setImageResource(R.drawable.filled_play);
             player.pauseMedia();
+            player.buildNotification(PlaybackStatus.PAUSED);
         }
     }
     public void change_theme(View view) {

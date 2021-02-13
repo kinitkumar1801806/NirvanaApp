@@ -32,7 +32,7 @@ public class Niri extends AppCompatActivity  {
         progressDialog.show();
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        Kommunicate.init(this, "51e88c7a38979dfd3d04b16dbea1499273e25c6f");
+        Kommunicate.init(this, "78f8a0644916b365e00127f911175579");
         new KmConversationBuilder(this)
                 .launchConversation(new KmCallback() {
                     @Override

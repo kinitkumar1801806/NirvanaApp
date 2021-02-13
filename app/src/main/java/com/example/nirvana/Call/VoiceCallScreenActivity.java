@@ -608,8 +608,8 @@ public class VoiceCallScreenActivity extends BaseActivity {
                                                     ratedby=Integer.parseInt(hashMap1.get("rated_by").toString());
                                                     totalrating+=rating;
                                                     ratedby++;
-                                                    firebaseDatabase1.child("total_rating").setValue(totalrating);
-                                                    firebaseDatabase1.child("rated_by").setValue(ratedby);
+                                                    firebaseDatabase1.child("total_rating").setValue(String.valueOf(totalrating));
+                                                    firebaseDatabase1.child("rated_by").setValue(String.valueOf(ratedby));
                                                     hangup();
                                                 }
 

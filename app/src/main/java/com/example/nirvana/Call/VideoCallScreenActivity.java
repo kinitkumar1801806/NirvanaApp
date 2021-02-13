@@ -68,6 +68,8 @@ public class VideoCallScreenActivity extends BaseActivity {
     ImageView micbutton,videobutton,endCallButton,CameraSwap,profileImage;
     Call call1;
     File direct;
+    DatabaseReference firebaseDatabase1;
+    int totalrating,ratedby;
     TextView mCallState,RecieverUserName;
     boolean mToggleVideoViewPositions = true;
     RelativeLayout remoteVideo,localVideo;
@@ -628,7 +630,46 @@ public class VideoCallScreenActivity extends BaseActivity {
                                     databaseReference1.setValue(rating_model).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            hangup();
+                                            if(Calling==null)
+                                            {
+                                                if(Who.equals("Doctors"))
+                                                {
+                                                    firebaseDatabase1=FirebaseDatabase.getInstance().getReference("Doctors").child(senderId);
+                                                }
+                                                else
+                                                {
+                                                    firebaseDatabase1=FirebaseDatabase.getInstance().getReference("Doctors").child(receiverId);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if(Calling.equals("Doctors"))
+                                                {
+                                                    firebaseDatabase1=FirebaseDatabase.getInstance().getReference("Doctors").child(senderId);
+                                                }
+                                                else
+                                                {
+                                                    firebaseDatabase1=FirebaseDatabase.getInstance().getReference("Doctors").child(receiverId);
+                                                }
+                                            }
+                                            firebaseDatabase1.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    HashMap<String,Object> hashMap1= (HashMap<String, Object>) snapshot.getValue();
+                                                    totalrating=Integer.parseInt(hashMap1.get("total_rating").toString());
+                                                    ratedby=Integer.parseInt(hashMap1.get("rated_by").toString());
+                                                    totalrating+=rating;
+                                                    ratedby++;
+                                                    firebaseDatabase1.child("total_rating").setValue(String.valueOf(totalrating));
+                                                    firebaseDatabase1.child("rated_by").setValue(String.valueOf(ratedby));
+                                                    hangup();
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
                                         }
                                     });
                                 }

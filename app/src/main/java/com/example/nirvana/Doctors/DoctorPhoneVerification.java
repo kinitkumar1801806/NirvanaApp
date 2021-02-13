@@ -222,7 +222,7 @@ public class DoctorPhoneVerification extends AppCompatActivity {
                 LinkedIn,
                 Id,
                 link,
-                "0",
+                "300",
                 "5",
                 "5",
                 "18"

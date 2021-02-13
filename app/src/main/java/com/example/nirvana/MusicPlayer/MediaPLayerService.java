@@ -158,7 +158,6 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
 
     @Override
     public boolean onUnbind(Intent intent) {
-        mediaSession.release();
         removeNotification();
         return super.onUnbind(intent);
     }
@@ -342,7 +341,14 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
             mediaPlayer.stop();
         }
     }
-
+   public boolean isPLaying()
+   {
+       if(mediaPlayer.isPlaying())
+       {
+           return true;
+       }
+       return false;
+   }
     public void pauseMedia() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
@@ -555,7 +561,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void buildNotification(PlaybackStatus playbackStatus) {
+    public void buildNotification(PlaybackStatus playbackStatus) {
 
         /**
          * Notification actions -> playbackAction()
@@ -588,9 +594,11 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
                     .addAction(android.R.drawable.ic_media_next, "next", playbackAction(2))
                      .setOngoing(true);
             NotificationChannel notificationChannel = new NotificationChannel("101", "Music_Player", NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setSound(null,null);
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
             notificationManager.notify(1,notificationCompact.build());
+
         } else if (playbackStatus == PlaybackStatus.PAUSED) {
             notificationAction = android.R.drawable.ic_media_play;
             play_pauseAction = playbackAction(0);
@@ -610,6 +618,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
                     .addAction(android.R.drawable.ic_media_next, "next", playbackAction(2))
                     .setOngoing(false);
             NotificationChannel notificationChannel = new NotificationChannel("101", "Music_Player", NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setSound(null,null);
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
             notificationManager.notify(1,notificationCompact.build());
@@ -619,7 +628,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
     }
 
 
-    private PendingIntent playbackAction(int actionNumber) {
+    public PendingIntent playbackAction(int actionNumber) {
         Intent playbackAction = new Intent(this, MediaPLayerService.class);
         switch (actionNumber) {
             case 0:
@@ -648,7 +657,7 @@ public class MediaPLayerService extends Service implements MediaPlayer.OnComplet
         return null;
     }
 
-    private void removeNotification() {
+    public void removeNotification() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(Integer.parseInt("101"));
     }

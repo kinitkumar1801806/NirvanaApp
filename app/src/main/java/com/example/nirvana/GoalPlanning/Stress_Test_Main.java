@@ -347,6 +347,7 @@ public class Stress_Test_Main extends AppCompatActivity {
                 Intent intent=new Intent(Stress_Test_Main.this,DepressiveModule.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+                Stress_Test_Main.this.finish();
             }
         });
         alertDialog.setView(view);

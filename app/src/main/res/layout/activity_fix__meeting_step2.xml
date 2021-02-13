@@ -164,6 +164,16 @@
                android:layout_marginStart="6dp"
                android:layout_marginEnd="6dp"
                android:id="@+id/recycler_view"/>
+           <TextView
+               android:id="@+id/textView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="No reviews available."
+               android:textStyle="bold"
+               android:textSize="18sp"
+               android:visibility="gone"
+               android:layout_centerHorizontal="true"
+               android:layout_centerVertical="true"/>
        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

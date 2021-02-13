@@ -40,7 +40,7 @@ import java.util.HashMap;
 public class Fix_Meeting_step2 extends AppCompatActivity {
     ProgressDialog progressDialog;
     private String phone,linkedIn,doctor_name,Id,doctor_Id;
-    private TextView nameText,doctor_place,doctor_qualification;
+    private TextView nameText,doctor_place,doctor_qualification,NoReview;
     ArrayList<String> arr,PatientNameList,RatingList,ReviewList,DateList,TimeList;
     ImageView image;
     RecyclerView recyclerView;
@@ -59,6 +59,7 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
         doctor_name=arr.get(0);
         nameText=findViewById(R.id.doctor_name);
         doctor_place=findViewById(R.id.doctor_place);
+        NoReview=findViewById(R.id.textView);
         doctor_qualification=findViewById(R.id.doctor_qualification);
         image=findViewById(R.id.doctor_image);
         PatientNameList=new ArrayList<>();
@@ -171,6 +172,10 @@ public class Fix_Meeting_step2 extends AppCompatActivity {
                         TimeList.add(time);
                         initRecyclerView();
                     }
+                }
+                else
+                {
+                    NoReview.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -93,6 +93,7 @@ public class Doctor_Welcome_Activity extends AppCompatActivity implements Naviga
             intent1.putExtra("Id",Id);
             startService(intent1);
         }
+        Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id).child("isPlaying").setValue("false");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Filter","date");

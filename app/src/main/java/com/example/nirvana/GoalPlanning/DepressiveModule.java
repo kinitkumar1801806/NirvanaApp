@@ -409,9 +409,10 @@ public class DepressiveModule extends AppCompatActivity {
         NextModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DepressiveModule.this,SuicidalityModule.class);
+                /*Intent intent=new Intent(DepressiveModule.this,SuicidalityModule.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);
+                overridePendingTransition(R.anim.slide_out_bottom,R.anim.no_animation);*/
+                Toast.makeText(DepressiveModule.this,"No next mocule available at this time",Toast.LENGTH_SHORT).show();
             }
         });
         alertDialog.setView(view);

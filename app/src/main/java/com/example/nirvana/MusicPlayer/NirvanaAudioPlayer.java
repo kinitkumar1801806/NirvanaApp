@@ -16,12 +16,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +39,7 @@ import com.example.nirvana.Adapter.RecyclerView_Adapter;
 import com.example.nirvana.CustomTouchListener;
 import com.example.nirvana.R;
 import com.example.nirvana.onItemClickListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +56,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     RelativeLayout relativeLayout;
     boolean serviceBound = false;
     ImageView collapsingImageView;
-    ImageView music_action_image;
+    public ImageView music_action_image;
     TextView marquee_music, detail_music_artist,currentDuration;
     ImageView detail_play;
     SeekBar seekBar;
@@ -95,6 +99,25 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
         }
         LoadIndex();
         loadAudio();
+        Handler mHandler = new Handler();
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                music_action_image=findViewById(R.id.music_action_btn);
+                if(music_action_image!=null&&player!=null)
+                {
+                    if(player.isPLaying())
+                    {
+                        music_action_image.setImageResource(R.drawable.ic_media_pause);
+                    }
+                    else
+                    {
+                        music_action_image.setImageResource(R.drawable.ic_media_play);
+                    }
+                }
+                mHandler.postDelayed(this,1000);
+            }
+        });
   }
 
     private void requestStoragePermission() {
@@ -129,7 +152,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
+
             } else {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }
@@ -237,7 +260,6 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         serviceBound = savedInstanceState.getBoolean("ServiceState");
-
     }
 
 
@@ -306,10 +328,12 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void change_icon(View view) {
         if (music_action_image.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_media_pause).getConstantState()) {
             music_action_image.setImageResource(R.drawable.ic_media_play);
             player.pauseMedia();
+            player.buildNotification(PlaybackStatus.PAUSED);
             tt=0;
             id = 1;
         } else {
@@ -320,6 +344,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 id=1;
             } else if (id == 1) {
                 player.resumeMedia();
+                player.buildNotification(PlaybackStatus.PLAYING);
             }
         }
     }
@@ -405,15 +430,18 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
             seekBar.setProgress(0);
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void play_music(View view) {
         detail_play=findViewById(R.id.detail_play);
         if (detail_play.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.filled_play).getConstantState()) {
             detail_play.setImageResource(R.drawable.filled_pause);
-            if(id==1)
+            if(id==1){
                 player.resumeMedia();
+                player.buildNotification(PlaybackStatus.PLAYING);}
             else
             {
                 playAudio(music_index);
+                player.buildNotification(PlaybackStatus.PAUSED);
                 id=1;
             }
         } else {
@@ -467,7 +495,7 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
                 if(snapshot.exists())
                 {
                     HashMap<String,Object> hashMap= (HashMap<String, Object>) snapshot.getValue();
-                    music_index=Integer.parseInt((String) hashMap.get("music_index"));
+                    music_index=Integer.parseInt(hashMap.get("music_index").toString());
                     isPlaying=hashMap.get("isPlaying").toString();
                 }
             }
@@ -487,6 +515,10 @@ public class NirvanaAudioPlayer extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        player.removeNotification();
+        player.stopMedia();
+        Task<Void> databaseReference1=FirebaseDatabase.getInstance().getReference("Music_Index").child(Id).child("isPlaying").setValue("false");
         overridePendingTransition(R.anim.no_animation,R.anim.slide_in_bottom);
     }
+
 }
